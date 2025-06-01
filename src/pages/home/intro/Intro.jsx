@@ -20,32 +20,32 @@ export const Intro = () => {
       type: 'orange',
       image: intro1,
       alt: 'Trendy Bag',
-      label: 'Accessories collection',
-      title: 'New Trendy Bags'
+      label: 'Your Everyday Style and Comfort',
+      title: 'Casual Collection'
     },
     {
       id: 2,
       type: 'blue',
       image: intro2,
       alt: 'Designer Handbag',
-      label: 'Designer collection',
-      title: 'Luxury Handbags'
+      label: 'Spring and Summer 2025',
+      title: 'Men\'s Fashion'
     },
     {
       id: 3,
       type: 'orange',
       image: intro3,
       alt: 'Vintage Bag',
-      label: 'Vintage collection',
-      title: 'Classic Styles'
+      label: 'Accessories Collection',
+      title: 'New Trendy Bags'
     },
     {
       id: 4,
       type: 'blue',
       image: intro4,
       alt: 'Modern Bag',
-      label: 'Modern collection',
-      title: 'Urban Essentials'
+      label: 'Spring and Summer 2025',
+      title: 'Women\'s Fashion'
     }
   ];
 
