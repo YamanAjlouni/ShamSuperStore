@@ -219,7 +219,7 @@ const Navbar = () => {
                             </a>
                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('shop') ? 'ecommerce-nav-dropdown-active' : ''}`}>
                                 <ul className="ecommerce-nav-dropdown-menu">
-                                    <li><a href="/categories">All Categories</a></li>
+                                    <li><a href="/shop">All Categories</a></li>
 
                                     <DropdownItem
                                         href="/computer"

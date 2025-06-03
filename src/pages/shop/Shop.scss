@@ -1,0 +1,61 @@
+@use '../../assets/style/vars.scss' as *;
+
+.shop-page {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: $gray-50;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    .sidebar {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .main-content {
+        flex: 1;
+        background: $white;
+        border-radius: $radius-lg;
+        padding: 2rem;
+        box-shadow: $shadow-sm;
+        border: 1px solid $gray-200;
+    }
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $text-dark;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $gray-200;
+}
+
+@media (max-width: 768px) {
+    .shop-page {
+        flex-direction: column-reverse;
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+
+        .sidebar {
+            width: 100%;
+        }
+
+        .main-content {
+            padding: 1.5rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .shop-page {
+        padding: 1.5rem 0.5rem;
+
+        .main-content {
+            padding: 1rem;
+        }
+    }
+}
