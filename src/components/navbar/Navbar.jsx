@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Mail, User, ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
 import './Navbar.scss';
+import { Link } from 'react-router-dom';
 import shamSuperStoreLogo from '../../assets/images/shamSuperStoreLogo.jpg'
 
 const Navbar = () => {
@@ -45,8 +46,8 @@ const Navbar = () => {
     };
 
     const handleMouseEnter = useCallback((dropdownKey) => {
-        // Clear all timeouts first
-        clearAllTimeouts();
+        // Clear any pending close timeout for this dropdown
+        clearTimeout(dropdownKey);
 
         // Determine the dropdown hierarchy
         const isMainDropdown = ['shop', 'account', 'sellers', 'delivery', 'language'].includes(dropdownKey);
@@ -79,15 +80,27 @@ const Navbar = () => {
                 };
             });
         }
-    }, [clearAllTimeouts]);
+    }, [clearTimeout]);
 
     const handleMouseLeave = useCallback((dropdownKey) => {
-        // Immediate close - no timeout
-        setOpenDropdowns(prev => {
-            const newState = { ...prev };
-            delete newState[dropdownKey];
-            return newState;
-        });
+        // Add a small delay before closing to prevent flickering
+        timeoutRefs.current[dropdownKey] = setTimeout(() => {
+            setOpenDropdowns(prev => {
+                const newState = { ...prev };
+                delete newState[dropdownKey];
+                
+                // If closing a main dropdown, also close its children
+                if (dropdownKey === 'shop') {
+                    Object.keys(newState).forEach(key => {
+                        if (key !== 'shop') {
+                            delete newState[key];
+                        }
+                    });
+                }
+                
+                return newState;
+            });
+        }, 150); // 150ms delay
     }, []);
 
     // Helper function to find parent dropdown for nested items
@@ -121,19 +134,19 @@ const Navbar = () => {
     };
 
     // Dropdown component for reusability
-    const DropdownItem = ({ href, children, dropdownKey, onMouseEnter, onMouseLeave, onClick, hasSubmenu = false, submenu = null }) => (
+    const DropdownItem = ({ to, children, dropdownKey, onMouseEnter, onMouseLeave, onClick, hasSubmenu = false, submenu = null }) => (
         <li
             className={hasSubmenu ? "ecommerce-nav-dropdown-item-has-submenu" : ""}
             onMouseEnter={() => hasSubmenu && onMouseEnter(dropdownKey)}
             onMouseLeave={() => hasSubmenu && onMouseLeave(dropdownKey)}
         >
-            <a
-                href={href}
+            <Link
+                to={to}
                 onClick={(e) => hasSubmenu && onClick(dropdownKey, e)}
             >
                 {children}
                 {hasSubmenu && <ChevronDown size={14} className="ecommerce-nav-arrow-right" />}
-            </a>
+            </Link>
             {hasSubmenu && submenu && (
                 <div className={`ecommerce-nav-submenu ${isDropdownOpen(dropdownKey) ? 'ecommerce-nav-submenu-active' : ''}`}>
                     {submenu}
@@ -143,19 +156,19 @@ const Navbar = () => {
     );
 
     // Nested dropdown component
-    const NestedDropdownItem = ({ href, children, dropdownKey, onMouseEnter, onMouseLeave, onClick, nestedSubmenu = null }) => (
+    const NestedDropdownItem = ({ to, children, dropdownKey, onMouseEnter, onMouseLeave, onClick, nestedSubmenu = null }) => (
         <li
             className="ecommerce-nav-submenu-item-has-submenu"
             onMouseEnter={() => onMouseEnter(dropdownKey)}
             onMouseLeave={() => onMouseLeave(dropdownKey)}
         >
-            <a
-                href={href}
+            <Link
+                to={to}
                 onClick={(e) => onClick(dropdownKey, e)}
             >
                 {children}
                 <ChevronDown size={12} className="ecommerce-nav-arrow-right" />
-            </a>
+            </Link>
             {nestedSubmenu && (
                 <div className={`ecommerce-nav-submenu-nested ${isDropdownOpen(dropdownKey) ? 'ecommerce-nav-submenu-nested-active' : ''}`}>
                     {nestedSubmenu}
@@ -202,7 +215,7 @@ const Navbar = () => {
                 <div className="ecommerce-nav-container">
                     <ul className={`ecommerce-nav-menu ${isMobileMenuOpen ? 'ecommerce-nav-menu-open' : ''}`}>
                         <li className="ecommerce-nav-item">
-                            <a href="/" className="ecommerce-nav-link">Home</a>
+                            <Link to="/" className="ecommerce-nav-link">Home</Link>
                         </li>
 
                         <li
@@ -210,19 +223,19 @@ const Navbar = () => {
                             onMouseEnter={() => handleMouseEnter('shop')}
                             onMouseLeave={() => handleMouseLeave('shop')}
                         >
-                            <a
-                                href="/shop"
+                            <Link
+                                to="/shop"
                                 className="ecommerce-nav-link"
                                 onClick={(e) => handleMobileDropdownClick('shop', e)}
                             >
                                 Shop <ChevronDown size={16} />
-                            </a>
+                            </Link>
                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('shop') ? 'ecommerce-nav-dropdown-active' : ''}`}>
                                 <ul className="ecommerce-nav-dropdown-menu">
-                                    <li><a href="/shop">All Categories</a></li>
+                                    <li><Link to="/shop">All Categories</Link></li>
 
                                     <DropdownItem
-                                        href="/computer"
+                                        to="/computer"
                                         dropdownKey="computer"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -230,28 +243,28 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/desktop-computer">Desktop Computer</a></li>
-                                                <li><a href="/tablet-pc">Tablet PC</a></li>
-                                                <li><a href="/computer-monitor">Computer Monitor</a></li>
-                                                <li><a href="/mouse-keyboard">Computer Mouse - Keyboard</a></li>
-                                                <li><a href="/computer-software">Computer Software</a></li>
-                                                <li><a href="/computer-accessories">Computer Accessories</a></li>
+                                                <li><Link to="/desktop-computer">Desktop Computer</Link></li>
+                                                <li><Link to="/tablet-pc">Tablet PC</Link></li>
+                                                <li><Link to="/computer-monitor">Computer Monitor</Link></li>
+                                                <li><Link to="/mouse-keyboard">Computer Mouse - Keyboard</Link></li>
+                                                <li><Link to="/computer-software">Computer Software</Link></li>
+                                                <li><Link to="/computer-accessories">Computer Accessories</Link></li>
 
                                                 <NestedDropdownItem
-                                                    href="/computer-components"
+                                                    to="/computer-components"
                                                     dropdownKey="computer-components"
                                                     onMouseEnter={handleMouseEnter}
                                                     onMouseLeave={handleMouseLeave}
                                                     onClick={handleMobileDropdownClick}
                                                     nestedSubmenu={
                                                         <ul>
-                                                            <li><a href="/cpu">CPU</a></li>
-                                                            <li><a href="/motherboard">Motherboard</a></li>
-                                                            <li><a href="/harddisk">Hard Disk</a></li>
-                                                            <li><a href="/memory">Memory</a></li>
-                                                            <li><a href="/graphic-card">Graphic Card</a></li>
-                                                            <li><a href="/power-supply">Power Supply</a></li>
-                                                            <li><a href="/computer-case">Computer Case</a></li>
+                                                            <li><Link to="/cpu">CPU</Link></li>
+                                                            <li><Link to="/motherboard">Motherboard</Link></li>
+                                                            <li><Link to="/harddisk">Hard Disk</Link></li>
+                                                            <li><Link to="/memory">Memory</Link></li>
+                                                            <li><Link to="/graphic-card">Graphic Card</Link></li>
+                                                            <li><Link to="/power-supply">Power Supply</Link></li>
+                                                            <li><Link to="/computer-case">Computer Case</Link></li>
                                                         </ul>
                                                     }
                                                 >
@@ -264,7 +277,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/electronics"
+                                        to="/electronics"
                                         dropdownKey="electronics"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -272,39 +285,39 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/mobile-smartphone">Mobile - Smart Phone</a></li>
+                                                <li><Link to="/mobile-smartphone">Mobile - Smart Phone</Link></li>
 
                                                 <NestedDropdownItem
-                                                    href="/wearable-technology"
+                                                    to="/wearable-technology"
                                                     dropdownKey="wearable"
                                                     onMouseEnter={handleMouseEnter}
                                                     onMouseLeave={handleMouseLeave}
                                                     onClick={handleMobileDropdownClick}
                                                     nestedSubmenu={
                                                         <ul>
-                                                            <li><a href="/smart-watches">Smart Watches</a></li>
-                                                            <li><a href="/headphones">Headphones</a></li>
+                                                            <li><Link to="/smart-watches">Smart Watches</Link></li>
+                                                            <li><Link to="/headphones">Headphones</Link></li>
                                                         </ul>
                                                     }
                                                 >
                                                     Wearable Technology
                                                 </NestedDropdownItem>
 
-                                                <li><a href="/tv-video">TV and Video</a></li>
-                                                <li><a href="/speakers">Speakers</a></li>
-                                                <li><a href="/cameras-pictures">Cameras - Pictures</a></li>
-                                                <li><a href="/movies-music">Movies - Music</a></li>
-                                                <li><a href="/musical-instruments">Musical Instruments</a></li>
+                                                <li><Link to="/tv-video">TV and Video</Link></li>
+                                                <li><Link to="/speakers">Speakers</Link></li>
+                                                <li><Link to="/cameras-pictures">Cameras - Pictures</Link></li>
+                                                <li><Link to="/movies-music">Movies - Music</Link></li>
+                                                <li><Link to="/musical-instruments">Musical Instruments</Link></li>
 
                                                 <NestedDropdownItem
-                                                    href="/electronic-office"
+                                                    to="/electronic-office"
                                                     dropdownKey="electronic-office"
                                                     onMouseEnter={handleMouseEnter}
                                                     onMouseLeave={handleMouseLeave}
                                                     onClick={handleMobileDropdownClick}
                                                     nestedSubmenu={
                                                         <ul>
-                                                            <li><a href="/copiers-printers-ink">Copiers - Printers - Ink</a></li>
+                                                            <li><Link to="/copiers-printers-ink">Copiers - Printers - Ink</Link></li>
                                                         </ul>
                                                     }
                                                 >
@@ -317,7 +330,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/smart-home"
+                                        to="/smart-home"
                                         dropdownKey="smart-home"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -325,13 +338,13 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/smart-lock">Smart Lock</a></li>
-                                                <li><a href="/smart-lighting">Smart Lighting</a></li>
-                                                <li><a href="/vacuums-mops">Vacuums - Mops</a></li>
-                                                <li><a href="/plugs-outlets">Plugs - Outlets</a></li>
-                                                <li><a href="/wifi-networking">WiFi - Networking</a></li>
-                                                <li><a href="/detectors-sensors">Detectors - Sensors</a></li>
-                                                <li><a href="/security-cameras">Security Cameras - Systems</a></li>
+                                                <li><Link to="/smart-lock">Smart Lock</Link></li>
+                                                <li><Link to="/smart-lighting">Smart Lighting</Link></li>
+                                                <li><Link to="/vacuums-mops">Vacuums - Mops</Link></li>
+                                                <li><Link to="/plugs-outlets">Plugs - Outlets</Link></li>
+                                                <li><Link to="/wifi-networking">WiFi - Networking</Link></li>
+                                                <li><Link to="/detectors-sensors">Detectors - Sensors</Link></li>
+                                                <li><Link to="/security-cameras">Security Cameras - Systems</Link></li>
                                             </ul>
                                         }
                                     >
@@ -339,7 +352,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/furniture"
+                                        to="/furniture"
                                         dropdownKey="furniture"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -347,31 +360,31 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/chair">Chair</a></li>
-                                                <li><a href="/sofa">Sofa</a></li>
-                                                <li><a href="/living-room">Living Room</a></li>
-                                                <li><a href="/guest-room">Guest Room</a></li>
-                                                <li><a href="/kids-room">Kids - Children Room</a></li>
-                                                <li><a href="/dining-room">Dining Room</a></li>
+                                                <li><Link to="/chair">Chair</Link></li>
+                                                <li><Link to="/sofa">Sofa</Link></li>
+                                                <li><Link to="/living-room">Living Room</Link></li>
+                                                <li><Link to="/guest-room">Guest Room</Link></li>
+                                                <li><Link to="/kids-room">Kids - Children Room</Link></li>
+                                                <li><Link to="/dining-room">Dining Room</Link></li>
 
                                                 <NestedDropdownItem
-                                                    href="/bedroom"
+                                                    to="/bedroom"
                                                     dropdownKey="bedroom"
                                                     onMouseEnter={handleMouseEnter}
                                                     onMouseLeave={handleMouseLeave}
                                                     onClick={handleMobileDropdownClick}
                                                     nestedSubmenu={
                                                         <ul>
-                                                            <li><a href="/mattress">Mattress</a></li>
+                                                            <li><Link to="/mattress">Mattress</Link></li>
                                                         </ul>
                                                     }
                                                 >
                                                     Bedroom
                                                 </NestedDropdownItem>
 
-                                                <li><a href="/study-office">Study - Home Office</a></li>
-                                                <li><a href="/outdoor-furniture">Outdoor Furniture</a></li>
-                                                <li><a href="/antiques">Antiques - Fine Arts</a></li>
+                                                <li><Link to="/study-office">Study - Home Office</Link></li>
+                                                <li><Link to="/outdoor-furniture">Outdoor Furniture</Link></li>
+                                                <li><Link to="/antiques">Antiques - Fine Arts</Link></li>
                                             </ul>
                                         }
                                     >
@@ -379,7 +392,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/clothes"
+                                        to="/clothes"
                                         dropdownKey="clothes"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -387,12 +400,12 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/womens-clothing">Women's Clothing</a></li>
-                                                <li><a href="/mens-clothing">Men's Clothing</a></li>
-                                                <li><a href="/girls-clothing">Girl's Clothing</a></li>
-                                                <li><a href="/boys-clothing">Boy's Clothing</a></li>
-                                                <li><a href="/childrens-clothing">Children's Clothing</a></li>
-                                                <li><a href="/baby-clothing">Infant's - Baby's Clothing</a></li>
+                                                <li><Link to="/womens-clothing">Women's Clothing</Link></li>
+                                                <li><Link to="/mens-clothing">Men's Clothing</Link></li>
+                                                <li><Link to="/girls-clothing">Girl's Clothing</Link></li>
+                                                <li><Link to="/boys-clothing">Boy's Clothing</Link></li>
+                                                <li><Link to="/childrens-clothing">Children's Clothing</Link></li>
+                                                <li><Link to="/baby-clothing">Infant's - Baby's Clothing</Link></li>
                                             </ul>
                                         }
                                     >
@@ -400,7 +413,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/shoes"
+                                        to="/shoes"
                                         dropdownKey="shoes"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -408,11 +421,11 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/womens-shoes">Women's Shoes</a></li>
-                                                <li><a href="/mens-shoes">Men's Shoes</a></li>
-                                                <li><a href="/girls-shoes">Girl's Shoes</a></li>
-                                                <li><a href="/boys-shoes">Boy's Shoes</a></li>
-                                                <li><a href="/childrens-shoes">Children's Shoes</a></li>
+                                                <li><Link to="/womens-shoes">Women's Shoes</Link></li>
+                                                <li><Link to="/mens-shoes">Men's Shoes</Link></li>
+                                                <li><Link to="/girls-shoes">Girl's Shoes</Link></li>
+                                                <li><Link to="/boys-shoes">Boy's Shoes</Link></li>
+                                                <li><Link to="/childrens-shoes">Children's Shoes</Link></li>
                                             </ul>
                                         }
                                     >
@@ -420,7 +433,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/home-garden"
+                                        to="/home-garden"
                                         dropdownKey="home-garden"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -428,19 +441,19 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/home-appliances">Home Appliances - Electrical Tools</a></li>
+                                                <li><Link to="/home-appliances">Home Appliances - Electrical Tools</Link></li>
 
                                                 <NestedDropdownItem
-                                                    href="/kitchen"
+                                                    to="/kitchen"
                                                     dropdownKey="kitchen"
                                                     onMouseEnter={handleMouseEnter}
                                                     onMouseLeave={handleMouseLeave}
                                                     onClick={handleMobileDropdownClick}
                                                     nestedSubmenu={
                                                         <ul>
-                                                            <li><a href="/cooking-appliances">Cooking Appliances</a></li>
-                                                            <li><a href="/kitchen-dining-appliances">Kitchen - Dining Room Appliances</a></li>
-                                                            <li><a href="/kitchen-supplies">Kitchen Other Supplies</a></li>
+                                                            <li><Link to="/cooking-appliances">Cooking Appliances</Link></li>
+                                                            <li><Link to="/kitchen-dining-appliances">Kitchen - Dining Room Appliances</Link></li>
+                                                            <li><Link to="/kitchen-supplies">Kitchen Other Supplies</Link></li>
                                                         </ul>
                                                     }
                                                 >
@@ -448,47 +461,47 @@ const Navbar = () => {
                                                 </NestedDropdownItem>
 
                                                 <NestedDropdownItem
-                                                    href="/bath"
+                                                    to="/bath"
                                                     dropdownKey="bath"
                                                     onMouseEnter={handleMouseEnter}
                                                     onMouseLeave={handleMouseLeave}
                                                     onClick={handleMobileDropdownClick}
                                                     nestedSubmenu={
                                                         <ul>
-                                                            <li><a href="/bathroom-fixtures">Bathroom Fixtures</a></li>
-                                                            <li><a href="/bathroom-supplies">Bathroom Supplies</a></li>
+                                                            <li><Link to="/bathroom-fixtures">Bathroom Fixtures</Link></li>
+                                                            <li><Link to="/bathroom-supplies">Bathroom Supplies</Link></li>
                                                         </ul>
                                                     }
                                                 >
                                                     Bath
                                                 </NestedDropdownItem>
 
-                                                <li><a href="/laundry-supplies">Laundry Supplies</a></li>
-                                                <li><a href="/heating-cooling">Heating - Cooling</a></li>
-                                                <li><a href="/lighting">Lighting</a></li>
-                                                <li><a href="/home-audio-video">Home Audio - Video Systems</a></li>
-                                                <li><a href="/storage-organization">Storage - Organization Supplies</a></li>
+                                                <li><Link to="/laundry-supplies">Laundry Supplies</Link></li>
+                                                <li><Link to="/heating-cooling">Heating - Cooling</Link></li>
+                                                <li><Link to="/lighting">Lighting</Link></li>
+                                                <li><Link to="/home-audio-video">Home Audio - Video Systems</Link></li>
+                                                <li><Link to="/storage-organization">Storage - Organization Supplies</Link></li>
 
                                                 <NestedDropdownItem
-                                                    href="/home-repair"
+                                                    to="/home-repair"
                                                     dropdownKey="home-repair"
                                                     onMouseEnter={handleMouseEnter}
                                                     onMouseLeave={handleMouseLeave}
                                                     onClick={handleMobileDropdownClick}
                                                     nestedSubmenu={
                                                         <ul>
-                                                            <li><a href="/hand-power-tools">Hand and Power Tools</a></li>
-                                                            <li><a href="/lamps-lighting">Lamps - Lighting - Fixtures</a></li>
-                                                            <li><a href="/paints">Paints</a></li>
-                                                            <li><a href="/building-supplies">Home Building Supplies</a></li>
+                                                            <li><Link to="/hand-power-tools">Hand and Power Tools</Link></li>
+                                                            <li><Link to="/lamps-lighting">Lamps - Lighting - Fixtures</Link></li>
+                                                            <li><Link to="/paints">Paints</Link></li>
+                                                            <li><Link to="/building-supplies">Home Building Supplies</Link></li>
                                                         </ul>
                                                     }
                                                 >
                                                     Home Repair Tools
                                                 </NestedDropdownItem>
 
-                                                <li><a href="/lawn-garden">Lawn - Garden</a></li>
-                                                <li><a href="/garden-supplies">Garden Supplies - Outdoor Activities</a></li>
+                                                <li><Link to="/lawn-garden">Lawn - Garden</Link></li>
+                                                <li><Link to="/garden-supplies">Garden Supplies - Outdoor Activities</Link></li>
                                             </ul>
                                         }
                                     >
@@ -496,7 +509,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/sports"
+                                        to="/sports"
                                         dropdownKey="sports"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -504,24 +517,24 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/sports-equipment">Sports Equipment</a></li>
-                                                <li><a href="/exercise-fitness">Exercise - Fitness Equipment</a></li>
-                                                <li><a href="/game-rooms">Game Rooms - Outdoor Games</a></li>
-                                                <li><a href="/outdoor-entertainment">Outdoor Entertainment - Equipment</a></li>
-                                                <li><a href="/golf">Golf</a></li>
-                                                <li><a href="/hunting">Hunting</a></li>
-                                                <li><a href="/cycling">Cycling</a></li>
-                                                <li><a href="/fishing-boating">Fishing - Boating</a></li>
+                                                <li><Link to="/sports-equipment">Sports Equipment</Link></li>
+                                                <li><Link to="/exercise-fitness">Exercise - Fitness Equipment</Link></li>
+                                                <li><Link to="/game-rooms">Game Rooms - Outdoor Games</Link></li>
+                                                <li><Link to="/outdoor-entertainment">Outdoor Entertainment - Equipment</Link></li>
+                                                <li><Link to="/golf">Golf</Link></li>
+                                                <li><Link to="/hunting">Hunting</Link></li>
+                                                <li><Link to="/cycling">Cycling</Link></li>
+                                                <li><Link to="/fishing-boating">Fishing - Boating</Link></li>
                                             </ul>
                                         }
                                     >
                                         Sports - Outdoor Activities
                                     </DropdownItem>
 
-                                    <li><a href="/teen-supplies">Teen Supplies</a></li>
+                                    <li><Link to="/teen-supplies">Teen Supplies</Link></li>
 
                                     <DropdownItem
-                                        href="/babies-kids"
+                                        to="/babies-kids"
                                         dropdownKey="babies-kids"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -529,10 +542,10 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/babies-supplies">Babies Supplies</a></li>
-                                                <li><a href="/kids-supplies">Kids - Children Supplies</a></li>
-                                                <li><a href="/children-toys">Children Toys</a></li>
-                                                <li><a href="/baby-diapers">Baby Diapers</a></li>
+                                                <li><Link to="/babies-supplies">Babies Supplies</Link></li>
+                                                <li><Link to="/kids-supplies">Kids - Children Supplies</Link></li>
+                                                <li><Link to="/children-toys">Children Toys</Link></li>
+                                                <li><Link to="/baby-diapers">Baby Diapers</Link></li>
                                             </ul>
                                         }
                                     >
@@ -540,7 +553,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/beauty-health"
+                                        to="/beauty-health"
                                         dropdownKey="beauty-health"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -548,14 +561,14 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/cosmetics-accessories">Cosmetics Accessories</a></li>
-                                                <li><a href="/skin-care">Specialized Skin Care</a></li>
-                                                <li><a href="/salon-spa">Salon - Spa Products</a></li>
-                                                <li><a href="/vitamins">Vitamins - Other Nutrients</a></li>
-                                                <li><a href="/mens-cosmetics">Men's Cosmetics Skin Care</a></li>
-                                                <li><a href="/jewelry">Jewelry</a></li>
-                                                <li><a href="/sunglasses">Sunglasses</a></li>
-                                                <li><a href="/watches">Watches</a></li>
+                                                <li><Link to="/cosmetics-accessories">Cosmetics Accessories</Link></li>
+                                                <li><Link to="/skin-care">Specialized Skin Care</Link></li>
+                                                <li><Link to="/salon-spa">Salon - Spa Products</Link></li>
+                                                <li><Link to="/vitamins">Vitamins - Other Nutrients</Link></li>
+                                                <li><Link to="/mens-cosmetics">Men's Cosmetics Skin Care</Link></li>
+                                                <li><Link to="/jewelry">Jewelry</Link></li>
+                                                <li><Link to="/sunglasses">Sunglasses</Link></li>
+                                                <li><Link to="/watches">Watches</Link></li>
                                             </ul>
                                         }
                                     >
@@ -563,7 +576,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/bags-luggage"
+                                        to="/bags-luggage"
                                         dropdownKey="bags-luggage"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -571,9 +584,9 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/handbags">Handbags</a></li>
-                                                <li><a href="/shoulder-bags">Shoulder Bags</a></li>
-                                                <li><a href="/luggage">Luggage</a></li>
+                                                <li><Link to="/handbags">Handbags</Link></li>
+                                                <li><Link to="/shoulder-bags">Shoulder Bags</Link></li>
+                                                <li><Link to="/luggage">Luggage</Link></li>
                                             </ul>
                                         }
                                     >
@@ -581,7 +594,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/entertainment"
+                                        to="/entertainment"
                                         dropdownKey="entertainment"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -589,9 +602,9 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/video-games">Video Games</a></li>
-                                                <li><a href="/home-entertainment">Home Entertainment System</a></li>
-                                                <li><a href="/vr">VR - Virtual Reality</a></li>
+                                                <li><Link to="/video-games">Video Games</Link></li>
+                                                <li><Link to="/home-entertainment">Home Entertainment System</Link></li>
+                                                <li><Link to="/vr">VR - Virtual Reality</Link></li>
                                             </ul>
                                         }
                                     >
@@ -599,7 +612,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/food-grocery"
+                                        to="/food-grocery"
                                         dropdownKey="food-grocery"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -607,7 +620,7 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/gourmet-food">Gourmet Food</a></li>
+                                                <li><Link to="/gourmet-food">Gourmet Food</Link></li>
                                             </ul>
                                         }
                                     >
@@ -615,7 +628,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/handmade"
+                                        to="/handmade"
                                         dropdownKey="handmade"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -623,7 +636,7 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/arts-crafts">Arts - Crafts - Sewing</a></li>
+                                                <li><Link to="/arts-crafts">Arts - Crafts - Sewing</Link></li>
                                             </ul>
                                         }
                                     >
@@ -631,7 +644,7 @@ const Navbar = () => {
                                     </DropdownItem>
 
                                     <DropdownItem
-                                        href="/pets"
+                                        to="/pets"
                                         dropdownKey="pets"
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
@@ -639,24 +652,24 @@ const Navbar = () => {
                                         hasSubmenu={true}
                                         submenu={
                                             <ul>
-                                                <li><a href="/cat-food">Cat Food</a></li>
-                                                <li><a href="/cat-supplies">Cat Supplies</a></li>
-                                                <li><a href="/dog-food">Dog Food</a></li>
-                                                <li><a href="/dog-supplies">Dog Supplies</a></li>
-                                                <li><a href="/bird-food">Bird Food</a></li>
-                                                <li><a href="/bird-supplies">Bird Supplies</a></li>
-                                                <li><a href="/fish-supplies">Fish Aquatic Supplies</a></li>
-                                                <li><a href="/other-animal-supplies">Other Animal Supplies</a></li>
+                                                <li><Link to="/cat-food">Cat Food</Link></li>
+                                                <li><Link to="/cat-supplies">Cat Supplies</Link></li>
+                                                <li><Link to="/dog-food">Dog Food</Link></li>
+                                                <li><Link to="/dog-supplies">Dog Supplies</Link></li>
+                                                <li><Link to="/bird-food">Bird Food</Link></li>
+                                                <li><Link to="/bird-supplies">Bird Supplies</Link></li>
+                                                <li><Link to="/fish-supplies">Fish Aquatic Supplies</Link></li>
+                                                <li><Link to="/other-animal-supplies">Other Animal Supplies</Link></li>
                                             </ul>
                                         }
                                     >
                                         Pets Supplies
                                     </DropdownItem>
 
-                                    <li><a href="/school-office">School - Office Supplies</a></li>
-                                    <li><a href="/books">Books</a></li>
-                                    <li><a href="/cars">Cars</a></li>
-                                    <li><a href="/industrial">Industrial Scientific Materials</a></li>
+                                    <li><Link to="/school-office">School - Office Supplies</Link></li>
+                                    <li><Link to="/books">Books</Link></li>
+                                    <li><Link to="/cars">Cars</Link></li>
+                                    <li><Link to="/industrial">Industrial Scientific Materials</Link></li>
                                 </ul>
                             </div>
                         </li>
@@ -666,34 +679,34 @@ const Navbar = () => {
                             onMouseEnter={() => handleMouseEnter('account')}
                             onMouseLeave={() => handleMouseLeave('account')}
                         >
-                            <a
-                                href="/my-account"
+                            <Link
+                                to="/my-account"
                                 className="ecommerce-nav-link"
                                 onClick={(e) => handleMobileDropdownClick('account', e)}
                             >
                                 My Account <ChevronDown size={16} />
-                            </a>
+                            </Link>
                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('account') ? 'ecommerce-nav-dropdown-active' : ''}`}>
                                 <ul className="ecommerce-nav-dropdown-menu">
-                                    <li><a href="/account-details">Account Details</a></li>
-                                    <li><a href="/addresses">Addresses</a></li>
-                                    <li><a href="/payment-methods">Payment Methods</a></li>
-                                    <li><a href="/wishlist">Wishlist</a></li>
-                                    <li><a href="/saved-for-later">Saved For Later</a></li>
-                                    <li><a href="/orders">Orders</a></li>
-                                    <li><a href="/order-tracking">Order Tracking</a></li>
-                                    <li><a href="/download">Download</a></li>
-                                    <li><a href="/lost-password">Lost Password</a></li>
+                                    <li><Link to="/account-details">Account Details</Link></li>
+                                    <li><Link to="/addresses">Addresses</Link></li>
+                                    <li><Link to="/payment-methods">Payment Methods</Link></li>
+                                    <li><Link to="/wishlist">Wishlist</Link></li>
+                                    <li><Link to="/saved-for-later">Saved For Later</Link></li>
+                                    <li><Link to="/orders">Orders</Link></li>
+                                    <li><Link to="/order-tracking">Order Tracking</Link></li>
+                                    <li><Link to="/download">Download</Link></li>
+                                    <li><Link to="/lost-password">Lost Password</Link></li>
                                 </ul>
                             </div>
                         </li>
 
                         <li className="ecommerce-nav-item">
-                            <a href="/about" className="ecommerce-nav-link">About</a>
+                            <Link to="/about" className="ecommerce-nav-link">About</Link>
                         </li>
 
                         <li className="ecommerce-nav-item">
-                            <a href="/contact" className="ecommerce-nav-link">Contact Us</a>
+                            <Link to="/contact" className="ecommerce-nav-link">Contact Us</Link>
                         </li>
 
                         <li
@@ -701,20 +714,20 @@ const Navbar = () => {
                             onMouseEnter={() => handleMouseEnter('sellers')}
                             onMouseLeave={() => handleMouseLeave('sellers')}
                         >
-                            <a
-                                href="/sellers"
+                            <Link
+                                to="/sellers"
                                 className="ecommerce-nav-link"
                                 onClick={(e) => handleMobileDropdownClick('sellers', e)}
                             >
                                 Sellers <ChevronDown size={16} />
-                            </a>
+                            </Link>
                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('sellers') ? 'ecommerce-nav-dropdown-active' : ''}`}>
                                 <ul className="ecommerce-nav-dropdown-menu">
-                                    <li><a href="/vendor-registration">Vendor Registration</a></li>
-                                    <li><a href="/vendor-membership">Vendor Membership</a></li>
-                                    <li><a href="/store-manager">Store Manager</a></li>
-                                    <li><a href="/vendors-drivers-manager">Vendors Drivers Manager</a></li>
-                                    <li><a href="/stores-list">Stores List</a></li>
+                                    <li><Link to="/vendor-registration">Vendor Registration</Link></li>
+                                    <li><Link to="/vendor-membership">Vendor Membership</Link></li>
+                                    <li><Link to="/store-manager">Store Manager</Link></li>
+                                    <li><Link to="/vendors-drivers-manager">Vendors Drivers Manager</Link></li>
+                                    <li><Link to="/stores-list">Stores List</Link></li>
                                 </ul>
                             </div>
                         </li>
@@ -724,28 +737,28 @@ const Navbar = () => {
                             onMouseEnter={() => handleMouseEnter('delivery')}
                             onMouseLeave={() => handleMouseLeave('delivery')}
                         >
-                            <a
-                                href="/delivery-drivers"
+                            <Link
+                                to="/delivery-drivers"
                                 className="ecommerce-nav-link"
                                 onClick={(e) => handleMobileDropdownClick('delivery', e)}
                             >
                                 Delivery Drivers <ChevronDown size={16} />
-                            </a>
+                            </Link>
                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('delivery') ? 'ecommerce-nav-dropdown-active' : ''}`}>
                                 <ul className="ecommerce-nav-dropdown-menu">
-                                    <li><a href="/delivery-drivers">Delivery Drivers</a></li>
-                                    <li><a href="/delivery-drivers-manager">Delivery Drivers Manager</a></li>
-                                    <li><a href="/vendors-drivers-managers">Vendors Drivers Managers</a></li>
-                                    <li><a href="/delivery-tracking">Delivery Tracking</a></li>
-                                    <li><a href="/delivery-drivers-app">Delivery Drivers App</a></li>
+                                    <li><Link to="/delivery-drivers">Delivery Drivers</Link></li>
+                                    <li><Link to="/delivery-drivers-manager">Delivery Drivers Manager</Link></li>
+                                    <li><Link to="/vendors-drivers-managers">Vendors Drivers Managers</Link></li>
+                                    <li><Link to="/delivery-tracking">Delivery Tracking</Link></li>
+                                    <li><Link to="/delivery-drivers-app">Delivery Drivers App</Link></li>
                                 </ul>
                             </div>
                         </li>
 
                         <li className="ecommerce-nav-item ecommerce-nav-item-cart">
-                            <a href="/cart" className="ecommerce-nav-link ecommerce-nav-link-orange">
+                            <Link to="/cart" className="ecommerce-nav-link ecommerce-nav-link-orange">
                                 <ShoppingCart size={20} />
-                            </a>
+                            </Link>
                         </li>
 
                         <li
@@ -753,16 +766,16 @@ const Navbar = () => {
                             onMouseEnter={() => handleMouseEnter('language')}
                             onMouseLeave={() => handleMouseLeave('language')}
                         >
-                            <a
-                                href="#"
+                            <button
                                 className="ecommerce-nav-link ecommerce-nav-link-orange"
                                 onClick={(e) => handleMobileDropdownClick('language', e)}
+                                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 'inherit', fontFamily: 'inherit' }}
                             >
                                 English <ChevronDown size={16} />
-                            </a>
+                            </button>
                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('language') ? 'ecommerce-nav-dropdown-active' : ''}`}>
                                 <ul className="ecommerce-nav-dropdown-menu">
-                                    <li><a href="/ar">Arabic</a></li>
+                                    <li><Link to="/ar">Arabic</Link></li>
                                 </ul>
                             </div>
                         </li>
