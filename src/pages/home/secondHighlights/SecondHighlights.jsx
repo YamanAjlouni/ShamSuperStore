@@ -1,25 +1,58 @@
 import './SecondHighlights.scss'
+import phone from '../../../assets/images/home/secondHighlights/phone.png'
+import watch from '../../../assets/images/home/secondHighlights/watch.png'
+import school from '../../../assets/images/home/secondHighlights/school.png'
 
 export const SecondHighlights = () => {
     return (
         <div className="secondHighlights-out-container">
             <div className='secondHighlights-container'>
-                <div className='product-out-container left-section'>
-                    <div className='content-overlay right-content'>
-                        <h2>Up to 50% off</h2>
-                        <h3>Items on Sale</h3>
-                        <div>
-                            <button>Shop now</button>
-                        </div>
+                <div className='product-out-container'>
+                    <div className='product-left-container'>
+                        <h5>
+                            New Items
+                        </h5>
+                        <h3>
+                            Smart Phones
+                        </h3>
+                        <button>
+                            Shop
+                        </button>
+                    </div>
+                    <div className='product-right-container'>
+                        <img className='product-right-image' src={phone} alt="" />
                     </div>
                 </div>
-                <div className='product-out-container right-section'>
-                    <div className='content-overlay left-content'>
-                        <h2>Up to 50% off</h2>
-                        <h3>Items on Sale</h3>
-                        <div>
-                            <button>Shop now</button>
-                        </div>
+                <div className='product-out-container'>
+                    <div className='product-left-container'>
+                        <h5>
+                            New Products
+                        </h5>
+                        <h3>
+                            Bags and Luggage
+                        </h3>
+                        <button>
+                            Shop
+                        </button>
+                    </div>
+                    <div className='product-right-container'>
+                        <img className='product-right-image' src={watch} alt="" />
+                    </div>
+                </div>
+                <div className='product-out-container'>
+                    <div className='product-left-container'>
+                        <h5>
+                            At Lowest Price
+                        </h5>
+                        <h3>
+                            Arts and Accessories
+                        </h3>
+                        <button>
+                            Shop
+                        </button>
+                    </div>
+                    <div className='product-right-container'>
+                        <img className='product-right-image' src={school} alt="tea" />
                     </div>
                 </div>
             </div>

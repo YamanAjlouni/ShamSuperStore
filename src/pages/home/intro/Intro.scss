@@ -14,10 +14,10 @@ $text-dark: #333333;
   justify-content: center;
 }
 
-@mixin glass-effect {
-  backdrop-filter: blur(10px);
-  background: rgba($white, 0.2);
-  border: 2px solid rgba($white, 0.5);
+@mixin glass-effect-subtle {
+  backdrop-filter: blur(8px);
+  background: rgba($white, 0.1);
+  border: 1px solid rgba($white, 0.3);
 }
 
 @mixin smooth-transition($duration: 0.3s) {
@@ -158,32 +158,35 @@ body {
     }
   }
 
-  // Navigation buttons
+  // Navigation buttons - Half boxes at screen edges
   .swiper-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 60px;
-    height: 60px;
-    @include glass-effect;
-    border-radius: 50%;
+    width: 50px;
+    height: 80px;
+    @include glass-effect-subtle;
     cursor: pointer;
     @include flex-center;
     @include smooth-transition;
     z-index: 100;
 
     &:hover {
-      background: rgba($white, 0.3);
-      border-color: $white;
-      transform: translateY(-50%) scale(1.1);
+      background: rgba($white, 0.2);
+      border-color: rgba($white, 0.5);
+      transform: translateY(-50%) translateX(0);
     }
 
     &-prev {
-      left: 30px;
+      left: 0;
+      border-radius: 0 5px 5px 0;
+      border-left: none;
     }
 
     &-next {
-      right: 30px;
+      right: 0;
+      border-radius: 5px 0 0 5px;
+      border-right: none;
     }
 
     svg {
@@ -223,7 +226,6 @@ body {
   }
 }
 
-// Responsive design
 @media (max-width: 768px) {
   .swiper-container {
     .slide-content {
@@ -250,23 +252,29 @@ body {
     }
 
     .swiper-nav {
-      width: 50px;
-      height: 50px;
+      width: 45px;
+      height: 70px;
 
       &-prev {
-        left: 20px;
+        left: 0; // Keep flush with edge
       }
 
       &-next {
-        right: 20px;
+        right: 0; // Keep flush with edge
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
       }
     }
   }
 }
 
-// Additional responsive breakpoints
 @media (max-width: 480px) {
   .swiper-container {
+    min-height: 675px;
+
     .slide-text {
       .main-title {
         font-size: 2.5rem;
@@ -285,7 +293,7 @@ body {
     .slide-image {
       img {
         width: 250px;
-        height: 300px; // Reduced height to fit better in smaller container
+        height: 300px;
       }
     }
 
@@ -298,15 +306,33 @@ body {
         height: 6px;
       }
     }
+
+    .swiper-nav {
+      width: 30px;
+      height: 40px;
+
+      &-prev {
+        left: 0;
+      }
+
+      &-next {
+        right: 0;
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
   }
 }
 
-// Animation keyframes
 @keyframes slideInFromRight {
   from {
     transform: translateX(100%);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -318,13 +344,13 @@ body {
     transform: translateX(0);
     opacity: 1;
   }
+
   to {
     transform: translateX(-100%);
     opacity: 0;
   }
 }
 
-// Accessibility improvements
 .swiper-nav,
 .pagination-bullet {
   &:focus {
@@ -340,12 +366,12 @@ body {
   }
 }
 
-// High contrast mode support
 @media (prefers-contrast: high) {
   .swiper-container {
+
     .swiper-nav,
     .pagination-bullet {
-      border-width: 3px;
+      border-width: 2px;
     }
 
     .shop-button {
@@ -354,8 +380,8 @@ body {
   }
 }
 
-// Reduced motion support
 @media (prefers-reduced-motion: reduce) {
+
   .swiper-slide,
   .swiper-nav,
   .pagination-bullet,

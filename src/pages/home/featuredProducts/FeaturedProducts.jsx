@@ -1,11 +1,16 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
+import { useState, useRef } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './FeaturedProducts.scss';
 
 const FeaturedProducts = () => {
+    const swiperRef = useRef(null);
+    const [isBeginning, setIsBeginning] = useState(true);
+    const [isEnd, setIsEnd] = useState(false);
+
     const products = [
         {
             id: 1,
@@ -83,8 +88,37 @@ const FeaturedProducts = () => {
         </svg>
     );
 
+    const ChevronLeft = () => (
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    );
+
+    const ChevronRight = () => (
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+    );
+
     const formatPrice = (price) => {
         return `$${price.toFixed(2)}`;
+    };
+
+    const handlePrevClick = () => {
+        if (swiperRef.current) {
+            swiperRef.current.slidePrev();
+        }
+    };
+
+    const handleNextClick = () => {
+        if (swiperRef.current) {
+            swiperRef.current.slideNext();
+        }
+    };
+
+    const handleSlideChange = (swiper) => {
+        setIsBeginning(swiper.isBeginning);
+        setIsEnd(swiper.isEnd);
     };
 
     return (
@@ -92,14 +126,34 @@ const FeaturedProducts = () => {
             <h2 className="section-title">Featured Products</h2>
 
             <div className="products-swiper-container">
+                {/* Custom Previous Button */}
+                <button
+                    className="custom-nav-button prev-button"
+                    onClick={handlePrevClick}
+                    disabled={isBeginning}
+                >
+                    <ChevronLeft />
+                </button>
+
+                {/* Custom Next Button */}
+                <button
+                    className="custom-nav-button next-button"
+                    onClick={handleNextClick}
+                    disabled={isEnd}
+                >
+                    <ChevronRight />
+                </button>
+
                 <Swiper
                     modules={[Navigation]}
                     slidesPerView={2}
                     spaceBetween={15}
-                    navigation={{
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
+                    onSwiper={(swiper) => {
+                        swiperRef.current = swiper;
+                        setIsBeginning(swiper.isBeginning);
+                        setIsEnd(swiper.isEnd);
                     }}
+                    onSlideChange={handleSlideChange}
                     breakpoints={{
                         480: {
                             slidesPerView: 3,
@@ -110,11 +164,11 @@ const FeaturedProducts = () => {
                             spaceBetween: 20,
                         },
                         1024: {
-                            slidesPerView: 6,
+                            slidesPerView: 5,
                             spaceBetween: 20,
                         },
                         1200: {
-                            slidesPerView: 7,
+                            slidesPerView: 6,
                             spaceBetween: 20,
                         }
                     }}
@@ -164,9 +218,6 @@ const FeaturedProducts = () => {
                             </div>
                         </SwiperSlide>
                     ))}
-
-                    <div className="swiper-button-next"></div>
-                    <div className="swiper-button-prev"></div>
                 </Swiper>
             </div>
         </div>

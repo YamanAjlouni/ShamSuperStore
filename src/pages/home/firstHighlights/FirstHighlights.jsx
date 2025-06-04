@@ -1,6 +1,6 @@
 import './FirstHighlights.scss'
-import bicycle from '../../../assets/images/home/firstHighlights/bicycle.png'
-import laptop from '../../../assets/images/home/firstHighlights/laptop.png'
+import home from '../../../assets/images/home/firstHighlights/home.png'
+import bag from '../../../assets/images/home/firstHighlights/bag.png'
 import art from '../../../assets/images/home/firstHighlights/art.png'
 
 export const FirstHighlights = () => {
@@ -13,36 +13,36 @@ export const FirstHighlights = () => {
                             New Look
                         </h5>
                         <h3>
-                            Best in bicycles
+                            Home Furniture
                         </h3>
                         <button>
                             Shop
                         </button>
                     </div>
                     <div className='product-right-container'>
-                        <img className='product-right-image' src={bicycle} alt="" />
+                        <img className='product-right-image' src={home} alt="" />
                     </div>
                 </div>
                 <div className='product-out-container'>
                     <div className='product-left-container'>
                         <h5>
-                            40% off
+                            New Products
                         </h5>
                         <h3>
-                            Laptop andcomputers
+                            Bags and Luggage
                         </h3>
                         <button>
                             Shop
                         </button>
                     </div>
                     <div className='product-right-container'>
-                        <img className='product-right-image' src={laptop} alt="" />
+                        <img className='product-right-image' src={bag} alt="" />
                     </div>
                 </div>
                 <div className='product-out-container'>
                     <div className='product-left-container'>
                         <h5>
-                            Latest products
+                            At Lowest Price
                         </h5>
                         <h3>
                             Arts and Accessories

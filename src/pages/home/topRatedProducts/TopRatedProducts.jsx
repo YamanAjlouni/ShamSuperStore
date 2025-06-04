@@ -1,11 +1,17 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay, FreeMode } from 'swiper/modules';
+import { useState, useRef } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 import './TopRatedProducts.scss';
 
 const TopRatedProducts = () => {
+    const swiperRef = useRef(null);
+    const [isBeginning, setIsBeginning] = useState(true);
+    const [isEnd, setIsEnd] = useState(false);
+
     const products = [
         {
             id: 1,
@@ -87,19 +93,25 @@ const TopRatedProducts = () => {
         return `$${price.toFixed(2)}`;
     };
 
+    const handleSlideChange = (swiper) => {
+        setIsBeginning(swiper.isBeginning);
+        setIsEnd(swiper.isEnd);
+    };
+
     return (
         <div className="top-rated-products-section">
-            <h2 className="section-title">Top Rated Products</h2>
-
             <div className="products-swiper-container">
+
                 <Swiper
-                    modules={[Navigation]}
+                    modules={[Navigation, Autoplay, FreeMode]}
                     slidesPerView={2}
                     spaceBetween={15}
-                    navigation={{
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
+                    onSwiper={(swiper) => {
+                        swiperRef.current = swiper;
+                        setIsBeginning(swiper.isBeginning);
+                        setIsEnd(swiper.isEnd);
                     }}
+                    onSlideChange={handleSlideChange}
                     breakpoints={{
                         480: {
                             slidesPerView: 3,
@@ -110,15 +122,23 @@ const TopRatedProducts = () => {
                             spaceBetween: 20,
                         },
                         1024: {
-                            slidesPerView: 6,
+                            slidesPerView: 5,
                             spaceBetween: 20,
                         },
                         1200: {
-                            slidesPerView: 7,
+                            slidesPerView: 6,
                             spaceBetween: 20,
                         }
                     }}
-                    loop={false}
+                    loop={true}
+                    autoplay={{
+                        delay: 0,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    }}
+                    speed={3000}
+                    freeMode={true}
+                    freeModeMomentum={false}
                     watchOverflow={true}
                     className="products-swiper"
                 >
@@ -164,9 +184,6 @@ const TopRatedProducts = () => {
                             </div>
                         </SwiperSlide>
                     ))}
-
-                    <div className="swiper-button-next"></div>
-                    <div className="swiper-button-prev"></div>
                 </Swiper>
             </div>
         </div>
