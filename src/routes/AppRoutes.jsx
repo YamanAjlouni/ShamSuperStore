@@ -4,6 +4,7 @@ import { Home } from '../pages/home/Home'
 import Shop from '../pages/shop/Shop'
 import CategoryDetail from '../pages/shop/categoryDetail/CategoryDetail'
 import ProductsList from '../pages/shop/productsList/ProductsList'
+import MyAccount from '../pages/myAccount/MyAccount'
 
 export const AppRoutes = () => {
   return (
@@ -12,6 +13,7 @@ export const AppRoutes = () => {
       <Route path="/shop" element={<Shop />} />
       <Route path="/shop/category/:categoryId" element={<CategoryDetail />} />
       <Route path="/shop/category/:categoryId/subcategory/:subcategoryId" element={<ProductsList />} />
+      <Route path="/myAccount" element={<MyAccount />} />
     </Routes>
   )
 }
