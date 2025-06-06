@@ -1,0 +1,82 @@
+// Support Tickets Content
+.support-tickets-content {
+  .tickets-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+
+    .new-ticket-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+  }
+
+  .tickets-table {
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #e9ecef;
+
+      thead {
+        background-color: #f8f9fa;
+
+        th {
+          padding: 12px;
+          text-align: left;
+          border-bottom: 1px solid #e9ecef;
+          font-weight: 600;
+          color: #333;
+          font-size: 14px;
+        }
+      }
+
+      tbody {
+        td {
+          padding: 20px 12px;
+          text-align: center;
+          border-bottom: 1px solid #e9ecef;
+          color: #666;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design for Support Tickets
+@media (max-width: 768px) {
+  .support-tickets-content {
+    .tickets-header {
+      justify-content: center;
+    }
+
+    .tickets-table {
+      font-size: 14px;
+
+      table {
+        th,
+        td {
+          padding: 8px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .support-tickets-content .tickets-header {
+    justify-content: center;
+  }
+}

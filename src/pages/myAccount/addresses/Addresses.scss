@@ -1,0 +1,59 @@
+// Addresses Content
+.addresses-content {
+    p {
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .address-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .address-card {
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 20px;
+        background: #f8f9fa;
+
+        .address-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+
+            h4 {
+                margin: 0;
+                color: #333;
+                font-size: 16px;
+            }
+
+            .edit-link {
+                color: #4285f4;
+                text-decoration: none;
+                font-size: 14px;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .address-info {
+            p {
+                margin: 0;
+                color: #666;
+                font-style: italic;
+            }
+        }
+    }
+}
+
+// Responsive Design for Addresses
+@media (max-width: 768px) {
+    .addresses-content .address-cards {
+        grid-template-columns: 1fr;
+    }
+}
