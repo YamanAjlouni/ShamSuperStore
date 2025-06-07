@@ -1,63 +1,341 @@
+// Import variables
+@use '../../../assets/style/vars.scss' as *;
+
 // Orders Content
 .orders-content {
     .orders-table {
         margin: 20px 0;
         overflow-x: auto;
+        border-radius: $radius-lg;
+        box-shadow: $shadow-sm;
+        border: 1px solid $gray-200;
 
         table {
             width: 100%;
             border-collapse: collapse;
-            border: 1px solid #e9ecef;
+            background: $white;
+            border-radius: $radius-lg;
+            overflow: hidden;
 
             thead {
-                background-color: #f8f9fa;
+                background: linear-gradient(135deg, $primary-color 0%, $primary-blue-hover 100%);
 
                 th {
-                    padding: 12px;
+                    padding: 16px 12px;
                     text-align: left;
-                    border-bottom: 1px solid #e9ecef;
+                    border-bottom: none;
                     font-weight: 600;
-                    color: #333;
+                    color: $white;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+
+                    &:first-child {
+                        border-top-left-radius: $radius-lg;
+                    }
+
+                    &:last-child {
+                        border-top-right-radius: $radius-lg;
+                    }
                 }
             }
 
             tbody {
+                tr {
+                    transition: $transition-all;
+
+                    &:hover {
+                        background-color: $primary-blue-light;
+                    }
+
+                    &:nth-child(even) {
+                        background-color: $gray-50;
+
+                        &:hover {
+                            background-color: $primary-blue-light;
+                        }
+                    }
+                }
+
                 td {
                     padding: 20px 12px;
                     text-align: center;
-                    border-bottom: 1px solid #e9ecef;
-                    color: #666;
+                    border-bottom: 1px solid $gray-200;
+                    color: $gray-600;
+                    font-size: 14px;
+                    font-style: italic;
+
+                    &:first-child {
+                        text-align: left;
+                        font-weight: 500;
+                    }
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
                 }
             }
         }
     }
 
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        background: $light-gray;
+        border-radius: $radius-lg;
+        border: 1px dashed $gray-300;
+        margin: 20px 0;
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            color: $gray-300;
+        }
+
+        h4 {
+            margin: 0 0 8px 0;
+            color: $text-dark;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        p {
+            margin: 0 0 20px 0;
+            color: $gray-600;
+            font-size: 14px;
+        }
+    }
+
     .browse-products {
-        display: inline-block;
-        background-color: #4285f4;
-        color: white;
-        padding: 10px 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, $primary-color 0%, $primary-blue-hover 100%);
+        color: $white;
+        padding: 12px 24px;
         text-decoration: none;
-        border-radius: 4px;
+        border-radius: $radius-lg;
         margin-top: 20px;
-        transition: background-color 0.3s;
+        transition: $transition-all;
+        font-weight: 600;
+        font-size: 14px;
+        box-shadow: $shadow-sm;
 
         &:hover {
-            background-color: #3367d6;
+            background: linear-gradient(135deg, $primary-blue-hover 0%, $dark-blue-color 100%);
+            transform: translateY(-2px);
+            box-shadow: $shadow-md;
+        }
+
+        &:active {
+            transform: translateY(0);
+            box-shadow: $shadow-sm;
+        }
+
+        &:focus {
+            outline: 2px solid $primary-blue-light;
+            outline-offset: 2px;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    // Order status badges
+    .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: $radius-xl;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+
+        &.pending {
+            background-color: rgba(206, 128, 45, 0.1);
+            color: $orange-color;
+            border: 1px solid rgba(206, 128, 45, 0.3);
+        }
+
+        &.completed {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        &.cancelled {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        &.processing {
+            background-color: rgba(66, 103, 178, 0.1);
+            color: $primary-color;
+            border: 1px solid rgba(66, 103, 178, 0.3);
+        }
+    }
+
+    // Order actions
+    .order-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+
+        .action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: $radius-sm;
+            font-size: 12px;
+            cursor: pointer;
+            transition: $transition-all;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+
+            &.view {
+                background-color: $primary-blue-light;
+                color: $primary-color;
+
+                &:hover {
+                    background-color: $primary-color;
+                    color: $white;
+                }
+            }
+
+            &.download {
+                background-color: rgba(16, 185, 129, 0.1);
+                color: #10b981;
+
+                &:hover {
+                    background-color: #10b981;
+                    color: $white;
+                }
+            }
+
+            &.cancel {
+                background-color: rgba(239, 68, 68, 0.1);
+                color: #ef4444;
+
+                &:hover {
+                    background-color: #ef4444;
+                    color: $white;
+                }
+            }
         }
     }
 }
 
 // Responsive Design for Orders
 @media (max-width: 768px) {
-    .orders-content .orders-table {
-        font-size: 14px;
+    .orders-content {
+        .orders-table {
+            margin: 15px 0;
+            border-radius: $radius-md;
 
-        table {
+            table {
+                font-size: 12px;
+                border-radius: $radius-md;
 
-            th,
-            td {
-                padding: 8px;
+                thead th {
+                    padding: 12px 8px;
+                    font-size: 11px;
+
+                    &:first-child,
+                    &:last-child {
+                        border-radius: $radius-md;
+                    }
+                }
+
+                tbody td {
+                    padding: 12px 8px;
+                    font-size: 11px;
+                }
+            }
+        }
+
+        .browse-products {
+            padding: 10px 20px;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        .empty-state {
+            padding: 30px 15px;
+
+            .empty-icon {
+                width: 48px;
+                height: 48px;
+            }
+
+            h4 {
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+        }
+
+        .order-actions {
+            flex-direction: column;
+            gap: 4px;
+
+            .action-btn {
+                font-size: 11px;
+                padding: 3px 6px;
+            }
+        }
+
+        .status-badge {
+            font-size: 10px;
+            padding: 2px 8px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .orders-content {
+        .orders-table {
+            margin: 10px 0;
+
+            table {
+                thead th {
+                    padding: 8px 4px;
+                    font-size: 10px;
+                }
+
+                tbody td {
+                    padding: 8px 4px;
+                    font-size: 10px;
+                }
+            }
+        }
+
+        .browse-products {
+            width: 100%;
+            justify-content: center;
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+
+        .empty-state {
+            padding: 20px 10px;
+
+            .empty-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            h4 {
+                font-size: 14px;
+            }
+
+            p {
                 font-size: 12px;
             }
         }

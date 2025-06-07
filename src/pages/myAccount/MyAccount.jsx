@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import './MyAccount.scss';
 
 // Import all components
-import AuthSection from './components/AuthSection';
-import Dashboard from './components/Dashboard';
-import Orders from './components/Orders';
-import OrderTracking from './components/OrderTracking';
-import Downloads from './components/Downloads';
-import Addresses from './components/Addresses';
-import PaymentMethods from './components/PaymentMethods';
-import AccountDetails from './components/AccountDetails';
-import Wishlist from './components/Wishlist';
-import Following from './components/Following';
-import LostPassword from './components/LostPassword';
-import SupportTickets from './components/SupportTickets';
-import Inquiries from './components/Inquiries';
+import AuthSection from './authSection/AuthSection';
+import Dashboard from './dashboard/Dashboard';
+import Orders from './orders/Orders';
+import OrderTracking from './orderTracking/OrderTracking';
+import Downloads from './downloads/Downloads';
+import Addresses from './addresses/Addresses';
+import PaymentMethods from './paymentMethods/PaymentMethods';
+import AccountDetails from './accountDetails/AccountDetails';
+import Wishlist from './wishlist/Wishlist';
+import Following from './following/Following';
+import LostPassword from './lostPassword/LostPassword';
+import SupportTickets from './supportTickets/SupportTickets';
+import Inquiries from './inquiries/Inquiries';
 
 const MyAccount = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);

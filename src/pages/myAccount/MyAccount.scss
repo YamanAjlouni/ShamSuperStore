@@ -1,3 +1,6 @@
+// Import variables
+@use '../../assets/style/vars.scss' as *;
+
 // Main MyAccount Styles
 .my-account {
   max-width: 1300px;
@@ -20,35 +23,45 @@
 }
 
 .account-sidebar {
-  background: #f8f9fa;
+  background: $light-gray;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: $radius-lg;
   height: fit-content;
-  border: 1px solid #e9ecef;
+  border: 1px solid $gray-200;
+  box-shadow: $shadow-sm;
 
   .user-info {
     margin-bottom: 30px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid $gray-200;
 
     h3 {
       margin: 0 0 10px 0;
-      color: #333;
+      color: $text-dark;
       font-size: 18px;
+      font-weight: 600;
     }
 
     .logout-btn {
-      background-color: #4285f4;
-      color: white;
+      background-color: $primary-color;
+      color: $white;
       border: none;
       padding: 8px 16px;
-      border-radius: 4px;
+      border-radius: $radius-sm;
       cursor: pointer;
       font-size: 14px;
-      transition: background-color 0.3s;
+      transition: $transition-all;
+      box-shadow: $shadow-sm;
 
       &:hover {
-        background-color: #3367d6;
+        background-color: $primary-blue-hover;
+        transform: translateY(-1px);
+        box-shadow: $shadow-md;
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: $shadow-sm;
       }
     }
   }
@@ -60,11 +73,13 @@
       margin: 0;
 
       li {
-        margin-bottom: 2px;
+        margin-bottom: 4px;
 
         &.active button {
-          background-color: #4285f4;
-          color: white;
+          background-color: $primary-color;
+          color: $white;
+          box-shadow: $shadow-sm;
+          transform: translateX(4px);
         }
 
         button {
@@ -74,14 +89,21 @@
           background: transparent;
           text-align: left;
           cursor: pointer;
-          border-radius: 4px;
-          color: #666;
+          border-radius: $radius-md;
+          color: $gray-600;
           font-size: 14px;
-          transition: all 0.3s;
+          transition: $transition-all;
+          font-weight: 500;
 
           &:hover {
-            background-color: #e3f2fd;
-            color: #4285f4;
+            background-color: $primary-blue-light;
+            color: $primary-color;
+            transform: translateX(2px);
+            box-shadow: $shadow-sm;
+          }
+
+          &:active {
+            transform: translateX(0);
           }
         }
       }
@@ -90,15 +112,16 @@
 }
 
 .account-content {
-  background: white;
+  background: $white;
   padding: 30px;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border-radius: $radius-lg;
+  border: 1px solid $gray-200;
   min-height: 400px;
+  box-shadow: $shadow-sm;
 
   h3 {
     margin: 0 0 20px 0;
-    color: #333;
+    color: $text-dark;
     font-size: 24px;
     font-weight: 600;
   }
@@ -116,6 +139,22 @@
 
   .account-sidebar {
     order: 2;
+    border-radius: $radius-md;
+    padding: 15px;
+
+    .user-info {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+
+      h3 {
+        font-size: 16px;
+      }
+
+      .logout-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+    }
 
     .account-nav ul {
       display: flex;
@@ -127,10 +166,19 @@
         flex: 1;
         min-width: calc(50% - 2.5px);
 
+        &.active button {
+          transform: none;
+        }
+
         button {
           text-align: center;
           font-size: 12px;
           padding: 8px 12px;
+          border-radius: $radius-sm;
+
+          &:hover {
+            transform: none;
+          }
         }
       }
     }
@@ -139,5 +187,42 @@
   .account-content {
     order: 1;
     padding: 20px;
+    border-radius: $radius-md;
+  }
+}
+
+@media (max-width: 480px) {
+  .my-account {
+    padding: 5px;
+  }
+
+  .account-sidebar {
+    padding: 12px;
+
+    .user-info {
+      margin-bottom: 15px;
+      padding-bottom: 12px;
+
+      h3 {
+        font-size: 14px;
+      }
+    }
+
+    .account-nav ul {
+      gap: 3px;
+
+      li button {
+        padding: 6px 8px;
+        font-size: 11px;
+      }
+    }
+  }
+
+  .account-content {
+    padding: 15px;
+
+    h3 {
+      font-size: 20px;
+    }
   }
 }

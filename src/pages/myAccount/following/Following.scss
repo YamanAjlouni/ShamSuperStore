@@ -1,35 +1,35 @@
 // Following Content
 .following-content {
-  text-align: center;
-  padding: 40px 20px;
+    text-align: center;
+    padding: 40px 20px;
 
-  .following-list {
-    background: #f8f9fa;
-    padding: 40px;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-    margin: 20px 0;
+    .following-list {
+        background: #f8f9fa;
+        padding: 40px;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        margin: 20px 0;
 
-    p {
-      margin: 0;
-      color: #666;
-      font-style: italic;
-      font-size: 16px;
+        p {
+            margin: 0;
+            color: #666;
+            font-style: italic;
+            font-size: 16px;
+        }
     }
-  }
 
-  .browse-stores {
-    display: inline-block;
-    background-color: #4285f4;
-    color: white;
-    padding: 12px 24px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    font-weight: 500;
+    .browse-stores {
+        display: inline-block;
+        background-color: #4285f4;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        font-weight: 500;
 
-    &:hover {
-      background-color: #3367d6;
+        &:hover {
+            background-color: #3367d6;
+        }
     }
-  }
 }
