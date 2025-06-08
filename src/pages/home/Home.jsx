@@ -15,6 +15,7 @@ import { FirstHighlights } from './firstHighlights/FirstHighlights'
 import { FourthHighlights } from './fourthHighlights/FourthHighlights'
 import { Intro } from './intro/Intro'
 import NewProducts from './newProducts/NewProducts'
+import OurNews from './ourNews/OurNews'
 import { SecondHighlights } from './secondHighlights/SecondHighlights'
 import { SixthHighlights } from './sixthHighlights/SixthHighlights'
 import { ThirdHighlights } from './thirdHighlights/ThirdHighlights'
@@ -43,6 +44,7 @@ export const Home = () => {
             <BestSellerGardenSupplies />
             <SixthHighlights />
             <FeaturedProducts />
+            <OurNews />
             <TopRatedProducts />
         </div>
     )
