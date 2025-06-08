@@ -1,4 +1,3 @@
-import React from 'react';
 import './Following.scss';
 
 const Following = () => {

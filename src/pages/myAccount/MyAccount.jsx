@@ -36,13 +36,11 @@ const MyAccount = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        // Handle login logic here
         setIsLoggedIn(true);
     };
 
     const handleRegister = (e) => {
         e.preventDefault();
-        // Handle registration logic here
         setIsLoggedIn(true);
     };
 
@@ -54,38 +52,38 @@ const MyAccount = () => {
 
     const renderContent = () => {
         switch (activeTab) {
-            case 'dashboard': 
+            case 'dashboard':
                 return <Dashboard handleLogout={handleLogout} setActiveTab={setActiveTab} />;
-            case 'orders': 
+            case 'orders':
                 return <Orders />;
-            case 'order-tracking': 
+            case 'order-tracking':
                 return <OrderTracking />;
-            case 'downloads': 
+            case 'downloads':
                 return <Downloads />;
-            case 'addresses': 
+            case 'addresses':
                 return <Addresses />;
-            case 'payment-methods': 
+            case 'payment-methods':
                 return <PaymentMethods />;
-            case 'account-details': 
+            case 'account-details':
                 return <AccountDetails />;
-            case 'wishlist': 
+            case 'wishlist':
                 return <Wishlist />;
-            case 'following': 
+            case 'following':
                 return <Following />;
-            case 'lost-password': 
+            case 'lost-password':
                 return <LostPassword setShowLogin={setShowLogin} />;
-            case 'support-tickets': 
+            case 'support-tickets':
                 return <SupportTickets />;
-            case 'inquiries': 
+            case 'inquiries':
                 return <Inquiries />;
-            default: 
+            default:
                 return <Dashboard handleLogout={handleLogout} setActiveTab={setActiveTab} />;
         }
     };
 
     if (!isLoggedIn) {
         return (
-            <AuthSection 
+            <AuthSection
                 formData={formData}
                 handleInputChange={handleInputChange}
                 handleLogin={handleLogin}

@@ -1,7 +1,8 @@
-// Addresses Content
+@use '../../../assets/style/vars.scss' as *;
+
 .addresses-content {
     p {
-        color: #666;
+        color: $gray-600;
         margin-bottom: 20px;
     }
 
@@ -13,10 +14,10 @@
     }
 
     .address-card {
-        border: 1px solid #e9ecef;
-        border-radius: 8px;
+        border: 1px solid $gray-200;
+        border-radius: $radius-lg;
         padding: 20px;
-        background: #f8f9fa;
+        background: $light-gray;
 
         .address-header {
             display: flex;
@@ -26,12 +27,12 @@
 
             h4 {
                 margin: 0;
-                color: #333;
+                color: $text-dark;
                 font-size: 16px;
             }
 
             .edit-link {
-                color: #4285f4;
+                color: $primary-color;
                 text-decoration: none;
                 font-size: 14px;
 
@@ -44,14 +45,13 @@
         .address-info {
             p {
                 margin: 0;
-                color: #666;
+                color: $gray-600;
                 font-style: italic;
             }
         }
     }
 }
 
-// Responsive Design for Addresses
 @media (max-width: 768px) {
     .addresses-content .address-cards {
         grid-template-columns: 1fr;

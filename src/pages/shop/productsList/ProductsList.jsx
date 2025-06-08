@@ -27,9 +27,8 @@ export const ProductsList = () => {
         61: { name: "Men's Clothing", categoryId: 6, description: "Shirts, pants, suits and more" }
     };
 
-    // Products data for each subcategory
     const productsData = {
-        11: [ // Keyboards products
+        11: [
             {
                 id: 101,
                 name: "Mechanical Gaming Keyboard RGB",
@@ -250,14 +249,14 @@ export const ProductsList = () => {
             {products.length > 0 && (
                 <div className="filters-bar">
                     <div className="filter-group">
-                        <label className="filter-checkbox">
+                        {/* <label className="filter-checkbox">
                             <input
                                 type="checkbox"
                                 checked={filterInStock}
                                 onChange={(e) => setFilterInStock(e.target.checked)}
                             />
                             In Stock Only
-                        </label>
+                        </label> */}
                     </div>
 
                     <div className="sort-group">

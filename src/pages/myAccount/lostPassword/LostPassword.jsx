@@ -1,4 +1,3 @@
-import React from 'react';
 import './LostPassword.scss';
 
 const LostPassword = ({ setShowLogin }) => {

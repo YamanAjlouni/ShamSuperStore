@@ -1,4 +1,5 @@
-// Downloads Content
+@use '../../../assets/style/vars.scss' as *;
+
 .downloads-content {
     .downloads-table {
         margin: 20px 0;
@@ -7,17 +8,17 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            border: 1px solid #e9ecef;
+            border: 1px solid $gray-200;
 
             thead {
-                background-color: #f8f9fa;
+                background-color: $light-gray;
 
                 th {
                     padding: 12px;
                     text-align: left;
-                    border-bottom: 1px solid #e9ecef;
+                    border-bottom: 1px solid $gray-200;
                     font-weight: 600;
-                    color: #333;
+                    color: $text-dark;
                 }
             }
 
@@ -25,8 +26,8 @@
                 td {
                     padding: 20px 12px;
                     text-align: center;
-                    border-bottom: 1px solid #e9ecef;
-                    color: #666;
+                    border-bottom: 1px solid $gray-200;
+                    color: $gray-600;
                 }
             }
         }
@@ -34,27 +35,25 @@
 
     .browse-products {
         display: inline-block;
-        background-color: #4285f4;
-        color: white;
+        background-color: $primary-color;
+        color: $white;
         padding: 10px 20px;
         text-decoration: none;
-        border-radius: 4px;
+        border-radius: $radius-sm;
         margin-top: 20px;
-        transition: background-color 0.3s;
+        transition: $transition-all;
 
         &:hover {
-            background-color: #3367d6;
+            background-color: $primary-blue-hover;
         }
     }
 }
 
-// Responsive Design for Downloads
 @media (max-width: 768px) {
     .downloads-content .downloads-table {
         font-size: 14px;
 
         table {
-
             th,
             td {
                 padding: 8px;

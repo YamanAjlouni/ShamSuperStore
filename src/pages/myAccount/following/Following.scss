@@ -1,18 +1,19 @@
-// Following Content
+@use '../../../assets/style/vars.scss' as *;
+
 .following-content {
     text-align: center;
     padding: 40px 20px;
 
     .following-list {
-        background: #f8f9fa;
+        background: $light-gray;
         padding: 40px;
-        border-radius: 8px;
-        border: 1px solid #e9ecef;
+        border-radius: $radius-lg;
+        border: 1px solid $gray-200;
         margin: 20px 0;
 
         p {
             margin: 0;
-            color: #666;
+            color: $gray-600;
             font-style: italic;
             font-size: 16px;
         }
@@ -20,16 +21,16 @@
 
     .browse-stores {
         display: inline-block;
-        background-color: #4285f4;
-        color: white;
+        background-color: $primary-color;
+        color: $white;
         padding: 12px 24px;
         text-decoration: none;
-        border-radius: 4px;
-        transition: background-color 0.3s;
+        border-radius: $radius-sm;
+        transition: $transition-all;
         font-weight: 500;
 
         &:hover {
-            background-color: #3367d6;
+            background-color: $primary-blue-hover;
         }
     }
 }
