@@ -1,7 +1,6 @@
 @use '../../../assets/style/vars.scss' as *;
 
 .sixthHighlights-out-container {
-    background-color: #ECEBEA;
     margin: 40px 0;
     padding: 20px 5px;
 
@@ -13,7 +12,7 @@
         display: flex;
         justify-content: center;
         gap: 20px;
-        flex-wrap: wrap; // Allow wrapping on smaller screens
+        flex-wrap: wrap;
 
         .product-out-container {
             background-color: #fff;
@@ -21,10 +20,9 @@
             gap: 30px;
             padding: 25px;
             border-radius: 5px;
-            border: 1px solid #39465D;
             flex: 1;
-            min-width: 300px; // Minimum width for each card
-            max-width: 400px; // Maximum width for each card
+            min-width: 300px;
+            max-width: 400px;
 
             .product-left-container {
                 flex: 1;
@@ -33,18 +31,11 @@
                 gap: 10px;
                 padding: 20px 0;
 
-                h5 {
-                    font-size: 16px;
-                    margin: 0;
-                    font-weight: 500;
-                    color: #666;
-                }
-
                 h3 {
                     font-size: 24px;
                     margin: 0;
                     font-weight: 600;
-                    color: #333;
+                    color: $white;
                 }
 
                 button {
@@ -53,7 +44,7 @@
                     width: 70px;
                     border-radius: 5px;
                     border: none;
-                    background: $primary-color;
+                    background: $yellow-color;
                     color: white;
                     cursor: pointer;
                     font-weight: 500;
@@ -78,10 +69,17 @@
                 }
             }
         }
+
+        .blue-container{
+            background-color: $primary-color;
+        }
+
+        .orange-container{
+            background-color: $orange-color;
+        }
     }
 }
 
-// Responsive design
 @media (max-width: 1024px) {
     .sixthHighlights-out-container {
         .sixthHighlights-container {

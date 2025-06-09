@@ -5,6 +5,7 @@ import Shop from '../pages/shop/Shop'
 import CategoryDetail from '../pages/shop/categoryDetail/CategoryDetail'
 import ProductsList from '../pages/shop/productsList/ProductsList'
 import MyAccount from '../pages/myAccount/MyAccount'
+import ProductDetails from '../pages/shop/productDetails/ProductDetails'
 
 export const AppRoutes = () => {
   return (
@@ -13,6 +14,7 @@ export const AppRoutes = () => {
       <Route path="/shop" element={<Shop />} />
       <Route path="/shop/category/:categoryId" element={<CategoryDetail />} />
       <Route path="/shop/category/:categoryId/subcategory/:subcategoryId" element={<ProductsList />} />
+      <Route path="/shop/product/:productId" element={<ProductDetails />} />
       <Route path="/my-account" element={<MyAccount />} />
     </Routes>
   )

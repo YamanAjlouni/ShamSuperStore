@@ -7,11 +7,8 @@ export const SixthHighlights = () => {
     return (
         <div className="sixthHighlights-out-container">
             <div className='sixthHighlights-container'>
-                <div className='product-out-container'>
+                <div className='product-out-container blue-container'>
                     <div className='product-left-container'>
-                        <h5>
-                            New Look
-                        </h5>
                         <h3>
                             Best Sellers in Computers
                         </h3>
@@ -23,11 +20,8 @@ export const SixthHighlights = () => {
                         <img className='product-right-image' src={laptop} alt="" />
                     </div>
                 </div>
-                <div className='product-out-container'>
+                <div className='product-out-container orange-container'>
                     <div className='product-left-container'>
-                        <h5>
-                            New Look
-                        </h5>
                         <h3>
                             Shop Homemade Products
                         </h3>
@@ -39,11 +33,8 @@ export const SixthHighlights = () => {
                         <img className='product-right-image' src={homeMade} alt="" />
                     </div>
                 </div>
-                <div className='product-out-container'>
+                <div className='product-out-container blue-container'>
                     <div className='product-left-container'>
-                        <h5>
-                            On Sale
-                        </h5>
                         <h3>
                             Baby Supplies
                         </h3>

@@ -175,7 +175,7 @@ export const ProductsList = () => {
     };
 
     const handleProductClick = (productId) => {
-        console.log('Product clicked:', productId);
+        navigate(`/shop/product/${productId}`);
         // Navigate to product detail page if implemented
     };
 
