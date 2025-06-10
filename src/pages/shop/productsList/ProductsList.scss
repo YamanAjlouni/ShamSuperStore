@@ -3,7 +3,8 @@
 .products-page {
   padding: 2rem;
   background: $gray-50;
-  min-height: 100vh;
+  min-height: 50vh;
+  align-content: center;
 
   .breadcrumb-nav {
     display: flex;
