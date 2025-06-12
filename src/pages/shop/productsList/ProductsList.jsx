@@ -1,6 +1,9 @@
-// ProductsList.jsx - Updated with Unsplash images
+// ProductsList.jsx - Enhanced with search and price filtering
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useMemo } from 'react';
+import { Search, Filter, ChevronLeft } from 'lucide-react';
+import ProductsOnSale from '../productsOnSale/ProductsOnSale';
+import FeaturedProducts from '../featuredProducts/FeaturedProducts';
 import './ProductsList.scss';
 
 export const ProductsList = () => {
@@ -8,6 +11,9 @@ export const ProductsList = () => {
     const navigate = useNavigate();
     const [sortBy, setSortBy] = useState('name');
     const [filterInStock, setFilterInStock] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [showFilters, setShowFilters] = useState(false);
+    const [priceRange, setPriceRange] = useState({ min: '', max: '' });
 
     // Categories data
     const categories = {
@@ -18,13 +24,14 @@ export const ProductsList = () => {
 
     // Subcategories data
     const subcategories = {
-        11: { name: "Keyboards", categoryId: 1, description: "Mechanical and membrane keyboards" },
-        12: { name: "Mice", categoryId: 1, description: "Gaming and office mice" },
-        13: { name: "Monitors", categoryId: 1, description: "LCD, LED, and OLED monitors" },
-        14: { name: "Laptops", categoryId: 1, description: "Gaming and business laptops" },
-        21: { name: "Smartphones", categoryId: 2, description: "Latest smartphones and accessories" },
-        22: { name: "Tablets", categoryId: 2, description: "Tablets for work and entertainment" },
-        61: { name: "Men's Clothing", categoryId: 6, description: "Shirts, pants, suits and more" }
+        11: { name: "Keyboards", categoryId: 1 },
+        12: { name: "Mice", categoryId: 1 },
+        13: { name: "Monitors", categoryId: 1 },
+        14: { name: "Laptops", categoryId: 1 },
+        15: { name: "Desktops", categoryId: 1 },
+        21: { name: "Smartphones", categoryId: 2 },
+        22: { name: "Tablets", categoryId: 2 },
+        61: { name: "Men's Clothing", categoryId: 6 }
     };
 
     const productsData = {
@@ -35,10 +42,7 @@ export const ProductsList = () => {
                 price: 89.99,
                 originalPrice: 129.99,
                 image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop&crop=center",
-                description: "High-quality mechanical keyboard with RGB lighting and Cherry MX switches",
-                inStock: true,
-                rating: 4.5,
-                reviews: 234
+                inStock: true
             },
             {
                 id: 102,
@@ -46,10 +50,7 @@ export const ProductsList = () => {
                 price: 45.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=400&fit=crop&crop=center",
-                description: "Compact wireless keyboard perfect for productivity and travel",
-                inStock: true,
-                rating: 4.2,
-                reviews: 156
+                inStock: true
             },
             {
                 id: 103,
@@ -57,10 +58,7 @@ export const ProductsList = () => {
                 price: 159.99,
                 originalPrice: 199.99,
                 image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=400&h=400&fit=crop&crop=center",
-                description: "Ergonomic split design for comfortable typing during long sessions",
-                inStock: false,
-                rating: 4.7,
-                reviews: 89
+                inStock: false
             },
             {
                 id: 104,
@@ -68,23 +66,17 @@ export const ProductsList = () => {
                 price: 24.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=400&fit=crop&crop=center",
-                description: "Quiet membrane keyboard ideal for office environments",
-                inStock: true,
-                rating: 4.0,
-                reviews: 312
+                inStock: true
             }
         ],
-        12: [ // Mice products
+        12: [
             {
                 id: 201,
                 name: "Gaming Mouse with LED",
                 price: 29.99,
                 originalPrice: 39.99,
                 image: "https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=400&fit=crop&crop=center",
-                description: "High-DPI gaming mouse with customizable LED lighting",
-                inStock: true,
-                rating: 4.3,
-                reviews: 445
+                inStock: true
             },
             {
                 id: 202,
@@ -92,10 +84,7 @@ export const ProductsList = () => {
                 price: 19.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=400&h=400&fit=crop&crop=center",
-                description: "Comfortable wireless mouse designed for office productivity",
-                inStock: true,
-                rating: 4.1,
-                reviews: 267
+                inStock: true
             },
             {
                 id: 203,
@@ -103,23 +92,17 @@ export const ProductsList = () => {
                 price: 65.99,
                 originalPrice: 85.99,
                 image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&h=400&fit=crop&crop=center",
-                description: "Vertical ergonomic design reduces wrist strain",
-                inStock: true,
-                rating: 4.6,
-                reviews: 178
+                inStock: true
             }
         ],
-        13: [ // Monitors products
+        13: [
             {
                 id: 401,
                 name: "4K Gaming Monitor 27\"",
                 price: 449.99,
                 originalPrice: 599.99,
                 image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop&crop=center",
-                description: "Ultra HD 4K gaming monitor with HDR support and 144Hz refresh rate",
-                inStock: true,
-                rating: 4.8,
-                reviews: 342
+                inStock: true
             },
             {
                 id: 402,
@@ -127,10 +110,7 @@ export const ProductsList = () => {
                 price: 699.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&crop=center",
-                description: "Immersive ultrawide curved display for productivity and gaming",
-                inStock: true,
-                rating: 4.6,
-                reviews: 189
+                inStock: true
             },
             {
                 id: 403,
@@ -138,23 +118,17 @@ export const ProductsList = () => {
                 price: 199.99,
                 originalPrice: 249.99,
                 image: "https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=400&h=400&fit=crop&crop=center",
-                description: "Lightweight portable monitor perfect for remote work and travel",
-                inStock: false,
-                rating: 4.4,
-                reviews: 156
+                inStock: false
             }
         ],
-        14: [ // Laptops products
+        14: [
             {
                 id: 501,
                 name: "Gaming Laptop RTX 4070",
                 price: 1899.99,
                 originalPrice: 2199.99,
                 image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop&crop=center",
-                description: "High-performance gaming laptop with RTX 4070 graphics and 16GB RAM",
-                inStock: true,
-                rating: 4.7,
-                reviews: 445
+                inStock: true
             },
             {
                 id: 502,
@@ -162,10 +136,7 @@ export const ProductsList = () => {
                 price: 1299.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=400&fit=crop&crop=center",
-                description: "Lightweight business laptop with long battery life and premium build",
-                inStock: true,
-                rating: 4.5,
-                reviews: 267
+                inStock: true
             },
             {
                 id: 503,
@@ -173,23 +144,59 @@ export const ProductsList = () => {
                 price: 549.99,
                 originalPrice: 699.99,
                 image: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=400&h=400&fit=crop&crop=center",
-                description: "Affordable laptop perfect for students and everyday computing tasks",
-                inStock: true,
-                rating: 4.2,
-                reviews: 523
+                inStock: true
             }
         ],
-        21: [ // Smartphones products
+        15: [
+            {
+                id: 511,
+                name: "Gaming Desktop PC",
+                price: 1599.99,
+                originalPrice: 1899.99,
+                image: "https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&h=400&fit=crop&crop=center",
+                inStock: true
+            },
+            {
+                id: 512,
+                name: "Office Desktop Computer",
+                price: 799.99,
+                originalPrice: null,
+                image: "https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=400&h=400&fit=crop&crop=center",
+                inStock: true
+            },
+            {
+                id: 513,
+                name: "Workstation Desktop",
+                price: 2499.99,
+                originalPrice: 2799.99,
+                image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=400&h=400&fit=crop&crop=center",
+                inStock: true
+            },
+            {
+                id: 514,
+                name: "Compact Mini PC",
+                price: 599.99,
+                originalPrice: null,
+                image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=400&fit=crop&crop=center",
+                inStock: true
+            },
+            {
+                id: 515,
+                name: "All-in-One Desktop",
+                price: 1299.99,
+                originalPrice: 1499.99,
+                image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop&crop=center",
+                inStock: false
+            }
+        ],
+        21: [
             {
                 id: 301,
                 name: "Latest Pro Smartphone 128GB",
                 price: 899.99,
                 originalPrice: 999.99,
                 image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&crop=center",
-                description: "Latest flagship smartphone with advanced camera system",
-                inStock: true,
-                rating: 4.8,
-                reviews: 1205
+                inStock: true
             },
             {
                 id: 302,
@@ -197,10 +204,7 @@ export const ProductsList = () => {
                 price: 199.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&crop=center",
-                description: "Affordable smartphone with essential features",
-                inStock: true,
-                rating: 4.0,
-                reviews: 589
+                inStock: true
             },
             {
                 id: 303,
@@ -208,23 +212,17 @@ export const ProductsList = () => {
                 price: 799.99,
                 originalPrice: 899.99,
                 image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&crop=center",
-                description: "Premium Android smartphone with triple camera system and 5G",
-                inStock: true,
-                rating: 4.6,
-                reviews: 834
+                inStock: true
             }
         ],
-        22: [ // Tablets products
+        22: [
             {
                 id: 601,
                 name: "Pro Tablet 12.9\" 256GB",
                 price: 1099.99,
                 originalPrice: 1299.99,
                 image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop&crop=center",
-                description: "Professional tablet with keyboard support and Apple Pencil compatibility",
-                inStock: true,
-                rating: 4.8,
-                reviews: 567
+                inStock: true
             },
             {
                 id: 602,
@@ -232,10 +230,7 @@ export const ProductsList = () => {
                 price: 299.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400&h=400&fit=crop&crop=center",
-                description: "Versatile Android tablet perfect for entertainment and productivity",
-                inStock: true,
-                rating: 4.3,
-                reviews: 324
+                inStock: true
             },
             {
                 id: 603,
@@ -243,23 +238,17 @@ export const ProductsList = () => {
                 price: 149.99,
                 originalPrice: 199.99,
                 image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=400&fit=crop&crop=center",
-                description: "Compact and affordable tablet for reading and light tasks",
-                inStock: false,
-                rating: 4.1,
-                reviews: 189
+                inStock: false
             }
         ],
-        61: [ // Men's Clothing products
+        61: [
             {
                 id: 701,
                 name: "Premium Cotton Dress Shirt",
                 price: 89.99,
                 originalPrice: 129.99,
                 image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&h=400&fit=crop&crop=center",
-                description: "High-quality cotton dress shirt perfect for business and formal occasions",
-                inStock: true,
-                rating: 4.5,
-                reviews: 234
+                inStock: true
             },
             {
                 id: 702,
@@ -267,10 +256,7 @@ export const ProductsList = () => {
                 price: 69.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop&crop=center",
-                description: "Comfortable and stylish denim jeans for everyday wear",
-                inStock: true,
-                rating: 4.3,
-                reviews: 445
+                inStock: true
             },
             {
                 id: 703,
@@ -278,10 +264,7 @@ export const ProductsList = () => {
                 price: 299.99,
                 originalPrice: 399.99,
                 image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=400&fit=crop&crop=center",
-                description: "Elegant wool blend suit jacket for professional and formal events",
-                inStock: true,
-                rating: 4.7,
-                reviews: 156
+                inStock: true
             },
             {
                 id: 704,
@@ -289,10 +272,7 @@ export const ProductsList = () => {
                 price: 39.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400&h=400&fit=crop&crop=center",
-                description: "Classic polo shirt perfect for casual and smart-casual occasions",
-                inStock: true,
-                rating: 4.2,
-                reviews: 378
+                inStock: true
             }
         ]
     };
@@ -305,9 +285,24 @@ export const ProductsList = () => {
     const filteredAndSortedProducts = useMemo(() => {
         let filtered = [...products];
 
+        // Filter by search term
+        if (searchTerm.trim()) {
+            filtered = filtered.filter(product => 
+                product.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
         // Filter by stock
         if (filterInStock) {
             filtered = filtered.filter(product => product.inStock);
+        }
+
+        // Filter by price range
+        if (priceRange.min !== '') {
+            filtered = filtered.filter(product => product.price >= parseFloat(priceRange.min));
+        }
+        if (priceRange.max !== '') {
+            filtered = filtered.filter(product => product.price <= parseFloat(priceRange.max));
         }
 
         // Sort products
@@ -317,8 +312,6 @@ export const ProductsList = () => {
                     return a.price - b.price;
                 case 'price-high':
                     return b.price - a.price;
-                case 'rating':
-                    return b.rating - a.rating;
                 case 'name':
                 default:
                     return a.name.localeCompare(b.name);
@@ -326,183 +319,178 @@ export const ProductsList = () => {
         });
 
         return filtered;
-    }, [products, sortBy, filterInStock]);
+    }, [products, sortBy, filterInStock, searchTerm, priceRange]);
 
     const handleBackToSubcategories = () => {
         navigate(`/shop/category/${categoryId}`);
     };
 
-    const handleBackToCategories = () => {
-        navigate('/shop');
-    };
-
     const handleProductClick = (productId) => {
         navigate(`/shop/product/${productId}`);
-        // Navigate to product detail page if implemented
     };
 
-    const handleAddToCart = (productId, e) => {
-        e.stopPropagation();
-        console.log('Add to cart:', productId);
-        // Add your cart logic here
+    const handleSearch = () => {
+        // Search is already handled by the useMemo dependency on searchTerm
+        // This function can be used for additional search actions if needed
     };
 
-    const renderStars = (rating) => {
-        const stars = [];
-        const fullStars = Math.floor(rating);
-        const hasHalfStar = rating % 1 !== 0;
-
-        for (let i = 0; i < fullStars; i++) {
-            stars.push(<span key={i} className="star filled">★</span>);
-        }
-
-        if (hasHalfStar) {
-            stars.push(<span key="half" className="star half">★</span>);
-        }
-
-        const remainingStars = 5 - Math.ceil(rating);
-        for (let i = 0; i < remainingStars; i++) {
-            stars.push(<span key={`empty-${i}`} className="star empty">☆</span>);
-        }
-
-        return stars;
+    const clearFilters = () => {
+        setPriceRange({ min: '', max: '' });
+        setFilterInStock(false);
+        setSearchTerm('');
     };
 
     if (!subcategory) {
         return (
-            <div className="products-page">
-                <div className="error-message">
-                    <h2>Subcategory not found</h2>
-                    <button onClick={handleBackToCategories}>Back to Shop</button>
+            <div className="shop-page">
+                <div className="sidebar">
+                    <ProductsOnSale />
+                    <FeaturedProducts />
+                </div>
+                <div className="main-content">
+                    <div className="error-message">
+                        <h2>Subcategory not found</h2>
+                        <button onClick={handleBackToSubcategories}>Back to Categories</button>
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="products-page">
-            {/* Breadcrumb Navigation */}
-            <div className="breadcrumb-nav">
-                <button onClick={handleBackToCategories} className="breadcrumb-link">
-                    All Categories
-                </button>
-                <span className="breadcrumb-separator">›</span>
-                <button onClick={handleBackToSubcategories} className="breadcrumb-link">
-                    {category?.name}
-                </button>
-                <span className="breadcrumb-separator">›</span>
-                <span className="breadcrumb-current">{subcategory.name}</span>
+        <div className="shop-page">
+            <div className="sidebar">
+                <ProductsOnSale />
+                <FeaturedProducts />
             </div>
-
-            {/* Page Header */}
-            <div className="page-header">
-                <div className="subcategory-info">
-                    <div className="subcategory-text">
-                        <h1 className="page-title">{subcategory.name}</h1>
-                        <p className="subcategory-description">{subcategory.description}</p>
-                        <p className="products-count">
-                            {filteredAndSortedProducts.length} products found
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Filters and Sorting */}
-            {products.length > 0 && (
-                <div className="filters-bar">
-                    <div className="filter-group">
-                        {/* <label className="filter-checkbox">
+            <div className="main-content">
+                <div className="shop-products-section">
+                    <button
+                        className="back-button"
+                        onClick={handleBackToSubcategories}
+                    >
+                        <ChevronLeft size={16} />
+                        Back to {category?.name}
+                    </button>
+                    
+                    <h2 className="section-title">{subcategory.name}</h2>
+                    
+                    {/* Filter Bar */}
+                    <div className="filter-bar">
+                        <div className="search-container">
                             <input
-                                type="checkbox"
-                                checked={filterInStock}
-                                onChange={(e) => setFilterInStock(e.target.checked)}
+                                type="text"
+                                placeholder="Search products..."
+                                className="search-input"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
                             />
-                            In Stock Only
-                        </label> */}
-                    </div>
-
-                    <div className="sort-group">
-                        <label htmlFor="sort-select">Sort by:</label>
-                        <select
-                            id="sort-select"
-                            value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value)}
-                            className="sort-select"
-                        >
-                            <option value="name">Name (A-Z)</option>
-                            <option value="price-low">Price (Low to High)</option>
-                            <option value="price-high">Price (High to Low)</option>
-                            <option value="rating">Customer Rating</option>
-                        </select>
-                    </div>
-                </div>
-            )}
-
-            {/* Products Grid */}
-            <div className="products-section">
-                {products.length === 0 ? (
-                    <div className="no-products">
-                        <h3>No products available</h3>
-                        <p>This subcategory doesn't have any products yet. Please check back later.</p>
-                    </div>
-                ) : filteredAndSortedProducts.length === 0 ? (
-                    <div className="no-products">
-                        <h3>No products found</h3>
-                        <p>Try adjusting your filters to see more products.</p>
-                    </div>
-                ) : (
-                    <div className="products-grid">
-                        {filteredAndSortedProducts.map(product => (
-                            <div
-                                key={product.id}
-                                className="product-card"
-                                onClick={() => handleProductClick(product.id)}
-                            >
-                                <div className="product-card-image">
-                                    <img src={product.image} alt={product.name} />
-                                    {!product.inStock && <div className="out-of-stock-badge">Out of Stock</div>}
-                                    {product.originalPrice && (
-                                        <div className="sale-badge">Sale</div>
-                                    )}
-                                </div>
-
-                                <div className="product-card-info">
-                                    <h3 className="product-card-name">{product.name}</h3>
-                                    <p className="product-card-description">{product.description}</p>
-
-                                    <div className="product-rating">
-                                        <div className="stars">
-                                            {renderStars(product.rating)}
-                                        </div>
-                                        <span className="reviews-count">({product.reviews} reviews)</span>
-                                    </div>
-
-                                    <div className="product-card-pricing">
-                                        <div className="price-container">
-                                            <span className="current-price">${product.price}</span>
-                                            {product.originalPrice && (
-                                                <span className="original-price">${product.originalPrice}</span>
-                                            )}
-                                        </div>
-                                        {product.originalPrice && (
-                                            <div className="savings">
-                                                Save ${(product.originalPrice - product.price).toFixed(2)}
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <button
-                                        className={`add-to-cart-btn ${!product.inStock ? 'disabled' : ''}`}
-                                        onClick={(e) => handleAddToCart(product.id, e)}
-                                        disabled={!product.inStock}
-                                    >
-                                        {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-                                    </button>
-                                </div>
+                            <button className="search-button" onClick={handleSearch}>
+                                <Search size={16} />
+                            </button>
+                        </div>
+                        
+                        <div className="filter-controls">
+                            <div className="sort-dropdown">
+                                <select
+                                    value={sortBy}
+                                    onChange={(e) => setSortBy(e.target.value)}
+                                    className="sort-select"
+                                >
+                                    <option value="name">Default sorting</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                </select>
                             </div>
-                        ))}
+                            <button 
+                                className="filter-button"
+                                onClick={() => setShowFilters(!showFilters)}
+                            >
+                                <Filter size={16} />
+                                Filter
+                            </button>
+                        </div>
                     </div>
-                )}
+
+                    {/* Advanced Filters Panel */}
+                    {showFilters && (
+                        <div className="advanced-filters">
+                            <h3 className="filters-title">Advanced Filters</h3>
+                            
+                            <div className="filter-row">
+                                <div className="price-range">
+                                    <label className="filter-label">Price:</label>
+                                    <input
+                                        type="number"
+                                        placeholder="Min"
+                                        className="price-input"
+                                        value={priceRange.min}
+                                        onChange={(e) => setPriceRange({...priceRange, min: e.target.value})}
+                                    />
+                                    <span className="price-separator">to</span>
+                                    <input
+                                        type="number"
+                                        placeholder="Max"
+                                        className="price-input"
+                                        value={priceRange.max}
+                                        onChange={(e) => setPriceRange({...priceRange, max: e.target.value})}
+                                    />
+                                </div>
+                                
+                                {/* <div className="stock-filter">
+                                    <input
+                                        type="checkbox"
+                                        id="inStock"
+                                        className="stock-checkbox"
+                                        checked={filterInStock}
+                                        onChange={(e) => setFilterInStock(e.target.checked)}
+                                    />
+                                    <label htmlFor="inStock" className="stock-label">In stock only</label>
+                                </div> */}
+
+                                <button className="clear-filters-btn" onClick={clearFilters}>
+                                    Clear Filters
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                    
+                    {products.length === 0 ? (
+                        <div className="no-products">
+                            <p>No products available for this category yet.</p>
+                            <p>Please check back later or browse other categories.</p>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="results-info">
+                                <span>Showing {filteredAndSortedProducts.length} of {products.length} results</span>
+                            </div>
+                            
+                            <div className="products-grid">
+                                {filteredAndSortedProducts.map(product => (
+                                    <div
+                                        key={product.id}
+                                        className="product-card"
+                                        onClick={() => handleProductClick(product.id)}
+                                    >
+                                        <div className="product-image">
+                                            <img src={product.image} alt={product.name} />
+                                        </div>
+                                        <div className="product-info">
+                                            <h3 className="product-name">{product.name}</h3>
+                                            <div className="product-price">
+                                                {product.originalPrice && (
+                                                    <span className="original-price">${product.originalPrice}</span>
+                                                )}
+                                                <span className="current-price">${product.price}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );
