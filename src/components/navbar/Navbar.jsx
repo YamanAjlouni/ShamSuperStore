@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Mail, User, ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
 import './Navbar.scss';
 import { Link, useNavigate } from 'react-router-dom';

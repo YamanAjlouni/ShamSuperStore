@@ -60,10 +60,10 @@ export const ProductsOnSale = () => {
             <div className="products-list">
                 {saleProducts.map(product => {
                     const savings = calculateSavings(product.originalPrice, product.salePrice);
-                    
+
                     return (
-                        <div 
-                            key={product.id} 
+                        <div
+                            key={product.id}
                             className="product-item"
                             onClick={() => handleProductClick(product.id)}
                         >
@@ -77,9 +77,9 @@ export const ProductsOnSale = () => {
                                     <span className="original-price">{product.originalPrice}</span>
                                     <span className="sale-price">{product.salePrice}</span>
                                 </div>
-                                <div className="savings-info">
+                                 {/* <div className="savings-info">
                                     Save ${savings.amount}
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     );
