@@ -125,7 +125,6 @@
         }
     }
 
-    // Advanced Filters Panel
     .advanced-filters {
         background: $gray-50;
         border: 1px solid $gray-200;
@@ -139,6 +138,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);

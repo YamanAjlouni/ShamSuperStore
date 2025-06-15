@@ -1,7 +1,5 @@
-// Import variables
 @use '../../assets/style/vars.scss' as *;
 
-// Main MyAccount Styles
 .my-account {
   max-width: 1300px;
   margin: 0 auto;
@@ -9,7 +7,6 @@
   font-family: Arial, sans-serif;
 }
 
-// Account Dashboard Styles
 .account-container {
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -127,7 +124,6 @@
   }
 }
 
-// Responsive Design
 @media (max-width: 768px) {
   .my-account {
     padding: 10px;
