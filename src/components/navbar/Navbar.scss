@@ -7,7 +7,7 @@ $transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
 @mixin hover-lift($amount: -2px) {
-  transition: $transition-all;
+  transition: $transition-fast;
   
   &:hover {
     transform: translateY($amount);
@@ -22,14 +22,14 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
 @mixin mobile-menu-item {
   width: 100%;
-  margin: 0.375rem 0;
+  margin: 0.25rem 0;
   border-radius: $radius-lg;
   background: rgba(255, 255, 255, 0.08);
   transition: $transition-fast;
+  overflow: hidden;
   
   &:hover {
     background: rgba(255, 255, 255, 0.15);
-    transform: translateX(4px);
   }
 }
 
@@ -47,7 +47,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     @include glass-effect(0.08, 10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       padding: 0.75rem 0;
     }
   }
@@ -61,7 +61,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       padding: 0 1rem;
     }
 
@@ -77,7 +77,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     border-radius: 5px;
     transition: $transition-fast;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       height: 3.5rem;
       width: 140px;
     }
@@ -94,11 +94,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     align-items: center;
     gap: 2rem;
 
-    @media (max-width: 1024px) {
-      gap: 1.5rem;
-    }
-
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       display: none;
     }
   }
@@ -178,7 +174,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       transform: scale(0.95);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -189,8 +185,8 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   &-border-container {
     padding: 0 1.5rem;
 
-    @media (max-width: 768px) {
-      display: none; // Hide on mobile for cleaner look
+    @media (max-width: 1023px) {
+      display: none;
     }
   }
 
@@ -218,7 +214,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     padding: 0;
     background: rgba(0, 0, 0, 0.05);
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       padding: 0;
     }
   }
@@ -233,46 +229,25 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     justify-content: center;
     flex-wrap: wrap;
 
-    @media (max-width: 1024px) {
-      justify-content: flex-start;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       display: none;
       flex-direction: column;
       position: fixed;
-      top: calc(100vh); // Start off-screen initially
+      top: 100vh;
       left: 0;
       right: 0;
-      height: calc(100vh - 70px - 1rem - 4.5rem - 1rem); // Calculate proper height
+      height: calc(100vh - 70px);
       background: $mobile-menu-bg;
       padding: 1rem;
       overflow-y: auto;
-      transform: translateY(0); // No horizontal transform
-      transition: top $transition-smooth; // Animate top position instead
+      transform: translateY(0);
+      transition: top $transition-smooth;
       z-index: 999;
       backdrop-filter: blur(10px);
 
       &-open {
         display: flex;
-        top: calc(70px + 1rem + 4.5rem + 1rem); // Position below navbar when open
-      }
-    }
-
-    @media (max-width: 480px) {
-      height: calc(100vh - 70px - 0.75rem - 3rem - 0.75rem); // Adjusted for mobile logo size
-      padding: 0.75rem;
-      
-      &-open {
-        top: calc(70px + 0.75rem + 3rem + 0.75rem); // Adjusted for mobile logo size
+        top: 70px;
       }
     }
   }
@@ -281,16 +256,16 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   &-item {
     position: relative;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       @include mobile-menu-item;
     }
 
     &-cart {
       margin-left: 1.25rem;
 
-      @media (max-width: 768px) {
+      @media (max-width: 1023px) {
         margin-left: 0;
-        order: -1; // Put cart at top on mobile
+        order: -1;
       }
     }
 
@@ -302,21 +277,21 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   // Link wrapper for split functionality
   &-link-wrapper {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     width: 100%;
 
-    @media (min-width: 769px) {
+    @media (min-width: 1024px) {
       .ecommerce-nav-link-main {
         flex: 1;
         padding-right: 0.5rem;
       }
       
       .ecommerce-nav-arrow-btn {
-        display: none; // Hide arrow button on desktop
+        display: none;
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       background: transparent;
       border-radius: $radius-lg;
       overflow: hidden;
@@ -387,13 +362,14 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     &-main {
       flex: 1;
       
-      @media (max-width: 768px) {
+      @media (max-width: 1023px) {
         padding: 1rem 1.25rem;
         width: 100%;
         border-radius: $radius-lg 0 0 $radius-lg;
         margin: 0;
         background: transparent;
         font-size: 1rem;
+        border-radius: $radius-lg;
 
         &:hover {
           transform: none;
@@ -428,7 +404,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         color: lighten($orange-color, 10%);
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 1023px) {
         background: rgba(206, 128, 45, 0.15);
         margin: 0;
         border-radius: $radius-lg 0 0 $radius-lg;
@@ -439,10 +415,10 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       padding: 1rem 1.25rem;
       width: 100%;
-      justify-content: space-between;
+      justify-content: flex-start;
       border-radius: $radius-lg;
       margin: 0;
       background: transparent;
@@ -491,22 +467,33 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     svg {
       transform: rotate(0);
-      transition: $transition-fast;
+      transition: transform $transition-fast;
+
+      &.rotate-180 {
+        transform: rotate(180deg);
+      }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       display: flex;
     }
   }
 
-  // Dropdown styles
+  // Desktop arrow (shown only on desktop)
+  &-desktop-arrow {
+    @media (max-width: 1023px) {
+      display: none;
+    }
+  }
+
+  // Dropdown styles - Desktop only (>= 1024px)
   &-dropdown {
     position: absolute;
     top: 100%;
     left: 0;
     min-width: 22rem;
-    width: max-content; // Allow natural width expansion
-    max-width: 95vw; // Prevent overflow on large screens
+    width: max-content;
+    max-width: 95vw;
     background: $white;
     box-shadow: $shadow-2xl;
     border-radius: $radius-xl;
@@ -518,11 +505,10 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     border: 1px solid rgba(0, 0, 0, 0.08);
     overflow: visible;
     pointer-events: none;
-    max-height: 80vh; // Prevent vertical overflow
-    overflow-y: auto; // Allow vertical scrolling only
-    overflow-x: hidden; // Prevent horizontal scrolling
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    // Auto adjust position if dropdown would overflow
     &.dropdown-right {
       left: auto;
       right: 0;
@@ -546,15 +532,15 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       animation: slideInScale 0.2s $transition-smooth;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1023px) {
       position: static;
       opacity: 1;
       visibility: visible;
       transform: none;
       box-shadow: none;
       background: transparent;
-      margin: 0.5rem 0 0;
-      border-radius: $radius-lg;
+      margin: 0;
+      border-radius: 0;
       border: none;
       pointer-events: auto;
       animation: none;
@@ -566,8 +552,8 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       transition: max-height 0.3s ease-out;
 
       &-active {
-        max-height: 70vh; // Increased for mobile
-        transition: max-height 0.5s ease-in;
+        max-height: 50vh;
+        transition: max-height 0.4s ease-in;
         overflow-y: auto;
         overflow-x: hidden;
       }
@@ -577,12 +563,12 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       list-style: none;
       margin: 0;
       padding: 0.5rem 0;
-      white-space: nowrap; // Prevent text wrapping
+      white-space: nowrap;
 
-      @media (max-width: 768px) {
-        padding: 0.5rem;
+      @media (max-width: 1023px) {
+        padding: 0.5rem 1rem;
         max-height: none;
-        white-space: normal; // Allow wrapping on mobile
+        white-space: normal;
       }
 
       li {
@@ -608,9 +594,9 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
           position: relative;
           width: 100%;
           box-sizing: border-box;
-          white-space: nowrap; // Prevent text wrapping
-          overflow: hidden; // Hide overflow text
-          text-overflow: ellipsis; // Show ... for long text
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
 
           &:hover {
             color: $white;
@@ -622,10 +608,10 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
           }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1023px) {
           margin: 0.25rem 0;
           border-radius: $radius-md;
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(255, 255, 255, 0.08);
 
           &:hover {
             background: rgba(255, 255, 255, 0.15);
@@ -635,163 +621,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             color: rgba(255, 255, 255, 0.95);
             padding: 0.75rem 1rem;
             font-size: 0.9rem;
-            white-space: normal; // Allow wrapping on mobile
-            overflow: visible;
-            text-overflow: initial;
-
-            &:hover {
-              color: $white;
-              transform: translateX(4px);
-            }
-          }
-        }
-      }
-    }
-
-    &-item-has-submenu {
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: -10px;
-        bottom: 0;
-        width: 10px;
-        background: transparent;
-        z-index: 1;
-      }
-
-      &:hover {
-        .ecommerce-nav-submenu {
-          opacity: 1;
-          visibility: visible;
-          transform: translateX(0) scale(1);
-          pointer-events: auto;
-        }
-      }
-
-      @media (max-width: 768px) {
-        &::after {
-          display: none;
-        }
-      }
-    }
-  }
-
-  // Submenu styles
-  &-submenu {
-    position: absolute;
-    top: -0.5rem;
-    left: calc(100% - 1px);
-    min-width: 20rem;
-    width: max-content; // Allow natural width expansion
-    max-width: 90vw; // Prevent overflow
-    background: $white;
-    box-shadow: $shadow-2xl;
-    border-radius: $radius-xl;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-10px) scale(0.98);
-    transition: $transition-fast;
-    z-index: 1002;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    overflow: visible;
-    pointer-events: none;
-    max-height: 70vh; // Prevent vertical overflow
-    overflow-y: auto; // Allow vertical scrolling only
-    overflow-x: hidden; // Prevent horizontal scrolling
-
-    // Auto adjust position if submenu would overflow
-    &.submenu-left {
-      left: auto;
-      right: calc(100% - 1px);
-      transform: translateX(10px) scale(0.98);
-
-      &.ecommerce-nav-submenu-active {
-        transform: translateX(0) scale(1);
-      }
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -10px;
-      bottom: 0;
-      width: 10px;
-      background: transparent;
-    }
-
-    &-active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(0) scale(1);
-      pointer-events: auto;
-    }
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0.75rem 0;
-      white-space: nowrap; // Prevent text wrapping
-
-      @media (max-width: 768px) {
-        padding: 0.25rem 0.5rem;
-        white-space: normal; // Allow wrapping on mobile
-      }
-
-      li {
-        position: relative;
-        width: 100%;
-
-        &:hover {
-          background-color: $primary-color;
-          color: white;
-        }
-
-        a {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0.75rem 1.25rem;
-          color: $dark-blue-color;
-          text-decoration: none;
-          font-size: 0.8125rem;
-          font-weight: 500;
-          transition: $transition-fast;
-          position: relative;
-          width: 100%;
-          box-sizing: border-box;
-          white-space: nowrap; // Prevent text wrapping
-          overflow: hidden; // Hide overflow text
-          text-overflow: ellipsis; // Show ... for long text
-
-          &:hover {
-            color: $white;
-            transform: translateX(3px);
-          }
-
-          &:focus {
-            box-shadow: 0 0 0 4px rgba(206, 128, 45, 0.2);
-            color: white;
-          }
-        }
-
-        @media (max-width: 768px) {
-          margin: 0.25rem 0;
-          border-radius: $radius-md;
-          background: rgba(255, 255, 255, 0.03);
-
-          &:hover {
-            background: rgba(255, 255, 255, 0.1);
-          }
-
-          a {
-            color: rgba(255, 255, 255, 0.9);
-            padding: 0.65rem 0.85rem;
-            font-size: 0.85rem;
-            white-space: normal; // Allow wrapping on mobile
+            white-space: normal;
             overflow: visible;
             text-overflow: initial;
 
@@ -803,240 +633,14 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
       }
     }
-
-    @media (max-width: 768px) {
-      position: static;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      box-shadow: none;
-      background: transparent;
-      margin-left: 1rem;
-      margin-top: 0.25rem;
-      border: none;
-      pointer-events: auto;
-      min-width: auto;
-      width: 100%;
-      max-width: none;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out;
-      border-left: 2px solid rgba(255, 255, 255, 0.2);
-      padding-left: 0.5rem;
-
-      &-active {
-        max-height: 60vh;
-        transition: max-height 0.5s ease-in;
-        overflow-y: auto;
-        overflow-x: hidden;
-      }
-
-      &::before {
-        display: none;
-      }
-    }
-
-    &-item-has-submenu {
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: -10px;
-        bottom: 0;
-        width: 10px;
-        background: transparent;
-        z-index: 1;
-      }
-
-      &:hover {
-        .ecommerce-nav-submenu-nested {
-          opacity: 1;
-          visibility: visible;
-          transform: translateX(0) scale(1);
-          pointer-events: auto;
-        }
-      }
-
-      @media (max-width: 768px) {
-        &::after {
-          display: none;
-        }
-      }
-    }
-
-    &-nested {
-      position: absolute;
-      top: -0.5rem;
-      left: calc(100% - 1px);
-      min-width: 18rem;
-      width: max-content; // Allow natural width expansion
-      max-width: 85vw; // Prevent overflow
-      background: $white;
-      box-shadow: $shadow-2xl;
-      border-radius: $radius-xl;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(-10px) scale(0.98);
-      transition: $transition-fast;
-      z-index: 1003;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-      pointer-events: none;
-      max-height: 60vh; // Prevent overflow
-      overflow-y: auto; // Allow vertical scrolling only
-      overflow-x: hidden; // Prevent horizontal scrolling
-
-      // Auto adjust for overflow
-      &.nested-left {
-        left: auto;
-        right: calc(100% - 1px);
-        transform: translateX(10px) scale(0.98);
-
-        &.ecommerce-nav-submenu-nested-active {
-          transform: translateX(0) scale(1);
-        }
-      }
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -10px;
-        bottom: 0;
-        width: 10px;
-        background: transparent;
-      }
-
-      &-active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(0) scale(1);
-        pointer-events: auto;
-      }
-
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0.75rem 0;
-        white-space: nowrap; // Prevent text wrapping
-
-        li {
-          position: relative;
-          width: 100%;
-
-          &:hover {
-            background-color: $primary-color;
-          }
-
-          a {
-            display: block;
-            padding: 0.625rem 1.25rem;
-            color: $dark-blue-color;
-            text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 500;
-            transition: $transition-fast;
-            position: relative;
-            width: 100%;
-            box-sizing: border-box;
-            white-space: nowrap; // Prevent text wrapping
-            overflow: hidden; // Hide overflow text
-            text-overflow: ellipsis; // Show ... for long text
-
-            &:hover {
-              color: $white;
-              transform: translateX(2px);
-            }
-
-            &:focus {
-              outline: 2px solid $orange-color;
-              outline-offset: 2px;
-              box-shadow: 0 0 0 4px rgba(206, 128, 45, 0.2);
-            }
-          }
-        }
-      }
-
-      @media (max-width: 768px) {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        background: transparent;
-        margin-left: 1rem;
-        margin-top: 0.25rem;
-        border: none;
-        pointer-events: auto;
-        min-width: auto;
-        width: 100%;
-        max-width: none;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out;
-        border-left: 2px solid rgba(255, 255, 255, 0.15);
-        padding-left: 0.5rem;
-
-        &-active {
-          max-height: 50vh;
-          transition: max-height 0.5s ease-in;
-          overflow-y: auto;
-          overflow-x: hidden;
-        }
-
-        &::before {
-          display: none;
-        }
-
-        ul {
-          white-space: normal; // Allow wrapping on mobile
-
-          li {
-            margin: 0.2rem 0;
-            border-radius: $radius-md;
-            background: rgba(255, 255, 255, 0.02);
-
-            &:hover {
-              background: rgba(255, 255, 255, 0.08);
-            }
-
-            a {
-              color: rgba(255, 255, 255, 0.85);
-              padding: 0.55rem 0.75rem;
-              font-size: 0.8rem;
-              white-space: normal; // Allow wrapping on mobile
-              overflow: visible;
-              text-overflow: initial;
-
-              &:hover {
-                color: $white;
-                transform: translateX(2px);
-              }
-            }
-          }
-        }
-      }
-    }
   }
 }
 
-// Arrow rotation when dropdown is active
-.ecommerce-nav-dropdown-active ~ .ecommerce-nav-link-wrapper .ecommerce-nav-arrow-btn svg,
-.ecommerce-nav-dropdown-active + .ecommerce-nav-arrow-btn svg {
-  transform: rotate(180deg);
-}
-
-// Mobile scroll improvements
-@media (max-width: 768px) {
+// Mobile/Tablet scroll improvements
+@media (max-width: 1023px) {
   .ecommerce-nav-menu {
-    // Custom scrollbar
-    top: 70px;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-    opacity: 1;
-    z-index: 99999;
 
     &::-webkit-scrollbar {
       width: 6px;
@@ -1056,10 +660,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
   }
 
-  // Dropdown scrollbars
-  .ecommerce-nav-dropdown-active,
-  .ecommerce-nav-submenu-active,
-  .ecommerce-nav-submenu-nested-active {
+  .ecommerce-nav-dropdown-active {
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 
@@ -1076,11 +677,6 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       border-radius: 2px;
     }
   }
-}
-
-// Prevent body scroll when mobile menu is open
-.mobile-menu-open {
-  overflow: hidden;
 }
 
 // Animations
@@ -1105,15 +701,15 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
 
+// Utility classes for icon rotation
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
 // Dynamic positioning helper classes
 .dropdown-position-right {
   left: auto !important;
   right: 0 !important;
-}
-
-.submenu-position-left {
-  left: auto !important;
-  right: calc(100% - 1px) !important;
 }
 
 // Accessibility
@@ -1121,9 +717,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   .ecommerce-nav {
     &-link,
     &-dropdown,
-    &-submenu,
-    &-submenu-nested,
-    &-arrow-right {
+    &-arrow-btn svg {
       transition: none;
       animation: none;
     }
@@ -1132,16 +726,12 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
 @media (prefers-contrast: high) {
   .ecommerce-nav {
-    &-dropdown,
-    &-submenu,
-    &-submenu-nested {
+    &-dropdown {
       border: 2px solid $gray-800;
       background: $white;
     }
 
-    &-dropdown-menu li a,
-    &-submenu ul li a,
-    &-submenu-nested ul li a {
+    &-dropdown-menu li a {
       color: $dark-blue-color;
       
       &:hover {

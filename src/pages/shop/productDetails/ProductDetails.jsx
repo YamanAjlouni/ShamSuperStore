@@ -8,11 +8,14 @@ export const ProductDetails = () => {
     const [quantity, setQuantity] = useState(1);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [activeTab, setActiveTab] = useState('about');
+    const [selectedColor, setSelectedColor] = useState('');
+    const [selectedSize, setSelectedSize] = useState('');
 
     // Mock products database - in real app, this would be an API call
     const productsDatabase = {
         101: {
             id: 101,
+            sku: "KB-RGB-001",
             name: "Mechanical Gaming Keyboard RGB",
             price: 89.99,
             originalPrice: 129.99,
@@ -27,13 +30,44 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.5,
             reviews: 234,
+            attributes: {
+                colors: [
+                    { name: "Black", value: "#000000" },
+                    { name: "White", value: "#FFFFFF" },
+                    { name: "Silver", value: "#C0C0C0" }
+                ],
+                sizes: ["Full Size", "Compact", "60%"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "GameMaster2023",
+                    rating: 5,
+                    date: "2024-01-15",
+                    comment: "Amazing keyboard! The RGB lighting is fantastic and the switches feel great."
+                },
+                {
+                    id: 2,
+                    user: "ProductivityPro",
+                    rating: 4,
+                    date: "2024-01-10",
+                    comment: "Great for both gaming and work. Build quality is excellent."
+                },
+                {
+                    id: 3,
+                    user: "TechReviewer",
+                    rating: 5,
+                    date: "2024-01-05",
+                    comment: "Best keyboard I've owned. Highly recommended!"
+                }
+            ],
             details: {
                 about: "This mechanical gaming keyboard features premium Cherry MX switches, customizable RGB lighting, and durable construction. Designed for both gaming enthusiasts and professionals who demand precision and reliability.",
                 shortDescription: "High-quality mechanical keyboard with RGB lighting and Cherry MX switches.",
                 moreInformation: "Switch Type: Cherry MX Blue, Backlight: RGB, Connection: USB-C, Compatibility: Windows/Mac/Linux, Warranty: 2 years",
                 productRating: "4.5/5 stars based on 234 customer reviews. Customers love the build quality and responsiveness.",
                 shippingTime: "Standard shipping takes 3-5 business days. Express shipping available.",
-                inquiry: "Contact our support team for any questions about this product or technical specifications.",
+                inquiry: "Have questions about this product? Our technical specialists are here to help!",
                 otherSellers: "This product is also available from 3 other verified sellers with competitive pricing.",
                 marketplacePolicy: "30-day return policy, buyer protection, and secure payment processing.",
                 storePolicy: "Free returns within 30 days, 2-year manufacturer warranty, and lifetime customer support."
@@ -41,6 +75,7 @@ export const ProductDetails = () => {
         },
         102: {
             id: 102,
+            sku: "KB-WL-002",
             name: "Wireless Compact Keyboard",
             price: 45.99,
             originalPrice: null,
@@ -54,13 +89,36 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.2,
             reviews: 156,
+            attributes: {
+                colors: [
+                    { name: "Space Gray", value: "#8E8E93" },
+                    { name: "Silver", value: "#C0C0C0" }
+                ],
+                sizes: ["Compact"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "TravelWriter",
+                    rating: 4,
+                    date: "2024-01-12",
+                    comment: "Perfect for travel. Lightweight and responsive."
+                },
+                {
+                    id: 2,
+                    user: "OfficeWorker",
+                    rating: 4,
+                    date: "2024-01-08",
+                    comment: "Great for desk setup. Battery lasts forever."
+                }
+            ],
             details: {
                 about: "Ultra-portable wireless keyboard designed for modern professionals. Features low-profile keys, excellent battery life, and seamless connectivity across multiple devices.",
                 shortDescription: "Compact wireless keyboard perfect for productivity and travel.",
                 moreInformation: "Connection: Bluetooth 5.0, Battery Life: 6 months, Weight: 300g, Dimensions: 28x12x1.5cm",
                 productRating: "4.2/5 stars based on 156 customer reviews. Great for travel and office use.",
                 shippingTime: "Standard shipping takes 2-4 business days.",
-                inquiry: "Contact us for bulk orders or enterprise pricing.",
+                inquiry: "Questions about compatibility or bulk orders? Contact our sales team!",
                 otherSellers: "Available from 2 other sellers.",
                 marketplacePolicy: "Standard return and refund policies apply.",
                 storePolicy: "1-year warranty and free technical support."
@@ -68,6 +126,7 @@ export const ProductDetails = () => {
         },
         103: {
             id: 103,
+            sku: "KB-ERG-003",
             name: "Ergonomic Split Keyboard",
             price: 159.99,
             originalPrice: 199.99,
@@ -81,13 +140,36 @@ export const ProductDetails = () => {
             inStock: false,
             rating: 4.7,
             reviews: 89,
+            attributes: {
+                colors: [
+                    { name: "Black", value: "#000000" },
+                    { name: "White", value: "#FFFFFF" }
+                ],
+                sizes: ["S", "M", "L" , "XL"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "HealthConscious",
+                    rating: 5,
+                    date: "2024-01-13",
+                    comment: "Game changer for my wrist pain. Highly recommended!"
+                },
+                {
+                    id: 2,
+                    user: "Developer123",
+                    rating: 4,
+                    date: "2024-01-09",
+                    comment: "Takes time to get used to but worth it for long coding sessions."
+                }
+            ],
             details: {
                 about: "Revolutionary split keyboard design that promotes natural hand positioning and reduces repetitive strain injuries. Perfect for professionals who spend long hours typing.",
                 shortDescription: "Ergonomic split design for comfortable typing during long sessions.",
                 moreInformation: "Layout: Split QWERTY, Connection: USB-A, Key Travel: 4mm, Wrist Rest: Included, Medical Certification: Yes",
                 productRating: "4.7/5 stars based on 89 reviews. Highly recommended by ergonomic specialists.",
                 shippingTime: "Currently out of stock. Expected restock in 2-3 weeks.",
-                inquiry: "Join our waiting list for immediate notification when back in stock.",
+                inquiry: "Any Questions? Please click to submit inquiry about this product.",
                 otherSellers: "Limited availability from 1 other seller at higher price.",
                 marketplacePolicy: "Pre-order available with full refund if not satisfied.",
                 storePolicy: "Extended 45-day return policy for ergonomic products."
@@ -95,6 +177,7 @@ export const ProductDetails = () => {
         },
         201: {
             id: 201,
+            sku: "MS-GM-001",
             name: "Gaming Mouse with LED",
             price: 29.99,
             originalPrice: 39.99,
@@ -108,20 +191,96 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.3,
             reviews: 445,
+            attributes: {
+                colors: [
+                    { name: "Black", value: "#000000" },
+                    { name: "White", value: "#FFFFFF" },
+                    { name: "Red", value: "#FF0000" }
+                ],
+                sizes: ["Standard", "Large"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "ProGamer",
+                    rating: 5,
+                    date: "2024-01-14",
+                    comment: "Excellent precision for competitive gaming. LED customization is great!"
+                },
+                {
+                    id: 2,
+                    user: "CasualPlayer",
+                    rating: 4,
+                    date: "2024-01-11",
+                    comment: "Good value for money. Comfortable grip."
+                }
+            ],
             details: {
                 about: "Professional gaming mouse with high-precision sensor, customizable LED lighting, and ergonomic design for extended gaming sessions.",
                 shortDescription: "High-DPI gaming mouse with customizable LED lighting.",
                 moreInformation: "DPI: 12000, Buttons: 6 programmable, Sensor: Optical, Cable: Braided USB",
                 productRating: "4.3/5 stars based on 445 reviews. Excellent for competitive gaming.",
                 shippingTime: "Ships within 1-2 business days.",
-                inquiry: "Ask about our gaming accessories bundle deals.",
+                inquiry: "Need help with gaming setup recommendations? Our gaming specialists are here!",
                 otherSellers: "Compare prices from 4 other verified sellers.",
                 marketplacePolicy: "Protected purchase with money-back guarantee.",
                 storePolicy: "2-year warranty and gaming gear specialist support."
             }
         },
+        202: {
+            id: 202,
+            sku: "MS-OF-002",
+            name: "Wireless Office Mouse",
+            price: 19.99,
+            originalPrice: null,
+            images: [
+                "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=600&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&h=600&fit=crop"
+            ],
+            tags: ["wireless", "office", "productivity"],
+            description: "Comfortable wireless mouse designed for office productivity and everyday use.",
+            inStock: true,
+            rating: null, // No rating - will not show rating section
+            reviews: 267,
+            attributes: {
+                colors: [
+                    { name: "Black", value: "#000000" },
+                    { name: "Gray", value: "#6B7280" }
+                ],
+                sizes: ["Standard"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "OfficeWorker",
+                    rating: 4,
+                    date: "2024-01-12",
+                    comment: "Reliable and comfortable for daily use."
+                },
+                {
+                    id: 2,
+                    user: "Student123",
+                    rating: 4,
+                    date: "2024-01-08",
+                    comment: "Good value for money. Battery lasts long."
+                }
+            ],
+            details: {
+                about: "Reliable wireless office mouse with comfortable grip and precise tracking. Perfect for daily office work and general computer use.",
+                shortDescription: "Comfortable wireless mouse designed for office productivity.",
+                moreInformation: "DPI: 1200, Connection: 2.4GHz wireless, Battery: 2 AA batteries, Range: 10 meters",
+                productRating: "No rating available yet. Check individual reviews below.",
+                shippingTime: "Ships within 1-2 business days.",
+                inquiry: "Ask about bulk pricing for office environments.",
+                otherSellers: "Available from 3 other office supply retailers.",
+                marketplacePolicy: "Standard warranty and return policy.",
+                storePolicy: "1-year manufacturer warranty with free replacement."
+            }
+        },
         203: {
             id: 203,
+            sku: "MS-ERG-003",
             name: "Ergonomic Vertical Mouse",
             price: 65.99,
             originalPrice: 85.99,
@@ -135,6 +294,29 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.6,
             reviews: 178,
+            attributes: {
+                colors: [
+                    { name: "Black", value: "#000000" },
+                    { name: "Blue", value: "#3B82F6" }
+                ],
+                sizes: ["Right-handed", "Left-handed"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "ErgonomicUser",
+                    rating: 5,
+                    date: "2024-01-15",
+                    comment: "Life-changing for my wrist pain. Highly recommended!"
+                },
+                {
+                    id: 2,
+                    user: "Developer456",
+                    rating: 4,
+                    date: "2024-01-10",
+                    comment: "Takes getting used to but great for long work sessions."
+                }
+            ],
             details: {
                 about: "Innovative vertical mouse design that eliminates wrist twisting and reduces the risk of repetitive strain injuries. Recommended by occupational therapists.",
                 shortDescription: "Vertical ergonomic design reduces wrist strain.",
@@ -149,6 +331,7 @@ export const ProductDetails = () => {
         },
         301: {
             id: 301,
+            sku: "PH-PRO-128",
             name: "Latest Pro Smartphone 128GB",
             price: 899.99,
             originalPrice: 999.99,
@@ -163,20 +346,105 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.8,
             reviews: 1205,
+            attributes: {
+                colors: [
+                    { name: "Midnight Black", value: "#1a1a1a" },
+                    { name: "Space Blue", value: "#1e3a8a" },
+                    { name: "Rose Gold", value: "#e11d48" },
+                    { name: "Silver", value: "#c0c0c0" }
+                ],
+                sizes: ["128GB", "256GB", "512GB"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "PhotoEnthusiast",
+                    rating: 5,
+                    date: "2024-01-16",
+                    comment: "Camera quality is outstanding! Best phone camera I've used."
+                },
+                {
+                    id: 2,
+                    user: "TechLover",
+                    rating: 5,
+                    date: "2024-01-13",
+                    comment: "Lightning fast performance. Battery lasts all day."
+                },
+                {
+                    id: 3,
+                    user: "BusinessUser",
+                    rating: 4,
+                    date: "2024-01-09",
+                    comment: "Great for productivity. Screen is gorgeous."
+                }
+            ],
             details: {
                 about: "Flagship smartphone featuring the latest processor, professional-grade camera system, and premium build quality. Perfect for photography, gaming, and productivity.",
                 shortDescription: "Latest flagship smartphone with advanced camera system.",
                 moreInformation: "Display: 6.7\" OLED, Storage: 128GB, Camera: Triple 48MP, Battery: 4000mAh, 5G Ready",
                 productRating: "4.8/5 stars based on 1205 reviews. Outstanding camera and performance.",
                 shippingTime: "Ships within 1-2 business days with free express shipping.",
-                inquiry: "Ask about trade-in programs and financing options.",
+                inquiry: "Questions about trade-in programs or need help choosing storage size?",
                 otherSellers: "Compare prices from authorized retailers.",
                 marketplacePolicy: "Full warranty coverage and certified authentic products.",
                 storePolicy: "30-day return policy with full manufacturer warranty."
             }
         },
+        302: {
+            id: 302,
+            sku: "PH-BUD-064",
+            name: "Budget Smartphone 64GB",
+            price: 199.99,
+            originalPrice: null,
+            images: [
+                "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop"
+            ],
+            tags: ["smartphone", "budget", "value"],
+            description: "Affordable smartphone with essential features, perfect for everyday communication and basic apps.",
+            inStock: true,
+            rating: 4.0,
+            reviews: 589,
+            attributes: {
+                colors: [
+                    { name: "Black", value: "#000000" },
+                    { name: "Blue", value: "#3B82F6" },
+                    { name: "Red", value: "#EF4444" }
+                ],
+                sizes: ["64GB", "128GB"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "BudgetBuyer",
+                    rating: 4,
+                    date: "2024-01-14",
+                    comment: "Great value for money. Does everything I need."
+                },
+                {
+                    id: 2,
+                    user: "FirstTimeUser",
+                    rating: 4,
+                    date: "2024-01-11",
+                    comment: "Perfect for my first smartphone. Easy to use."
+                }
+            ],
+            details: {
+                about: "Budget-friendly smartphone that doesn't compromise on essential features. Great for first-time smartphone users or those looking for reliable backup device.",
+                shortDescription: "Affordable smartphone with essential features.",
+                moreInformation: "Display: 6.1\" LCD, Storage: 64GB, Camera: 13MP, Battery: 3000mAh, OS: Android 13",
+                productRating: "4.0/5 stars based on 589 reviews. Great value for money.",
+                shippingTime: "Free shipping within 2-3 business days.",
+                inquiry: "Ask about our prepaid plan bundles and accessories.",
+                otherSellers: "Available from 2 other mobile retailers.",
+                marketplacePolicy: "30-day satisfaction guarantee with full refund.",
+                storePolicy: "1-year limited warranty and customer support."
+            }
+        },
         401: {
             id: 401,
+            sku: "MN-4K-27",
             name: "4K Gaming Monitor 27\"",
             price: 449.99,
             originalPrice: 599.99,
@@ -190,6 +458,28 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.8,
             reviews: 342,
+            attributes: {
+                colors: [
+                    { name: "Black", value: "#000000" }
+                ],
+                sizes: ["27\"", "32\""]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "GamerPro",
+                    rating: 5,
+                    date: "2024-01-15",
+                    comment: "Incredible display quality. Perfect for competitive gaming."
+                },
+                {
+                    id: 2,
+                    user: "ContentCreator",
+                    rating: 5,
+                    date: "2024-01-12",
+                    comment: "Colors are amazing. Great for video editing too."
+                }
+            ],
             details: {
                 about: "Professional 4K gaming monitor with stunning visual clarity, HDR support, and ultra-fast refresh rate. Perfect for gaming, content creation, and professional work.",
                 shortDescription: "Ultra HD 4K gaming monitor with HDR support and 144Hz refresh rate.",
@@ -204,6 +494,7 @@ export const ProductDetails = () => {
         },
         501: {
             id: 501,
+            sku: "LP-GM-RTX",
             name: "Gaming Laptop RTX 4070",
             price: 1899.99,
             originalPrice: 2199.99,
@@ -217,6 +508,29 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.7,
             reviews: 445,
+            attributes: {
+                colors: [
+                    { name: "Black", value: "#000000" },
+                    { name: "Silver", value: "#C0C0C0" }
+                ],
+                sizes: ["16GB RAM", "32GB RAM"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "HardcoreGamer",
+                    rating: 5,
+                    date: "2024-01-16",
+                    comment: "Beast of a machine! Runs everything at max settings."
+                },
+                {
+                    id: 2,
+                    user: "StreamerLife",
+                    rating: 5,
+                    date: "2024-01-13",
+                    comment: "Perfect for streaming and gaming simultaneously."
+                }
+            ],
             details: {
                 about: "Ultimate gaming laptop powered by RTX 4070 graphics and latest generation processor. Features advanced cooling, high-refresh display, and premium build quality for serious gamers.",
                 shortDescription: "High-performance gaming laptop with RTX 4070 graphics and 16GB RAM.",
@@ -231,6 +545,7 @@ export const ProductDetails = () => {
         },
         601: {
             id: 601,
+            sku: "TB-PRO-256",
             name: "Pro Tablet 12.9\" 256GB",
             price: 1099.99,
             originalPrice: 1299.99,
@@ -244,6 +559,29 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.8,
             reviews: 567,
+            attributes: {
+                colors: [
+                    { name: "Silver", value: "#C0C0C0" },
+                    { name: "Space Gray", value: "#4A5568" }
+                ],
+                sizes: ["256GB", "512GB", "1TB"]
+            },
+            reviewsList: [
+                {
+                    id: 1,
+                    user: "DigitalArtist",
+                    rating: 5,
+                    date: "2024-01-17",
+                    comment: "Perfect for digital art. Stylus is incredibly responsive."
+                },
+                {
+                    id: 2,
+                    user: "CreativePro",
+                    rating: 5,
+                    date: "2024-01-14",
+                    comment: "Replaced my laptop for most tasks. Screen is gorgeous."
+                }
+            ],
             details: {
                 about: "Professional-grade tablet designed for creative professionals and power users. Features stunning display, powerful processor, and full compatibility with professional creative apps.",
                 shortDescription: "Professional tablet with keyboard support and Apple Pencil compatibility.",
@@ -255,93 +593,21 @@ export const ProductDetails = () => {
                 marketplacePolicy: "Creative satisfaction guarantee - return within 30 days if not meeting creative needs.",
                 storePolicy: "AppleCare+ available with comprehensive coverage and priority support."
             }
-        },
-        // Additional products from ProductsList that should be accessible
-        102: {
-            id: 102,
-            name: "Wireless Compact Keyboard",
-            price: 45.99,
-            originalPrice: null,
-            images: [
-                "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=600&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1595044426077-d36d9236d54a?w=600&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=600&h=600&fit=crop"
-            ],
-            tags: ["wireless", "compact", "productivity"],
-            description: "Compact wireless keyboard perfect for productivity and travel. Ultra-slim design with long battery life.",
-            inStock: true,
-            rating: 4.2,
-            reviews: 156,
-            details: {
-                about: "Ultra-portable wireless keyboard designed for modern professionals. Features low-profile keys, excellent battery life, and seamless connectivity across multiple devices.",
-                shortDescription: "Compact wireless keyboard perfect for productivity and travel.",
-                moreInformation: "Connection: Bluetooth 5.0, Battery Life: 6 months, Weight: 300g, Dimensions: 28x12x1.5cm",
-                productRating: "4.2/5 stars based on 156 customer reviews. Great for travel and office use.",
-                shippingTime: "Standard shipping takes 2-4 business days.",
-                inquiry: "Contact us for bulk orders or enterprise pricing.",
-                otherSellers: "Available from 2 other sellers.",
-                marketplacePolicy: "Standard return and refund policies apply.",
-                storePolicy: "1-year warranty and free technical support."
-            }
-        },
-        202: {
-            id: 202,
-            name: "Wireless Office Mouse",
-            price: 19.99,
-            originalPrice: null,
-            images: [
-                "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=600&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&h=600&fit=crop"
-            ],
-            tags: ["wireless", "office", "productivity"],
-            description: "Comfortable wireless mouse designed for office productivity and everyday use.",
-            inStock: true,
-            rating: 4.1,
-            reviews: 267,
-            details: {
-                about: "Reliable wireless office mouse with comfortable grip and precise tracking. Perfect for daily office work and general computer use.",
-                shortDescription: "Comfortable wireless mouse designed for office productivity.",
-                moreInformation: "DPI: 1200, Connection: 2.4GHz wireless, Battery: 2 AA batteries, Range: 10 meters",
-                productRating: "4.1/5 stars based on 267 reviews. Reliable and comfortable for daily use.",
-                shippingTime: "Ships within 1-2 business days.",
-                inquiry: "Ask about bulk pricing for office environments.",
-                otherSellers: "Available from 3 other office supply retailers.",
-                marketplacePolicy: "Standard warranty and return policy.",
-                storePolicy: "1-year manufacturer warranty with free replacement."
-            }
-        },
-        302: {
-            id: 302,
-            name: "Budget Smartphone 64GB",
-            price: 199.99,
-            originalPrice: null,
-            images: [
-                "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&h=600&fit=crop",
-                "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop"
-            ],
-            tags: ["smartphone", "budget", "value"],
-            description: "Affordable smartphone with essential features, perfect for everyday communication and basic apps.",
-            inStock: true,
-            rating: 4.0,
-            reviews: 589,
-            details: {
-                about: "Budget-friendly smartphone that doesn't compromise on essential features. Great for first-time smartphone users or those looking for reliable backup device.",
-                shortDescription: "Affordable smartphone with essential features.",
-                moreInformation: "Display: 6.1\" LCD, Storage: 64GB, Camera: 13MP, Battery: 3000mAh, OS: Android 13",
-                productRating: "4.0/5 stars based on 589 reviews. Great value for money.",
-                shippingTime: "Free shipping within 2-3 business days.",
-                inquiry: "Ask about our prepaid plan bundles and accessories.",
-                otherSellers: "Available from 2 other mobile retailers.",
-                marketplacePolicy: "30-day satisfaction guarantee with full refund.",
-                storePolicy: "1-year limited warranty and customer support."
-            }
         }
     };
 
     // Get product by ID from URL params
     const product = productsDatabase[productId];
+
+    // Initialize selected attributes with first available option
+    useState(() => {
+        if (product?.attributes?.colors?.length > 0) {
+            setSelectedColor(product.attributes.colors[0].name);
+        }
+        if (product?.attributes?.sizes?.length > 0) {
+            setSelectedSize(product.attributes.sizes[0]);
+        }
+    }, [product]);
 
     // Handle product not found
     if (!product) {
@@ -365,13 +631,54 @@ export const ProductDetails = () => {
     };
 
     const handleAddToCart = () => {
-        console.log(`Added ${quantity} items to cart`);
+        console.log(`Added ${quantity} items to cart`, {
+            productId,
+            sku: product.sku,
+            color: selectedColor,
+            size: selectedSize,
+            quantity
+        });
         // Add your cart logic here
     };
 
     const handleCompare = () => {
-        console.log('Added to compare');
+        console.log('Added to compare:', {
+            productId,
+            name: product.name,
+            sku: product.sku
+        });
         // Add your compare logic here
+    };
+
+    const handleInquiry = () => {
+        // Navigate to inquiry page with product details
+        navigate(`/inquiry/${productId}`, {
+            state: {
+                productName: product.name,
+                sku: product.sku
+            }
+        });
+    };
+
+    const renderStars = (rating) => {
+        const stars = [];
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 !== 0;
+
+        for (let i = 0; i < fullStars; i++) {
+            stars.push(<span key={i} className="star filled">★</span>);
+        }
+
+        if (hasHalfStar) {
+            stars.push(<span key="half" className="star half">☆</span>);
+        }
+
+        const emptyStars = 5 - Math.ceil(rating);
+        for (let i = 0; i < emptyStars; i++) {
+            stars.push(<span key={`empty-${i}`} className="star empty">☆</span>);
+        }
+
+        return stars;
     };
 
     const tabs = [
@@ -379,6 +686,7 @@ export const ProductDetails = () => {
         { id: 'shortDescription', label: 'Short Description' },
         { id: 'moreInformation', label: 'More information' },
         { id: 'productRating', label: 'Product Rating' },
+        { id: 'reviews', label: 'Reviews' },
         { id: 'shippingTime', label: 'Shipping time' },
         { id: 'inquiry', label: 'Inquiry' },
         { id: 'otherSellers', label: 'Offers from other sellers' },
@@ -388,6 +696,44 @@ export const ProductDetails = () => {
 
     const hasSale = product.originalPrice && product.originalPrice > product.price;
 
+    const renderTabContent = () => {
+        if (activeTab === 'reviews') {
+            return (
+                <div className="reviews-section">
+                    {product.reviewsList && product.reviewsList.length > 0 ? (
+                        <div className="reviews-list">
+                            {product.reviewsList.map((review) => (
+                                <div key={review.id} className="review-item">
+                                    <div className="review-header">
+                                        <span className="review-user">{review.user}</span>
+                                        <div className="review-rating">
+                                            {renderStars(review.rating)}
+                                        </div>
+                                        <span className="review-date">{review.date}</span>
+                                    </div>
+                                    <p className="review-comment">{review.comment}</p>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p>No reviews available for this product yet.</p>
+                    )}
+                </div>
+            );
+        } else if (activeTab === 'inquiry') {
+            return (
+                <div className="inquiry-section">
+                    <p>{product.details[activeTab]}</p>
+                    <button className="inquiry-btn" onClick={handleInquiry}>
+                        I've a Question
+                    </button>
+                </div>
+            );
+        } else {
+            return <p>{product.details[activeTab]}</p>;
+        }
+    };
+
     return (
         <div className="product-details">
             <div className="product-container">
@@ -396,24 +742,24 @@ export const ProductDetails = () => {
                     <div className="main-image-container">
                         <div className="image-wrapper">
                             {hasSale && <div className="sale-badge">Sale</div>}
-                            <img 
-                                src={product.images[selectedImageIndex]} 
-                                alt={`${product.name}`} 
+                            <img
+                                src={product.images[selectedImageIndex]}
+                                alt={`${product.name}`}
                                 className="main-image"
                             />
                             {product.images.length > 1 && (
                                 <>
-                                    <button 
+                                    <button
                                         className="nav-btn prev-btn"
-                                        onClick={() => setSelectedImageIndex(prev => 
+                                        onClick={() => setSelectedImageIndex(prev =>
                                             prev === 0 ? product.images.length - 1 : prev - 1
                                         )}
                                     >
                                         ❮
                                     </button>
-                                    <button 
+                                    <button
                                         className="nav-btn next-btn"
-                                        onClick={() => setSelectedImageIndex(prev => 
+                                        onClick={() => setSelectedImageIndex(prev =>
                                             prev === product.images.length - 1 ? 0 : prev + 1
                                         )}
                                     >
@@ -422,7 +768,7 @@ export const ProductDetails = () => {
                                 </>
                             )}
                         </div>
-                        
+
                         {/* Pagination dots */}
                         {product.images.length > 1 && (
                             <div className="pagination-dots">
@@ -458,13 +804,70 @@ export const ProductDetails = () => {
                 {/* Product Info Section */}
                 <div className="product-info">
                     <h1 className="product-name">{product.name}</h1>
-                    
+
+                    <div className="sku-section">
+                        <span className="sku-label">SKU:</span>
+                        <span className="sku-value">{product.sku}</span>
+                    </div>
+
+                    {/* Rating Section - only show if rating exists */}
+                    {product.rating && (
+                        <div className="rating-section">
+                            <div className="rating-stars">
+                                {renderStars(product.rating)}
+                                <span className="rating-value">({product.rating})</span>
+                            </div>
+                            <span className="review-count">{product.reviews} reviews</span>
+                        </div>
+                    )}
+
                     <div className="price-container">
                         <span className="current-price">${product.price.toFixed(2)}</span>
                         {product.originalPrice && (
                             <span className="original-price">${product.originalPrice.toFixed(2)}</span>
                         )}
                     </div>
+
+                    {/* Attributes Section */}
+                    {product.attributes && (
+                        <div className="attributes-section">
+                            {/* Color Selection */}
+                            {product.attributes.colors && product.attributes.colors.length > 0 && (
+                                <div className="attribute-group">
+                                    <span className="attribute-label">Color: <strong>{selectedColor}</strong></span>
+                                    <div className="color-options">
+                                        {product.attributes.colors.map((color) => (
+                                            <button
+                                                key={color.name}
+                                                className={`color-option ${selectedColor === color.name ? 'selected' : ''}`}
+                                                style={{ backgroundColor: color.value }}
+                                                onClick={() => setSelectedColor(color.name)}
+                                                title={color.name}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Size Selection */}
+                            {product.attributes.sizes && product.attributes.sizes.length > 0 && (
+                                <div className="attribute-group">
+                                    <span className="attribute-label">Size:</span>
+                                    <div className="size-options">
+                                        {product.attributes.sizes.map((size) => (
+                                            <button
+                                                key={size}
+                                                className={`size-option ${selectedSize === size ? 'selected' : ''}`}
+                                                onClick={() => setSelectedSize(size)}
+                                            >
+                                                {size}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
 
                     <div className="tags-section">
                         <span className="tags-label">Tags:</span>
@@ -479,7 +882,7 @@ export const ProductDetails = () => {
 
                     <div className="purchase-section">
                         <div className="quantity-selector">
-                            <button 
+                            <button
                                 className="quantity-btn"
                                 onClick={() => handleQuantityChange('decrement')}
                                 disabled={quantity <= 1}
@@ -487,7 +890,7 @@ export const ProductDetails = () => {
                                 -
                             </button>
                             <span className="quantity-display">{quantity}</span>
-                            <button 
+                            <button
                                 className="quantity-btn"
                                 onClick={() => handleQuantityChange('increment')}
                             >
@@ -495,8 +898,8 @@ export const ProductDetails = () => {
                             </button>
                         </div>
 
-                        <button 
-                            className={`add-to-cart-btn ${!product.inStock ? 'disabled' : ''}`} 
+                        <button
+                            className={`add-to-cart-btn ${!product.inStock ? 'disabled' : ''}`}
                             onClick={handleAddToCart}
                             disabled={!product.inStock}
                         >
@@ -504,9 +907,9 @@ export const ProductDetails = () => {
                         </button>
                     </div>
 
-                    {/* <button className="compare-btn" onClick={handleCompare}>
+                    <button className="compare-btn" onClick={handleCompare}>
                         Compare
-                    </button> */}
+                    </button>
 
                     <div className="sold-by">
                         <span>Sold By:</span>
@@ -536,7 +939,7 @@ export const ProductDetails = () => {
 
                 <div className="tab-content">
                     <div className="tab-panel">
-                        <p>{product.details[activeTab]}</p>
+                        {renderTabContent()}
                     </div>
                 </div>
             </div>
