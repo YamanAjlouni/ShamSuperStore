@@ -567,21 +567,18 @@
                 transition: opacity 0.3s ease;
             }
 
-            // Left shadow
             &::before {
                 left: 0;
                 background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
                 opacity: 0;
             }
 
-            // Right shadow
             &::after {
                 right: 0;
                 background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
                 opacity: 1;
             }
 
-            // Show shadows when scrolled
             &.scrolled-left::before {
                 opacity: 1;
             }
@@ -716,7 +713,6 @@
     }
 }
 
-// Responsive Design
 @media (max-width: 1200px) {
     .product-details {
         .product-tabs {
