@@ -1,5 +1,5 @@
-// ProductsList.jsx - Enhanced with search and price filtering
-import { useParams, useNavigate } from 'react-router-dom';
+// ProductsList.jsx - Clean version without extra buttons
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 import { Search, Filter, ChevronLeft } from 'lucide-react';
 import ProductsOnSale from '../productsOnSale/ProductsOnSale';
@@ -9,11 +9,15 @@ import './ProductsList.scss';
 export const ProductsList = () => {
     const { categoryId, subcategoryId } = useParams();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [sortBy, setSortBy] = useState('name');
     const [filterInStock, setFilterInStock] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [showFilters, setShowFilters] = useState(false);
     const [priceRange, setPriceRange] = useState({ min: '', max: '' });
+
+    // Get comparison state from URL
+    const compareProducts = searchParams.get('compare');
 
     // Categories data
     const categories = {
@@ -322,11 +326,21 @@ export const ProductsList = () => {
     }, [products, sortBy, filterInStock, searchTerm, priceRange]);
 
     const handleBackToSubcategories = () => {
-        navigate(`/shop/category/${categoryId}`);
+        // Preserve comparison state when going back
+        if (compareProducts) {
+            navigate(`/shop/category/${categoryId}?compare=${compareProducts}`);
+        } else {
+            navigate(`/shop/category/${categoryId}`);
+        }
     };
 
     const handleProductClick = (productId) => {
-        navigate(`/shop/product/${productId}`);
+        // Preserve comparison state when viewing product
+        if (compareProducts) {
+            navigate(`/shop/product/${productId}?compare=${compareProducts}`);
+        } else {
+            navigate(`/shop/product/${productId}`);
+        }
     };
 
     const handleSearch = () => {
@@ -344,8 +358,8 @@ export const ProductsList = () => {
         return (
             <div className="shop-page">
                 <div className="sidebar">
-                    <ProductsOnSale />
-                    <FeaturedProducts />
+                    <ProductsOnSale compareProducts={compareProducts} />
+                    <FeaturedProducts compareProducts={compareProducts} />
                 </div>
                 <div className="main-content">
                     <div className="error-message">
@@ -360,8 +374,8 @@ export const ProductsList = () => {
     return (
         <div className="shop-page">
             <div className="sidebar">
-                <ProductsOnSale />
-                <FeaturedProducts />
+                <ProductsOnSale compareProducts={compareProducts} />
+                <FeaturedProducts compareProducts={compareProducts} />
             </div>
             <div className="main-content">
                 <div className="shop-products-section">
@@ -374,6 +388,13 @@ export const ProductsList = () => {
                     </button>
                     
                     <h2 className="section-title">{subcategory.name}</h2>
+                    
+                    {/* Show comparison status if active */}
+                    {compareProducts && (
+                        <div className="comparison-status">
+                            <p>🔍 Comparing {compareProducts.split(',').length} product(s) - Add more products or <button onClick={() => navigate(`/compare?products=${compareProducts}`)} style={{color: '#FEF3C7', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', fontWeight: '600'}}>view comparison</button></p>
+                        </div>
+                    )}
                     
                     {/* Filter Bar */}
                     <div className="filter-bar">
@@ -436,17 +457,6 @@ export const ProductsList = () => {
                                         onChange={(e) => setPriceRange({...priceRange, max: e.target.value})}
                                     />
                                 </div>
-                                
-                                {/* <div className="stock-filter">
-                                    <input
-                                        type="checkbox"
-                                        id="inStock"
-                                        className="stock-checkbox"
-                                        checked={filterInStock}
-                                        onChange={(e) => setFilterInStock(e.target.checked)}
-                                    />
-                                    <label htmlFor="inStock" className="stock-label">In stock only</label>
-                                </div> */}
 
                                 <button className="clear-filters-btn" onClick={clearFilters}>
                                     Clear Filters

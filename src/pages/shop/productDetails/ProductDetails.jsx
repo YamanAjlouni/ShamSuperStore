@@ -1,10 +1,12 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import './ProductDetails.scss';
 
 export const ProductDetails = () => {
     const { productId } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    const [searchParams] = useSearchParams();
     const [quantity, setQuantity] = useState(1);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [activeTab, setActiveTab] = useState('about');
@@ -15,7 +17,7 @@ export const ProductDetails = () => {
     const productsDatabase = {
         101: {
             id: 101,
-            sku: "KB-RGB-001",
+            sku: "2021-590",
             name: "Mechanical Gaming Keyboard RGB",
             price: 89.99,
             originalPrice: 129.99,
@@ -30,6 +32,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.5,
             reviews: 234,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Black", value: "#000000" },
@@ -75,7 +78,7 @@ export const ProductDetails = () => {
         },
         102: {
             id: 102,
-            sku: "KB-WL-002",
+            sku: "2021-591",
             name: "Wireless Compact Keyboard",
             price: 45.99,
             originalPrice: null,
@@ -89,6 +92,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.2,
             reviews: 156,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Space Gray", value: "#8E8E93" },
@@ -126,7 +130,7 @@ export const ProductDetails = () => {
         },
         103: {
             id: 103,
-            sku: "KB-ERG-003",
+            sku: "2021-592",
             name: "Ergonomic Split Keyboard",
             price: 159.99,
             originalPrice: 199.99,
@@ -140,12 +144,13 @@ export const ProductDetails = () => {
             inStock: false,
             rating: 4.7,
             reviews: 89,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Black", value: "#000000" },
                     { name: "White", value: "#FFFFFF" }
                 ],
-                sizes: ["S", "M", "L" , "XL"]
+                sizes: ["S", "M", "L", "XL"]
             },
             reviewsList: [
                 {
@@ -177,7 +182,7 @@ export const ProductDetails = () => {
         },
         201: {
             id: 201,
-            sku: "MS-GM-001",
+            sku: "2021-593",
             name: "Gaming Mouse with LED",
             price: 29.99,
             originalPrice: 39.99,
@@ -191,6 +196,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.3,
             reviews: 445,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Black", value: "#000000" },
@@ -229,7 +235,7 @@ export const ProductDetails = () => {
         },
         202: {
             id: 202,
-            sku: "MS-OF-002",
+            sku: "2021-594",
             name: "Wireless Office Mouse",
             price: 19.99,
             originalPrice: null,
@@ -243,6 +249,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: null, // No rating - will not show rating section
             reviews: 267,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Black", value: "#000000" },
@@ -280,7 +287,7 @@ export const ProductDetails = () => {
         },
         203: {
             id: 203,
-            sku: "MS-ERG-003",
+            sku: "2021-595",
             name: "Ergonomic Vertical Mouse",
             price: 65.99,
             originalPrice: 85.99,
@@ -294,6 +301,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.6,
             reviews: 178,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Black", value: "#000000" },
@@ -331,7 +339,7 @@ export const ProductDetails = () => {
         },
         301: {
             id: 301,
-            sku: "PH-PRO-128",
+            sku: "2021-596",
             name: "Latest Pro Smartphone 128GB",
             price: 899.99,
             originalPrice: 999.99,
@@ -346,6 +354,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.8,
             reviews: 1205,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Midnight Black", value: "#1a1a1a" },
@@ -392,7 +401,7 @@ export const ProductDetails = () => {
         },
         302: {
             id: 302,
-            sku: "PH-BUD-064",
+            sku: "2021-597",
             name: "Budget Smartphone 64GB",
             price: 199.99,
             originalPrice: null,
@@ -406,6 +415,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.0,
             reviews: 589,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Black", value: "#000000" },
@@ -444,7 +454,7 @@ export const ProductDetails = () => {
         },
         401: {
             id: 401,
-            sku: "MN-4K-27",
+            sku: "2021-598",
             name: "4K Gaming Monitor 27\"",
             price: 449.99,
             originalPrice: 599.99,
@@ -458,6 +468,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.8,
             reviews: 342,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Black", value: "#000000" }
@@ -494,7 +505,7 @@ export const ProductDetails = () => {
         },
         501: {
             id: 501,
-            sku: "LP-GM-RTX",
+            sku: "2021-599",
             name: "Gaming Laptop RTX 4070",
             price: 1899.99,
             originalPrice: 2199.99,
@@ -508,6 +519,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.7,
             reviews: 445,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Black", value: "#000000" },
@@ -545,7 +557,7 @@ export const ProductDetails = () => {
         },
         601: {
             id: 601,
-            sku: "TB-PRO-256",
+            sku: "2021-600",
             name: "Pro Tablet 12.9\" 256GB",
             price: 1099.99,
             originalPrice: 1299.99,
@@ -559,6 +571,7 @@ export const ProductDetails = () => {
             inStock: true,
             rating: 4.8,
             reviews: 567,
+            condition: "New",
             attributes: {
                 colors: [
                     { name: "Silver", value: "#C0C0C0" },
@@ -641,13 +654,34 @@ export const ProductDetails = () => {
         // Add your cart logic here
     };
 
+    // FIXED: Properly handle comparison state
     const handleCompare = () => {
+        let existingProductIds = [];
+        
+        // Check for existing comparison products from multiple sources
+        const urlProducts = searchParams.get('products'); // Direct from compare page
+        const urlCompare = searchParams.get('compare'); // From shop page with compare state
+        
+        if (urlProducts) {
+            existingProductIds = urlProducts.split(',').filter(id => id && productsDatabase[id]);
+        } else if (urlCompare) {
+            existingProductIds = urlCompare.split(',').filter(id => id && productsDatabase[id]);
+        }
+        
+        // Add current product if not already in the list
+        if (!existingProductIds.includes(productId)) {
+            existingProductIds.push(productId);
+        }
+        
+        // Navigate to compare page with all products
+        navigate(`/compare?products=${existingProductIds.join(',')}`);
+        
         console.log('Added to compare:', {
             productId,
             name: product.name,
-            sku: product.sku
+            sku: product.sku,
+            compareList: existingProductIds
         });
-        // Add your compare logic here
     };
 
     const handleInquiry = () => {
@@ -803,12 +837,13 @@ export const ProductDetails = () => {
 
                 {/* Product Info Section */}
                 <div className="product-info">
-                    <h1 className="product-name">{product.name}</h1>
-
                     <div className="sku-section">
                         <span className="sku-label">SKU:</span>
                         <span className="sku-value">{product.sku}</span>
                     </div>
+
+                    <h1 className="product-name">{product.name}</h1>
+
 
                     {/* Rating Section - only show if rating exists */}
                     {product.rating && (

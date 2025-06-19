@@ -1,5 +1,5 @@
-// SubCategories.jsx - Updated with categories design layout
-import { useParams, useNavigate } from 'react-router-dom';
+// SubCategories.jsx - Updated with comparison state preservation
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import ProductsOnSale from '../productsOnSale/ProductsOnSale';
 import FeaturedProducts from '../featuredProducts/FeaturedProducts';
 import './SubCategories.scss';
@@ -7,6 +7,10 @@ import './SubCategories.scss';
 export const SubCategories = () => {
     const { categoryId } = useParams();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    
+    // Get comparison state from URL
+    const compareProducts = searchParams.get('compare');
 
     // Categories data to get category info
     const categories = {
@@ -213,19 +217,29 @@ export const SubCategories = () => {
     const subcategories = subcategoriesData[categoryId] || [];
 
     const handleBackToCategories = () => {
-        navigate('/shop');
+        // Preserve comparison state when going back
+        if (compareProducts) {
+            navigate(`/shop?compare=${compareProducts}`);
+        } else {
+            navigate('/shop');
+        }
     };
 
     const handleSubcategoryClick = (subcategoryId) => {
-        navigate(`/shop/category/${categoryId}/subcategory/${subcategoryId}`);
+        // Preserve comparison state when navigating to subcategory
+        if (compareProducts) {
+            navigate(`/shop/category/${categoryId}/subcategory/${subcategoryId}?compare=${compareProducts}`);
+        } else {
+            navigate(`/shop/category/${categoryId}/subcategory/${subcategoryId}`);
+        }
     };
 
     if (!category) {
         return (
             <div className="shop-page">
                 <div className="sidebar">
-                    <ProductsOnSale />
-                    <FeaturedProducts />
+                    <ProductsOnSale compareProducts={compareProducts} />
+                    <FeaturedProducts compareProducts={compareProducts} />
                 </div>
                 <div className="main-content">
                     <div className="error-message">
@@ -240,8 +254,8 @@ export const SubCategories = () => {
     return (
         <div className="shop-page">
             <div className="sidebar">
-                <ProductsOnSale />
-                <FeaturedProducts />
+                <ProductsOnSale compareProducts={compareProducts} />
+                <FeaturedProducts compareProducts={compareProducts} />
             </div>
             <div className="main-content">
                 <div className="shop-subcategories-section">
@@ -253,6 +267,13 @@ export const SubCategories = () => {
                     </button>
                     
                     <h2 className="section-title">{category.name}</h2>
+                    
+                    {/* Show comparison status if active */}
+                    {compareProducts && (
+                        <div className="comparison-status">
+                            <p>🔍 Comparing {compareProducts.split(',').length} product(s) - Continue browsing to add more!</p>
+                        </div>
+                    )}
                     
                     {subcategories.length === 0 ? (
                         <div className="no-subcategories">

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './ProductsOnSale.scss';
 
-export const ProductsOnSale = () => {
+export const ProductsOnSale = ({ compareProducts }) => {
     const navigate = useNavigate();
 
     const saleProducts = [
@@ -43,7 +43,12 @@ export const ProductsOnSale = () => {
     ];
 
     const handleProductClick = (productId) => {
-        navigate(`/shop/product/${productId}`);
+        // Preserve comparison state when clicking on sale products
+        if (compareProducts) {
+            navigate(`/shop/product/${productId}?compare=${compareProducts}`);
+        } else {
+            navigate(`/shop/product/${productId}`);
+        }
     };
 
     const calculateSavings = (originalPrice, salePrice) => {
@@ -77,7 +82,7 @@ export const ProductsOnSale = () => {
                                     <span className="original-price">{product.originalPrice}</span>
                                     <span className="sale-price">{product.salePrice}</span>
                                 </div>
-                                 {/* <div className="savings-info">
+                                {/* <div className="savings-info">
                                     Save ${savings.amount}
                                 </div> */}
                             </div>

@@ -344,7 +344,7 @@ const Navbar = () => {
                             onMouseEnter={() => handleMouseEnter('language')}
                             onMouseLeave={() => handleMouseLeave('language')}
                         >
-                            <div className="ecommerce-nav-link-wrapper">
+                            <div className="ecommerce-nav-link-wrapper orange-wrapper">
                                 <button
                                     className="ecommerce-nav-link ecommerce-nav-link-orange ecommerce-nav-link-main"
                                     style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 'inherit', fontFamily: 'inherit' }}

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './FeaturedProducts.scss';
 
-export const FeaturedProducts = () => {
+export const FeaturedProducts = ({ compareProducts }) => {
     const navigate = useNavigate();
 
     const featuredProducts = [
@@ -50,7 +50,12 @@ export const FeaturedProducts = () => {
     ];
 
     const handleProductClick = (productId) => {
-        navigate(`/shop/product/${productId}`);
+        // Preserve comparison state when clicking on featured products
+        if (compareProducts) {
+            navigate(`/shop/product/${productId}?compare=${compareProducts}`);
+        } else {
+            navigate(`/shop/product/${productId}`);
+        }
     };
 
     return (

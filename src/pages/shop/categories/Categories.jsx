@@ -1,8 +1,8 @@
-// Categories.jsx - Updated with Unsplash images
+// Categories.jsx - Updated with comparison state preservation
 import { useNavigate } from 'react-router-dom';
 import './Categories.scss';
 
-export const Categories = () => {
+export const Categories = ({ compareProducts }) => {
     const navigate = useNavigate();
 
     const categories = [
@@ -109,12 +109,23 @@ export const Categories = () => {
     ];
 
     const handleCategoryClick = (categoryId) => {
-        navigate(`/shop/category/${categoryId}`);
+        // Preserve comparison state when navigating to categories
+        if (compareProducts) {
+            navigate(`/shop/category/${categoryId}?compare=${compareProducts}`);
+        } else {
+            navigate(`/shop/category/${categoryId}`);
+        }
     };
 
     return (
         <div className="shop-categories-section">
             <h2 className="section-title">Categories</h2>
+            {/* Show comparison status if active */}
+            {compareProducts && (
+                <div className="comparison-status">
+                    <p>🔍 Comparing {compareProducts.split(',').length} product(s) - Continue shopping to add more items to compare!</p>
+                </div>
+            )}
             <div className="categories-grid">
                 {categories.map(category => (
                     <div
