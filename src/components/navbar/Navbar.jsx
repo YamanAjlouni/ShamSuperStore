@@ -1,11 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Mail, User, ShoppingCart, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
-import './Navbar.scss';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartReducer';
 import shamSuperStoreLogo from '../../assets/images/shamSuperStoreLogo.jpg'
+import './Navbar.scss';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const { toggleCart, getTotalItems } = useCart();
+    const totalItems = getTotalItems();
+    
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [openDropdowns, setOpenDropdowns] = useState({});
     const timeoutRefs = useRef({});
@@ -111,6 +115,12 @@ const Navbar = () => {
 
     const handleLoginClick = () => {
         navigate('/my-account');
+        setIsMobileMenuOpen(false);
+    };
+
+    const handleCartClick = (e) => {
+        e.preventDefault();
+        toggleCart();
         setIsMobileMenuOpen(false);
     };
 
@@ -334,9 +344,20 @@ const Navbar = () => {
                         </li>
 
                         <li className="ecommerce-nav-item ecommerce-nav-item-cart">
-                            <Link to="/cart" className="ecommerce-nav-link ecommerce-nav-link-orange" onClick={handleLinkClick}>
-                                <ShoppingCart size={20} />
-                            </Link>
+                            <button 
+                                onClick={handleCartClick}
+                                className="ecommerce-nav-link ecommerce-nav-link-orange cart-btn"
+                                aria-label={`Shopping cart with ${totalItems} items`}
+                            >
+                                <div className="cart-icon-wrapper">
+                                    <ShoppingCart size={20} />
+                                    {totalItems > 0 && (
+                                        <span className="cart-badge">
+                                            {totalItems > 99 ? '99+' : totalItems}
+                                        </span>
+                                    )}
+                                </div>
+                            </button>
                         </li>
 
                         <li

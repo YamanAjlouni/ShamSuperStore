@@ -1,6 +1,6 @@
 @use '../../assets/style/vars.scss' as *;
 
-$primary-color: #305CDE;
+// $primary-color: #305CDE;
 $navbar-height: 70px;
 $mobile-menu-bg: darken($primary-color, 5%);
 $transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -8,7 +8,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
 @mixin hover-lift($amount: -2px) {
   transition: $transition-fast;
-  
+
   &:hover {
     transform: translateY($amount);
   }
@@ -27,7 +27,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   background: rgba(255, 255, 255, 0.08);
   transition: $transition-fast;
   overflow: hidden;
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.15);
   }
@@ -192,14 +192,12 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   &-border {
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.3) 20%,
-      rgba(255, 255, 255, 0.6) 50%,
-      rgba(255, 255, 255, 0.3) 80%,
-      transparent 100%
-    );
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 20%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.3) 80%,
+        transparent 100%);
     max-width: 1280px;
     margin: 0 auto;
     animation: shimmer 3s ease-in-out infinite;
@@ -293,11 +291,9 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.1) 0%,
-          rgba(255, 255, 255, 0.05) 100%
-        );
+        background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 100%);
         opacity: 0;
         transition: $transition-fast;
         border-radius: inherit;
@@ -340,7 +336,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
           }
         }
       }
-      
+
       .ecommerce-nav-link-main {
         flex: 1;
         padding-right: 0.25rem;
@@ -355,7 +351,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
           transform: none;
         }
       }
-      
+
       .ecommerce-nav-arrow-btn {
         display: flex;
         align-items: center;
@@ -417,11 +413,9 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.05) 100%
-      );
+      background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.05) 100%);
       opacity: 0;
       transition: $transition-fast;
       border-radius: inherit;
@@ -454,8 +448,9 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     &-main {
       flex: 1;
-      
+
       @media (min-width: 1024px) {
+
         &::before,
         &::after {
           display: none;
@@ -465,7 +460,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
           transform: none;
         }
       }
-      
+
       @media (max-width: 1023px) {
         padding: 1rem 1.25rem;
         width: 100%;
@@ -493,11 +488,9 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       margin: 0.375rem 0.25rem;
 
       &::before {
-        background: linear-gradient(
-          135deg,
-          rgba(206, 128, 45, 0.1) 0%,
-          rgba(206, 128, 45, 0.05) 100%
-        );
+        background: linear-gradient(135deg,
+            rgba(206, 128, 45, 0.1) 0%,
+            rgba(206, 128, 45, 0.05) 100%);
       }
 
       &::after {
@@ -553,14 +546,13 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     justify-content: center;
     align-items: center;
 
-
     &:active {
       background: rgba(255, 255, 255, 0.2);
     }
 
     &-orange {
       color: $orange-color;
-      
+
       &:hover {
         background: rgba(206, 128, 45, 0.2);
       }
@@ -733,6 +725,77 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
 
+// Cart button styles - Seamlessly integrated with existing design
+.cart-btn {
+  background: none !important;
+  border: none !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .cart-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: $orange-color;
+      color: $white;
+      border-radius: 50%;
+      min-width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1;
+      padding: 0 2px;
+      border: 2px solid $white;
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  &:hover {
+    .cart-icon-wrapper {
+      .cart-badge {
+        background: darken($orange-color, 10%);
+        box-shadow: $shadow-md;
+      }
+    }
+  }
+
+  // Mobile responsive adjustments
+  @media (max-width: 1023px) {
+    .cart-icon-wrapper {
+      .cart-badge {
+        min-width: 16px;
+        height: 16px;
+        font-size: 10px;
+        top: -6px;
+        right: -6px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cart-icon-wrapper {
+      .cart-badge {
+        min-width: 14px;
+        height: 14px;
+        font-size: 9px;
+        top: -5px;
+        right: -5px;
+      }
+    }
+  }
+}
+
 // Mobile/Tablet scroll improvements
 @media (max-width: 1023px) {
   .ecommerce-nav-menu {
@@ -778,10 +841,12 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
 // Animations
 @keyframes shimmer {
+
   0%,
   100% {
     opacity: 0.6;
   }
+
   50% {
     opacity: 1;
   }
@@ -792,6 +857,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     opacity: 0;
     transform: translateY(-8px) scale(0.96);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -812,6 +878,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 // Accessibility
 @media (prefers-reduced-motion: reduce) {
   .ecommerce-nav {
+
     &-link,
     &-dropdown,
     &-arrow-btn svg {
@@ -830,7 +897,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     &-dropdown-menu li a {
       color: $dark-blue-color;
-      
+
       &:hover {
         color: $white;
       }
