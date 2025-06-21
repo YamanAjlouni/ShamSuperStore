@@ -9,6 +9,7 @@ import About from '../pages/about/About'
 import ContactUs from '../pages/contactUs/ContactUs'
 import InquiryForm from '../pages/shop/productDetails/inquiryForm/InquiryForm'
 import Compare from '../pages/shop/productDetails/compare/Compare'
+import Cart from '../pages/cart/Cart'
 
 // Sellers Section Pages
 import Sellers from '../pages/sellers/Sellers'
@@ -24,16 +25,6 @@ import DeliveryDriversManager from '../pages/deliveryDrivers/deliveryDriversMana
 import VendorsDriversManagers from '../pages/deliveryDrivers/vendorsDriversManagers/VendorsDriversManagers'
 import DeliveryTracking from '../pages/deliveryDrivers/deliveryTracking/DeliveryTracking'
 import DeliveryDriversApp from '../pages/deliveryDrivers/deliveryDriversApp/DeliveryDriversApp'
-
-// Placeholder Cart component (will be replaced with actual design later)
-const Cart = () => {
-  return (
-    <div style={{ padding: '50px', textAlign: 'center' }}>
-      <h1>Shopping Cart Page</h1>
-      <p>Cart page content will be implemented based on your design requirements.</p>
-    </div>
-  );
-};
 
 export const AppRoutes = () => {
   return (
