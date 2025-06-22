@@ -268,7 +268,19 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     &-dropdown {
-      // Desktop dropdown styles handled below
+
+      // Desktop dropdown hover area extension
+      @media (min-width: 1024px) {
+        &::before {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          height: 10px; // Creates invisible bridge to prevent hover loss
+          z-index: 1000;
+        }
+      }
     }
   }
 
@@ -575,10 +587,10 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
   }
 
-  // Dropdown styles - Desktop only (>= 1024px)
+  // Dropdown styles - Fixed for smooth hover
   &-dropdown {
     position: absolute;
-    top: 100%;
+    top: calc(100% - 1px); // Slight overlap to prevent gap
     left: 0;
     min-width: 22rem;
     width: max-content;
@@ -588,12 +600,11 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     border-radius: $radius-xl;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px) scale(0.98);
-    transition: $transition-fast;
+    transform: translateY(-5px);
+    transition: all 0.2s ease;
     z-index: 1001;
     border: 1px solid rgba(0, 0, 0, 0.08);
     overflow: visible;
-    pointer-events: none;
     max-height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
@@ -603,22 +614,22 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       right: 0;
     }
 
+    // Invisible extension to maintain hover
     &::before {
       content: '';
       position: absolute;
-      top: -5px;
+      top: -10px;
       left: 0;
       right: 0;
-      height: 5px;
+      height: 10px;
       background: transparent;
+      z-index: 1;
     }
 
     &-active {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-      animation: slideInScale 0.2s $transition-smooth;
+      transform: translateY(0);
     }
 
     @media (max-width: 1023px) {
@@ -631,14 +642,16 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       margin: 0;
       border-radius: 0;
       border: none;
-      pointer-events: auto;
-      animation: none;
       min-width: auto;
       width: 100%;
       max-width: none;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease-out;
+
+      &::before {
+        display: none;
+      }
 
       &-active {
         max-height: 50vh;
@@ -796,7 +809,6 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
 
-// Mobile/Tablet scroll improvements
 @media (max-width: 1023px) {
   .ecommerce-nav-menu {
     scrollbar-width: thin;
@@ -905,7 +917,6 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
 
-// Print styles
 @media print {
   .ecommerce-nav {
     display: none;
