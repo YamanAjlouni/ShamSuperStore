@@ -735,6 +735,201 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
       }
     }
+
+    .category-link-wrapper {
+      display: flex !important;
+
+      .mobile-submenu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.875rem 0.5rem;
+        background: none;
+        border: none;
+        color: $white;
+        cursor: pointer;
+        transition: $transition-fast;
+        border-radius: 0 $radius-lg $radius-lg 0;
+        min-width: auto;
+
+        &-orange {
+          color: $orange-color;
+        }
+
+        svg {
+          transform: rotate(0);
+          transition: transform $transition-fast;
+
+          &.rotate-180 {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+
+    // Nested dropdown item with submenu
+    &-item-has-submenu {
+      position: relative;
+
+      // Desktop hover area extension for nested items
+      @media (min-width: 1024px) {
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 100%;
+          width: 10px;
+          height: 100%;
+          z-index: 1000;
+        }
+      }
+
+      &:hover {
+        >a {
+          background-color: lighten($primary-color, 5%);
+          color: $white;
+        }
+      }
+
+      >a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 1rem !important;
+
+        .ecommerce-nav-submenu-arrow {
+          margin-left: auto;
+          opacity: 0.7;
+          transition: $transition-fast;
+        }
+      }
+
+      @media (max-width: 1023px) {
+        >a {
+          &::after {
+            content: '›';
+            margin-left: auto;
+            font-size: 1.2rem;
+            opacity: 0.6;
+          }
+
+          .ecommerce-nav-submenu-arrow {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  // Simple submenu styles for categories
+  .submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 16rem;
+    background: $white;
+    box-shadow: $shadow-xl;
+    border-radius: $radius-lg;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-5px);
+    transition: all 0.2s ease;
+    z-index: 1002;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    margin-left: 0.25rem;
+
+    // Invisible extension to maintain hover
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -10px;
+      width: 10px;
+      height: 100%;
+      background: transparent;
+      z-index: 1;
+    }
+
+    &-active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0.5rem 0;
+
+      li {
+        a {
+          display: block;
+          padding: 0.75rem 1.25rem;
+          color: $dark-blue-color;
+          text-decoration: none;
+          font-size: 0.875rem;
+          font-weight: 500;
+          transition: $transition-fast;
+          white-space: nowrap;
+
+          &:hover {
+            background-color: $primary-color;
+            color: $white;
+            transform: translateX(4px);
+          }
+        }
+      }
+    }
+
+    @media (max-width: 1023px) {
+      position: static;
+      box-shadow: none;
+      background: transparent;
+      margin: 0;
+      padding: 0;
+      border: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+
+      &::before {
+        display: none;
+      }
+
+      &-active {
+        max-height: 50vh;
+        transition: max-height 0.4s ease-in;
+      }
+
+      ul {
+        padding: 0 0 0 1rem;
+
+        li {
+          margin: 0.25rem 0;
+          border-radius: $radius-md;
+          background: rgba(255, 255, 255, 0.05);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+
+          a {
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+
+            &:hover {
+              background: transparent;
+              color: $white;
+              transform: translateX(2px);
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -813,7 +1008,7 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   .ecommerce-nav-menu {
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-    
+
 
     &::-webkit-scrollbar {
       width: 6px;
@@ -877,9 +1072,15 @@ $transition-smooth: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
 
-// Utility classes for icon rotation
+// Utility classes
 .rotate-180 {
-  transform: rotate(180deg);
+  transform: rotate(180deg) !important;
+}
+
+.desktop-only {
+  @media (max-width: 1023px) {
+    display: none !important;
+  }
 }
 
 // Dynamic positioning helper classes

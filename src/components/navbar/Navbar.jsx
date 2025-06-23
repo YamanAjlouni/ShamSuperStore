@@ -14,7 +14,6 @@ const Navbar = () => {
     const [openDropdowns, setOpenDropdowns] = useState({});
     const dropdownTimeouts = useRef({});
     const navRef = useRef(null);
-    const dropdownRefs = useRef({});
 
     // Close dropdowns when clicking outside
     useEffect(() => {
@@ -77,15 +76,15 @@ const Navbar = () => {
         }
     };
 
-    // Improved hover handlers for desktop
-    const handleItemMouseEnter = useCallback((dropdownKey) => {
+    // Simple hover handlers for desktop
+    const handleMouseEnter = useCallback((dropdownKey) => {
         if (window.innerWidth < 1024) return;
         
         clearDropdownTimeout(dropdownKey);
-        setOpenDropdowns({ [dropdownKey]: true });
+        setOpenDropdowns(prev => ({ ...prev, [dropdownKey]: true }));
     }, [clearDropdownTimeout]);
 
-    const handleItemMouseLeave = useCallback((dropdownKey) => {
+    const handleMouseLeave = useCallback((dropdownKey) => {
         if (window.innerWidth < 1024) return;
         
         dropdownTimeouts.current[dropdownKey] = setTimeout(() => {
@@ -94,21 +93,8 @@ const Navbar = () => {
                 delete newState[dropdownKey];
                 return newState;
             });
-        }, 300); // Increased timeout for smoother experience
+        }, 300);
     }, []);
-
-    // Separate handlers for dropdown content to maintain hover state
-    const handleDropdownMouseEnter = useCallback((dropdownKey) => {
-        if (window.innerWidth < 1024) return;
-        
-        clearDropdownTimeout(dropdownKey);
-    }, [clearDropdownTimeout]);
-
-    const handleDropdownMouseLeave = useCallback((dropdownKey) => {
-        if (window.innerWidth < 1024) return;
-        
-        handleItemMouseLeave(dropdownKey);
-    }, [handleItemMouseLeave]);
 
     const handleMobileDropdownToggle = (dropdownKey, event) => {
         if (window.innerWidth >= 1024) return;
@@ -131,6 +117,16 @@ const Navbar = () => {
         setIsMobileMenuOpen(false);
     };
 
+    const handleEmailClick = () => {
+        navigate('/contact');
+        setIsMobileMenuOpen(false);
+    };
+
+    const handleSellerClick = () => {
+        navigate('/sellers');
+        setIsMobileMenuOpen(false);
+    };
+
     const handleCartClick = (e) => {
         e.preventDefault();
         toggleCart();
@@ -138,18 +134,219 @@ const Navbar = () => {
     };
 
     const handleLinkClick = () => {
+        setOpenDropdowns({});
         if (window.innerWidth < 1024) {
             setIsMobileMenuOpen(false);
         }
+        clearAllTimeouts();
     };
+
+    // Shop categories with subcategories
+    const shopCategories = [
+        {
+            id: 1,
+            name: "Computer",
+            link: "/shop/category/1",
+            subcategories: [
+                { name: "Desktop Computer", link: "/shop/category/1/desktop" },
+                { name: "Tablet PC", link: "/shop/category/1/tablet" },
+                { name: "Computer Monitor", link: "/shop/category/1/monitor" },
+                { name: "Computer Mouse - Keyboard", link: "/shop/category/1/mouse-keyboard" },
+                { name: "Computer Software", link: "/shop/category/1/software" },
+                { name: "Computer Accessories", link: "/shop/category/1/accessories" },
+                { name: "Computer Components", link: "/shop/category/1/components" }
+            ]
+        },
+        {
+            id: 2,
+            name: "Electronics",
+            link: "/shop/category/2",
+            subcategories: [
+                { name: "Mobile - Smart Phone", link: "/shop/category/2/mobile" },
+                { name: "Wearable Technology", link: "/shop/category/2/wearable" },
+                { name: "TV and Video", link: "/shop/category/2/tv-video" },
+                { name: "Speakers", link: "/shop/category/2/speakers" },
+                { name: "Cameras - Pictures", link: "/shop/category/2/cameras" },
+                { name: "Movies - Music", link: "/shop/category/2/movies-music" },
+                { name: "Musical Instruments", link: "/shop/category/2/musical-instruments" },
+                { name: "Electronic Office Equipment", link: "/shop/category/2/office-equipment" }
+            ]
+        },
+        {
+            id: 3,
+            name: "Smart Home",
+            link: "/shop/category/3",
+            subcategories: [
+                { name: "Smart Lock", link: "/shop/category/3/smart-lock" },
+                { name: "Smart Lighting", link: "/shop/category/3/smart-lighting" },
+                { name: "Vacuums - Mops", link: "/shop/category/3/vacuums-mops" },
+                { name: "Plugs - Outlets", link: "/shop/category/3/plugs-outlets" },
+                { name: "WiFi - Networking", link: "/shop/category/3/wifi-networking" },
+                { name: "Detectors - Sensors", link: "/shop/category/3/detectors-sensors" },
+                { name: "Security Cameras - Systems", link: "/shop/category/3/security-cameras" }
+            ]
+        },
+        {
+            id: 4,
+            name: "Home - Garden",
+            link: "/shop/category/4",
+            subcategories: [
+                { name: "Home Appliances - Electrical Tools", link: "/shop/category/4/home-appliances" },
+                { name: "Kitchen", link: "/shop/category/4/kitchen" },
+                { name: "Bath", link: "/shop/category/4/bath" },
+                { name: "Laundry Supplies", link: "/shop/category/4/laundry" },
+                { name: "Heating - Cooling", link: "/shop/category/4/heating-cooling" },
+                { name: "Lighting", link: "/shop/category/4/lighting" },
+                { name: "Home Audio - Video Systems", link: "/shop/category/4/home-audio-video" },
+                { name: "Storage - Organization Supplies", link: "/shop/category/4/storage" },
+                { name: "Home Repair Tools", link: "/shop/category/4/home-repair" },
+                { name: "Lawn - Garden", link: "/shop/category/4/lawn-garden" },
+                { name: "Garden Supplies - Outdoor Activities", link: "/shop/category/4/garden-supplies" }
+            ]
+        },
+        {
+            id: 5,
+            name: "Furniture",
+            link: "/shop/category/5",
+            subcategories: [
+                { name: "Chair", link: "/shop/category/5/chair" },
+                { name: "Sofa", link: "/shop/category/5/sofa" },
+                { name: "Living Room", link: "/shop/category/5/living-room" },
+                { name: "Guest Room", link: "/shop/category/5/guest-room" },
+                { name: "Kids - Children Room", link: "/shop/category/5/kids-room" },
+                { name: "Dining Room", link: "/shop/category/5/dining-room" },
+                { name: "Bedroom", link: "/shop/category/5/bedroom" },
+                { name: "Study - Home Office", link: "/shop/category/5/study-office" },
+                { name: "Outdoor Furniture", link: "/shop/category/5/outdoor" },
+                { name: "Antiques - Fine Arts", link: "/shop/category/5/antiques" }
+            ]
+        },
+        {
+            id: 6,
+            name: "Clothes",
+            link: "/shop/category/6",
+            subcategories: [
+                { name: "Women's Clothing", link: "/shop/category/6/womens" },
+                { name: "Men's Clothing", link: "/shop/category/6/mens" },
+                { name: "Girl's Clothing", link: "/shop/category/6/girls" },
+                { name: "Boy's Clothing", link: "/shop/category/6/boys" },
+                { name: "Children's Clothing", link: "/shop/category/6/childrens" },
+                { name: "Infant's - Baby's Clothing", link: "/shop/category/6/baby" }
+            ]
+        },
+        {
+            id: 7,
+            name: "Shoes",
+            link: "/shop/category/7",
+            subcategories: [
+                { name: "Women's Shoes", link: "/shop/category/7/womens" },
+                { name: "Men's Shoes", link: "/shop/category/7/mens" },
+                { name: "Girl's Shoes", link: "/shop/category/7/girls" },
+                { name: "Boy's Shoes", link: "/shop/category/7/boys" },
+                { name: "Children's Shoes", link: "/shop/category/7/childrens" }
+            ]
+        },
+        {
+            id: 8,
+            name: "Babies - Kids - Children Supplies",
+            link: "/shop/category/8",
+            subcategories: [
+                { name: "Babies Supplies", link: "/shop/category/8/babies" },
+                { name: "Kids - Children Supplies", link: "/shop/category/8/kids" },
+                { name: "Children Toys", link: "/shop/category/8/toys" },
+                { name: "Baby Diapers", link: "/shop/category/8/diapers" }
+            ]
+        },
+        {
+            id: 10,
+            name: "Beauty - Health",
+            link: "/shop/category/10",
+            subcategories: [
+                { name: "Cosmetics Accessories", link: "/shop/category/10/cosmetics" },
+                { name: "Specialized Skin Care", link: "/shop/category/10/skin-care" },
+                { name: "Salon - Spa Products", link: "/shop/category/10/salon-spa" },
+                { name: "Vitamins - Other Nutrients", link: "/shop/category/10/vitamins" },
+                { name: "Men's Cosmetics Skin Care", link: "/shop/category/10/mens-cosmetics" },
+                { name: "Jewelry", link: "/shop/category/10/jewelry" },
+                { name: "Sunglasses", link: "/shop/category/10/sunglasses" },
+                { name: "Watches", link: "/shop/category/10/watches" }
+            ]
+        },
+        {
+            id: 11,
+            name: "Sports - Outdoor Activities",
+            link: "/shop/category/11",
+            subcategories: [
+                { name: "Sports Equipment", link: "/shop/category/11/sports-equipment" },
+                { name: "Exercise - Fitness Equipment", link: "/shop/category/11/exercise-fitness" },
+                { name: "Game Rooms - Outdoor Games", link: "/shop/category/11/game-rooms" },
+                { name: "Outdoor Entertainment - Equipment", link: "/shop/category/11/outdoor-entertainment" },
+                { name: "Golf", link: "/shop/category/11/golf" },
+                { name: "Hunting", link: "/shop/category/11/hunting" },
+                { name: "Cycling", link: "/shop/category/11/cycling" },
+                { name: "Fishing - Boating", link: "/shop/category/11/fishing-boating" }
+            ]
+        },
+        {
+            id: 12,
+            name: "Food Grocery",
+            link: "/shop/category/12",
+            subcategories: [
+                { name: "Gourmet Food", link: "/shop/category/12/gourmet" }
+            ]
+        },
+        {
+            id: 13,
+            name: "Pets Supplies",
+            link: "/shop/category/13",
+            subcategories: [
+                { name: "Cat Food", link: "/shop/category/13/cat-food" },
+                { name: "Cat Supplies", link: "/shop/category/13/cat-supplies" },
+                { name: "Dog Food", link: "/shop/category/13/dog-food" },
+                { name: "Dog Supplies", link: "/shop/category/13/dog-supplies" },
+                { name: "Bird Food", link: "/shop/category/13/bird-food" },
+                { name: "Bird Supplies", link: "/shop/category/13/bird-supplies" },
+                { name: "Fish Aquatic Supplies", link: "/shop/category/13/fish-supplies" },
+                { name: "Other Animal Supplies", link: "/shop/category/13/other-animals" }
+            ]
+        },
+        {
+            id: 14,
+            name: "Entertainment",
+            link: "/shop/category/14",
+            subcategories: [
+                { name: "Video Games", link: "/shop/category/14/video-games" },
+                { name: "Home Entertainment System", link: "/shop/category/14/home-entertainment" },
+                { name: "VR - Virtual Reality", link: "/shop/category/14/vr" }
+            ]
+        },
+        {
+            id: 15,
+            name: "Handmade",
+            link: "/shop/category/15",
+            subcategories: [
+                { name: "Arts - Crafts - Sewing", link: "/shop/category/15/arts-crafts" }
+            ]
+        },
+        {
+            id: 20,
+            name: "Bags - Luggage",
+            link: "/shop/category/20",
+            subcategories: [
+                { name: "Handbags", link: "/shop/category/20/handbags" },
+                { name: "Shoulder Bags", link: "/shop/category/20/shoulder-bags" },
+                { name: "Luggage", link: "/shop/category/20/luggage" }
+            ]
+        }
+    ];
 
     // Dropdown wrapper component for consistent behavior
     const DropdownItem = ({ dropdownKey, linkTo, linkText, children }) => {
         return (
             <li
                 className="ecommerce-nav-item ecommerce-nav-item-dropdown"
-                onMouseEnter={() => handleItemMouseEnter(dropdownKey)}
-                onMouseLeave={() => handleItemMouseLeave(dropdownKey)}
+                onMouseEnter={() => handleMouseEnter(dropdownKey)}
+                onMouseLeave={() => handleMouseLeave(dropdownKey)}
             >
                 <div className="ecommerce-nav-link-wrapper">
                     <Link
@@ -170,9 +367,8 @@ const Navbar = () => {
                 
                 <div 
                     className={`ecommerce-nav-dropdown ${isDropdownOpen(dropdownKey) ? 'ecommerce-nav-dropdown-active' : ''}`}
-                    onMouseEnter={() => handleDropdownMouseEnter(dropdownKey)}
-                    onMouseLeave={() => handleDropdownMouseLeave(dropdownKey)}
-                    ref={el => dropdownRefs.current[dropdownKey] = el}
+                    onMouseEnter={() => handleMouseEnter(dropdownKey)}
+                    onMouseLeave={() => handleMouseLeave(dropdownKey)}
                 >
                     <ul className="ecommerce-nav-dropdown-menu">
                         {children}
@@ -193,7 +389,7 @@ const Navbar = () => {
                     </div>
 
                     <div className="ecommerce-nav-top-items">
-                        <div className="ecommerce-nav-email">
+                        <div className="ecommerce-nav-email" onClick={handleEmailClick}>
                             <Mail size={16} />
                             <span>support@shamsuperstore.com</span>
                         </div>
@@ -203,7 +399,7 @@ const Navbar = () => {
                             <span>Login</span>
                         </div>
 
-                        <button className="ecommerce-nav-seller-btn">
+                        <button className="ecommerce-nav-seller-btn" onClick={handleSellerClick}>
                             Become a seller
                         </button>
                     </div>
@@ -229,41 +425,70 @@ const Navbar = () => {
 
                         <DropdownItem dropdownKey="shop" linkTo="/shop" linkText="Shop">
                             <li><Link to="/shop" onClick={handleLinkClick}>All Categories</Link></li>
-                            <li><Link to="/shop/category/1" onClick={handleLinkClick}>Computer</Link></li>
-                            <li><Link to="/shop/category/2" onClick={handleLinkClick}>Electronics</Link></li>
-                            <li><Link to="/shop/category/3" onClick={handleLinkClick}>Smart Home</Link></li>
-                            <li><Link to="/shop/category/4" onClick={handleLinkClick}>Home - Garden</Link></li>
-                            <li><Link to="/shop/category/5" onClick={handleLinkClick}>Furniture</Link></li>
-                            <li><Link to="/shop/category/6" onClick={handleLinkClick}>Clothes</Link></li>
-                            <li><Link to="/shop/category/7" onClick={handleLinkClick}>Shoes</Link></li>
-                            <li><Link to="/shop/category/8" onClick={handleLinkClick}>Babies - Kids - Children Supplies</Link></li>
+                            {shopCategories.map((category) => (
+                                <li 
+                                    key={category.id}
+                                    className={category.subcategories.length > 0 ? "has-submenu" : ""}
+                                    onMouseEnter={() => handleMouseEnter(`shop-cat-${category.id}`)}
+                                    onMouseLeave={() => handleMouseLeave(`shop-cat-${category.id}`)}
+                                >
+                                    <div className="category-link-wrapper">
+                                        <Link to={category.link} onClick={handleLinkClick}>
+                                            {category.name}
+                                        </Link>
+                                        {category.subcategories.length > 0 && (
+                                            <>
+                                                <ChevronRight size={14} className="submenu-arrow desktop-only" />
+                                                <button
+                                                    className="mobile-submenu-toggle"
+                                                    onClick={(e) => handleMobileDropdownToggle(`shop-cat-${category.id}`, e)}
+                                                    aria-label={`Toggle ${category.name} submenu`}
+                                                >
+                                                    <ChevronDown size={14} className={isDropdownOpen(`shop-cat-${category.id}`) ? 'rotate-180' : ''} />
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
+                                    
+                                    {category.subcategories.length > 0 && (
+                                        <div 
+                                            className={`submenu ${isDropdownOpen(`shop-cat-${category.id}`) ? 'submenu-active' : ''}`}
+                                            onMouseEnter={() => handleMouseEnter(`shop-cat-${category.id}`)}
+                                            onMouseLeave={() => handleMouseLeave(`shop-cat-${category.id}`)}
+                                        >
+                                            <ul>
+                                                {category.subcategories.map((sub, index) => (
+                                                    <li key={index}>
+                                                        <Link to={sub.link} onClick={handleLinkClick}>
+                                                            {sub.name}
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </li>
+                            ))}
                             <li><Link to="/shop/category/9" onClick={handleLinkClick}>Teen Supplies</Link></li>
-                            <li><Link to="/shop/category/10" onClick={handleLinkClick}>Beauty - Health</Link></li>
-                            <li><Link to="/shop/category/11" onClick={handleLinkClick}>Sports - Outdoor Activities</Link></li>
-                            <li><Link to="/shop/category/12" onClick={handleLinkClick}>Food Grocery</Link></li>
-                            <li><Link to="/shop/category/13" onClick={handleLinkClick}>Pets Supplies</Link></li>
-                            <li><Link to="/shop/category/14" onClick={handleLinkClick}>Entertainment</Link></li>
-                            <li><Link to="/shop/category/15" onClick={handleLinkClick}>Handmade</Link></li>
                             <li><Link to="/shop/category/16" onClick={handleLinkClick}>School - Office Supplies</Link></li>
                             <li><Link to="/shop/category/17" onClick={handleLinkClick}>Books</Link></li>
                             <li><Link to="/shop/category/18" onClick={handleLinkClick}>Cars</Link></li>
                             <li><Link to="/shop/category/19" onClick={handleLinkClick}>Industrial Scientific Materials</Link></li>
-                            <li><Link to="/shop/category/20" onClick={handleLinkClick}>Bags - Luggage</Link></li>
                         </DropdownItem>
 
                         <DropdownItem dropdownKey="account" linkTo="/my-account" linkText="My Account">
                             <li><Link to="/my-account" onClick={handleLinkClick}>Dashboard</Link></li>
-                            <li><Link to="/my-account/orders" onClick={handleLinkClick}>Orders</Link></li>
-                            <li><Link to="/my-account/tracking" onClick={handleLinkClick}>Order Tracking</Link></li>
-                            <li><Link to="/my-account/downloads" onClick={handleLinkClick}>Downloads</Link></li>
-                            <li><Link to="/my-account/addresses" onClick={handleLinkClick}>Addresses</Link></li>
-                            <li><Link to="/my-account/payment" onClick={handleLinkClick}>Payment Methods</Link></li>
-                            <li><Link to="/my-account/details" onClick={handleLinkClick}>Account Details</Link></li>
-                            <li><Link to="/my-account/wishlist" onClick={handleLinkClick}>Wishlist</Link></li>
-                            <li><Link to="/my-account/following" onClick={handleLinkClick}>Following</Link></li>
-                            <li><Link to="/my-account/support" onClick={handleLinkClick}>Support Tickets</Link></li>
-                            <li><Link to="/my-account/inquiries" onClick={handleLinkClick}>Inquiries</Link></li>
-                            <li><Link to="/my-account/password" onClick={handleLinkClick}>Lost Password</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Orders</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Order Tracking</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Downloads</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Addresses</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Payment Methods</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Account Details</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Wishlist</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Following</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Support Tickets</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Inquiries</Link></li>
+                            <li><Link to="/my-account" onClick={handleLinkClick}>Lost Password</Link></li>
                         </DropdownItem>
 
                         <li className="ecommerce-nav-item">
@@ -313,8 +538,8 @@ const Navbar = () => {
 
                         <li
                             className="ecommerce-nav-item ecommerce-nav-item-dropdown"
-                            onMouseEnter={() => handleItemMouseEnter('language')}
-                            onMouseLeave={() => handleItemMouseLeave('language')}
+                            onMouseEnter={() => handleMouseEnter('language')}
+                            onMouseLeave={() => handleMouseLeave('language')}
                         >
                             <div className="ecommerce-nav-link-wrapper orange-wrapper">
                                 <button
@@ -334,8 +559,8 @@ const Navbar = () => {
                             
                             <div 
                                 className={`ecommerce-nav-dropdown ${isDropdownOpen('language') ? 'ecommerce-nav-dropdown-active' : ''}`}
-                                onMouseEnter={() => handleDropdownMouseEnter('language')}
-                                onMouseLeave={() => handleDropdownMouseLeave('language')}
+                                onMouseEnter={() => handleMouseEnter('language')}
+                                onMouseLeave={() => handleMouseLeave('language')}
                             >
                                 <ul className="ecommerce-nav-dropdown-menu">
                                     <li><Link to="/ar" onClick={handleLinkClick}>Arabic</Link></li>
@@ -351,792 +576,4 @@ const Navbar = () => {
 
 export default Navbar;
 
-// import React, { useState, useRef, useEffect, useCallback } from 'react';
-// import { Mail, User, ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
-// import './Navbar.scss';
-// import { Link } from 'react-router-dom';
-// import shamSuperStoreLogo from '../../assets/images/shamSuperStoreLogo.jpg'
 
-// const Navbar = () => {
-//     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-//     const [openDropdowns, setOpenDropdowns] = useState({});
-//     const timeoutRefs = useRef({});
-//     const navRef = useRef(null);
-
-//     // Close dropdowns when clicking outside
-//     useEffect(() => {
-//         const handleClickOutside = (event) => {
-//             if (navRef.current && !navRef.current.contains(event.target)) {
-//                 setOpenDropdowns({});
-//                 clearAllTimeouts();
-//             }
-//         };
-
-//         document.addEventListener('mousedown', handleClickOutside);
-//         return () => {
-//             document.removeEventListener('mousedown', handleClickOutside);
-//             clearAllTimeouts();
-//         };
-//     }, []);
-
-//     const clearAllTimeouts = useCallback(() => {
-//         Object.values(timeoutRefs.current).forEach(timeout => clearTimeout(timeout));
-//         timeoutRefs.current = {};
-//     }, []);
-
-//     const clearTimeout = useCallback((key) => {
-//         if (timeoutRefs.current[key]) {
-//             clearTimeout(timeoutRefs.current[key]);
-//             delete timeoutRefs.current[key];
-//         }
-//     }, []);
-
-//     const toggleMobileMenu = () => {
-//         setIsMobileMenuOpen(!isMobileMenuOpen);
-//         if (!isMobileMenuOpen) {
-//             setOpenDropdowns({});
-//         }
-//     };
-
-//     const handleMouseEnter = useCallback((dropdownKey) => {
-//         // Clear any pending close timeout for this dropdown
-//         clearTimeout(dropdownKey);
-
-//         // Determine the dropdown hierarchy
-//         const isMainDropdown = ['shop', 'account', 'sellers', 'delivery', 'language'].includes(dropdownKey);
-//         const isSubDropdown = ['computer', 'electronics', 'smart-home', 'furniture', 'clothes', 'shoes', 'home-garden', 'sports', 'babies-kids', 'beauty-health', 'bags-luggage', 'entertainment', 'food-grocery', 'handmade', 'pets'].includes(dropdownKey);
-
-//         if (isMainDropdown) {
-//             // Close all dropdowns and open only this main dropdown
-//             setOpenDropdowns({ [dropdownKey]: true });
-//         } else if (isSubDropdown) {
-//             // Keep the shop dropdown open and add this subdropdown
-//             setOpenDropdowns(prev => {
-//                 const newState = { shop: true, [dropdownKey]: true };
-//                 return newState;
-//             });
-//         } else {
-//             // For nested dropdowns (third level), keep parent hierarchy
-//             setOpenDropdowns(prev => {
-//                 // Find which main category this belongs to
-//                 const parentDropdown = findParentDropdown(dropdownKey);
-//                 if (parentDropdown) {
-//                     return {
-//                         shop: true,
-//                         [parentDropdown]: true,
-//                         [dropdownKey]: true
-//                     };
-//                 }
-//                 return {
-//                     ...prev,
-//                     [dropdownKey]: true
-//                 };
-//             });
-//         }
-//     }, [clearTimeout]);
-
-//     const handleMouseLeave = useCallback((dropdownKey) => {
-//         // Add a small delay before closing to prevent flickering
-//         timeoutRefs.current[dropdownKey] = setTimeout(() => {
-//             setOpenDropdowns(prev => {
-//                 const newState = { ...prev };
-//                 delete newState[dropdownKey];
-                
-//                 // If closing a main dropdown, also close its children
-//                 if (dropdownKey === 'shop') {
-//                     Object.keys(newState).forEach(key => {
-//                         if (key !== 'shop') {
-//                             delete newState[key];
-//                         }
-//                     });
-//                 }
-                
-//                 return newState;
-//             });
-//         }, 150); // 150ms delay
-//     }, []);
-
-//     // Helper function to find parent dropdown for nested items
-//     const findParentDropdown = (dropdownKey) => {
-//         const nestedMapping = {
-//             'computer-components': 'computer',
-//             'wearable': 'electronics',
-//             'electronic-office': 'electronics',
-//             'bedroom': 'furniture',
-//             'kitchen': 'home-garden',
-//             'bath': 'home-garden',
-//             'home-repair': 'home-garden'
-//         };
-//         return nestedMapping[dropdownKey];
-//     };
-
-//     const handleMobileDropdownClick = (dropdownKey, event) => {
-//         if (window.innerWidth <= 768) {
-//             event.preventDefault();
-//             event.stopPropagation();
-
-//             setOpenDropdowns(prev => ({
-//                 ...prev,
-//                 [dropdownKey]: !prev[dropdownKey]
-//             }));
-//         }
-//     };
-
-//     const isDropdownOpen = (dropdownKey) => {
-//         return openDropdowns[dropdownKey] || false;
-//     };
-
-//     // Dropdown component for reusability
-//     const DropdownItem = ({ to, children, dropdownKey, onMouseEnter, onMouseLeave, onClick, hasSubmenu = false, submenu = null }) => (
-//         <li
-//             className={hasSubmenu ? "ecommerce-nav-dropdown-item-has-submenu" : ""}
-//             onMouseEnter={() => hasSubmenu && onMouseEnter(dropdownKey)}
-//             onMouseLeave={() => hasSubmenu && onMouseLeave(dropdownKey)}
-//         >
-//             <Link
-//                 to={to}
-//                 onClick={(e) => hasSubmenu && onClick(dropdownKey, e)}
-//             >
-//                 {children}
-//                 {hasSubmenu && <ChevronDown size={14} className="ecommerce-nav-arrow-right" />}
-//             </Link>
-//             {hasSubmenu && submenu && (
-//                 <div className={`ecommerce-nav-submenu ${isDropdownOpen(dropdownKey) ? 'ecommerce-nav-submenu-active' : ''}`}>
-//                     {submenu}
-//                 </div>
-//             )}
-//         </li>
-//     );
-
-//     // Nested dropdown component
-//     const NestedDropdownItem = ({ to, children, dropdownKey, onMouseEnter, onMouseLeave, onClick, nestedSubmenu = null }) => (
-//         <li
-//             className="ecommerce-nav-submenu-item-has-submenu"
-//             onMouseEnter={() => onMouseEnter(dropdownKey)}
-//             onMouseLeave={() => onMouseLeave(dropdownKey)}
-//         >
-//             <Link
-//                 to={to}
-//                 onClick={(e) => onClick(dropdownKey, e)}
-//             >
-//                 {children}
-//                 <ChevronDown size={12} className="ecommerce-nav-arrow-right" />
-//             </Link>
-//             {nestedSubmenu && (
-//                 <div className={`ecommerce-nav-submenu-nested ${isDropdownOpen(dropdownKey) ? 'ecommerce-nav-submenu-nested-active' : ''}`}>
-//                     {nestedSubmenu}
-//                 </div>
-//             )}
-//         </li>
-//     );
-
-//     return (
-//         <nav className="ecommerce-nav" ref={navRef}>
-//             <div className="ecommerce-nav-top">
-//                 <div className="ecommerce-nav-container">
-//                     <div className="ecommerce-nav-logo">
-//                         <img src={shamSuperStoreLogo} alt="Sham Super Store" className="ecommerce-nav-logo-img" />
-//                     </div>
-
-//                     <div className="ecommerce-nav-top-items">
-//                         <div className="ecommerce-nav-email">
-//                             <Mail size={16} />
-//                             <span>support@shamsuperstore.com</span>
-//                         </div>
-
-//                         <div className="ecommerce-nav-login">
-//                             <User size={16} />
-//                             <span>Login</span>
-//                         </div>
-
-//                         <button className="ecommerce-nav-seller-btn">
-//                             Become a seller
-//                         </button>
-//                     </div>
-
-//                     <button className="ecommerce-nav-mobile-toggle" onClick={toggleMobileMenu}>
-//                         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-//                     </button>
-//                 </div>
-//             </div>
-
-//             <div className="ecommerce-nav-border-container">
-//                 <div className="ecommerce-nav-border"></div>
-//             </div>
-
-//             <div className="ecommerce-nav-bottom">
-//                 <div className="ecommerce-nav-container">
-//                     <ul className={`ecommerce-nav-menu ${isMobileMenuOpen ? 'ecommerce-nav-menu-open' : ''}`}>
-//                         <li className="ecommerce-nav-item">
-//                             <Link to="/" className="ecommerce-nav-link">Home</Link>
-//                         </li>
-
-//                         <li
-//                             className="ecommerce-nav-item ecommerce-nav-item-dropdown"
-//                             onMouseEnter={() => handleMouseEnter('shop')}
-//                             onMouseLeave={() => handleMouseLeave('shop')}
-//                         >
-//                             <Link
-//                                 to="/shop"
-//                                 className="ecommerce-nav-link"
-//                                 onClick={(e) => handleMobileDropdownClick('shop', e)}
-//                             >
-//                                 Shop <ChevronDown size={16} />
-//                             </Link>
-//                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('shop') ? 'ecommerce-nav-dropdown-active' : ''}`}>
-//                                 <ul className="ecommerce-nav-dropdown-menu">
-//                                     <li><Link to="/shop">All Categories</Link></li>
-
-//                                     <DropdownItem
-//                                         to="/computer"
-//                                         dropdownKey="computer"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/desktop-computer">Desktop Computer</Link></li>
-//                                                 <li><Link to="/tablet-pc">Tablet PC</Link></li>
-//                                                 <li><Link to="/computer-monitor">Computer Monitor</Link></li>
-//                                                 <li><Link to="/mouse-keyboard">Computer Mouse - Keyboard</Link></li>
-//                                                 <li><Link to="/computer-software">Computer Software</Link></li>
-//                                                 <li><Link to="/computer-accessories">Computer Accessories</Link></li>
-
-//                                                 <NestedDropdownItem
-//                                                     to="/computer-components"
-//                                                     dropdownKey="computer-components"
-//                                                     onMouseEnter={handleMouseEnter}
-//                                                     onMouseLeave={handleMouseLeave}
-//                                                     onClick={handleMobileDropdownClick}
-//                                                     nestedSubmenu={
-//                                                         <ul>
-//                                                             <li><Link to="/cpu">CPU</Link></li>
-//                                                             <li><Link to="/motherboard">Motherboard</Link></li>
-//                                                             <li><Link to="/harddisk">Hard Disk</Link></li>
-//                                                             <li><Link to="/memory">Memory</Link></li>
-//                                                             <li><Link to="/graphic-card">Graphic Card</Link></li>
-//                                                             <li><Link to="/power-supply">Power Supply</Link></li>
-//                                                             <li><Link to="/computer-case">Computer Case</Link></li>
-//                                                         </ul>
-//                                                     }
-//                                                 >
-//                                                     Computer Components
-//                                                 </NestedDropdownItem>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Computer
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/electronics"
-//                                         dropdownKey="electronics"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/mobile-smartphone">Mobile - Smart Phone</Link></li>
-
-//                                                 <NestedDropdownItem
-//                                                     to="/wearable-technology"
-//                                                     dropdownKey="wearable"
-//                                                     onMouseEnter={handleMouseEnter}
-//                                                     onMouseLeave={handleMouseLeave}
-//                                                     onClick={handleMobileDropdownClick}
-//                                                     nestedSubmenu={
-//                                                         <ul>
-//                                                             <li><Link to="/smart-watches">Smart Watches</Link></li>
-//                                                             <li><Link to="/headphones">Headphones</Link></li>
-//                                                         </ul>
-//                                                     }
-//                                                 >
-//                                                     Wearable Technology
-//                                                 </NestedDropdownItem>
-
-//                                                 <li><Link to="/tv-video">TV and Video</Link></li>
-//                                                 <li><Link to="/speakers">Speakers</Link></li>
-//                                                 <li><Link to="/cameras-pictures">Cameras - Pictures</Link></li>
-//                                                 <li><Link to="/movies-music">Movies - Music</Link></li>
-//                                                 <li><Link to="/musical-instruments">Musical Instruments</Link></li>
-
-//                                                 <NestedDropdownItem
-//                                                     to="/electronic-office"
-//                                                     dropdownKey="electronic-office"
-//                                                     onMouseEnter={handleMouseEnter}
-//                                                     onMouseLeave={handleMouseLeave}
-//                                                     onClick={handleMobileDropdownClick}
-//                                                     nestedSubmenu={
-//                                                         <ul>
-//                                                             <li><Link to="/copiers-printers-ink">Copiers - Printers - Ink</Link></li>
-//                                                         </ul>
-//                                                     }
-//                                                 >
-//                                                     Electronic Office Equipment
-//                                                 </NestedDropdownItem>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Electronics
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/smart-home"
-//                                         dropdownKey="smart-home"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/smart-lock">Smart Lock</Link></li>
-//                                                 <li><Link to="/smart-lighting">Smart Lighting</Link></li>
-//                                                 <li><Link to="/vacuums-mops">Vacuums - Mops</Link></li>
-//                                                 <li><Link to="/plugs-outlets">Plugs - Outlets</Link></li>
-//                                                 <li><Link to="/wifi-networking">WiFi - Networking</Link></li>
-//                                                 <li><Link to="/detectors-sensors">Detectors - Sensors</Link></li>
-//                                                 <li><Link to="/security-cameras">Security Cameras - Systems</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Smart Home
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/furniture"
-//                                         dropdownKey="furniture"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/chair">Chair</Link></li>
-//                                                 <li><Link to="/sofa">Sofa</Link></li>
-//                                                 <li><Link to="/living-room">Living Room</Link></li>
-//                                                 <li><Link to="/guest-room">Guest Room</Link></li>
-//                                                 <li><Link to="/kids-room">Kids - Children Room</Link></li>
-//                                                 <li><Link to="/dining-room">Dining Room</Link></li>
-
-//                                                 <NestedDropdownItem
-//                                                     to="/bedroom"
-//                                                     dropdownKey="bedroom"
-//                                                     onMouseEnter={handleMouseEnter}
-//                                                     onMouseLeave={handleMouseLeave}
-//                                                     onClick={handleMobileDropdownClick}
-//                                                     nestedSubmenu={
-//                                                         <ul>
-//                                                             <li><Link to="/mattress">Mattress</Link></li>
-//                                                         </ul>
-//                                                     }
-//                                                 >
-//                                                     Bedroom
-//                                                 </NestedDropdownItem>
-
-//                                                 <li><Link to="/study-office">Study - Home Office</Link></li>
-//                                                 <li><Link to="/outdoor-furniture">Outdoor Furniture</Link></li>
-//                                                 <li><Link to="/antiques">Antiques - Fine Arts</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Furniture
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/clothes"
-//                                         dropdownKey="clothes"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/womens-clothing">Women's Clothing</Link></li>
-//                                                 <li><Link to="/mens-clothing">Men's Clothing</Link></li>
-//                                                 <li><Link to="/girls-clothing">Girl's Clothing</Link></li>
-//                                                 <li><Link to="/boys-clothing">Boy's Clothing</Link></li>
-//                                                 <li><Link to="/childrens-clothing">Children's Clothing</Link></li>
-//                                                 <li><Link to="/baby-clothing">Infant's - Baby's Clothing</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Clothes
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/shoes"
-//                                         dropdownKey="shoes"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/womens-shoes">Women's Shoes</Link></li>
-//                                                 <li><Link to="/mens-shoes">Men's Shoes</Link></li>
-//                                                 <li><Link to="/girls-shoes">Girl's Shoes</Link></li>
-//                                                 <li><Link to="/boys-shoes">Boy's Shoes</Link></li>
-//                                                 <li><Link to="/childrens-shoes">Children's Shoes</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Shoes
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/home-garden"
-//                                         dropdownKey="home-garden"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/home-appliances">Home Appliances - Electrical Tools</Link></li>
-
-//                                                 <NestedDropdownItem
-//                                                     to="/kitchen"
-//                                                     dropdownKey="kitchen"
-//                                                     onMouseEnter={handleMouseEnter}
-//                                                     onMouseLeave={handleMouseLeave}
-//                                                     onClick={handleMobileDropdownClick}
-//                                                     nestedSubmenu={
-//                                                         <ul>
-//                                                             <li><Link to="/cooking-appliances">Cooking Appliances</Link></li>
-//                                                             <li><Link to="/kitchen-dining-appliances">Kitchen - Dining Room Appliances</Link></li>
-//                                                             <li><Link to="/kitchen-supplies">Kitchen Other Supplies</Link></li>
-//                                                         </ul>
-//                                                     }
-//                                                 >
-//                                                     Kitchen
-//                                                 </NestedDropdownItem>
-
-//                                                 <NestedDropdownItem
-//                                                     to="/bath"
-//                                                     dropdownKey="bath"
-//                                                     onMouseEnter={handleMouseEnter}
-//                                                     onMouseLeave={handleMouseLeave}
-//                                                     onClick={handleMobileDropdownClick}
-//                                                     nestedSubmenu={
-//                                                         <ul>
-//                                                             <li><Link to="/bathroom-fixtures">Bathroom Fixtures</Link></li>
-//                                                             <li><Link to="/bathroom-supplies">Bathroom Supplies</Link></li>
-//                                                         </ul>
-//                                                     }
-//                                                 >
-//                                                     Bath
-//                                                 </NestedDropdownItem>
-
-//                                                 <li><Link to="/laundry-supplies">Laundry Supplies</Link></li>
-//                                                 <li><Link to="/heating-cooling">Heating - Cooling</Link></li>
-//                                                 <li><Link to="/lighting">Lighting</Link></li>
-//                                                 <li><Link to="/home-audio-video">Home Audio - Video Systems</Link></li>
-//                                                 <li><Link to="/storage-organization">Storage - Organization Supplies</Link></li>
-
-//                                                 <NestedDropdownItem
-//                                                     to="/home-repair"
-//                                                     dropdownKey="home-repair"
-//                                                     onMouseEnter={handleMouseEnter}
-//                                                     onMouseLeave={handleMouseLeave}
-//                                                     onClick={handleMobileDropdownClick}
-//                                                     nestedSubmenu={
-//                                                         <ul>
-//                                                             <li><Link to="/hand-power-tools">Hand and Power Tools</Link></li>
-//                                                             <li><Link to="/lamps-lighting">Lamps - Lighting - Fixtures</Link></li>
-//                                                             <li><Link to="/paints">Paints</Link></li>
-//                                                             <li><Link to="/building-supplies">Home Building Supplies</Link></li>
-//                                                         </ul>
-//                                                     }
-//                                                 >
-//                                                     Home Repair Tools
-//                                                 </NestedDropdownItem>
-
-//                                                 <li><Link to="/lawn-garden">Lawn - Garden</Link></li>
-//                                                 <li><Link to="/garden-supplies">Garden Supplies - Outdoor Activities</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Home - Garden
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/sports"
-//                                         dropdownKey="sports"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/sports-equipment">Sports Equipment</Link></li>
-//                                                 <li><Link to="/exercise-fitness">Exercise - Fitness Equipment</Link></li>
-//                                                 <li><Link to="/game-rooms">Game Rooms - Outdoor Games</Link></li>
-//                                                 <li><Link to="/outdoor-entertainment">Outdoor Entertainment - Equipment</Link></li>
-//                                                 <li><Link to="/golf">Golf</Link></li>
-//                                                 <li><Link to="/hunting">Hunting</Link></li>
-//                                                 <li><Link to="/cycling">Cycling</Link></li>
-//                                                 <li><Link to="/fishing-boating">Fishing - Boating</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Sports - Outdoor Activities
-//                                     </DropdownItem>
-
-//                                     <li><Link to="/teen-supplies">Teen Supplies</Link></li>
-
-//                                     <DropdownItem
-//                                         to="/babies-kids"
-//                                         dropdownKey="babies-kids"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/babies-supplies">Babies Supplies</Link></li>
-//                                                 <li><Link to="/kids-supplies">Kids - Children Supplies</Link></li>
-//                                                 <li><Link to="/children-toys">Children Toys</Link></li>
-//                                                 <li><Link to="/baby-diapers">Baby Diapers</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Babies - Kids - Children Supplies
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/beauty-health"
-//                                         dropdownKey="beauty-health"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/cosmetics-accessories">Cosmetics Accessories</Link></li>
-//                                                 <li><Link to="/skin-care">Specialized Skin Care</Link></li>
-//                                                 <li><Link to="/salon-spa">Salon - Spa Products</Link></li>
-//                                                 <li><Link to="/vitamins">Vitamins - Other Nutrients</Link></li>
-//                                                 <li><Link to="/mens-cosmetics">Men's Cosmetics Skin Care</Link></li>
-//                                                 <li><Link to="/jewelry">Jewelry</Link></li>
-//                                                 <li><Link to="/sunglasses">Sunglasses</Link></li>
-//                                                 <li><Link to="/watches">Watches</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Beauty and Health
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/bags-luggage"
-//                                         dropdownKey="bags-luggage"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/handbags">Handbags</Link></li>
-//                                                 <li><Link to="/shoulder-bags">Shoulder Bags</Link></li>
-//                                                 <li><Link to="/luggage">Luggage</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Bags - Luggage
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/entertainment"
-//                                         dropdownKey="entertainment"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/video-games">Video Games</Link></li>
-//                                                 <li><Link to="/home-entertainment">Home Entertainment System</Link></li>
-//                                                 <li><Link to="/vr">VR - Virtual Reality</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Entertainment
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/food-grocery"
-//                                         dropdownKey="food-grocery"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/gourmet-food">Gourmet Food</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Food and Grocery
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/handmade"
-//                                         dropdownKey="handmade"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/arts-crafts">Arts - Crafts - Sewing</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Handmade
-//                                     </DropdownItem>
-
-//                                     <DropdownItem
-//                                         to="/pets"
-//                                         dropdownKey="pets"
-//                                         onMouseEnter={handleMouseEnter}
-//                                         onMouseLeave={handleMouseLeave}
-//                                         onClick={handleMobileDropdownClick}
-//                                         hasSubmenu={true}
-//                                         submenu={
-//                                             <ul>
-//                                                 <li><Link to="/cat-food">Cat Food</Link></li>
-//                                                 <li><Link to="/cat-supplies">Cat Supplies</Link></li>
-//                                                 <li><Link to="/dog-food">Dog Food</Link></li>
-//                                                 <li><Link to="/dog-supplies">Dog Supplies</Link></li>
-//                                                 <li><Link to="/bird-food">Bird Food</Link></li>
-//                                                 <li><Link to="/bird-supplies">Bird Supplies</Link></li>
-//                                                 <li><Link to="/fish-supplies">Fish Aquatic Supplies</Link></li>
-//                                                 <li><Link to="/other-animal-supplies">Other Animal Supplies</Link></li>
-//                                             </ul>
-//                                         }
-//                                     >
-//                                         Pets Supplies
-//                                     </DropdownItem>
-
-//                                     <li><Link to="/school-office">School - Office Supplies</Link></li>
-//                                     <li><Link to="/books">Books</Link></li>
-//                                     <li><Link to="/cars">Cars</Link></li>
-//                                     <li><Link to="/industrial">Industrial Scientific Materials</Link></li>
-//                                 </ul>
-//                             </div>
-//                         </li>
-
-//                         <li
-//                             className="ecommerce-nav-item ecommerce-nav-item-dropdown"
-//                             onMouseEnter={() => handleMouseEnter('account')}
-//                             onMouseLeave={() => handleMouseLeave('account')}
-//                         >
-//                             <Link
-//                                 to="/my-account"
-//                                 className="ecommerce-nav-link"
-//                                 onClick={(e) => handleMobileDropdownClick('account', e)}
-//                             >
-//                                 My Account <ChevronDown size={16} />
-//                             </Link>
-//                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('account') ? 'ecommerce-nav-dropdown-active' : ''}`}>
-//                                 <ul className="ecommerce-nav-dropdown-menu">
-//                                     <li><Link to="/account-details">Account Details</Link></li>
-//                                     <li><Link to="/addresses">Addresses</Link></li>
-//                                     <li><Link to="/payment-methods">Payment Methods</Link></li>
-//                                     <li><Link to="/wishlist">Wishlist</Link></li>
-//                                     <li><Link to="/saved-for-later">Saved For Later</Link></li>
-//                                     <li><Link to="/orders">Orders</Link></li>
-//                                     <li><Link to="/order-tracking">Order Tracking</Link></li>
-//                                     <li><Link to="/download">Download</Link></li>
-//                                     <li><Link to="/lost-password">Lost Password</Link></li>
-//                                 </ul>
-//                             </div>
-//                         </li>
-
-//                         <li className="ecommerce-nav-item">
-//                             <Link to="/about" className="ecommerce-nav-link">About</Link>
-//                         </li>
-
-//                         <li className="ecommerce-nav-item">
-//                             <Link to="/contact" className="ecommerce-nav-link">Contact Us</Link>
-//                         </li>
-
-//                         <li
-//                             className="ecommerce-nav-item ecommerce-nav-item-dropdown"
-//                             onMouseEnter={() => handleMouseEnter('sellers')}
-//                             onMouseLeave={() => handleMouseLeave('sellers')}
-//                         >
-//                             <Link
-//                                 to="/sellers"
-//                                 className="ecommerce-nav-link"
-//                                 onClick={(e) => handleMobileDropdownClick('sellers', e)}
-//                             >
-//                                 Sellers <ChevronDown size={16} />
-//                             </Link>
-//                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('sellers') ? 'ecommerce-nav-dropdown-active' : ''}`}>
-//                                 <ul className="ecommerce-nav-dropdown-menu">
-//                                     <li><Link to="/vendor-registration">Vendor Registration</Link></li>
-//                                     <li><Link to="/vendor-membership">Vendor Membership</Link></li>
-//                                     <li><Link to="/store-manager">Store Manager</Link></li>
-//                                     <li><Link to="/vendors-drivers-manager">Vendors Drivers Manager</Link></li>
-//                                     <li><Link to="/stores-list">Stores List</Link></li>
-//                                 </ul>
-//                             </div>
-//                         </li>
-
-//                         <li
-//                             className="ecommerce-nav-item ecommerce-nav-item-dropdown"
-//                             onMouseEnter={() => handleMouseEnter('delivery')}
-//                             onMouseLeave={() => handleMouseLeave('delivery')}
-//                         >
-//                             <Link
-//                                 to="/delivery-drivers"
-//                                 className="ecommerce-nav-link"
-//                                 onClick={(e) => handleMobileDropdownClick('delivery', e)}
-//                             >
-//                                 Delivery Drivers <ChevronDown size={16} />
-//                             </Link>
-//                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('delivery') ? 'ecommerce-nav-dropdown-active' : ''}`}>
-//                                 <ul className="ecommerce-nav-dropdown-menu">
-//                                     <li><Link to="/delivery-drivers">Delivery Drivers</Link></li>
-//                                     <li><Link to="/delivery-drivers-manager">Delivery Drivers Manager</Link></li>
-//                                     <li><Link to="/vendors-drivers-managers">Vendors Drivers Managers</Link></li>
-//                                     <li><Link to="/delivery-tracking">Delivery Tracking</Link></li>
-//                                     <li><Link to="/delivery-drivers-app">Delivery Drivers App</Link></li>
-//                                 </ul>
-//                             </div>
-//                         </li>
-
-//                         <li className="ecommerce-nav-item ecommerce-nav-item-cart">
-//                             <Link to="/cart" className="ecommerce-nav-link ecommerce-nav-link-orange">
-//                                 <ShoppingCart size={20} />
-//                             </Link>
-//                         </li>
-
-//                         <li
-//                             className="ecommerce-nav-item ecommerce-nav-item-dropdown"
-//                             onMouseEnter={() => handleMouseEnter('language')}
-//                             onMouseLeave={() => handleMouseLeave('language')}
-//                         >
-//                             <button
-//                                 className="ecommerce-nav-link ecommerce-nav-link-orange"
-//                                 onClick={(e) => handleMobileDropdownClick('language', e)}
-//                                 style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 'inherit', fontFamily: 'inherit' }}
-//                             >
-//                                 English <ChevronDown size={16} />
-//                             </button>
-//                             <div className={`ecommerce-nav-dropdown ${isDropdownOpen('language') ? 'ecommerce-nav-dropdown-active' : ''}`}>
-//                                 <ul className="ecommerce-nav-dropdown-menu">
-//                                     <li><Link to="/ar">Arabic</Link></li>
-//                                 </ul>
-//                             </div>
-//                         </li>
-//                     </ul>
-//                 </div>
-//             </div>
-//         </nav>
-//     );
-// };
-
-// export default Navbar;
