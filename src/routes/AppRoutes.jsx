@@ -25,11 +25,15 @@ import DeliveryDriversManager from '../pages/deliveryDrivers/deliveryDriversMana
 import VendorsDriversManagers from '../pages/deliveryDrivers/vendorsDriversManagers/VendorsDriversManagers'
 import DeliveryTracking from '../pages/deliveryDrivers/deliveryTracking/DeliveryTracking'
 import DeliveryDriversApp from '../pages/deliveryDrivers/deliveryDriversApp/DeliveryDriversApp'
+import PrivacyPolicy from '../components/privacyPolicy/PrivacyPolicy'
+import TermsConditions from '../components/termsConditions/TermsConditions'
 
 export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms-conditions" element={<TermsConditions />} />
 
       {/* Shop Pages and Sections */}
       <Route path="/shop" element={<Shop />} />

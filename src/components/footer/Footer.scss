@@ -25,6 +25,13 @@
                     align-items: center;
                     gap: 15px;
                     margin-bottom: 25px;
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                    text-decoration: none;
+
+                    &:hover {
+                        transform: scale(1.05);
+                    }
 
                     img {
                         width: 200px;
@@ -40,6 +47,15 @@
                         color: $orange-color;
                         font-size: 14px;
                         margin: 8px 0;
+                        cursor: pointer;
+                        transition: color 0.3s ease;
+                        text-decoration: none;
+                        display: block;
+
+                        &:hover {
+                            color: lighten($orange-color, 10%);
+                            text-decoration: underline;
+                        }
                     }
                 }
 
@@ -64,7 +80,6 @@
                         }
 
                         &:hover {
-                            color: $orange-color;
                             transform: translateY(-2px);
                         }
 
@@ -91,6 +106,17 @@
                 }
 
                 .shopping-bag {
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+
+                    a {
+                        text-decoration: none;
+                    }
+
                     svg {
                         width: 40px;
                         height: 40px;
@@ -113,6 +139,7 @@
                             text-decoration: none;
                             font-size: 14px;
                             transition: color 0.3s ease;
+                            cursor: pointer;
 
                             &:hover {
                                 color: $orange-color;
@@ -251,6 +278,7 @@
                     text-decoration: none;
                     font-size: 14px;
                     transition: color 0.3s ease;
+                    cursor: pointer;
 
                     &:hover {
                         color: $orange-color;

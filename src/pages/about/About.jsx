@@ -13,7 +13,7 @@ const About = () => {
     };
 
     const handleBecomeSellerClick = () => {
-        navigate('/become-seller');
+        navigate('/sellers');
     };
 
     const handleContactClick = () => {
@@ -21,7 +21,7 @@ const About = () => {
     };
 
     const handleJoinDeliveryClick = () => {
-        navigate('/join-delivery');
+        navigate('/delivery-drivers');
     };
 
     return (

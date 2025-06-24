@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Mail, User, ShoppingCart, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartReducer';
-import shamSuperStoreLogo from '../../assets/images/shamSuperStoreLogo.jpg'
+import shamSuperStoreLogo from '../../assets/images/shamSuperStoreLogo.jpg';
 import './Navbar.scss';
 
 const Navbar = () => {
@@ -11,137 +11,12 @@ const Navbar = () => {
     const totalItems = getTotalItems();
     
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [openDropdowns, setOpenDropdowns] = useState({});
-    const dropdownTimeouts = useRef({});
+    const [activeDropdown, setActiveDropdown] = useState(null);
+    const [activeSubMenu, setActiveSubMenu] = useState(null);
     const navRef = useRef(null);
+    const hoverTimeoutRef = useRef(null);
 
-    // Close dropdowns when clicking outside
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (navRef.current && !navRef.current.contains(event.target)) {
-                setOpenDropdowns({});
-                clearAllTimeouts();
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-            clearAllTimeouts();
-        };
-    }, []);
-
-    // Close mobile menu when window resizes to desktop
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 1024) {
-                setIsMobileMenuOpen(false);
-                setOpenDropdowns({});
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    // Prevent body scroll when mobile menu is open
-    useEffect(() => {
-        if (isMobileMenuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
-    }, [isMobileMenuOpen]);
-
-    const clearAllTimeouts = useCallback(() => {
-        Object.values(dropdownTimeouts.current).forEach(timeout => clearTimeout(timeout));
-        dropdownTimeouts.current = {};
-    }, []);
-
-    const clearDropdownTimeout = useCallback((key) => {
-        if (dropdownTimeouts.current[key]) {
-            clearTimeout(dropdownTimeouts.current[key]);
-            delete dropdownTimeouts.current[key];
-        }
-    }, []);
-
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-        if (!isMobileMenuOpen) {
-            setOpenDropdowns({});
-        }
-    };
-
-    // Simple hover handlers for desktop
-    const handleMouseEnter = useCallback((dropdownKey) => {
-        if (window.innerWidth < 1024) return;
-        
-        clearDropdownTimeout(dropdownKey);
-        setOpenDropdowns(prev => ({ ...prev, [dropdownKey]: true }));
-    }, [clearDropdownTimeout]);
-
-    const handleMouseLeave = useCallback((dropdownKey) => {
-        if (window.innerWidth < 1024) return;
-        
-        dropdownTimeouts.current[dropdownKey] = setTimeout(() => {
-            setOpenDropdowns(prev => {
-                const newState = { ...prev };
-                delete newState[dropdownKey];
-                return newState;
-            });
-        }, 300);
-    }, []);
-
-    const handleMobileDropdownToggle = (dropdownKey, event) => {
-        if (window.innerWidth >= 1024) return;
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        setOpenDropdowns(prev => ({
-            ...prev,
-            [dropdownKey]: !prev[dropdownKey]
-        }));
-    };
-
-    const isDropdownOpen = (dropdownKey) => {
-        return openDropdowns[dropdownKey] || false;
-    };
-
-    const handleLoginClick = () => {
-        navigate('/my-account');
-        setIsMobileMenuOpen(false);
-    };
-
-    const handleEmailClick = () => {
-        navigate('/contact');
-        setIsMobileMenuOpen(false);
-    };
-
-    const handleSellerClick = () => {
-        navigate('/sellers');
-        setIsMobileMenuOpen(false);
-    };
-
-    const handleCartClick = (e) => {
-        e.preventDefault();
-        toggleCart();
-        setIsMobileMenuOpen(false);
-    };
-
-    const handleLinkClick = () => {
-        setOpenDropdowns({});
-        if (window.innerWidth < 1024) {
-            setIsMobileMenuOpen(false);
-        }
-        clearAllTimeouts();
-    };
-
-    // Shop categories with subcategories
+    // Shop categories data
     const shopCategories = [
         {
             id: 1,
@@ -340,192 +215,437 @@ const Navbar = () => {
         }
     ];
 
-    // Dropdown wrapper component for consistent behavior
-    const DropdownItem = ({ dropdownKey, linkTo, linkText, children }) => {
-        return (
-            <li
-                className="ecommerce-nav-item ecommerce-nav-item-dropdown"
-                onMouseEnter={() => handleMouseEnter(dropdownKey)}
-                onMouseLeave={() => handleMouseLeave(dropdownKey)}
-            >
-                <div className="ecommerce-nav-link-wrapper">
-                    <Link
-                        to={linkTo}
-                        className="ecommerce-nav-link ecommerce-nav-link-main"
-                        onClick={handleLinkClick}
-                    >
-                        {linkText}
-                    </Link>
-                    <button
-                        className="ecommerce-nav-arrow-btn"
-                        onClick={(e) => handleMobileDropdownToggle(dropdownKey, e)}
-                        aria-label={`Toggle ${linkText} menu`}
-                    >
-                        <ChevronDown size={16} className={isDropdownOpen(dropdownKey) ? 'rotate-180' : ''} />
-                    </button>
-                </div>
-                
-                <div 
-                    className={`ecommerce-nav-dropdown ${isDropdownOpen(dropdownKey) ? 'ecommerce-nav-dropdown-active' : ''}`}
-                    onMouseEnter={() => handleMouseEnter(dropdownKey)}
-                    onMouseLeave={() => handleMouseLeave(dropdownKey)}
-                >
-                    <ul className="ecommerce-nav-dropdown-menu">
-                        {children}
-                    </ul>
-                </div>
-            </li>
-        );
+    // Additional categories without subcategories
+    const additionalCategories = [
+        { name: "Teen Supplies", link: "/shop/category/9" },
+        { name: "School - Office Supplies", link: "/shop/category/16" },
+        { name: "Books", link: "/shop/category/17" },
+        { name: "Cars", link: "/shop/category/18" },
+        { name: "Industrial Scientific Materials", link: "/shop/category/19" }
+    ];
+
+    // Navigation data
+    const accountLinks = [
+        { name: "Dashboard", link: "/my-account" },
+        { name: "Orders", link: "/my-account" },
+        { name: "Order Tracking", link: "/my-account" },
+        { name: "Downloads", link: "/my-account" },
+        { name: "Addresses", link: "/my-account" },
+        { name: "Payment Methods", link: "/my-account" },
+        { name: "Account Details", link: "/my-account" },
+        { name: "Wishlist", link: "/my-account" },
+        { name: "Following", link: "/my-account" },
+        { name: "Support Tickets", link: "/my-account" },
+        { name: "Inquiries", link: "/my-account" },
+        { name: "Lost Password", link: "/my-account" }
+    ];
+
+    const sellersLinks = [
+        { name: "Vendor Registration", link: "/vendor-registration" },
+        { name: "Vendor Membership", link: "/vendor-membership" },
+        { name: "Store Manager", link: "/store-manager" },
+        { name: "Vendors Drivers Manager", link: "/vendors-drivers-manager" },
+        { name: "Stores List", link: "/stores-list" }
+    ];
+
+    const deliveryLinks = [
+        { name: "Delivery Drivers", link: "/delivery-drivers" },
+        { name: "Delivery Drivers Manager", link: "/delivery-drivers-manager" },
+        { name: "Vendors Drivers Managers", link: "/vendors-drivers-managers" },
+        { name: "Delivery Tracking", link: "/delivery-tracking" },
+        { name: "Delivery Drivers App", link: "/delivery-drivers-app" }
+    ];
+
+    // Event handlers
+    const handleDropdownToggle = (dropdownName) => {
+        if (window.innerWidth < 1024) {
+            setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
+            setActiveSubMenu(null);
+        }
     };
 
-    return (
-        <nav className="ecommerce-nav" ref={navRef}>
-            <div className="ecommerce-nav-top">
-                <div className="ecommerce-nav-container">
-                    <div className="ecommerce-nav-logo">
-                        <Link to="/" onClick={handleLinkClick}>
-                            <img src={shamSuperStoreLogo} alt="Sham Super Store" className="ecommerce-nav-logo-img" />
-                        </Link>
-                    </div>
+    const handleSubMenuToggle = (subMenuName) => {
+        if (window.innerWidth < 1024) {
+            setActiveSubMenu(activeSubMenu === subMenuName ? null : subMenuName);
+        }
+    };
 
-                    <div className="ecommerce-nav-top-items">
-                        <div className="ecommerce-nav-email" onClick={handleEmailClick}>
+    // Desktop hover handlers
+    const handleDropdownHover = (dropdownName) => {
+        if (window.innerWidth >= 1024) {
+            clearTimeout(hoverTimeoutRef.current);
+            setActiveDropdown(dropdownName);
+            setActiveSubMenu(null);
+        }
+    };
+
+    const handleDropdownLeave = () => {
+        if (window.innerWidth >= 1024) {
+            hoverTimeoutRef.current = setTimeout(() => {
+                setActiveDropdown(null);
+                setActiveSubMenu(null);
+            }, 100);
+        }
+    };
+
+    const handleCategoryHover = (categoryId) => {
+        if (window.innerWidth >= 1024) {
+            clearTimeout(hoverTimeoutRef.current);
+            setActiveSubMenu(`shop-${categoryId}`);
+        }
+    };
+
+    const handleCategoryLeave = () => {
+        if (window.innerWidth >= 1024) {
+            hoverTimeoutRef.current = setTimeout(() => {
+                setActiveSubMenu(null);
+            }, 100);
+        }
+    };
+
+    const handleMobileMenuToggle = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+        setActiveDropdown(null);
+        setActiveSubMenu(null);
+    };
+
+    const handleLinkClick = () => {
+        clearTimeout(hoverTimeoutRef.current);
+        setIsMobileMenuOpen(false);
+        setActiveDropdown(null);
+        setActiveSubMenu(null);
+    };
+
+    const handleNavigation = (path) => {
+        navigate(path);
+        handleLinkClick();
+    };
+
+    const handleCartClick = () => {
+        toggleCart();
+        handleLinkClick();
+    };
+
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (navRef.current && !navRef.current.contains(event.target)) {
+                clearTimeout(hoverTimeoutRef.current);
+                setActiveDropdown(null);
+                setActiveSubMenu(null);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            clearTimeout(hoverTimeoutRef.current);
+        };
+    }, []);
+
+    // Close mobile menu on resize
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1024) {
+                clearTimeout(hoverTimeoutRef.current);
+                setIsMobileMenuOpen(false);
+                setActiveDropdown(null);
+                setActiveSubMenu(null);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            clearTimeout(hoverTimeoutRef.current);
+        };
+    }, []);
+
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            const scrollY = window.scrollY;
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+        } else {
+            const scrollY = document.body.style.top;
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            if (scrollY) {
+                window.scrollTo(0, parseInt(scrollY || '0') * -1);
+            }
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+        };
+    }, [isMobileMenuOpen]);
+
+    return (
+        <nav className={`navbar ${isMobileMenuOpen ? 'menu-open' : ''}`} ref={navRef}>
+            {/* Top Bar */}
+            <div className="navbar-top">
+                <div className="navbar-container">
+                    {/* Logo */}
+                    <Link to="/" className="navbar-logo" onClick={handleLinkClick}>
+                        <img src={shamSuperStoreLogo} alt="Sham Super Store" />
+                    </Link>
+
+                    {/* Top Actions (Desktop Only) */}
+                    <div className="navbar-actions">
+                        <button 
+                            className="action-btn"
+                            onClick={() => handleNavigation('/contact')}
+                        >
                             <Mail size={16} />
                             <span>support@shamsuperstore.com</span>
-                        </div>
-
-                        <div className="ecommerce-nav-login" onClick={handleLoginClick}>
+                        </button>
+                        
+                        <button 
+                            className="action-btn"
+                            onClick={() => handleNavigation('/my-account')}
+                        >
                             <User size={16} />
                             <span>Login</span>
-                        </div>
-
-                        <button className="ecommerce-nav-seller-btn" onClick={handleSellerClick}>
+                        </button>
+                        
+                        <button 
+                            className="seller-btn"
+                            onClick={() => handleNavigation('/sellers')}
+                        >
                             Become a seller
                         </button>
                     </div>
 
-                    <button className="ecommerce-nav-mobile-toggle" onClick={toggleMobileMenu}>
+                    {/* Mobile Toggle */}
+                    <button 
+                        className="mobile-toggle"
+                        onClick={handleMobileMenuToggle}
+                        aria-label="Toggle menu"
+                    >
                         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
             </div>
 
-            <div className="ecommerce-nav-border-container">
-                <div className="ecommerce-nav-border"></div>
-            </div>
-
-            <div className="ecommerce-nav-bottom">
-                <div className="ecommerce-nav-container">
-                    <ul className={`ecommerce-nav-menu ${isMobileMenuOpen ? 'ecommerce-nav-menu-open' : ''}`}>
-                        <li className="ecommerce-nav-item">
-                            <Link to="/" className="ecommerce-nav-link" onClick={handleLinkClick}>
+            {/* Main Navigation */}
+            <div className="navbar-main">
+                <div className="navbar-container">
+                    <ul className={`navbar-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+                        {/* Home */}
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link" onClick={handleLinkClick}>
                                 Home
                             </Link>
                         </li>
 
-                        <DropdownItem dropdownKey="shop" linkTo="/shop" linkText="Shop">
-                            <li><Link to="/shop" onClick={handleLinkClick}>All Categories</Link></li>
-                            {shopCategories.map((category) => (
-                                <li 
-                                    key={category.id}
-                                    className={category.subcategories.length > 0 ? "has-submenu" : ""}
-                                    onMouseEnter={() => handleMouseEnter(`shop-cat-${category.id}`)}
-                                    onMouseLeave={() => handleMouseLeave(`shop-cat-${category.id}`)}
-                                >
-                                    <div className="category-link-wrapper">
-                                        <Link to={category.link} onClick={handleLinkClick}>
-                                            {category.name}
+                        {/* Shop Mega Menu */}
+                        <li 
+                            className="nav-item mega-dropdown"
+                            onMouseEnter={() => handleDropdownHover('shop')}
+                            onMouseLeave={handleDropdownLeave}
+                        >
+                            <button 
+                                className="nav-link dropdown-toggle"
+                                onClick={() => handleDropdownToggle('shop')}
+                            >
+                                Shop
+                                <ChevronDown 
+                                    size={16} 
+                                    className={activeDropdown === 'shop' ? 'rotated' : ''} 
+                                />
+                            </button>
+                            
+                            <div className={`mega-menu ${activeDropdown === 'shop' ? 'active' : ''}`}>
+                                <div className="mega-menu-content">
+                                    {/* Categories List */}
+                                    <div className="categories-list">
+                                        <Link 
+                                            to="/shop" 
+                                            className="category-item featured"
+                                            onClick={handleLinkClick}
+                                        >
+                                            All Categories
                                         </Link>
-                                        {category.subcategories.length > 0 && (
-                                            <>
-                                                <ChevronRight size={14} className="submenu-arrow desktop-only" />
-                                                <button
-                                                    className="mobile-submenu-toggle"
-                                                    onClick={(e) => handleMobileDropdownToggle(`shop-cat-${category.id}`, e)}
-                                                    aria-label={`Toggle ${category.name} submenu`}
+                                        
+                                        {shopCategories.map((category) => (
+                                            <div 
+                                                key={category.id}
+                                                className={`category-item ${activeSubMenu === `shop-${category.id}` ? 'active' : ''}`}
+                                                onMouseEnter={() => handleCategoryHover(category.id)}
+                                                onMouseLeave={handleCategoryLeave}
+                                                onClick={() => handleSubMenuToggle(`shop-${category.id}`)}
+                                            >
+                                                <Link 
+                                                    to={category.link}
+                                                    className="category-link"
+                                                    onClick={handleLinkClick}
                                                 >
-                                                    <ChevronDown size={14} className={isDropdownOpen(`shop-cat-${category.id}`) ? 'rotate-180' : ''} />
-                                                </button>
-                                            </>
-                                        )}
+                                                    {category.name}
+                                                </Link>
+                                                {category.subcategories.length > 0 && (
+                                                    <ChevronRight size={16} className="category-arrow" />
+                                                )}
+                                            </div>
+                                        ))}
+                                        
+                                        {additionalCategories.map((category, index) => (
+                                            <Link 
+                                                key={index}
+                                                to={category.link} 
+                                                className="category-item"
+                                                onClick={handleLinkClick}
+                                            >
+                                                {category.name}
+                                            </Link>
+                                        ))}
                                     </div>
                                     
-                                    {category.subcategories.length > 0 && (
-                                        <div 
-                                            className={`submenu ${isDropdownOpen(`shop-cat-${category.id}`) ? 'submenu-active' : ''}`}
-                                            onMouseEnter={() => handleMouseEnter(`shop-cat-${category.id}`)}
-                                            onMouseLeave={() => handleMouseLeave(`shop-cat-${category.id}`)}
-                                        >
-                                            <ul>
-                                                {category.subcategories.map((sub, index) => (
-                                                    <li key={index}>
-                                                        <Link to={sub.link} onClick={handleLinkClick}>
+                                    {/* Subcategories Panel */}
+                                    <div className="subcategories-panel">
+                                        {shopCategories.map((category) => (
+                                            <div 
+                                                key={category.id}
+                                                className={`subcategories-content ${activeSubMenu === `shop-${category.id}` ? 'active' : ''}`}
+                                            >
+                                                <h3 className="subcategories-title">{category.name}</h3>
+                                                <div className="subcategories-grid">
+                                                    {category.subcategories.map((sub, index) => (
+                                                        <Link 
+                                                            key={index}
+                                                            to={sub.link} 
+                                                            className="subcategory-item"
+                                                            onClick={handleLinkClick}
+                                                        >
                                                             {sub.name}
                                                         </Link>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )}
-                                </li>
-                            ))}
-                            <li><Link to="/shop/category/9" onClick={handleLinkClick}>Teen Supplies</Link></li>
-                            <li><Link to="/shop/category/16" onClick={handleLinkClick}>School - Office Supplies</Link></li>
-                            <li><Link to="/shop/category/17" onClick={handleLinkClick}>Books</Link></li>
-                            <li><Link to="/shop/category/18" onClick={handleLinkClick}>Cars</Link></li>
-                            <li><Link to="/shop/category/19" onClick={handleLinkClick}>Industrial Scientific Materials</Link></li>
-                        </DropdownItem>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
 
-                        <DropdownItem dropdownKey="account" linkTo="/my-account" linkText="My Account">
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Dashboard</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Orders</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Order Tracking</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Downloads</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Addresses</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Payment Methods</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Account Details</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Wishlist</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Following</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Support Tickets</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Inquiries</Link></li>
-                            <li><Link to="/my-account" onClick={handleLinkClick}>Lost Password</Link></li>
-                        </DropdownItem>
+                        {/* My Account Dropdown */}
+                        <li 
+                            className="nav-item dropdown"
+                            onMouseEnter={() => handleDropdownHover('account')}
+                            onMouseLeave={handleDropdownLeave}
+                        >
+                            <button 
+                                className="nav-link dropdown-toggle"
+                                onClick={() => handleDropdownToggle('account')}
+                            >
+                                My Account
+                                <ChevronDown 
+                                    size={16} 
+                                    className={activeDropdown === 'account' ? 'rotated' : ''} 
+                                />
+                            </button>
+                            
+                            <div className={`dropdown-menu ${activeDropdown === 'account' ? 'active' : ''}`}>
+                                {accountLinks.map((link, index) => (
+                                    <Link 
+                                        key={index}
+                                        to={link.link} 
+                                        className="dropdown-item"
+                                        onClick={handleLinkClick}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                ))}
+                            </div>
+                        </li>
 
-                        <li className="ecommerce-nav-item">
-                            <Link to="/about" className="ecommerce-nav-link" onClick={handleLinkClick}>
+                        {/* About */}
+                        <li className="nav-item">
+                            <Link to="/about" className="nav-link" onClick={handleLinkClick}>
                                 About
                             </Link>
                         </li>
 
-                        <li className="ecommerce-nav-item">
-                            <Link to="/contact" className="ecommerce-nav-link" onClick={handleLinkClick}>
+                        {/* Contact */}
+                        <li className="nav-item">
+                            <Link to="/contact" className="nav-link" onClick={handleLinkClick}>
                                 Contact Us
                             </Link>
                         </li>
 
-                        <DropdownItem dropdownKey="sellers" linkTo="/sellers" linkText="Sellers">
-                            <li><Link to="/vendor-registration" onClick={handleLinkClick}>Vendor Registration</Link></li>
-                            <li><Link to="/vendor-membership" onClick={handleLinkClick}>Vendor Membership</Link></li>
-                            <li><Link to="/store-manager" onClick={handleLinkClick}>Store Manager</Link></li>
-                            <li><Link to="/vendors-drivers-manager" onClick={handleLinkClick}>Vendors Drivers Manager</Link></li>
-                            <li><Link to="/stores-list" onClick={handleLinkClick}>Stores List</Link></li>
-                        </DropdownItem>
-
-                        <DropdownItem dropdownKey="delivery" linkTo="/delivery-drivers" linkText="Delivery Drivers">
-                            <li><Link to="/delivery-drivers" onClick={handleLinkClick}>Delivery Drivers</Link></li>
-                            <li><Link to="/delivery-drivers-manager" onClick={handleLinkClick}>Delivery Drivers Manager</Link></li>
-                            <li><Link to="/vendors-drivers-managers" onClick={handleLinkClick}>Vendors Drivers Managers</Link></li>
-                            <li><Link to="/delivery-tracking" onClick={handleLinkClick}>Delivery Tracking</Link></li>
-                            <li><Link to="/delivery-drivers-app" onClick={handleLinkClick}>Delivery Drivers App</Link></li>
-                        </DropdownItem>
-
-                        <li className="ecommerce-nav-item ecommerce-nav-item-cart">
+                        {/* Sellers Dropdown */}
+                        <li 
+                            className="nav-item dropdown"
+                            onMouseEnter={() => handleDropdownHover('sellers')}
+                            onMouseLeave={handleDropdownLeave}
+                        >
                             <button 
-                                onClick={handleCartClick}
-                                className="ecommerce-nav-link ecommerce-nav-link-orange cart-btn"
-                                aria-label={`Shopping cart with ${totalItems} items`}
+                                className="nav-link dropdown-toggle"
+                                onClick={() => handleDropdownToggle('sellers')}
                             >
-                                <div className="cart-icon-wrapper">
+                                Sellers
+                                <ChevronDown 
+                                    size={16} 
+                                    className={activeDropdown === 'sellers' ? 'rotated' : ''} 
+                                />
+                            </button>
+                            
+                            <div className={`dropdown-menu ${activeDropdown === 'sellers' ? 'active' : ''}`}>
+                                {sellersLinks.map((link, index) => (
+                                    <Link 
+                                        key={index}
+                                        to={link.link} 
+                                        className="dropdown-item"
+                                        onClick={handleLinkClick}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                ))}
+                            </div>
+                        </li>
+
+                        {/* Delivery Drivers Dropdown */}
+                        <li 
+                            className="nav-item dropdown"
+                            onMouseEnter={() => handleDropdownHover('delivery')}
+                            onMouseLeave={handleDropdownLeave}
+                        >
+                            <button 
+                                className="nav-link dropdown-toggle"
+                                onClick={() => handleDropdownToggle('delivery')}
+                            >
+                                Delivery Drivers
+                                <ChevronDown 
+                                    size={16} 
+                                    className={activeDropdown === 'delivery' ? 'rotated' : ''} 
+                                />
+                            </button>
+                            
+                            <div className={`dropdown-menu ${activeDropdown === 'delivery' ? 'active' : ''}`}>
+                                {deliveryLinks.map((link, index) => (
+                                    <Link 
+                                        key={index}
+                                        to={link.link} 
+                                        className="dropdown-item"
+                                        onClick={handleLinkClick}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                ))}
+                            </div>
+                        </li>
+
+                        {/* Cart */}
+                        <li className="nav-item cart">
+                            <button className="cart-btn" onClick={handleCartClick}>
+                                <div className="cart-icon">
                                     <ShoppingCart size={20} />
                                     {totalItems > 0 && (
                                         <span className="cart-badge">
@@ -536,35 +656,31 @@ const Navbar = () => {
                             </button>
                         </li>
 
-                        <li
-                            className="ecommerce-nav-item ecommerce-nav-item-dropdown"
-                            onMouseEnter={() => handleMouseEnter('language')}
-                            onMouseLeave={() => handleMouseLeave('language')}
+                        {/* Language Dropdown */}
+                        <li 
+                            className="nav-item dropdown"
+                            onMouseEnter={() => handleDropdownHover('language')}
+                            onMouseLeave={handleDropdownLeave}
                         >
-                            <div className="ecommerce-nav-link-wrapper orange-wrapper">
-                                <button
-                                    className="ecommerce-nav-link ecommerce-nav-link-orange ecommerce-nav-link-main"
-                                    style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 'inherit', fontFamily: 'inherit' }}
-                                >
-                                    English
-                                </button>
-                                <button
-                                    className="ecommerce-nav-arrow-btn ecommerce-nav-arrow-btn-orange"
-                                    onClick={(e) => handleMobileDropdownToggle('language', e)}
-                                    aria-label="Toggle language menu"
-                                >
-                                    <ChevronDown size={16} className={isDropdownOpen('language') ? 'rotate-180' : ''} />
-                                </button>
-                            </div>
-                            
-                            <div 
-                                className={`ecommerce-nav-dropdown ${isDropdownOpen('language') ? 'ecommerce-nav-dropdown-active' : ''}`}
-                                onMouseEnter={() => handleMouseEnter('language')}
-                                onMouseLeave={() => handleMouseLeave('language')}
+                            <button 
+                                className="nav-link dropdown-toggle orange"
+                                onClick={() => handleDropdownToggle('language')}
                             >
-                                <ul className="ecommerce-nav-dropdown-menu">
-                                    <li><Link to="/ar" onClick={handleLinkClick}>Arabic</Link></li>
-                                </ul>
+                                English
+                                <ChevronDown 
+                                    size={16} 
+                                    className={activeDropdown === 'language' ? 'rotated' : ''} 
+                                />
+                            </button>
+                            
+                            <div className={`dropdown-menu ${activeDropdown === 'language' ? 'active' : ''}`}>
+                                <Link 
+                                    to="/ar" 
+                                    className="dropdown-item"
+                                    onClick={handleLinkClick}
+                                >
+                                    العربية (Arabic)
+                                </Link>
                             </div>
                         </li>
                     </ul>
@@ -575,5 +691,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-

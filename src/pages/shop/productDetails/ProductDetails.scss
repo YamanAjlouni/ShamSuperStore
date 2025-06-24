@@ -233,13 +233,14 @@
 
                 .star {
                     font-size: 1.2rem;
+                    font-weight: 800;
 
                     &.filled {
-                        color: #ffd700;
+                        color: $yellow-color;
                     }
 
                     &.half {
-                        color: #ffd700;
+                        color: $yellow-color;
                     }
 
                     &.empty {
@@ -249,14 +250,16 @@
 
                 .rating-value {
                     margin-left: 0.5rem;
-                    font-weight: 600;
+                    font-weight: 700;
                     color: $text-dark;
+                    font-size: 1.1rem;
                 }
             }
 
             .review-count {
                 color: $text-light;
                 font-size: 0.9rem;
+                font-weight: 600;
             }
         }
 
@@ -471,46 +474,12 @@
 
             span {
                 font-weight: 500;
-                color: $text-dark;
+                color: $gray-600;
             }
 
-            .social-links {
-                display: flex;
-                gap: 0.5rem;
-
-                .social-link {
-                    width: 35px;
-                    height: 35px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: $white;
-                    text-decoration: none;
-                    font-weight: 600;
-                    font-size: 0.9rem;
-                    transition: transform 0.2s ease;
-
-                    &:hover {
-                        transform: scale(1.1);
-                    }
-
-                    &.facebook {
-                        background: #1877f2;
-                    }
-
-                    &.twitter {
-                        background: #1da1f2;
-                    }
-
-                    &.whatsapp {
-                        background: #25d366;
-                    }
-
-                    &.telegram {
-                        background: #0088cc;
-                    }
-                }
+            .sold-by-details {
+                font-weight: 500;
+                color: $gray-600;
             }
         }
     }
@@ -594,9 +563,10 @@
             .tab-btn {
                 background: none;
                 border: none;
-                padding: 1rem 1.5rem;
+                padding: 1.25rem 1.75rem;
                 cursor: pointer;
-                font-size: 0.9rem;
+                font-size: 1rem;
+                font-weight: 700;
                 color: $text-light;
                 white-space: nowrap;
                 transition: all 0.2s ease;
@@ -615,7 +585,7 @@
                     color: $primary-color;
                     background: $primary-blue-light;
                     border-bottom-color: $primary-color;
-                    font-weight: 500;
+                    font-weight: 800;
                 }
             }
         }
@@ -628,6 +598,8 @@
                     color: $text-light;
                     line-height: 1.6;
                     margin: 0;
+                    font-size: 0.95rem;
+                    font-weight: 400;
                 }
             }
 
@@ -661,13 +633,14 @@
 
                                 .star {
                                     font-size: 1rem;
+                                    font-weight: 800;
 
                                     &.filled {
-                                        color: #ffd700;
+                                        color: $yellow-color;
                                     }
 
                                     &.half {
-                                        color: #ffd700;
+                                        color: $yellow-color;
                                     }
 
                                     &.empty {
@@ -713,6 +686,80 @@
                     }
                 }
             }
+
+            .shipping-section {
+                p {
+                    font-size: 1rem;
+                    color: $text-dark;
+                    font-weight: 500;
+
+                    strong {
+                        color: $primary-color;
+                        font-weight: 700;
+                    }
+                }
+            }
+
+            .marketplace-policy-section {
+                .policy-features {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 2rem;
+
+                    .policy-feature {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 1rem;
+
+                        .policy-icon {
+                            font-size: 2rem;
+                            width: 60px;
+                            height: 60px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: $gray-100;
+                            border-radius: $radius-lg;
+                            flex-shrink: 0;
+                        }
+
+                        .policy-content {
+                            flex: 1;
+
+                            h4 {
+                                margin: 0 0 0.5rem 0;
+                                font-size: 1.1rem;
+                                font-weight: 700;
+                                color: $text-dark;
+                            }
+
+                            p {
+                                margin: 0;
+                                color: $gray-600;
+                                line-height: 1.5;
+                                font-size: 0.9rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .store-policy-section {
+                p {
+                    font-size: 0.95rem;
+                    color: $text-light;
+                    line-height: 1.6;
+                }
+            }
+
+            .product-rating-section {
+                p {
+                    font-size: 1rem;
+                    color: $yellow-color;
+                    line-height: 1.6;
+                    font-weight: 600;
+                }
+            }
         }
     }
 }
@@ -722,9 +769,17 @@
         .product-tabs {
             .tabs-navigation {
                 .tab-btn {
-                    padding: 0.9rem 1.3rem;
-                    font-size: 0.85rem;
+                    padding: 1.1rem 1.5rem;
+                    font-size: 0.95rem;
                     min-width: 120px;
+                }
+            }
+
+            .tab-content {
+                .marketplace-policy-section {
+                    .policy-features {
+                        gap: 1.5rem;
+                    }
                 }
             }
         }
@@ -755,9 +810,18 @@
                 }
 
                 .tab-btn {
-                    padding: 0.85rem 1.2rem;
-                    font-size: 0.85rem;
+                    padding: 1rem 1.3rem;
+                    font-size: 0.9rem;
                     min-width: 110px;
+                }
+            }
+
+            .tab-content {
+                .marketplace-policy-section {
+                    .policy-features {
+                        grid-template-columns: 1fr;
+                        gap: 1.5rem;
+                    }
                 }
             }
         }
@@ -771,8 +835,8 @@
                 padding: 0 0.5rem 0 0; // Add padding for better scroll indicator visibility
 
                 .tab-btn {
-                    padding: 0.8rem 1rem;
-                    font-size: 0.8rem;
+                    padding: 0.9rem 1.1rem;
+                    font-size: 0.85rem;
                     min-width: 100px;
                     flex: 0 0 auto;
                 }
@@ -895,7 +959,7 @@
                 }
 
                 .tab-btn {
-                    padding: 0.75rem 1rem;
+                    padding: 0.85rem 1rem;
                     font-size: 0.8rem;
                     min-width: 110px;
                     text-align: center;
@@ -927,6 +991,28 @@
                     .inquiry-btn {
                         width: 100%;
                         padding: 0.875rem 1.5rem;
+                    }
+                }
+
+                .marketplace-policy-section {
+                    .policy-features {
+                        .policy-feature {
+                            .policy-icon {
+                                width: 50px;
+                                height: 50px;
+                                font-size: 1.5rem;
+                            }
+
+                            .policy-content {
+                                h4 {
+                                    font-size: 1rem;
+                                }
+
+                                p {
+                                    font-size: 0.85rem;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1062,7 +1148,7 @@
                 }
 
                 .tab-btn {
-                    padding: 0.6rem 0.8rem;
+                    padding: 0.7rem 0.9rem;
                     font-size: 0.75rem;
                     min-width: 95px;
                     text-align: center;
@@ -1110,6 +1196,33 @@
                         min-height: 44px; // Good touch target
                     }
                 }
+
+                .marketplace-policy-section {
+                    .policy-features {
+                        .policy-feature {
+                            flex-direction: column;
+                            text-align: center;
+                            gap: 0.75rem;
+
+                            .policy-icon {
+                                width: 45px;
+                                height: 45px;
+                                font-size: 1.25rem;
+                                align-self: center;
+                            }
+
+                            .policy-content {
+                                h4 {
+                                    font-size: 0.95rem;
+                                }
+
+                                p {
+                                    font-size: 0.8rem;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -1134,7 +1247,7 @@
 
                 .tab-btn {
                     min-height: 48px; // Larger touch targets
-                    padding: 0.8rem 1rem;
+                    padding: 0.9rem 1.1rem;
                 }
             }
         }

@@ -1,31 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Categories.scss';
 
 const Categories = () => {
     const categories = [
         // Row 1
-        { icon: 'computer-icon', name: 'Computers' },
-        { icon: 'headphones-icon', name: 'Electronics' },
-        { icon: 'smarthome-icon', name: 'Smart Home' },
-        { icon: 'furniture-icon', name: 'Furniture' },
-        { icon: 'clothes-icon', name: 'Clothes' },
-        { icon: 'shoes-icon', name: 'Shoes' },
+        { id: 1, icon: 'computer-icon', name: 'Computers' },
+        { id: 2, icon: 'headphones-icon', name: 'Electronics' },
+        { id: 3, icon: 'smarthome-icon', name: 'Smart Home' },
+        { id: 5, icon: 'furniture-icon', name: 'Furniture' },
+        { id: 6, icon: 'clothes-icon', name: 'Clothes' },
+        { id: 7, icon: 'shoes-icon', name: 'Shoes' },
 
         // Row 2
-        { icon: 'home-garden-icon', name: 'Home & Garden' },
-        { icon: 'sport-icon', name: 'Sport & Outdoor Activities' },
-        { icon: 'teen-icon', name: 'Teen Supplies' },
-        { icon: 'babies-icon', name: 'Babies & Kids Supply' },
-        { icon: 'beauty-icon', name: 'Beauty & Health' },
-        { icon: 'bags-icon', name: 'Bags & Luggage' },
+        { id: 4, icon: 'home-garden-icon', name: 'Home & Garden' },
+        { id: 8, icon: 'sport-icon', name: 'Sport & Outdoor Activities' },
+        { id: 9, icon: 'teen-icon', name: 'Teen Supplies' },
+        { id: 10, icon: 'babies-icon', name: 'Babies & Kids Supply' },
+        { id: 11, icon: 'beauty-icon', name: 'Beauty & Health' },
+        { id: 12, icon: 'bags-icon', name: 'Bags & Luggage' },
 
         // Row 3
-        { icon: 'entertainment-icon', name: 'Entertainment' },
-        { icon: 'handmade-icon', name: 'Handmade' },
-        { icon: 'school-icon', name: 'School & Office Supplies' },
-        { icon: 'pets-icon', name: 'Pets Supplies' },
-        { icon: 'cars-icon', name: 'Cars' },
-        { icon: 'books-icon', name: 'Books' },
+        { id: 13, icon: 'entertainment-icon', name: 'Entertainment' },
+        { id: 14, icon: 'handmade-icon', name: 'Handmade' },
+        { id: 15, icon: 'school-icon', name: 'School & Office Supplies' },
+        { id: 16, icon: 'pets-icon', name: 'Pets Supplies' },
+        { id: 18, icon: 'cars-icon', name: 'Cars' },
+        { id: 17, icon: 'books-icon', name: 'Books' },
     ];
 
     return (
@@ -33,11 +34,15 @@ const Categories = () => {
             <h2 className="section-title">Categories</h2>
 
             <div className="categories-grid">
-                {categories.map((category, index) => (
-                    <div key={index} className="category-item">
+                {categories.map((category) => (
+                    <Link 
+                        key={category.id} 
+                        to={`/shop/category/${category.id}`}
+                        className="category-item"
+                    >
                         <div className={`category-icon ${category.icon}`}></div>
                         <span className="category-name">{category.name}</span>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

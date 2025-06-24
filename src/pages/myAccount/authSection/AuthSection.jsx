@@ -75,7 +75,7 @@ const AuthSection = ({ formData, handleInputChange, handleLogin, handleRegister 
                             <button type="submit" className="register-btn">Register</button>
                         </form>
                         <div className="vendor-link">
-                            <a href="#" className="become-vendor">Become a Vendor</a>
+                            {/* <a href="#" className="become-vendor">Become a Vendor</a> */}
                         </div>
                     </div>
                 </div>

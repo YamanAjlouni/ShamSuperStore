@@ -69,10 +69,8 @@ export const ProductDetails = () => {
                 shortDescription: "High-quality mechanical keyboard with RGB lighting and Cherry MX switches.",
                 moreInformation: "Switch Type: Cherry MX Blue, Backlight: RGB, Connection: USB-C, Compatibility: Windows/Mac/Linux, Warranty: 2 years",
                 productRating: "4.5/5 stars based on 234 customer reviews. Customers love the build quality and responsiveness.",
-                shippingTime: "Standard shipping takes 3-5 business days. Express shipping available.",
                 inquiry: "Have questions about this product? Our technical specialists are here to help!",
                 otherSellers: "This product is also available from 3 other verified sellers with competitive pricing.",
-                marketplacePolicy: "30-day return policy, buyer protection, and secure payment processing.",
                 storePolicy: "Free returns within 30 days, 2-year manufacturer warranty, and lifetime customer support."
             }
         },
@@ -121,10 +119,8 @@ export const ProductDetails = () => {
                 shortDescription: "Compact wireless keyboard perfect for productivity and travel.",
                 moreInformation: "Connection: Bluetooth 5.0, Battery Life: 6 months, Weight: 300g, Dimensions: 28x12x1.5cm",
                 productRating: "4.2/5 stars based on 156 customer reviews. Great for travel and office use.",
-                shippingTime: "Standard shipping takes 2-4 business days.",
                 inquiry: "Questions about compatibility or bulk orders? Contact our sales team!",
                 otherSellers: "Available from 2 other sellers.",
-                marketplacePolicy: "Standard return and refund policies apply.",
                 storePolicy: "1-year warranty and free technical support."
             }
         },
@@ -173,10 +169,8 @@ export const ProductDetails = () => {
                 shortDescription: "Ergonomic split design for comfortable typing during long sessions.",
                 moreInformation: "Layout: Split QWERTY, Connection: USB-A, Key Travel: 4mm, Wrist Rest: Included, Medical Certification: Yes",
                 productRating: "4.7/5 stars based on 89 reviews. Highly recommended by ergonomic specialists.",
-                shippingTime: "Currently out of stock. Expected restock in 2-3 weeks.",
                 inquiry: "Any Questions? Please click to submit inquiry about this product.",
                 otherSellers: "Limited availability from 1 other seller at higher price.",
-                marketplacePolicy: "Pre-order available with full refund if not satisfied.",
                 storePolicy: "Extended 45-day return policy for ergonomic products."
             }
         },
@@ -226,10 +220,8 @@ export const ProductDetails = () => {
                 shortDescription: "High-DPI gaming mouse with customizable LED lighting.",
                 moreInformation: "DPI: 12000, Buttons: 6 programmable, Sensor: Optical, Cable: Braided USB",
                 productRating: "4.3/5 stars based on 445 reviews. Excellent for competitive gaming.",
-                shippingTime: "Ships within 1-2 business days.",
                 inquiry: "Need help with gaming setup recommendations? Our gaming specialists are here!",
                 otherSellers: "Compare prices from 4 other verified sellers.",
-                marketplacePolicy: "Protected purchase with money-back guarantee.",
                 storePolicy: "2-year warranty and gaming gear specialist support."
             }
         },
@@ -278,10 +270,8 @@ export const ProductDetails = () => {
                 shortDescription: "Comfortable wireless mouse designed for office productivity.",
                 moreInformation: "DPI: 1200, Connection: 2.4GHz wireless, Battery: 2 AA batteries, Range: 10 meters",
                 productRating: "No rating available yet. Check individual reviews below.",
-                shippingTime: "Ships within 1-2 business days.",
                 inquiry: "Ask about bulk pricing for office environments.",
                 otherSellers: "Available from 3 other office supply retailers.",
-                marketplacePolicy: "Standard warranty and return policy.",
                 storePolicy: "1-year manufacturer warranty with free replacement."
             }
         },
@@ -330,10 +320,8 @@ export const ProductDetails = () => {
                 shortDescription: "Vertical ergonomic design reduces wrist strain.",
                 moreInformation: "DPI: 1600, Connection: Wireless 2.4GHz, Battery: Rechargeable Li-ion, Grip: Right-handed",
                 productRating: "4.6/5 stars based on 178 reviews. Life-changing for users with wrist pain.",
-                shippingTime: "Ships within 1-2 business days.",
                 inquiry: "Ask about our ergonomic workspace consultation service.",
                 otherSellers: "Available from 2 other health-focused retailers.",
-                marketplacePolicy: "30-day comfort guarantee or full refund.",
                 storePolicy: "Health-focused return policy with ergonomic specialist support."
             }
         },
@@ -392,10 +380,8 @@ export const ProductDetails = () => {
                 shortDescription: "Latest flagship smartphone with advanced camera system.",
                 moreInformation: "Display: 6.7\" OLED, Storage: 128GB, Camera: Triple 48MP, Battery: 4000mAh, 5G Ready",
                 productRating: "4.8/5 stars based on 1205 reviews. Outstanding camera and performance.",
-                shippingTime: "Ships within 1-2 business days with free express shipping.",
                 inquiry: "Questions about trade-in programs or need help choosing storage size?",
                 otherSellers: "Compare prices from authorized retailers.",
-                marketplacePolicy: "Full warranty coverage and certified authentic products.",
                 storePolicy: "30-day return policy with full manufacturer warranty."
             }
         },
@@ -445,10 +431,8 @@ export const ProductDetails = () => {
                 shortDescription: "Affordable smartphone with essential features.",
                 moreInformation: "Display: 6.1\" LCD, Storage: 64GB, Camera: 13MP, Battery: 3000mAh, OS: Android 13",
                 productRating: "4.0/5 stars based on 589 reviews. Great value for money.",
-                shippingTime: "Free shipping within 2-3 business days.",
                 inquiry: "Ask about our prepaid plan bundles and accessories.",
                 otherSellers: "Available from 2 other mobile retailers.",
-                marketplacePolicy: "30-day satisfaction guarantee with full refund.",
                 storePolicy: "1-year limited warranty and customer support."
             }
         },
@@ -496,10 +480,8 @@ export const ProductDetails = () => {
                 shortDescription: "Ultra HD 4K gaming monitor with HDR support and 144Hz refresh rate.",
                 moreInformation: "Resolution: 3840x2160, Refresh Rate: 144Hz, HDR: HDR10, Inputs: HDMI 2.1, DisplayPort 1.4, USB-C",
                 productRating: "4.8/5 stars based on 342 reviews. Exceptional color accuracy and gaming performance.",
-                shippingTime: "Free shipping within 2-3 business days.",
                 inquiry: "Ask about our monitor calibration service and mounting solutions.",
                 otherSellers: "Available from 3 other electronics retailers.",
-                marketplacePolicy: "Pixel-perfect guarantee with easy returns.",
                 storePolicy: "3-year warranty with on-site replacement service."
             }
         },
@@ -548,10 +530,8 @@ export const ProductDetails = () => {
                 shortDescription: "High-performance gaming laptop with RTX 4070 graphics and 16GB RAM.",
                 moreInformation: "CPU: Intel i7-13700H, GPU: RTX 4070 8GB, RAM: 16GB DDR5, Storage: 1TB NVMe SSD, Display: 15.6\" 165Hz",
                 productRating: "4.7/5 stars based on 445 reviews. Exceptional gaming performance and build quality.",
-                shippingTime: "Free express shipping within 1-2 business days.",
                 inquiry: "Ask about our gaming setup consultation and accessories bundle.",
                 otherSellers: "Compare configurations from 2 other gaming specialists.",
-                marketplacePolicy: "Gaming performance guarantee with hassle-free returns.",
                 storePolicy: "2-year premium warranty with gaming support hotline."
             }
         },
@@ -600,10 +580,8 @@ export const ProductDetails = () => {
                 shortDescription: "Professional tablet with keyboard support and Apple Pencil compatibility.",
                 moreInformation: "Display: 12.9\" Liquid Retina, Storage: 256GB, CPU: M2 chip, Camera: 12MP, Compatibility: Apple Pencil, Magic Keyboard",
                 productRating: "4.8/5 stars based on 567 reviews. Industry-leading performance for creative professionals.",
-                shippingTime: "Ships within 1-2 business days with free premium packaging.",
                 inquiry: "Ask about our creative professional bundle deals and financing options.",
                 otherSellers: "Available from authorized retailers with same warranty.",
-                marketplacePolicy: "Creative satisfaction guarantee - return within 30 days if not meeting creative needs.",
                 storePolicy: "AppleCare+ available with comprehensive coverage and priority support."
             }
         }
@@ -763,6 +741,78 @@ export const ProductDetails = () => {
                     </button>
                 </div>
             );
+        } else if (activeTab === 'shippingTime') {
+            return (
+                <div className="shipping-section">
+                    {product.inStock ? (
+                        <p><strong>Available</strong> - Shipping time is from 2 to 3 days</p>
+                    ) : (
+                        <p><strong>Currently out of stock.</strong> Expected restock in 2-3 weeks.</p>
+                    )}
+                </div>
+            );
+        } else if (activeTab === 'marketplacePolicy') {
+            return (
+                <div className="marketplace-policy-section">
+                    <div className="policy-features">
+                        <div className="policy-feature">
+                            <div className="policy-icon">
+                                🛡️
+                            </div>
+                            <div className="policy-content">
+                                <h4>Secure online payments</h4>
+                                <p>Scelerisque dignissim in leo at magna donec mi metus ipsum luctus nam elit sociis luctus et aliquam libero at mi metus ipsum luctus magna donec mi metus.</p>
+                            </div>
+                        </div>
+                        
+                        <div className="policy-feature">
+                            <div className="policy-icon">
+                                🚚
+                            </div>
+                            <div className="policy-content">
+                                <h4>Free worldwide shipping</h4>
+                                <p>Cras mi metus ipsum luctus ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                        
+                        <div className="policy-feature">
+                            <div className="policy-icon">
+                                🎧
+                            </div>
+                            <div className="policy-content">
+                                <h4>Customer support</h4>
+                                <p>Scelerisque dignissim in leo at magna donec mi metus ipsum luctus nam elit sociis luctus et aliquam libero.</p>
+                            </div>
+                        </div>
+                        
+                        <div className="policy-feature">
+                            <div className="policy-icon">
+                                🔄
+                            </div>
+                            <div className="policy-content">
+                                <h4>30 days return period</h4>
+                                <p>Scelerisque dignissim in leo at magna donec mi metus ipsum luctus nam elit sociis luctus et aliquam libero. Cras ultricies ligula sed magna dictum porta.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        } else if (activeTab === 'storePolicy') {
+            return (
+                <div className="store-policy-section">
+                    {product.details[activeTab] && product.details[activeTab].trim() !== '' ? (
+                        <p>{product.details[activeTab]}</p>
+                    ) : (
+                        <p>No store policy information available.</p>
+                    )}
+                </div>
+            );
+        } else if (activeTab === 'productRating') {
+            return (
+                <div className="product-rating-section">
+                    <p>{product.details[activeTab]}</p>
+                </div>
+            );
         } else {
             return <p>{product.details[activeTab]}</p>;
         }
@@ -843,7 +893,6 @@ export const ProductDetails = () => {
                     </div>
 
                     <h1 className="product-name">{product.name}</h1>
-
 
                     {/* Rating Section - only show if rating exists */}
                     {product.rating && (
@@ -948,11 +997,8 @@ export const ProductDetails = () => {
 
                     <div className="sold-by">
                         <span>Sold By:</span>
-                        <div className="social-links">
-                            <a href="#" className="social-link facebook">f</a>
-                            <a href="#" className="social-link twitter">t</a>
-                            <a href="#" className="social-link whatsapp">w</a>
-                            <a href="#" className="social-link telegram">T</a>
+                        <div className="sold-by-details">
+                            Sham Super Store
                         </div>
                     </div>
                 </div>

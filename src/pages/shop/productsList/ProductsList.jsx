@@ -1,7 +1,7 @@
-// ProductsList.jsx - Clean version without extra buttons
+// ProductsList.jsx - Enhanced with additional filters
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useMemo } from 'react';
-import { Search, Filter, ChevronLeft } from 'lucide-react';
+import { Search, Filter, ChevronLeft, Star } from 'lucide-react';
 import ProductsOnSale from '../productsOnSale/ProductsOnSale';
 import FeaturedProducts from '../featuredProducts/FeaturedProducts';
 import './ProductsList.scss';
@@ -15,6 +15,12 @@ export const ProductsList = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [showFilters, setShowFilters] = useState(false);
     const [priceRange, setPriceRange] = useState({ min: '', max: '' });
+
+    // New filter states
+    const [selectedSizes, setSelectedSizes] = useState([]);
+    const [selectedColors, setSelectedColors] = useState([]);
+    const [selectedCondition, setSelectedCondition] = useState('');
+    const [minRating, setMinRating] = useState(0);
 
     // Get comparison state from URL
     const compareProducts = searchParams.get('compare');
@@ -46,7 +52,11 @@ export const ProductsList = () => {
                 price: 89.99,
                 originalPrice: 129.99,
                 image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop&crop=center",
-                inStock: true
+                inStock: true,
+                sizes: ["Full Size", "Compact"],
+                colors: ["Black", "White", "RGB"],
+                condition: "new",
+                rating: 4.5
             },
             {
                 id: 102,
@@ -54,7 +64,11 @@ export const ProductsList = () => {
                 price: 45.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=400&fit=crop&crop=center",
-                inStock: true
+                inStock: true,
+                sizes: ["Compact"],
+                colors: ["Black", "Silver"],
+                condition: "new",
+                rating: 4.2
             },
             {
                 id: 103,
@@ -62,7 +76,11 @@ export const ProductsList = () => {
                 price: 159.99,
                 originalPrice: 199.99,
                 image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=400&h=400&fit=crop&crop=center",
-                inStock: false
+                inStock: false,
+                sizes: ["Full Size"],
+                colors: ["Black", "White"],
+                condition: "open box",
+                rating: 4.8
             },
             {
                 id: 104,
@@ -70,7 +88,11 @@ export const ProductsList = () => {
                 price: 24.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=400&fit=crop&crop=center",
-                inStock: true
+                inStock: true,
+                sizes: ["Full Size"],
+                colors: ["Black"],
+                condition: "used",
+                rating: 3.9
             }
         ],
         12: [
@@ -80,7 +102,11 @@ export const ProductsList = () => {
                 price: 29.99,
                 originalPrice: 39.99,
                 image: "https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=400&fit=crop&crop=center",
-                inStock: true
+                inStock: true,
+                sizes: ["Standard"],
+                colors: ["Black", "Red", "Blue"],
+                condition: "new",
+                rating: 4.3
             },
             {
                 id: 202,
@@ -88,7 +114,11 @@ export const ProductsList = () => {
                 price: 19.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1563297007-0686b7003af7?w=400&h=400&fit=crop&crop=center",
-                inStock: true
+                inStock: true,
+                sizes: ["Standard"],
+                colors: ["Black", "Silver", "White"],
+                condition: "new",
+                rating: 4.0
             },
             {
                 id: 203,
@@ -96,153 +126,11 @@ export const ProductsList = () => {
                 price: 65.99,
                 originalPrice: 85.99,
                 image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            }
-        ],
-        13: [
-            {
-                id: 401,
-                name: "4K Gaming Monitor 27\"",
-                price: 449.99,
-                originalPrice: 599.99,
-                image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 402,
-                name: "Ultrawide Curved Monitor 34\"",
-                price: 699.99,
-                originalPrice: null,
-                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 403,
-                name: "Portable Monitor 15.6\"",
-                price: 199.99,
-                originalPrice: 249.99,
-                image: "https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=400&h=400&fit=crop&crop=center",
-                inStock: false
-            }
-        ],
-        14: [
-            {
-                id: 501,
-                name: "Gaming Laptop RTX 4070",
-                price: 1899.99,
-                originalPrice: 2199.99,
-                image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 502,
-                name: "Business Ultrabook 14\"",
-                price: 1299.99,
-                originalPrice: null,
-                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 503,
-                name: "Budget Student Laptop",
-                price: 549.99,
-                originalPrice: 699.99,
-                image: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            }
-        ],
-        15: [
-            {
-                id: 511,
-                name: "Gaming Desktop PC",
-                price: 1599.99,
-                originalPrice: 1899.99,
-                image: "https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 512,
-                name: "Office Desktop Computer",
-                price: 799.99,
-                originalPrice: null,
-                image: "https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 513,
-                name: "Workstation Desktop",
-                price: 2499.99,
-                originalPrice: 2799.99,
-                image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 514,
-                name: "Compact Mini PC",
-                price: 599.99,
-                originalPrice: null,
-                image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 515,
-                name: "All-in-One Desktop",
-                price: 1299.99,
-                originalPrice: 1499.99,
-                image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop&crop=center",
-                inStock: false
-            }
-        ],
-        21: [
-            {
-                id: 301,
-                name: "Latest Pro Smartphone 128GB",
-                price: 899.99,
-                originalPrice: 999.99,
-                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 302,
-                name: "Budget Smartphone 64GB",
-                price: 199.99,
-                originalPrice: null,
-                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 303,
-                name: "Flagship Android Phone 256GB",
-                price: 799.99,
-                originalPrice: 899.99,
-                image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            }
-        ],
-        22: [
-            {
-                id: 601,
-                name: "Pro Tablet 12.9\" 256GB",
-                price: 1099.99,
-                originalPrice: 1299.99,
-                image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 602,
-                name: "Android Tablet 10\" 128GB",
-                price: 299.99,
-                originalPrice: null,
-                image: "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400&h=400&fit=crop&crop=center",
-                inStock: true
-            },
-            {
-                id: 603,
-                name: "Budget Tablet 8\" 64GB",
-                price: 149.99,
-                originalPrice: 199.99,
-                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=400&fit=crop&crop=center",
-                inStock: false
+                inStock: true,
+                sizes: ["Large"],
+                colors: ["Black", "Gray"],
+                condition: "open box",
+                rating: 4.6
             }
         ],
         61: [
@@ -252,7 +140,11 @@ export const ProductsList = () => {
                 price: 89.99,
                 originalPrice: 129.99,
                 image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&h=400&fit=crop&crop=center",
-                inStock: true
+                inStock: true,
+                sizes: ["S", "M", "L", "XL", "XXL"],
+                colors: ["White", "Blue", "Black"],
+                condition: "new",
+                rating: 4.7
             },
             {
                 id: 702,
@@ -260,7 +152,11 @@ export const ProductsList = () => {
                 price: 69.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop&crop=center",
-                inStock: true
+                inStock: true,
+                sizes: ["28", "30", "32", "34", "36", "38"],
+                colors: ["Blue", "Black", "Gray"],
+                condition: "new",
+                rating: 4.4
             },
             {
                 id: 703,
@@ -268,7 +164,11 @@ export const ProductsList = () => {
                 price: 299.99,
                 originalPrice: 399.99,
                 image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=400&fit=crop&crop=center",
-                inStock: true
+                inStock: true,
+                sizes: ["S", "M", "L", "XL"],
+                colors: ["Navy", "Charcoal", "Black"],
+                condition: "used",
+                rating: 4.8
             },
             {
                 id: 704,
@@ -276,7 +176,11 @@ export const ProductsList = () => {
                 price: 39.99,
                 originalPrice: null,
                 image: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400&h=400&fit=crop&crop=center",
-                inStock: true
+                inStock: true,
+                sizes: ["S", "M", "L", "XL"],
+                colors: ["White", "Navy", "Red", "Green"],
+                condition: "new",
+                rating: 4.1
             }
         ]
     };
@@ -285,13 +189,22 @@ export const ProductsList = () => {
     const subcategory = subcategories[subcategoryId];
     const products = productsData[subcategoryId] || [];
 
+    // Get unique filter options from products
+    const filterOptions = useMemo(() => {
+        const sizes = [...new Set(products.flatMap(p => p.sizes || []))];
+        const colors = [...new Set(products.flatMap(p => p.colors || []))];
+        const conditions = [...new Set(products.map(p => p.condition).filter(Boolean))];
+
+        return { sizes, colors, conditions };
+    }, [products]);
+
     // Filter and sort products
     const filteredAndSortedProducts = useMemo(() => {
         let filtered = [...products];
 
         // Filter by search term
         if (searchTerm.trim()) {
-            filtered = filtered.filter(product => 
+            filtered = filtered.filter(product =>
                 product.name.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
@@ -309,6 +222,30 @@ export const ProductsList = () => {
             filtered = filtered.filter(product => product.price <= parseFloat(priceRange.max));
         }
 
+        // Filter by sizes
+        if (selectedSizes.length > 0) {
+            filtered = filtered.filter(product =>
+                product.sizes && product.sizes.some(size => selectedSizes.includes(size))
+            );
+        }
+
+        // Filter by colors
+        if (selectedColors.length > 0) {
+            filtered = filtered.filter(product =>
+                product.colors && product.colors.some(color => selectedColors.includes(color))
+            );
+        }
+
+        // Filter by condition
+        if (selectedCondition) {
+            filtered = filtered.filter(product => product.condition === selectedCondition);
+        }
+
+        // Filter by rating
+        if (minRating > 0) {
+            filtered = filtered.filter(product => (product.rating || 0) >= minRating);
+        }
+
         // Sort products
         filtered.sort((a, b) => {
             switch (sortBy) {
@@ -316,6 +253,8 @@ export const ProductsList = () => {
                     return a.price - b.price;
                 case 'price-high':
                     return b.price - a.price;
+                case 'rating':
+                    return (b.rating || 0) - (a.rating || 0);
                 case 'name':
                 default:
                     return a.name.localeCompare(b.name);
@@ -323,10 +262,9 @@ export const ProductsList = () => {
         });
 
         return filtered;
-    }, [products, sortBy, filterInStock, searchTerm, priceRange]);
+    }, [products, sortBy, filterInStock, searchTerm, priceRange, selectedSizes, selectedColors, selectedCondition, minRating]);
 
     const handleBackToSubcategories = () => {
-        // Preserve comparison state when going back
         if (compareProducts) {
             navigate(`/shop/category/${categoryId}?compare=${compareProducts}`);
         } else {
@@ -335,7 +273,6 @@ export const ProductsList = () => {
     };
 
     const handleProductClick = (productId) => {
-        // Preserve comparison state when viewing product
         if (compareProducts) {
             navigate(`/shop/product/${productId}?compare=${compareProducts}`);
         } else {
@@ -345,13 +282,43 @@ export const ProductsList = () => {
 
     const handleSearch = () => {
         // Search is already handled by the useMemo dependency on searchTerm
-        // This function can be used for additional search actions if needed
     };
 
     const clearFilters = () => {
         setPriceRange({ min: '', max: '' });
         setFilterInStock(false);
         setSearchTerm('');
+        setSelectedSizes([]);
+        setSelectedColors([]);
+        setSelectedCondition('');
+        setMinRating(0);
+    };
+
+    const handleSizeToggle = (size) => {
+        setSelectedSizes(prev =>
+            prev.includes(size)
+                ? prev.filter(s => s !== size)
+                : [...prev, size]
+        );
+    };
+
+    const handleColorToggle = (color) => {
+        setSelectedColors(prev =>
+            prev.includes(color)
+                ? prev.filter(c => c !== color)
+                : [...prev, color]
+        );
+    };
+
+    const renderStars = (rating) => {
+        return [...Array(5)].map((_, i) => (
+            <Star
+                key={i}
+                size={14}
+                className={i < rating ? 'star filled' : 'star'}
+                fill={i < rating ? 'currentColor' : 'none'}
+            />
+        ));
     };
 
     if (!subcategory) {
@@ -363,7 +330,7 @@ export const ProductsList = () => {
                 </div>
                 <div className="main-content">
                     <div className="error-message">
-                        <h2>Subcategory not found</h2>
+                        <h2>Coming Soon</h2>
                         <button onClick={handleBackToSubcategories}>Back to Categories</button>
                     </div>
                 </div>
@@ -386,16 +353,16 @@ export const ProductsList = () => {
                         <ChevronLeft size={16} />
                         Back to {category?.name}
                     </button>
-                    
+
                     <h2 className="section-title">{subcategory.name}</h2>
-                    
+
                     {/* Show comparison status if active */}
                     {compareProducts && (
                         <div className="comparison-status">
-                            <p>🔍 Comparing {compareProducts.split(',').length} product(s) - Add more products or <button onClick={() => navigate(`/compare?products=${compareProducts}`)} style={{color: '#FEF3C7', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', fontWeight: '600'}}>view comparison</button></p>
+                            <p>🔍 Comparing {compareProducts.split(',').length} product(s) - Add more products or <button onClick={() => navigate(`/compare?products=${compareProducts}`)} style={{ color: '#FEF3C7', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', fontWeight: '600' }}>view comparison</button></p>
                         </div>
                     )}
-                    
+
                     {/* Filter Bar */}
                     <div className="filter-bar">
                         <div className="search-container">
@@ -410,7 +377,7 @@ export const ProductsList = () => {
                                 <Search size={16} />
                             </button>
                         </div>
-                        
+
                         <div className="filter-controls">
                             <div className="sort-dropdown">
                                 <select
@@ -421,9 +388,10 @@ export const ProductsList = () => {
                                     <option value="name">Default sorting</option>
                                     <option value="price-low">Price: Low to High</option>
                                     <option value="price-high">Price: High to Low</option>
+                                    <option value="rating">Rating: High to Low</option>
                                 </select>
                             </div>
-                            <button 
+                            <button
                                 className="filter-button"
                                 onClick={() => setShowFilters(!showFilters)}
                             >
@@ -437,34 +405,129 @@ export const ProductsList = () => {
                     {showFilters && (
                         <div className="advanced-filters">
                             <h3 className="filters-title">Advanced Filters</h3>
-                            
-                            <div className="filter-row">
-                                <div className="price-range">
+
+                            <div className="filter-grid">
+                                {/* Price Range */}
+                                <div className="filter-group">
                                     <label className="filter-label">Price:</label>
-                                    <input
-                                        type="number"
-                                        placeholder="Min"
-                                        className="price-input"
-                                        value={priceRange.min}
-                                        onChange={(e) => setPriceRange({...priceRange, min: e.target.value})}
-                                    />
-                                    <span className="price-separator">to</span>
-                                    <input
-                                        type="number"
-                                        placeholder="Max"
-                                        className="price-input"
-                                        value={priceRange.max}
-                                        onChange={(e) => setPriceRange({...priceRange, max: e.target.value})}
-                                    />
+                                    <div className="price-range">
+                                        <input
+                                            type="number"
+                                            placeholder="Min"
+                                            className="price-input"
+                                            value={priceRange.min}
+                                            onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
+                                        />
+                                        <span className="price-separator">to</span>
+                                        <input
+                                            type="number"
+                                            placeholder="Max"
+                                            className="price-input"
+                                            value={priceRange.max}
+                                            onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
+                                        />
+                                    </div>
                                 </div>
 
-                                <button className="clear-filters-btn" onClick={clearFilters}>
-                                    Clear Filters
-                                </button>
+                                {/* Size Filter */}
+                                {filterOptions.sizes.length > 0 && (
+                                    <div className="filter-group">
+                                        <label className="filter-label">Size:</label>
+                                        <div className="size-options">
+                                            {filterOptions.sizes.map(size => (
+                                                <button
+                                                    key={size}
+                                                    className={`size-option ${selectedSizes.includes(size) ? 'selected' : ''}`}
+                                                    onClick={() => handleSizeToggle(size)}
+                                                >
+                                                    {size}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Color Filter */}
+                                {filterOptions.colors.length > 0 && (
+                                    <div className="filter-group">
+                                        <label className="filter-label">Color:</label>
+                                        <div className="color-options">
+                                            {filterOptions.colors.map(color => (
+                                                <button
+                                                    key={color}
+                                                    className={`color-option ${selectedColors.includes(color) ? 'selected' : ''}`}
+                                                    onClick={() => handleColorToggle(color)}
+                                                >
+                                                    <span className={`color-swatch color-${color.toLowerCase()}`}></span>
+                                                    {color}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Condition Filter */}
+                                {filterOptions.conditions.length > 0 && (
+                                    <div className="filter-group">
+                                        <label className="filter-label">Condition:</label>
+                                        <select
+                                            value={selectedCondition}
+                                            onChange={(e) => setSelectedCondition(e.target.value)}
+                                            className="condition-select"
+                                        >
+                                            <option value="">All Conditions</option>
+                                            {filterOptions.conditions.map(condition => (
+                                                <option key={condition} value={condition}>
+                                                    {condition.charAt(0).toUpperCase() + condition.slice(1)}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                )}
+
+                                {/* Rating Filter */}
+                                <div className="filter-group">
+                                    <label className="filter-label">Minimum Rating:</label>
+                                    <div className="rating-options">
+                                        {[4, 3, 2, 1].map(rating => (
+                                            <button
+                                                key={rating}
+                                                className={`rating-option ${minRating === rating ? 'selected' : ''}`}
+                                                onClick={() => setMinRating(minRating === rating ? 0 : rating)}
+                                            >
+                                                <div className="stars">
+                                                    {renderStars(rating)}
+                                                </div>
+                                                <span>& up</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Stock Filter */}
+                                <div className="filter-group">
+                                    <div className="stock-filter">
+                                        <input
+                                            type="checkbox"
+                                            id="inStock"
+                                            className="stock-checkbox"
+                                            checked={filterInStock}
+                                            onChange={(e) => setFilterInStock(e.target.checked)}
+                                        />
+                                        <label htmlFor="inStock" className="stock-label">In Stock Only</label>
+                                    </div>
+                                </div>
+
+                                {/* Clear Filters */}
+                                <div className="filter-group">
+                                    <button className="clear-filters-btn" onClick={clearFilters}>
+                                        Clear All Filters
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}
-                    
+
                     {products.length === 0 ? (
                         <div className="no-products">
                             <p>No products available for this category yet.</p>
@@ -475,7 +538,7 @@ export const ProductsList = () => {
                             <div className="results-info">
                                 <span>Showing {filteredAndSortedProducts.length} of {products.length} results</span>
                             </div>
-                            
+
                             <div className="products-grid">
                                 {filteredAndSortedProducts.map(product => (
                                     <div
@@ -488,12 +551,28 @@ export const ProductsList = () => {
                                         </div>
                                         <div className="product-info">
                                             <h3 className="product-name">{product.name}</h3>
+
+                                            {product.rating && (
+                                                <div className="product-rating">
+                                                    <div className="stars">
+                                                        {renderStars(product.rating)}
+                                                    </div>
+                                                    <span className="rating-text">({product.rating})</span>
+                                                </div>
+                                            )}
+
                                             <div className="product-price">
                                                 {product.originalPrice && (
                                                     <span className="original-price">${product.originalPrice}</span>
                                                 )}
                                                 <span className="current-price">${product.price}</span>
                                             </div>
+
+                                            {product.condition && product.condition !== 'new' && (
+                                                <div className="product-condition">
+                                                    {product.condition.charAt(0).toUpperCase() + product.condition.slice(1)}
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 ))}
