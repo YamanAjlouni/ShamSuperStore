@@ -76,6 +76,7 @@
         cursor: pointer;
 
         &:hover {
+            background-color: transparent;
             box-shadow: $shadow-md;
         }
 

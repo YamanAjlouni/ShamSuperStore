@@ -85,6 +85,7 @@ const Footer = ({ toggleCartSidebar }) => {
                         <ul>
                             <li><Link to="/" className={isActiveLink('/') ? 'highlighted' : ''}>Home</Link></li>
                             <li><Link to="/shop" className={isActiveLink('/shop', true) ? 'highlighted' : ''}>Shop</Link></li>
+                            <li><Link to="/about" className={isActiveLink('/about', true) ? 'highlighted' : ''}>About</Link></li>
                             <li><Link to="/contact" className={isActiveLink('/contact') ? 'highlighted' : ''}>Contact Us</Link></li>
                             <li><Link to="/contact">Inquiries</Link></li>
                         </ul>
