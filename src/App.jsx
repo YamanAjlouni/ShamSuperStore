@@ -11,9 +11,13 @@ function App() {
   return (
     <BrowserRouter>
       <CartProvider>
-        <Navbar />
+        <div className="navbar-positioned">
+          <Navbar />
+        </div>
         <AppRoutes />
-        <Footer />
+        <div className="footer-positioned">
+          <Footer />
+        </div>
         <SidebarCart />
         <FloatingCart />
       </CartProvider>

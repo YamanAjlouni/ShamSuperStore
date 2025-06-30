@@ -5,6 +5,21 @@
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
+
+  @media (max-width: 1200px) {
+    margin-top: 40px;
+    padding-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 30px;
+    padding: 15px 10px;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 20px;
+    padding: 10px 5px;
+  }
 }
 
 .account-container {
@@ -125,10 +140,6 @@
 }
 
 @media (max-width: 768px) {
-  .my-account {
-    padding: 10px;
-  }
-
   .account-container {
     display: flex;
     flex-direction: column-reverse;
@@ -190,10 +201,6 @@
 }
 
 @media (max-width: 480px) {
-  .my-account {
-    padding: 5px;
-  }
-
   .account-sidebar {
     padding: 12px;
 

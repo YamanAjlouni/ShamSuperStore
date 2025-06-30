@@ -117,7 +117,7 @@ const Footer = ({ toggleCartSidebar }) => {
                     <div className="footer-bottom-links">
                         <Link to="/privacy-policy">Privacy Policy</Link>
                         <Link to="/terms-conditions">Terms & conditions</Link>
-                        <Link to="/return-refunds">Return & Refunds</Link>
+                        <Link to="/return-and-refunds-policy">Return & Refunds</Link>
                     </div>
                 </div>
             </div>

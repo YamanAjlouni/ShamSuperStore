@@ -3,7 +3,7 @@ import { ExternalLink, Building2, ArrowLeft } from 'lucide-react';
 import './StoresList.scss';
 
 const StoresList = () => {
-    const storesListUrl = "https://seller-dashboard.shamsuperstore.com/stores-list";
+    const storesListUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="stores-list-page">

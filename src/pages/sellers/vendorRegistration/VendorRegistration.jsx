@@ -3,7 +3,7 @@ import { ExternalLink, UserPlus, ArrowLeft } from 'lucide-react';
 import './VendorRegistration.scss';
 
 const VendorRegistration = () => {
-    const registrationUrl = "https://seller-dashboard.shamsuperstore.com/register";
+    const registrationUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="vendor-registration-page">

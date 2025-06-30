@@ -3,7 +3,7 @@ import { ExternalLink, TruckIcon, ArrowLeft } from 'lucide-react';
 import './VendorsDriversManager.scss';
 
 const VendorsDriversManager = () => {
-    const vendorsDriversUrl = "https://seller-dashboard.shamsuperstore.com/drivers-manager";
+    const vendorsDriversUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="vendors-drivers-manager-page">

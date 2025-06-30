@@ -2,7 +2,7 @@ import { ExternalLink, Truck } from 'lucide-react';
 import './DeliveryDrivers.scss';
 
 const DeliveryDrivers = () => {
-    const driverDashboardUrl = "https://driver-dashboard.shamsuperstore.com";
+    const driverDashboardUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="delivery-drivers-page">

@@ -325,7 +325,7 @@ export const InquiryForm = () => {
                             </div>
                             <div>
                                 <strong>Email:</strong>
-                                <p>support@yourstore.com</p>
+                                <p>support@shamsuperstore.com</p>
                             </div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@ import { ExternalLink, Store } from 'lucide-react';
 import './Sellers.scss';
 
 const Sellers = () => {
-    const sellerDashboardUrl = "https://seller-dashboard.shamsuperstore.com";
+    const sellerDashboardUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="sellers-page">

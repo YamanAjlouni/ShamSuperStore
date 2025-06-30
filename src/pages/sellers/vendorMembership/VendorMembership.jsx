@@ -3,7 +3,7 @@ import { ExternalLink, Crown, ArrowLeft } from 'lucide-react';
 import './VendorMembership.scss';
 
 const VendorMembership = () => {
-    const membershipUrl = "https://seller-dashboard.shamsuperstore.com/membership";
+    const membershipUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="vendor-membership-page">

@@ -3,7 +3,7 @@ import { ExternalLink, Smartphone, ArrowLeft } from 'lucide-react';
 import './DeliveryDriversApp.scss';
 
 const DeliveryDriversApp = () => {
-    const appUrl = "https://driver-dashboard.shamsuperstore.com/mobile-app";
+    const appUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="delivery-drivers-app-page">

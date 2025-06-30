@@ -3,7 +3,7 @@ import { ExternalLink, Store, ArrowLeft } from 'lucide-react';
 import './StoreManager.scss';
 
 const StoreManager = () => {
-    const storeManagerUrl = "https://seller-dashboard.shamsuperstore.com/store-manager";
+    const storeManagerUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="store-manager-page">

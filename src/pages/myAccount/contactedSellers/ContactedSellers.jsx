@@ -1,6 +1,6 @@
-import './Inquiries.scss';
+import './ContactedSellers.scss';
 
-const Inquiries = () => {
+const ContactedSellers = () => {
     return (
         <div className="inquiries-content">
             <h3>Contacted Sellers</h3>
@@ -8,16 +8,15 @@ const Inquiries = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>Product</th>
+                            <th>Seller</th>
                             <th>Subject</th>
-                            <th>Status</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colSpan="5">No inquiries found.</td>
+                            <td colSpan="5">No Contacted Sellers found.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -26,4 +25,4 @@ const Inquiries = () => {
     );
 };
 
-export default Inquiries;
+export default ContactedSellers;

@@ -27,6 +27,7 @@ import DeliveryTracking from '../pages/deliveryDrivers/deliveryTracking/Delivery
 import DeliveryDriversApp from '../pages/deliveryDrivers/deliveryDriversApp/DeliveryDriversApp'
 import PrivacyPolicy from '../components/privacyPolicy/PrivacyPolicy'
 import TermsConditions from '../components/termsConditions/TermsConditions'
+import ReturnPolicy from '../components/returnPolicy/ReturnPolicy'
 
 export const AppRoutes = () => {
   return (
@@ -34,6 +35,7 @@ export const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms-conditions" element={<TermsConditions />} />
+      <Route path="/return-and-refunds-policy" element={<ReturnPolicy />} />
 
       {/* Shop Pages and Sections */}
       <Route path="/shop" element={<Shop />} />

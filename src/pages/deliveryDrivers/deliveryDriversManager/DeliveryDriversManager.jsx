@@ -3,7 +3,7 @@ import { ExternalLink, Users, ArrowLeft } from 'lucide-react';
 import './DeliveryDriversManager.scss';
 
 const DeliveryDriversManager = () => {
-    const managerDashboardUrl = "https://driver-dashboard.shamsuperstore.com/manager";
+    const managerDashboardUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="delivery-drivers-manager-page">

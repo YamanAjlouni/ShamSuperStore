@@ -69,7 +69,7 @@ export const ProductDetails = () => {
                 shortDescription: "High-quality mechanical keyboard with RGB lighting and Cherry MX switches.",
                 moreInformation: "Switch Type: Cherry MX Blue, Backlight: RGB, Connection: USB-C, Compatibility: Windows/Mac/Linux, Warranty: 2 years",
                 productRating: "4.5/5 stars based on 234 customer reviews. Customers love the build quality and responsiveness.",
-                inquiry: "Have questions about this product? Our technical specialists are here to help!",
+                contactSeller: "Have questions about this product? Our technical specialists are here to help!",
                 otherSellers: "This product is also available from 3 other verified sellers with competitive pricing.",
                 storePolicy: "Free returns within 30 days, 2-year manufacturer warranty, and lifetime customer support."
             }
@@ -119,7 +119,7 @@ export const ProductDetails = () => {
                 shortDescription: "Compact wireless keyboard perfect for productivity and travel.",
                 moreInformation: "Connection: Bluetooth 5.0, Battery Life: 6 months, Weight: 300g, Dimensions: 28x12x1.5cm",
                 productRating: "4.2/5 stars based on 156 customer reviews. Great for travel and office use.",
-                inquiry: "Questions about compatibility or bulk orders? Contact our sales team!",
+                contactSeller: "Questions about compatibility or bulk orders? Contact our sales team!",
                 otherSellers: "Available from 2 other sellers.",
                 storePolicy: "1-year warranty and free technical support."
             }
@@ -169,7 +169,7 @@ export const ProductDetails = () => {
                 shortDescription: "Ergonomic split design for comfortable typing during long sessions.",
                 moreInformation: "Layout: Split QWERTY, Connection: USB-A, Key Travel: 4mm, Wrist Rest: Included, Medical Certification: Yes",
                 productRating: "4.7/5 stars based on 89 reviews. Highly recommended by ergonomic specialists.",
-                inquiry: "Any Questions? Please click to submit inquiry about this product.",
+                contactSeller: "Any Questions? Please click to submit question about this product.",
                 otherSellers: "Limited availability from 1 other seller at higher price.",
                 storePolicy: "Extended 45-day return policy for ergonomic products."
             }
@@ -220,7 +220,7 @@ export const ProductDetails = () => {
                 shortDescription: "High-DPI gaming mouse with customizable LED lighting.",
                 moreInformation: "DPI: 12000, Buttons: 6 programmable, Sensor: Optical, Cable: Braided USB",
                 productRating: "4.3/5 stars based on 445 reviews. Excellent for competitive gaming.",
-                inquiry: "Need help with gaming setup recommendations? Our gaming specialists are here!",
+                contactSeller: "Need help with gaming setup recommendations? Our gaming specialists are here!",
                 otherSellers: "Compare prices from 4 other verified sellers.",
                 storePolicy: "2-year warranty and gaming gear specialist support."
             }
@@ -270,7 +270,7 @@ export const ProductDetails = () => {
                 shortDescription: "Comfortable wireless mouse designed for office productivity.",
                 moreInformation: "DPI: 1200, Connection: 2.4GHz wireless, Battery: 2 AA batteries, Range: 10 meters",
                 productRating: "No rating available yet. Check individual reviews below.",
-                inquiry: "Ask about bulk pricing for office environments.",
+                contactSeller: "Ask about bulk pricing for office environments.",
                 otherSellers: "Available from 3 other office supply retailers.",
                 storePolicy: "1-year manufacturer warranty with free replacement."
             }
@@ -320,7 +320,7 @@ export const ProductDetails = () => {
                 shortDescription: "Vertical ergonomic design reduces wrist strain.",
                 moreInformation: "DPI: 1600, Connection: Wireless 2.4GHz, Battery: Rechargeable Li-ion, Grip: Right-handed",
                 productRating: "4.6/5 stars based on 178 reviews. Life-changing for users with wrist pain.",
-                inquiry: "Ask about our ergonomic workspace consultation service.",
+                contactSeller: "Ask about our ergonomic workspace consultation service.",
                 otherSellers: "Available from 2 other health-focused retailers.",
                 storePolicy: "Health-focused return policy with ergonomic specialist support."
             }
@@ -380,7 +380,7 @@ export const ProductDetails = () => {
                 shortDescription: "Latest flagship smartphone with advanced camera system.",
                 moreInformation: "Display: 6.7\" OLED, Storage: 128GB, Camera: Triple 48MP, Battery: 4000mAh, 5G Ready",
                 productRating: "4.8/5 stars based on 1205 reviews. Outstanding camera and performance.",
-                inquiry: "Questions about trade-in programs or need help choosing storage size?",
+                contactSeller: "Questions about trade-in programs or need help choosing storage size?",
                 otherSellers: "Compare prices from authorized retailers.",
                 storePolicy: "30-day return policy with full manufacturer warranty."
             }
@@ -431,7 +431,7 @@ export const ProductDetails = () => {
                 shortDescription: "Affordable smartphone with essential features.",
                 moreInformation: "Display: 6.1\" LCD, Storage: 64GB, Camera: 13MP, Battery: 3000mAh, OS: Android 13",
                 productRating: "4.0/5 stars based on 589 reviews. Great value for money.",
-                inquiry: "Ask about our prepaid plan bundles and accessories.",
+                contactSeller: "Ask about our prepaid plan bundles and accessories.",
                 otherSellers: "Available from 2 other mobile retailers.",
                 storePolicy: "1-year limited warranty and customer support."
             }
@@ -480,7 +480,7 @@ export const ProductDetails = () => {
                 shortDescription: "Ultra HD 4K gaming monitor with HDR support and 144Hz refresh rate.",
                 moreInformation: "Resolution: 3840x2160, Refresh Rate: 144Hz, HDR: HDR10, Inputs: HDMI 2.1, DisplayPort 1.4, USB-C",
                 productRating: "4.8/5 stars based on 342 reviews. Exceptional color accuracy and gaming performance.",
-                inquiry: "Ask about our monitor calibration service and mounting solutions.",
+                contactSeller: "Ask about our monitor calibration service and mounting solutions.",
                 otherSellers: "Available from 3 other electronics retailers.",
                 storePolicy: "3-year warranty with on-site replacement service."
             }
@@ -530,7 +530,7 @@ export const ProductDetails = () => {
                 shortDescription: "High-performance gaming laptop with RTX 4070 graphics and 16GB RAM.",
                 moreInformation: "CPU: Intel i7-13700H, GPU: RTX 4070 8GB, RAM: 16GB DDR5, Storage: 1TB NVMe SSD, Display: 15.6\" 165Hz",
                 productRating: "4.7/5 stars based on 445 reviews. Exceptional gaming performance and build quality.",
-                inquiry: "Ask about our gaming setup consultation and accessories bundle.",
+                contactSeller: "Ask about our gaming setup consultation and accessories bundle.",
                 otherSellers: "Compare configurations from 2 other gaming specialists.",
                 storePolicy: "2-year premium warranty with gaming support hotline."
             }
@@ -580,7 +580,7 @@ export const ProductDetails = () => {
                 shortDescription: "Professional tablet with keyboard support and Apple Pencil compatibility.",
                 moreInformation: "Display: 12.9\" Liquid Retina, Storage: 256GB, CPU: M2 chip, Camera: 12MP, Compatibility: Apple Pencil, Magic Keyboard",
                 productRating: "4.8/5 stars based on 567 reviews. Industry-leading performance for creative professionals.",
-                inquiry: "Ask about our creative professional bundle deals and financing options.",
+                contactSeller: "Ask about our creative professional bundle deals and financing options.",
                 otherSellers: "Available from authorized retailers with same warranty.",
                 storePolicy: "AppleCare+ available with comprehensive coverage and priority support."
             }
@@ -635,25 +635,25 @@ export const ProductDetails = () => {
     // FIXED: Properly handle comparison state
     const handleCompare = () => {
         let existingProductIds = [];
-        
+
         // Check for existing comparison products from multiple sources
         const urlProducts = searchParams.get('products'); // Direct from compare page
         const urlCompare = searchParams.get('compare'); // From shop page with compare state
-        
+
         if (urlProducts) {
             existingProductIds = urlProducts.split(',').filter(id => id && productsDatabase[id]);
         } else if (urlCompare) {
             existingProductIds = urlCompare.split(',').filter(id => id && productsDatabase[id]);
         }
-        
+
         // Add current product if not already in the list
         if (!existingProductIds.includes(productId)) {
             existingProductIds.push(productId);
         }
-        
+
         // Navigate to compare page with all products
         navigate(`/compare?products=${existingProductIds.join(',')}`);
-        
+
         console.log('Added to compare:', {
             productId,
             name: product.name,
@@ -700,7 +700,7 @@ export const ProductDetails = () => {
         { id: 'productRating', label: 'Product Rating' },
         { id: 'reviews', label: 'Reviews' },
         { id: 'shippingTime', label: 'Shipping time' },
-        { id: 'inquiry', label: 'Inquiry' },
+        { id: 'contactSeller', label: 'Contact Seller' },
         { id: 'otherSellers', label: 'Other seller\'s offers' },
         { id: 'marketplacePolicy', label: 'Marketplace Policy' },
         { id: 'storePolicy', label: 'Store Policy' }
@@ -732,12 +732,12 @@ export const ProductDetails = () => {
                     )}
                 </div>
             );
-        } else if (activeTab === 'inquiry') {
+        } else if (activeTab === 'contactSeller') {
             return (
                 <div className="inquiry-section">
                     <p>{product.details[activeTab]}</p>
                     <button className="inquiry-btn" onClick={handleInquiry}>
-                        I've a Question
+                        Contact Seller
                     </button>
                 </div>
             );
@@ -764,7 +764,7 @@ export const ProductDetails = () => {
                                 <p>Scelerisque dignissim in leo at magna donec mi metus ipsum luctus nam elit sociis luctus et aliquam libero at mi metus ipsum luctus magna donec mi metus.</p>
                             </div>
                         </div>
-                        
+
                         <div className="policy-feature">
                             <div className="policy-icon">
                                 🚚
@@ -774,7 +774,7 @@ export const ProductDetails = () => {
                                 <p>Cras mi metus ipsum luctus ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             </div>
                         </div>
-                        
+
                         <div className="policy-feature">
                             <div className="policy-icon">
                                 🎧
@@ -784,7 +784,7 @@ export const ProductDetails = () => {
                                 <p>Scelerisque dignissim in leo at magna donec mi metus ipsum luctus nam elit sociis luctus et aliquam libero.</p>
                             </div>
                         </div>
-                        
+
                         <div className="policy-feature">
                             <div className="policy-icon">
                                 🔄
@@ -810,7 +810,23 @@ export const ProductDetails = () => {
         } else if (activeTab === 'productRating') {
             return (
                 <div className="product-rating-section">
-                    <p>{product.details[activeTab]}</p>
+                    {product.rating ? (
+                        <div className="rating-display">
+                            <div className="rating-stars">
+                                {renderStars(product.rating)}
+                                <span className="rating-value">({product.rating})</span>
+                            </div>
+                            <p className="rating-text">
+                                Based on {product.reviews} customer reviews.
+                                {product.rating >= 4.5 ? " Outstanding quality and performance." :
+                                    product.rating >= 4.0 ? " Great quality and value." :
+                                        product.rating >= 3.5 ? " Good quality with room for improvement." :
+                                            " Mixed reviews, consider alternatives."}
+                            </p>
+                        </div>
+                    ) : (
+                        <p>No rating available yet. Check individual reviews below.</p>
+                    )}
                 </div>
             );
         } else {
@@ -998,7 +1014,7 @@ export const ProductDetails = () => {
                     <div className="sold-by">
                         <span>Sold By:</span>
                         <div className="sold-by-details">
-                            Sham Super Store
+                            2153
                         </div>
                     </div>
                 </div>

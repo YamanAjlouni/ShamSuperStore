@@ -14,11 +14,9 @@ const Navbar = () => {
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [activeSubDropdown, setActiveSubDropdown] = useState(null);
 
-    // Mobile dropdown states
     const [mobileActiveDropdown, setMobileActiveDropdown] = useState(null);
     const [mobileActiveSubDropdown, setMobileActiveSubDropdown] = useState(null);
 
-    // Transform your data to match the clean structure
     const navItems = [
         {
             title: 'Home',

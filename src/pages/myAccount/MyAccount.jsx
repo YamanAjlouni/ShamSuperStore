@@ -14,7 +14,8 @@ import Wishlist from './wishlist/Wishlist';
 import Following from './following/Following';
 import LostPassword from './lostPassword/LostPassword';
 import SupportTickets from './supportTickets/SupportTickets';
-import Inquiries from './inquiries/Inquiries';
+import Inquiries from './contactedSellers/ContactedSellers';
+import ContactedSellers from './contactedSellers/ContactedSellers';
 
 const MyAccount = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -75,7 +76,7 @@ const MyAccount = () => {
             case 'support-tickets':
                 return <SupportTickets />;
             case 'inquiries':
-                return <Inquiries />;
+                return <ContactedSellers />;
             default:
                 return <Dashboard handleLogout={handleLogout} setActiveTab={setActiveTab} />;
         }

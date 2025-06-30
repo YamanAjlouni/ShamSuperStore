@@ -3,7 +3,7 @@ import { ExternalLink, MapPin, ArrowLeft } from 'lucide-react';
 import './DeliveryTracking.scss';
 
 const DeliveryTracking = () => {
-    const trackingUrl = "https://driver-dashboard.shamsuperstore.com/tracking";
+    const trackingUrl = "https://shamsuperstore-dashboard.netlify.app/";
 
     return (
         <div className="delivery-tracking-page">
