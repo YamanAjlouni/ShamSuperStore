@@ -14,17 +14,17 @@ const Categories = () => {
 
         // Row 2
         { id: 4, icon: 'home-garden-icon', name: 'Home & Garden' },
-        { id: 8, icon: 'sport-icon', name: 'Sport & Outdoor Activities' },
+        { id: 11, icon: 'sport-icon', name: 'Sport & Outdoor Activities' },
         { id: 9, icon: 'teen-icon', name: 'Teen Supplies' },
-        { id: 10, icon: 'babies-icon', name: 'Babies & Kids Supply' },
-        { id: 11, icon: 'beauty-icon', name: 'Beauty & Health' },
-        { id: 12, icon: 'bags-icon', name: 'Bags & Luggage' },
+        { id: 8, icon: 'babies-icon', name: 'Babies & Kids Supply' },
+        { id: 10, icon: 'beauty-icon', name: 'Beauty & Health' },
+        { id: 20, icon: 'bags-icon', name: 'Bags & Luggage' },
 
         // Row 3
-        { id: 13, icon: 'entertainment-icon', name: 'Entertainment' },
-        { id: 14, icon: 'handmade-icon', name: 'Handmade' },
-        { id: 15, icon: 'school-icon', name: 'School & Office Supplies' },
-        { id: 16, icon: 'pets-icon', name: 'Pets Supplies' },
+        { id: 14, icon: 'entertainment-icon', name: 'Entertainment' },
+        { id: 15, icon: 'handmade-icon', name: 'Handmade' },
+        { id: 16, icon: 'school-icon', name: 'School & Office Supplies' },
+        { id: 13, icon: 'pets-icon', name: 'Pets Supplies' },
         { id: 18, icon: 'cars-icon', name: 'Cars' },
         { id: 17, icon: 'books-icon', name: 'Books' },
     ];

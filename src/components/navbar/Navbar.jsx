@@ -230,7 +230,7 @@ const Navbar = () => {
                 { title: 'Wishlist', link: '/my-account' },
                 { title: 'Following', link: '/my-account' },
                 { title: 'Support Tickets', link: '/my-account' },
-                { title: 'Inquiries', link: '/my-account' },
+                { title: 'Contacted Sellers', link: '/my-account' },
                 { title: 'Lost Password', link: '/my-account' }
             ]
         },
@@ -330,7 +330,7 @@ const Navbar = () => {
     // Close mobile menu on resize
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth >= 1024) {
+            if (window.innerWidth >= 1200) {
                 setMobileMenuOpen(false);
                 setMobileActiveDropdown(null);
                 setMobileActiveSubDropdown(null);

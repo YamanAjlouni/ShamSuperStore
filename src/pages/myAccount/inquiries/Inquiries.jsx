@@ -3,7 +3,7 @@ import './Inquiries.scss';
 const Inquiries = () => {
     return (
         <div className="inquiries-content">
-            <h3>Inquiries</h3>
+            <h3>Contacted Sellers</h3>
             <div className="inquiries-table">
                 <table>
                     <thead>

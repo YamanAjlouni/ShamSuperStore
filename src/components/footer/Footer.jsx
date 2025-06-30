@@ -33,7 +33,7 @@ const Footer = ({ toggleCartSidebar }) => {
 
                     <div className="contact-info">
                         <Link to="/contact" className="email">support@shamsuperstore.com</Link>
-                        <Link to="/contact" className="phone">Phone: (000) 000-0000</Link>
+                        <a href="tel:10012345678" className="phone">Phone: (000) 000-0000</a>
                     </div>
 
                     <div className="social-icons">

@@ -133,7 +133,7 @@ const MyAccount = () => {
                                 <button onClick={() => setActiveTab('support-tickets')}>Support Tickets</button>
                             </li>
                             <li className={activeTab === 'inquiries' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('inquiries')}>Inquiries</button>
+                                <button onClick={() => setActiveTab('inquiries')}>Contacted Sellers</button>
                             </li>
                             <li className={activeTab === 'lost-password' ? 'active' : ''}>
                                 <button onClick={() => setActiveTab('lost-password')}>Lost Password</button>

@@ -530,8 +530,7 @@ export const ProductsList = () => {
 
                     {products.length === 0 ? (
                         <div className="no-products">
-                            <p>No products available for this category yet.</p>
-                            <p>Please check back later or browse other categories.</p>
+                            <p>Coming Soon !!</p>
                         </div>
                     ) : (
                         <>

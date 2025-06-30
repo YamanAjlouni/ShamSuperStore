@@ -277,8 +277,7 @@ export const SubCategories = () => {
                     
                     {subcategories.length === 0 ? (
                         <div className="no-subcategories">
-                            <p>No subcategories available for this category yet.</p>
-                            <p>Please check back later or browse other categories.</p>
+                            <p>Coming Soon !!.</p>
                         </div>
                     ) : (
                         <div className="subcategories-grid">

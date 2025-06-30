@@ -701,7 +701,7 @@ export const ProductDetails = () => {
         { id: 'reviews', label: 'Reviews' },
         { id: 'shippingTime', label: 'Shipping time' },
         { id: 'inquiry', label: 'Inquiry' },
-        { id: 'otherSellers', label: 'Offers from other sellers' },
+        { id: 'otherSellers', label: 'Other seller\'s offers' },
         { id: 'marketplacePolicy', label: 'Marketplace Policy' },
         { id: 'storePolicy', label: 'Store Policy' }
     ];

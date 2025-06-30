@@ -30,13 +30,13 @@ const ContactUs = () => {
                 <div className="contact-info-section">
                     <div className="contact-info-grid">
                         {/* Phone Card */}
-                        <div className="contact-info-card">
+                        <a href='tel:10012345678' className="contact-info-card">
                             <div className="info-icon">
                                 <Phone size={40} />
                             </div>
                             <h3 className="info-title">1-001-234-5678</h3>
                             <p className="info-subtitle">Mon-Sat: 8:00 - 21:00</p>
-                        </div>
+                        </a>
 
                         {/* Email Card */}
                         <div className="contact-info-card">
@@ -128,7 +128,7 @@ const ContactUs = () => {
                         <a href="#" className="social-icon whatsapp">
                             <MessageCircle size={24} />
                         </a>
-                        <a href="#" className="social-icon phone">
+                        <a href="tel:10012345678" className="social-icon phone">
                             <PhoneCall size={24} />
                         </a>
                     </div>
