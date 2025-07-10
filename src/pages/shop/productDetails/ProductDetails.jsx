@@ -672,6 +672,12 @@ export const ProductDetails = () => {
         });
     };
 
+    const handleStoreClick = () => {
+        // Navigate to store page - using store ID 2153 as default
+        // In a real app, this would be dynamic based on the product's seller
+        navigate('/shop/store/2153');
+    };
+
     const renderStars = (rating) => {
         const stars = [];
         const fullStars = Math.floor(rating);
@@ -1013,7 +1019,11 @@ export const ProductDetails = () => {
 
                     <div className="sold-by">
                         <span>Sold By:</span>
-                        <div className="sold-by-details">
+                        <div
+                            className="sold-by-details clickable"
+                            onClick={handleStoreClick}
+                            title="Click to view store details"
+                        >
                             2153
                         </div>
                     </div>

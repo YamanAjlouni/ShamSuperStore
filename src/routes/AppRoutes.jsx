@@ -5,6 +5,7 @@ import MyAccount from '../pages/myAccount/MyAccount'
 import ProductDetails from '../pages/shop/productDetails/ProductDetails'
 import ProductsList from '../pages/shop/productsList/ProductsList'
 import SubCategories from '../pages/shop/subCategories/SubCategories'
+import StorePage from '../pages/shop/storePage/StorePage'
 import About from '../pages/about/About'
 import ContactUs from '../pages/contactUs/ContactUs'
 import InquiryForm from '../pages/shop/productDetails/inquiryForm/InquiryForm'
@@ -42,6 +43,7 @@ export const AppRoutes = () => {
       <Route path="/shop/category/:categoryId" element={<SubCategories />} />
       <Route path="/shop/category/:categoryId/subcategory/:subcategoryId" element={<ProductsList />} />
       <Route path="/shop/product/:productId" element={<ProductDetails />} />
+      <Route path="/shop/store/:storeId" element={<StorePage />} /> {/* New Store route */}
       <Route path="/inquiry/:productId" element={<InquiryForm />} />
       <Route path="/compare" element={<Compare />} />
       {/* End of Shop Pages and Sections */}
