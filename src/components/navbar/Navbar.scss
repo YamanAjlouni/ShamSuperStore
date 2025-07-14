@@ -22,6 +22,195 @@ $transition: all 0.2s ease-in-out;
   border: 1px solid rgba(255, 255, 255, $opacity);
 }
 
+// Search Bar Styles
+.navbar__search {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 2rem;
+
+  @media (min-width: 1200px) {
+    max-width: 500px;
+    margin: 0 1.5rem;
+  }
+
+  @media (max-width: 1200px) {
+    max-width: 400px;
+    margin: 0 1rem;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 300px;
+    margin: 0 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 250px;
+    margin: 0 0.5rem;
+  }
+}
+
+.navbar__search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  @include glass-effect(0.15);
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: $transition;
+
+  &:focus-within {
+    @include glass-effect(0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+  }
+}
+
+.navbar__search-input {
+  flex: 1;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  background: transparent;
+  color: $white;
+  font-size: 0.9rem;
+  font-weight: 400;
+  outline: none;
+  transition: $transition;
+
+  @media (min-width: 1200px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+  }
+
+  &:focus::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.navbar__search-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: $white;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition;
+  border-radius: 0;
+
+  @media (min-width: 1200px) {
+    padding: 0.6rem 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.6rem 0.8rem;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: $white;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    transition: $transition;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
+}
+
+// Mobile Search Bar
+.navbar__mobile-search {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+
+.navbar__mobile-search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  @include glass-effect(0.15);
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: $transition;
+
+  &:focus-within {
+    @include glass-effect(0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.navbar__mobile-search-input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: none;
+  background: transparent;
+  color: $white;
+  font-size: 1rem;
+  font-weight: 400;
+  outline: none;
+  transition: $transition;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+  }
+
+  &:focus::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.navbar__mobile-search-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: $white;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition;
+  border-radius: 0;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: $white;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    transition: $transition;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
+}
+
 .navbar {
   background: $primary-color;
   box-shadow: $shadow-lg;
@@ -623,175 +812,4 @@ $transition: all 0.2s ease-in-out;
   align-items: center;
   flex: 1;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.85);
-  padding: 0.8rem 0;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: $transition;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
-  &:hover {
-    color: $white;
-    padding-left: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    margin: 0 -1rem;
-    padding-right: 1rem;
-  }
-}
-
-.navbar__mobile-sub-dropdown {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
-  background: rgba(255, 255, 255, 0.03);
-  margin: 0 -1rem;
-  padding: 0 1rem;
-
-  &.active {
-    max-height: 500px;
-    padding: 0.5rem 1rem;
-  }
-}
-
-.navbar__mobile-sub-dropdown-link {
-  display: block;
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.75);
-  padding: 0.6rem 0;
-  font-size: 0.9rem;
-  font-weight: 400;
-  transition: $transition;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
-  &:hover {
-    color: $white;
-    padding-left: 1rem;
-  }
-}
-
-// Mobile Cart - Improved
-.navbar__mobile-cart {
-  @include flex-center;
-  gap: 0.8rem;
-  width: calc(100% - 2rem);
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  color: $white;
-  padding: 1.2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: $transition;
-  position: relative;
-  margin: 1rem;
-  backdrop-filter: blur(10px);
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-}
-
-.navbar__mobile-cart-badge {
-  background: $orange-color;
-  color: $white;
-  border-radius: 50%;
-  min-width: 22px;
-  height: 22px;
-  @include flex-center;
-  font-size: 12px;
-  font-weight: 700;
-  border: 2px solid $white;
-  box-shadow: $shadow-sm;
-  margin-left: auto;
-}
-
-// Animation for dropdown arrow rotation
-.navbar__item:hover .navbar__arrow {
-  transform: rotate(180deg);
-}
-
-.navbar__dropdown-item:hover .navbar__arrow--sub {
-  transform: rotate(0deg);
-}
-
-// Language dropdown special styling (orange)
-.navbar__item:nth-last-child(2) .navbar__link {
-  color: $orange-color;
-
-  &:hover {
-    color: lighten($orange-color, 10%);
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .navbar__arrow {
-    color: rgba(255, 165, 0, 0.8);
-  }
-}
-
-// Enhanced hover areas for better UX
-.navbar__item:hover .navbar__dropdown,
-.navbar__dropdown:hover {
-  display: block;
-}
-
-.navbar__dropdown-item:hover .navbar__sub-dropdown,
-.navbar__sub-dropdown:hover {
-  display: block;
-}
-
-// Add a small bridge area to prevent dropdown from closing
-.navbar__dropdown::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: transparent;
-}
-
-.navbar__sub-dropdown::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -1px;
-  width: 1px;
-  height: 100%;
-  background: transparent;
-}
-
-// Responsive Design
-@media (max-width: 768px) {
-  .navbar__container {
-    padding: 0 1rem;
-  }
-
-  .navbar__mobile-menu {
-    padding-top: 140px; // More space for smaller screens
-  }
-
-  .navbar__top {
-    padding: 0.5rem 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar__container {
-    height: 60px;
-  }
-
-  .navbar__mobile-menu {
-    padding-top: 110px;
-  }
-
-  .navbar__mobile-link {
-    font-size: 1rem;
-  }
-
-  .navbar__mobile-dropdown-link {
-    font-size: 0.9rem;
-  }
 }

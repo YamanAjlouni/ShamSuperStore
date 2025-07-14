@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, User, ShoppingCart, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
+import { Mail, User, ShoppingCart, Menu, X, ChevronDown, ChevronRight, Search } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartReducer';
 import shamSuperStoreLogo from '../../assets/images/shamSuperStoreLogo.jpg';
@@ -13,6 +13,7 @@ const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
     const [activeSubDropdown, setActiveSubDropdown] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const [mobileActiveDropdown, setMobileActiveDropdown] = useState(null);
     const [mobileActiveSubDropdown, setMobileActiveSubDropdown] = useState(null);
@@ -325,6 +326,18 @@ const Navbar = () => {
         handleLinkClick();
     };
 
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+            handleLinkClick();
+        }
+    };
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
     // Close mobile menu on resize
     useEffect(() => {
         const handleResize = () => {
@@ -376,6 +389,22 @@ const Navbar = () => {
                         <Link to="/" onClick={handleLinkClick}>
                             <img src={shamSuperStoreLogo} alt="Sham Super Store" />
                         </Link>
+                    </div>
+
+                    {/* Search Bar */}
+                    <div className="navbar__search">
+                        <form onSubmit={handleSearchSubmit} className="navbar__search-form">
+                            <input
+                                type="text"
+                                placeholder="Search products..."
+                                value={searchQuery}
+                                onChange={handleSearchChange}
+                                className="navbar__search-input"
+                            />
+                            <button type="submit" className="navbar__search-button">
+                                <Search size={20} />
+                            </button>
+                        </form>
                     </div>
 
                     {/* Top Actions (Desktop Only) */}
@@ -490,6 +519,22 @@ const Navbar = () => {
 
                 {/* Mobile Menu */}
                 <div className={`navbar__mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
+                    {/* Mobile Search */}
+                    <div className="navbar__mobile-search">
+                        <form onSubmit={handleSearchSubmit} className="navbar__mobile-search-form">
+                            <input
+                                type="text"
+                                placeholder="Search products..."
+                                value={searchQuery}
+                                onChange={handleSearchChange}
+                                className="navbar__mobile-search-input"
+                            />
+                            <button type="submit" className="navbar__mobile-search-button">
+                                <Search size={20} />
+                            </button>
+                        </form>
+                    </div>
+
                     {navItems.map((item, index) => (
                         <div key={index} className="navbar__mobile-item">
                             <div className="navbar__mobile-link-container">
