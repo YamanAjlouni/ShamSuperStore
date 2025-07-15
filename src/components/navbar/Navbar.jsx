@@ -391,8 +391,8 @@ const Navbar = () => {
                         </Link>
                     </div>
 
-                    {/* Search Bar */}
-                    <div className="navbar__search">
+                    {/* Search Bar - Desktop Only */}
+                    <div className="navbar__search navbar__search--desktop">
                         <form onSubmit={handleSearchSubmit} className="navbar__search-form">
                             <input
                                 type="text"
@@ -439,6 +439,24 @@ const Navbar = () => {
                         <span className={`navbar__toggle-line ${mobileMenuOpen ? 'active' : ''}`}></span>
                         <span className={`navbar__toggle-line ${mobileMenuOpen ? 'active' : ''}`}></span>
                     </div>
+                </div>
+            </div>
+
+            {/* Separate Search Bar for Tablet/Mobile */}
+            <div className="navbar__search-bar-mobile">
+                <div className="navbar__search-bar-container">
+                    <form onSubmit={handleSearchSubmit} className="navbar__search-form-mobile">
+                        <input
+                            type="text"
+                            placeholder="Search products..."
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                            className="navbar__search-input-mobile"
+                        />
+                        <button type="submit" className="navbar__search-button-mobile">
+                            <Search size={20} />
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -519,22 +537,6 @@ const Navbar = () => {
 
                 {/* Mobile Menu */}
                 <div className={`navbar__mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
-                    {/* Mobile Search */}
-                    <div className="navbar__mobile-search">
-                        <form onSubmit={handleSearchSubmit} className="navbar__mobile-search-form">
-                            <input
-                                type="text"
-                                placeholder="Search products..."
-                                value={searchQuery}
-                                onChange={handleSearchChange}
-                                className="navbar__mobile-search-input"
-                            />
-                            <button type="submit" className="navbar__mobile-search-button">
-                                <Search size={20} />
-                            </button>
-                        </form>
-                    </div>
-
                     {navItems.map((item, index) => (
                         <div key={index} className="navbar__mobile-item">
                             <div className="navbar__mobile-link-container">

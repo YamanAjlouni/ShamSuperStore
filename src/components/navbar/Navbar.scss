@@ -22,7 +22,7 @@ $transition: all 0.2s ease-in-out;
   border: 1px solid rgba(255, 255, 255, $opacity);
 }
 
-// Search Bar Styles
+// Search Bar Styles - Desktop
 .navbar__search {
   flex: 1;
   max-width: 600px;
@@ -33,19 +33,16 @@ $transition: all 0.2s ease-in-out;
     margin: 0 1.5rem;
   }
 
+  // Hide on tablet and mobile - only show desktop version
   @media (max-width: 1200px) {
-    max-width: 400px;
-    margin: 0 1rem;
+    display: none;
   }
+}
 
-  @media (max-width: 768px) {
-    max-width: 300px;
-    margin: 0 0.5rem;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 250px;
-    margin: 0 0.5rem;
+// Desktop search modifier
+.navbar__search--desktop {
+  @media (max-width: 1200px) {
+    display: none;
   }
 }
 
@@ -83,11 +80,6 @@ $transition: all 0.2s ease-in-out;
     font-size: 0.85rem;
   }
 
-  @media (max-width: 480px) {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.8rem;
-  }
-
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
     font-weight: 300;
@@ -114,10 +106,6 @@ $transition: all 0.2s ease-in-out;
     padding: 0.6rem 0.8rem;
   }
 
-  @media (max-width: 480px) {
-    padding: 0.6rem 0.8rem;
-  }
-
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     color: $white;
@@ -136,11 +124,147 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Mobile Search Bar
+// NEW: Separate Search Bar for Tablet/Mobile
+.navbar__search-bar-mobile {
+  display: none;
+  background: linear-gradient(135deg, $primary-color 0%, $primary-blue-hover 50%, lighten($primary-color, 10%) 100%);
+  box-shadow: 0 2px 10px rgba(66, 103, 178, 0.3);
+  position: relative;
+  z-index: 999;
+
+  @media (max-width: 1200px) {
+    display: block;
+    position: fixed;
+    top: 85px; // Adjust based on your top bar height
+    left: 0;
+    right: 0;
+    padding: 1rem 0;
+    box-shadow: $shadow-md;
+  }
+
+  @media (max-width: 768px) {
+    top: 85px; // Adjust for mobile
+    padding: 0.8rem 0;
+  }
+
+  @media (max-width: 480px) {
+    top: 80px;
+    padding: 0.7rem 0;
+  }
+}
+
+.navbar__search-bar-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.75rem;
+  }
+}
+
+.navbar__search-form-mobile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: $shadow-lg;
+  transition: $transition;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+
+  &:focus-within {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: $shadow-xl;
+    transform: translateY(-2px);
+    border-color: $primary-blue-light;
+  }
+}
+
+.navbar__search-input-mobile {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: $text-dark;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  transition: $transition;
+
+  @media (max-width: 768px) {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  &::placeholder {
+    color: $gray-500;
+    font-weight: 400;
+  }
+
+  &:focus::placeholder {
+    color: $gray-400;
+  }
+}
+
+.navbar__search-button-mobile {
+  background: linear-gradient(135deg, $orange-color 0%, darken($orange-color, 15%) 100%);
+  border: none;
+  color: $white;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition;
+  border-radius: 0;
+  min-width: 60px;
+
+  @media (max-width: 768px) {
+    padding: 0.9rem 1.1rem;
+    min-width: 55px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.8rem 1rem;
+    min-width: 50px;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, darken($orange-color, 10%) 0%, darken($orange-color, 25%) 100%);
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  svg {
+    transition: $transition;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
+}
+
+// Mobile Search Bar (in menu)
 .navbar__mobile-search {
   padding: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 1rem;
+  display: none; // Hide since we have separate search bar
 }
 
 .navbar__mobile-search-form {
@@ -272,7 +396,15 @@ $transition: all 0.2s ease-in-out;
   }
 
   @media (max-width: 1200px) {
-    margin-top: 0rem;
+    margin-top: 60px; // Add margin to account for search bar
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 55px;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 50px;
   }
 }
 
@@ -695,7 +827,15 @@ $transition: all 0.2s ease-in-out;
   transition: transform 0.3s ease-in-out;
   overflow-y: auto;
   z-index: 1001; // LOWER THAN TOGGLE BUTTON
-  padding: 120px 0 2rem 0; // More padding to account for fixed top bar
+  padding: 180px 0 2rem 0; // More padding to account for fixed top bar + search bar
+
+  @media (max-width: 768px) {
+    padding: 170px 0 2rem 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 160px 0 2rem 0;
+  }
 
   // Custom scrollbar
   &::-webkit-scrollbar {
@@ -812,4 +952,80 @@ $transition: all 0.2s ease-in-out;
   align-items: center;
   flex: 1;
   text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 1rem 0;
+  transition: $transition;
+
+  &:hover {
+    color: $white;
+    padding-left: 0.5rem;
+  }
+}
+
+.navbar__mobile-sub-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+  background: rgba(255, 255, 255, 0.03);
+  margin: 0 -1rem;
+  padding: 0 1rem;
+
+  &.active {
+    max-height: 1000px;
+    padding: 0.5rem 1rem 1rem 2rem;
+  }
+}
+
+.navbar__mobile-sub-dropdown-link {
+  display: block;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding: 0.8rem 0;
+  transition: $transition;
+
+  &:hover {
+    color: $white;
+    padding-left: 0.5rem;
+  }
+}
+
+.navbar__mobile-cart {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: $white;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: $transition;
+  position: relative;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+.navbar__mobile-cart-badge {
+  background: $orange-color;
+  color: $white;
+  border-radius: 50%;
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  border: 2px solid $white;
+  margin-left: auto;
 }
