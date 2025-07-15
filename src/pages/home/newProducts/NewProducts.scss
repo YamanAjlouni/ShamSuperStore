@@ -18,13 +18,19 @@
         font-weight: 600;
         color: $text-dark;
         margin-bottom: 30px;
-        text-align: left;
+        text-align: left; // Default for LTR
 
         @media (max-width: 768px) {
             font-size: 20px;
             margin: 0 30px;
             margin-bottom: 20px;
         }
+    }
+
+    // RTL title alignment
+    .rtl .section-title {
+        text-align: right;
+        font-family: 'Arial', 'Tahoma', sans-serif;
     }
 
     .products-swiper-container {
@@ -40,7 +46,7 @@
         }
     }
 
-    // Navigation buttons positioned in the padding area
+    // Navigation buttons positioned in the padding area - keep exact design
     .custom-nav-button {
         position: absolute;
         top: 50%;
@@ -91,7 +97,7 @@
         }
 
         &.prev-button {
-            left: 10px;
+            left: 10px; // Keep your exact positioning
 
             @media (max-width: 768px) {
                 left: 5px;
@@ -99,7 +105,7 @@
         }
 
         &.next-button {
-            right: 10px;
+            right: 10px; // Keep your exact positioning
 
             @media (max-width: 768px) {
                 right: 5px;
@@ -109,6 +115,19 @@
 
     .products-swiper {
         position: relative;
+
+        // RTL layout handling through CSS
+        &.rtl-swiper {
+            direction: rtl;
+
+            .swiper-wrapper {
+                direction: ltr;
+            }
+
+            .swiper-slide {
+                direction: ltr; // Reset direction for slide content
+            }
+        }
 
         .swiper-slide {
             height: auto;
@@ -159,7 +178,7 @@
                 .store-icon-overlay {
                     position: absolute;
                     bottom: 8px;
-                    right: 8px;
+                    right: 8px; // Keep your exact positioning
                     width: 32px;
                     height: 32px;
                     background-color: $primary-color;

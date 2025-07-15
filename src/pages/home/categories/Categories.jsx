@@ -1,44 +1,50 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../../context/LanguageContext';
 import './Categories.scss';
 
 const Categories = () => {
+    const { t, isRTL } = useLanguage();
+
     const categories = [
         // Row 1
-        { id: 1, icon: 'computer-icon', name: 'Computers' },
-        { id: 2, icon: 'headphones-icon', name: 'Electronics' },
-        { id: 3, icon: 'smarthome-icon', name: 'Smart Home' },
-        { id: 5, icon: 'furniture-icon', name: 'Furniture' },
-        { id: 6, icon: 'clothes-icon', name: 'Clothes' },
-        { id: 7, icon: 'shoes-icon', name: 'Shoes' },
+        { id: 1, icon: 'computer-icon', name: t('home.categories.items.computers') },
+        { id: 2, icon: 'headphones-icon', name: t('home.categories.items.electronics') },
+        { id: 3, icon: 'smarthome-icon', name: t('home.categories.items.smartHome') },
+        { id: 5, icon: 'furniture-icon', name: t('home.categories.items.furniture') },
+        { id: 6, icon: 'clothes-icon', name: t('home.categories.items.clothes') },
+        { id: 7, icon: 'shoes-icon', name: t('home.categories.items.shoes') },
 
         // Row 2
-        { id: 4, icon: 'home-garden-icon', name: 'Home & Garden' },
-        { id: 11, icon: 'sport-icon', name: 'Sport & Outdoor Activities' },
-        { id: 9, icon: 'teen-icon', name: 'Teen Supplies' },
-        { id: 8, icon: 'babies-icon', name: 'Babies & Kids Supply' },
-        { id: 10, icon: 'beauty-icon', name: 'Beauty & Health' },
-        { id: 20, icon: 'bags-icon', name: 'Bags & Luggage' },
+        { id: 4, icon: 'home-garden-icon', name: t('home.categories.items.homeGarden') },
+        { id: 11, icon: 'sport-icon', name: t('home.categories.items.sport') },
+        { id: 9, icon: 'teen-icon', name: t('home.categories.items.teen') },
+        { id: 8, icon: 'babies-icon', name: t('home.categories.items.babies') },
+        { id: 10, icon: 'beauty-icon', name: t('home.categories.items.beauty') },
+        { id: 20, icon: 'bags-icon', name: t('home.categories.items.bags') },
 
         // Row 3
-        { id: 14, icon: 'entertainment-icon', name: 'Entertainment' },
-        { id: 15, icon: 'handmade-icon', name: 'Handmade' },
-        { id: 16, icon: 'school-icon', name: 'School & Office Supplies' },
-        { id: 13, icon: 'pets-icon', name: 'Pets Supplies' },
-        { id: 18, icon: 'cars-icon', name: 'Cars' },
-        { id: 17, icon: 'books-icon', name: 'Books' },
+        { id: 14, icon: 'entertainment-icon', name: t('home.categories.items.entertainment') },
+        { id: 15, icon: 'handmade-icon', name: t('home.categories.items.handmade') },
+        { id: 16, icon: 'school-icon', name: t('home.categories.items.school') },
+        { id: 13, icon: 'pets-icon', name: t('home.categories.items.pets') },
+        { id: 18, icon: 'cars-icon', name: t('home.categories.items.cars') },
+        { id: 17, icon: 'books-icon', name: t('home.categories.items.books') },
     ];
 
     return (
         <div className="categories-section">
-            <h2 className="section-title">Categories</h2>
+            <div className={isRTL ? 'rtl' : 'ltr'}>
+                <h2 className="section-title">{t('home.categories.title')}</h2>
+            </div>
 
-            <div className="categories-grid">
+            <div className={`categories-grid ${isRTL ? 'rtl-grid' : ''}`}>
                 {categories.map((category) => (
-                    <Link 
-                        key={category.id} 
+                    <Link
+                        key={category.id}
                         to={`/shop/category/${category.id}`}
                         className="category-item"
+                        aria-label={t('home.categories.accessibility.categoryLink', { categoryName: category.name })}
                     >
                         <div className={`category-icon ${category.icon}`}></div>
                         <span className="category-name">{category.name}</span>

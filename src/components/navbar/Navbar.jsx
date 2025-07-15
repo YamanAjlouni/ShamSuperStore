@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Mail, User, ShoppingCart, Menu, X, ChevronDown, ChevronRight, Search } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartReducer';
+import { useLanguage } from '../../context/LanguageContext';
 import shamSuperStoreLogo from '../../assets/images/shamSuperStoreLogo.jpg';
 import './Navbar.scss';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const { toggleCart, getTotalItems } = useCart();
+    const { t, language, changeLanguage, isRTL } = useLanguage();
     const totalItems = getTotalItems();
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,253 +22,256 @@ const Navbar = () => {
 
     const navItems = [
         {
-            title: 'Home',
+            title: t('navbar.navigation.home'),
             link: '/'
         },
         {
-            title: 'Shop',
+            title: t('navbar.navigation.shop'),
             link: '/shop',
             dropdown: [
-                { title: 'All Categories', link: '/shop' },
+                { title: t('navbar.shop.allCategories'), link: '/shop' },
                 {
-                    title: 'Computer',
+                    title: t('navbar.shop.computer'),
                     link: '/shop/category/1',
                     subDropdown: [
-                        { title: 'Desktop Computer', link: '/shop/category/1/desktop' },
-                        { title: 'Tablet PC', link: '/shop/category/1/tablet' },
-                        { title: 'Computer Monitor', link: '/shop/category/1/monitor' },
-                        { title: 'Computer Mouse - Keyboard', link: '/shop/category/1/mouse-keyboard' },
-                        { title: 'Computer Software', link: '/shop/category/1/software' },
-                        { title: 'Computer Accessories', link: '/shop/category/1/accessories' },
-                        { title: 'Computer Components', link: '/shop/category/1/components' }
+                        { title: t('navbar.computer.desktop'), link: '/shop/category/1/desktop' },
+                        { title: t('navbar.computer.tablet'), link: '/shop/category/1/tablet' },
+                        { title: t('navbar.computer.monitor'), link: '/shop/category/1/monitor' },
+                        { title: t('navbar.computer.mouseKeyboard'), link: '/shop/category/1/mouse-keyboard' },
+                        { title: t('navbar.computer.software'), link: '/shop/category/1/software' },
+                        { title: t('navbar.computer.accessories'), link: '/shop/category/1/accessories' },
+                        { title: t('navbar.computer.components'), link: '/shop/category/1/components' }
                     ]
                 },
                 {
-                    title: 'Electronics',
+                    title: t('navbar.shop.electronics'),
                     link: '/shop/category/2',
                     subDropdown: [
-                        { title: 'Mobile - Smart Phone', link: '/shop/category/2/mobile' },
-                        { title: 'Wearable Technology', link: '/shop/category/2/wearable' },
-                        { title: 'TV and Video', link: '/shop/category/2/tv-video' },
-                        { title: 'Speakers', link: '/shop/category/2/speakers' },
-                        { title: 'Cameras - Pictures', link: '/shop/category/2/cameras' },
-                        { title: 'Movies - Music', link: '/shop/category/2/movies-music' },
-                        { title: 'Musical Instruments', link: '/shop/category/2/musical-instruments' },
-                        { title: 'Electronic Office Equipment', link: '/shop/category/2/office-equipment' }
+                        { title: t('navbar.electronics.mobile'), link: '/shop/category/2/mobile' },
+                        { title: t('navbar.electronics.wearable'), link: '/shop/category/2/wearable' },
+                        { title: t('navbar.electronics.tvVideo'), link: '/shop/category/2/tv-video' },
+                        { title: t('navbar.electronics.speakers'), link: '/shop/category/2/speakers' },
+                        { title: t('navbar.electronics.cameras'), link: '/shop/category/2/cameras' },
+                        { title: t('navbar.electronics.moviesMusic'), link: '/shop/category/2/movies-music' },
+                        { title: t('navbar.electronics.musicalInstruments'), link: '/shop/category/2/musical-instruments' },
+                        { title: t('navbar.electronics.officeEquipment'), link: '/shop/category/2/office-equipment' }
                     ]
                 },
                 {
-                    title: 'Smart Home',
+                    title: t('navbar.shop.smartHome'),
                     link: '/shop/category/3',
                     subDropdown: [
-                        { title: 'Smart Lock', link: '/shop/category/3/smart-lock' },
-                        { title: 'Smart Lighting', link: '/shop/category/3/smart-lighting' },
-                        { title: 'Vacuums - Mops', link: '/shop/category/3/vacuums-mops' },
-                        { title: 'Plugs - Outlets', link: '/shop/category/3/plugs-outlets' },
-                        { title: 'WiFi - Networking', link: '/shop/category/3/wifi-networking' },
-                        { title: 'Detectors - Sensors', link: '/shop/category/3/detectors-sensors' },
-                        { title: 'Security Cameras - Systems', link: '/shop/category/3/security-cameras' }
+                        { title: t('navbar.smartHome.smartLock'), link: '/shop/category/3/smart-lock' },
+                        { title: t('navbar.smartHome.smartLighting'), link: '/shop/category/3/smart-lighting' },
+                        { title: t('navbar.smartHome.vacuumsMops'), link: '/shop/category/3/vacuums-mops' },
+                        { title: t('navbar.smartHome.plugsOutlets'), link: '/shop/category/3/plugs-outlets' },
+                        { title: t('navbar.smartHome.wifiNetworking'), link: '/shop/category/3/wifi-networking' },
+                        { title: t('navbar.smartHome.detectorsSensors'), link: '/shop/category/3/detectors-sensors' },
+                        { title: t('navbar.smartHome.securityCameras'), link: '/shop/category/3/security-cameras' }
                     ]
                 },
                 {
-                    title: 'Home - Garden',
+                    title: t('navbar.shop.homeGarden'),
                     link: '/shop/category/4',
                     subDropdown: [
-                        { title: 'Home Appliances - Electrical Tools', link: '/shop/category/4/home-appliances' },
-                        { title: 'Kitchen', link: '/shop/category/4/kitchen' },
-                        { title: 'Bath', link: '/shop/category/4/bath' },
-                        { title: 'Laundry Supplies', link: '/shop/category/4/laundry' },
-                        { title: 'Heating - Cooling', link: '/shop/category/4/heating-cooling' },
-                        { title: 'Lighting', link: '/shop/category/4/lighting' },
-                        { title: 'Home Audio - Video Systems', link: '/shop/category/4/home-audio-video' },
-                        { title: 'Storage - Organization Supplies', link: '/shop/category/4/storage' },
-                        { title: 'Home Repair Tools', link: '/shop/category/4/home-repair' },
-                        { title: 'Lawn - Garden', link: '/shop/category/4/lawn-garden' },
-                        { title: 'Garden Supplies - Outdoor Activities', link: '/shop/category/4/garden-supplies' }
+                        { title: t('navbar.homeGarden.homeAppliances'), link: '/shop/category/4/home-appliances' },
+                        { title: t('navbar.homeGarden.kitchen'), link: '/shop/category/4/kitchen' },
+                        { title: t('navbar.homeGarden.bath'), link: '/shop/category/4/bath' },
+                        { title: t('navbar.homeGarden.laundry'), link: '/shop/category/4/laundry' },
+                        { title: t('navbar.homeGarden.heatingCooling'), link: '/shop/category/4/heating-cooling' },
+                        { title: t('navbar.homeGarden.lighting'), link: '/shop/category/4/lighting' },
+                        { title: t('navbar.homeGarden.homeAudioVideo'), link: '/shop/category/4/home-audio-video' },
+                        { title: t('navbar.homeGarden.storage'), link: '/shop/category/4/storage' },
+                        { title: t('navbar.homeGarden.homeRepair'), link: '/shop/category/4/home-repair' },
+                        { title: t('navbar.homeGarden.lawnGarden'), link: '/shop/category/4/lawn-garden' },
+                        { title: t('navbar.homeGarden.gardenSupplies'), link: '/shop/category/4/garden-supplies' }
                     ]
                 },
                 {
-                    title: 'Furniture',
+                    title: t('navbar.shop.furniture'),
                     link: '/shop/category/5',
                     subDropdown: [
-                        { title: 'Chair', link: '/shop/category/5/chair' },
-                        { title: 'Sofa', link: '/shop/category/5/sofa' },
-                        { title: 'Living Room', link: '/shop/category/5/living-room' },
-                        { title: 'Guest Room', link: '/shop/category/5/guest-room' },
-                        { title: 'Kids - Children Room', link: '/shop/category/5/kids-room' },
-                        { title: 'Dining Room', link: '/shop/category/5/dining-room' },
-                        { title: 'Bedroom', link: '/shop/category/5/bedroom' },
-                        { title: 'Study - Home Office', link: '/shop/category/5/study-office' },
-                        { title: 'Outdoor Furniture', link: '/shop/category/5/outdoor' },
-                        { title: 'Antiques - Fine Arts', link: '/shop/category/5/antiques' }
+                        { title: t('navbar.furniture.chair'), link: '/shop/category/5/chair' },
+                        { title: t('navbar.furniture.sofa'), link: '/shop/category/5/sofa' },
+                        { title: t('navbar.furniture.livingRoom'), link: '/shop/category/5/living-room' },
+                        { title: t('navbar.furniture.guestRoom'), link: '/shop/category/5/guest-room' },
+                        { title: t('navbar.furniture.kidsRoom'), link: '/shop/category/5/kids-room' },
+                        { title: t('navbar.furniture.diningRoom'), link: '/shop/category/5/dining-room' },
+                        { title: t('navbar.furniture.bedroom'), link: '/shop/category/5/bedroom' },
+                        { title: t('navbar.furniture.studyOffice'), link: '/shop/category/5/study-office' },
+                        { title: t('navbar.furniture.outdoor'), link: '/shop/category/5/outdoor' },
+                        { title: t('navbar.furniture.antiques'), link: '/shop/category/5/antiques' }
                     ]
                 },
                 {
-                    title: 'Clothes',
+                    title: t('navbar.shop.clothes'),
                     link: '/shop/category/6',
                     subDropdown: [
-                        { title: 'Women\'s Clothing', link: '/shop/category/6/womens' },
-                        { title: 'Men\'s Clothing', link: '/shop/category/6/mens' },
-                        { title: 'Girl\'s Clothing', link: '/shop/category/6/girls' },
-                        { title: 'Boy\'s Clothing', link: '/shop/category/6/boys' },
-                        { title: 'Children\'s Clothing', link: '/shop/category/6/childrens' },
-                        { title: 'Infant\'s - Baby\'s Clothing', link: '/shop/category/6/baby' }
+                        { title: t('navbar.clothes.womens'), link: '/shop/category/6/womens' },
+                        { title: t('navbar.clothes.mens'), link: '/shop/category/6/mens' },
+                        { title: t('navbar.clothes.girls'), link: '/shop/category/6/girls' },
+                        { title: t('navbar.clothes.boys'), link: '/shop/category/6/boys' },
+                        { title: t('navbar.clothes.childrens'), link: '/shop/category/6/childrens' },
+                        { title: t('navbar.clothes.baby'), link: '/shop/category/6/baby' }
                     ]
                 },
                 {
-                    title: 'Shoes',
+                    title: t('navbar.shop.shoes'),
                     link: '/shop/category/7',
                     subDropdown: [
-                        { title: 'Women\'s Shoes', link: '/shop/category/7/womens' },
-                        { title: 'Men\'s Shoes', link: '/shop/category/7/mens' },
-                        { title: 'Girl\'s Shoes', link: '/shop/category/7/girls' },
-                        { title: 'Boy\'s Shoes', link: '/shop/category/7/boys' },
-                        { title: 'Children\'s Shoes', link: '/shop/category/7/childrens' }
+                        { title: t('navbar.shoes.womens'), link: '/shop/category/7/womens' },
+                        { title: t('navbar.shoes.mens'), link: '/shop/category/7/mens' },
+                        { title: t('navbar.shoes.girls'), link: '/shop/category/7/girls' },
+                        { title: t('navbar.shoes.boys'), link: '/shop/category/7/boys' },
+                        { title: t('navbar.shoes.childrens'), link: '/shop/category/7/childrens' }
                     ]
                 },
                 {
-                    title: 'Babies - Kids - Children Supplies',
+                    title: t('navbar.shop.babiesKidsChildren'),
                     link: '/shop/category/8',
                     subDropdown: [
-                        { title: 'Babies Supplies', link: '/shop/category/8/babies' },
-                        { title: 'Kids - Children Supplies', link: '/shop/category/8/kids' },
-                        { title: 'Children Toys', link: '/shop/category/8/toys' },
-                        { title: 'Baby Diapers', link: '/shop/category/8/diapers' }
+                        { title: t('navbar.babiesKids.babies'), link: '/shop/category/8/babies' },
+                        { title: t('navbar.babiesKids.kids'), link: '/shop/category/8/kids' },
+                        { title: t('navbar.babiesKids.toys'), link: '/shop/category/8/toys' },
+                        { title: t('navbar.babiesKids.diapers'), link: '/shop/category/8/diapers' }
                     ]
                 },
-                { title: 'Teen Supplies', link: '/shop/category/9' },
+                { title: t('navbar.shop.teenSupplies'), link: '/shop/category/9' },
                 {
-                    title: 'Beauty - Health',
+                    title: t('navbar.shop.beautyHealth'),
                     link: '/shop/category/10',
                     subDropdown: [
-                        { title: 'Cosmetics Accessories', link: '/shop/category/10/cosmetics' },
-                        { title: 'Specialized Skin Care', link: '/shop/category/10/skin-care' },
-                        { title: 'Salon - Spa Products', link: '/shop/category/10/salon-spa' },
-                        { title: 'Vitamins - Other Nutrients', link: '/shop/category/10/vitamins' },
-                        { title: 'Men\'s Cosmetics Skin Care', link: '/shop/category/10/mens-cosmetics' },
-                        { title: 'Jewelry', link: '/shop/category/10/jewelry' },
-                        { title: 'Sunglasses', link: '/shop/category/10/sunglasses' },
-                        { title: 'Watches', link: '/shop/category/10/watches' }
+                        { title: t('navbar.beautyHealth.cosmetics'), link: '/shop/category/10/cosmetics' },
+                        { title: t('navbar.beautyHealth.skinCare'), link: '/shop/category/10/skin-care' },
+                        { title: t('navbar.beautyHealth.salonSpa'), link: '/shop/category/10/salon-spa' },
+                        { title: t('navbar.beautyHealth.vitamins'), link: '/shop/category/10/vitamins' },
+                        { title: t('navbar.beautyHealth.mensCosmetics'), link: '/shop/category/10/mens-cosmetics' },
+                        { title: t('navbar.beautyHealth.jewelry'), link: '/shop/category/10/jewelry' },
+                        { title: t('navbar.beautyHealth.sunglasses'), link: '/shop/category/10/sunglasses' },
+                        { title: t('navbar.beautyHealth.watches'), link: '/shop/category/10/watches' }
                     ]
                 },
                 {
-                    title: 'Sports - Outdoor Activities',
+                    title: t('navbar.shop.sportsOutdoor'),
                     link: '/shop/category/11',
                     subDropdown: [
-                        { title: 'Sports Equipment', link: '/shop/category/11/sports-equipment' },
-                        { title: 'Exercise - Fitness Equipment', link: '/shop/category/11/exercise-fitness' },
-                        { title: 'Game Rooms - Outdoor Games', link: '/shop/category/11/game-rooms' },
-                        { title: 'Outdoor Entertainment - Equipment', link: '/shop/category/11/outdoor-entertainment' },
-                        { title: 'Golf', link: '/shop/category/11/golf' },
-                        { title: 'Hunting', link: '/shop/category/11/hunting' },
-                        { title: 'Cycling', link: '/shop/category/11/cycling' },
-                        { title: 'Fishing - Boating', link: '/shop/category/11/fishing-boating' }
+                        { title: t('navbar.sportsOutdoor.sportsEquipment'), link: '/shop/category/11/sports-equipment' },
+                        { title: t('navbar.sportsOutdoor.exerciseFitness'), link: '/shop/category/11/exercise-fitness' },
+                        { title: t('navbar.sportsOutdoor.gameRooms'), link: '/shop/category/11/game-rooms' },
+                        { title: t('navbar.sportsOutdoor.outdoorEntertainment'), link: '/shop/category/11/outdoor-entertainment' },
+                        { title: t('navbar.sportsOutdoor.golf'), link: '/shop/category/11/golf' },
+                        { title: t('navbar.sportsOutdoor.hunting'), link: '/shop/category/11/hunting' },
+                        { title: t('navbar.sportsOutdoor.cycling'), link: '/shop/category/11/cycling' },
+                        { title: t('navbar.sportsOutdoor.fishingBoating'), link: '/shop/category/11/fishing-boating' }
                     ]
                 },
                 {
-                    title: 'Food Grocery',
+                    title: t('navbar.shop.foodGrocery'),
                     link: '/shop/category/12',
                     subDropdown: [
-                        { title: 'Gourmet Food', link: '/shop/category/12/gourmet' }
+                        { title: t('navbar.foodGrocery.gourmet'), link: '/shop/category/12/gourmet' }
                     ]
                 },
                 {
-                    title: 'Pets Supplies',
+                    title: t('navbar.shop.petsSupplies'),
                     link: '/shop/category/13',
                     subDropdown: [
-                        { title: 'Cat Food', link: '/shop/category/13/cat-food' },
-                        { title: 'Cat Supplies', link: '/shop/category/13/cat-supplies' },
-                        { title: 'Dog Food', link: '/shop/category/13/dog-food' },
-                        { title: 'Dog Supplies', link: '/shop/category/13/dog-supplies' },
-                        { title: 'Bird Food', link: '/shop/category/13/bird-food' },
-                        { title: 'Bird Supplies', link: '/shop/category/13/bird-supplies' },
-                        { title: 'Fish Aquatic Supplies', link: '/shop/category/13/fish-supplies' },
-                        { title: 'Other Animal Supplies', link: '/shop/category/13/other-animals' }
+                        { title: t('navbar.petsSupplies.catFood'), link: '/shop/category/13/cat-food' },
+                        { title: t('navbar.petsSupplies.catSupplies'), link: '/shop/category/13/cat-supplies' },
+                        { title: t('navbar.petsSupplies.dogFood'), link: '/shop/category/13/dog-food' },
+                        { title: t('navbar.petsSupplies.dogSupplies'), link: '/shop/category/13/dog-supplies' },
+                        { title: t('navbar.petsSupplies.birdFood'), link: '/shop/category/13/bird-food' },
+                        { title: t('navbar.petsSupplies.birdSupplies'), link: '/shop/category/13/bird-supplies' },
+                        { title: t('navbar.petsSupplies.fishSupplies'), link: '/shop/category/13/fish-supplies' },
+                        { title: t('navbar.petsSupplies.otherAnimals'), link: '/shop/category/13/other-animals' }
                     ]
                 },
                 {
-                    title: 'Entertainment',
+                    title: t('navbar.shop.entertainment'),
                     link: '/shop/category/14',
                     subDropdown: [
-                        { title: 'Video Games', link: '/shop/category/14/video-games' },
-                        { title: 'Home Entertainment System', link: '/shop/category/14/home-entertainment' },
-                        { title: 'VR - Virtual Reality', link: '/shop/category/14/vr' }
+                        { title: t('navbar.entertainment.videoGames'), link: '/shop/category/14/video-games' },
+                        { title: t('navbar.entertainment.homeEntertainment'), link: '/shop/category/14/home-entertainment' },
+                        { title: t('navbar.entertainment.vr'), link: '/shop/category/14/vr' }
                     ]
                 },
                 {
-                    title: 'Handmade',
+                    title: t('navbar.shop.handmade'),
                     link: '/shop/category/15',
                     subDropdown: [
-                        { title: 'Arts - Crafts - Sewing', link: '/shop/category/15/arts-crafts' }
+                        { title: t('navbar.handmade.artsCrafts'), link: '/shop/category/15/arts-crafts' }
                     ]
                 },
-                { title: 'School - Office Supplies', link: '/shop/category/16' },
-                { title: 'Books', link: '/shop/category/17' },
-                { title: 'Cars', link: '/shop/category/18' },
-                { title: 'Industrial Scientific Materials', link: '/shop/category/19' },
+                { title: t('navbar.shop.schoolOffice'), link: '/shop/category/16' },
+                { title: t('navbar.shop.books'), link: '/shop/category/17' },
+                { title: t('navbar.shop.cars'), link: '/shop/category/18' },
+                { title: t('navbar.shop.industrialScientific'), link: '/shop/category/19' },
                 {
-                    title: 'Bags - Luggage',
+                    title: t('navbar.shop.bagsLuggage'),
                     link: '/shop/category/20',
                     subDropdown: [
-                        { title: 'Handbags', link: '/shop/category/20/handbags' },
-                        { title: 'Shoulder Bags', link: '/shop/category/20/shoulder-bags' },
-                        { title: 'Luggage', link: '/shop/category/20/luggage' }
+                        { title: t('navbar.bagsLuggage.handbags'), link: '/shop/category/20/handbags' },
+                        { title: t('navbar.bagsLuggage.shoulderBags'), link: '/shop/category/20/shoulder-bags' },
+                        { title: t('navbar.bagsLuggage.luggage'), link: '/shop/category/20/luggage' }
                     ]
                 }
             ]
         },
         {
-            title: 'My Account',
+            title: t('navbar.navigation.myAccount'),
             link: '/my-account',
             dropdown: [
-                { title: 'Dashboard', link: '/my-account' },
-                { title: 'Orders', link: '/my-account' },
-                { title: 'Order Tracking', link: '/my-account' },
-                { title: 'Downloads', link: '/my-account' },
-                { title: 'Addresses', link: '/my-account' },
-                { title: 'Payment Methods', link: '/my-account' },
-                { title: 'Account Details', link: '/my-account' },
-                { title: 'Wishlist', link: '/my-account' },
-                { title: 'Following', link: '/my-account' },
-                { title: 'Support Tickets', link: '/my-account' },
-                { title: 'Contacted Sellers', link: '/my-account' },
-                { title: 'Lost Password', link: '/my-account' }
+                { title: t('navbar.myAccount.dashboard'), link: '/my-account' },
+                { title: t('navbar.myAccount.orders'), link: '/my-account' },
+                { title: t('navbar.myAccount.orderTracking'), link: '/my-account' },
+                { title: t('navbar.myAccount.downloads'), link: '/my-account' },
+                { title: t('navbar.myAccount.addresses'), link: '/my-account' },
+                { title: t('navbar.myAccount.paymentMethods'), link: '/my-account' },
+                { title: t('navbar.myAccount.accountDetails'), link: '/my-account' },
+                { title: t('navbar.myAccount.wishlist'), link: '/my-account' },
+                { title: t('navbar.myAccount.following'), link: '/my-account' },
+                { title: t('navbar.myAccount.supportTickets'), link: '/my-account' },
+                { title: t('navbar.myAccount.contactedSellers'), link: '/my-account' },
+                { title: t('navbar.myAccount.lostPassword'), link: '/my-account' }
             ]
         },
         {
-            title: 'About',
+            title: t('navbar.navigation.about'),
             link: '/about'
         },
         {
-            title: 'Contact Us',
+            title: t('navbar.navigation.contactUs'),
             link: '/contact'
         },
         {
-            title: 'Sellers',
+            title: t('navbar.navigation.sellers'),
             link: '/sellers',
             dropdown: [
-                { title: 'Vendor Registration', link: '/vendor-registration' },
-                { title: 'Vendor Membership', link: '/vendor-membership' },
-                { title: 'Store Manager', link: '/store-manager' },
-                { title: 'Vendors Drivers Manager', link: '/vendors-drivers-manager' },
-                { title: 'Stores List', link: '/stores-list' }
+                { title: t('navbar.sellers.vendorRegistration'), link: '/vendor-registration' },
+                { title: t('navbar.sellers.vendorMembership'), link: '/vendor-membership' },
+                { title: t('navbar.sellers.storeManager'), link: '/store-manager' },
+                { title: t('navbar.sellers.vendorsDriversManager'), link: '/vendors-drivers-manager' },
+                { title: t('navbar.sellers.storesList'), link: '/stores-list' }
             ]
         },
         {
-            title: 'Delivery Drivers',
+            title: t('navbar.navigation.deliveryDrivers'),
             link: '/delivery-drivers',
             dropdown: [
-                { title: 'Delivery Drivers', link: '/delivery-drivers' },
-                { title: 'Delivery Drivers Manager', link: '/delivery-drivers-manager' },
-                { title: 'Vendors Drivers Managers', link: '/vendors-drivers-managers' },
-                { title: 'Delivery Tracking', link: '/delivery-tracking' },
-                { title: 'Delivery Drivers App', link: '/delivery-drivers-app' }
+                { title: t('navbar.deliveryDrivers.deliveryDrivers'), link: '/delivery-drivers' },
+                { title: t('navbar.deliveryDrivers.deliveryDriversManager'), link: '/delivery-drivers-manager' },
+                { title: t('navbar.deliveryDrivers.vendorsDriversManagers'), link: '/vendors-drivers-managers' },
+                { title: t('navbar.deliveryDrivers.deliveryTracking'), link: '/delivery-tracking' },
+                { title: t('navbar.deliveryDrivers.deliveryDriversApp'), link: '/delivery-drivers-app' }
             ]
         },
         {
-            title: 'English',
+            title: language === 'en' ? t('navbar.languages.english') : t('navbar.languages.arabic'),
             dropdown: [
-                { title: 'العربية (Arabic)', link: '/ar' }
+                {
+                    title: language === 'en' ? t('navbar.languages.arabic') : t('navbar.languages.english'),
+                    onClick: () => changeLanguage(language === 'en' ? 'ar' : 'en')
+                }
             ]
         }
     ];
@@ -380,7 +385,7 @@ const Navbar = () => {
     }, [mobileMenuOpen]);
 
     return (
-        <nav className="navbar">
+        <nav className={`navbar ${isRTL ? 'rtl' : 'ltr'}`}>
             {/* Top Bar */}
             <div className="navbar__top">
                 <div className="navbar__top-container">
@@ -396,7 +401,7 @@ const Navbar = () => {
                         <form onSubmit={handleSearchSubmit} className="navbar__search-form">
                             <input
                                 type="text"
-                                placeholder="Search products..."
+                                placeholder={t('navbar.search.placeholder')}
                                 value={searchQuery}
                                 onChange={handleSearchChange}
                                 className="navbar__search-input"
@@ -414,7 +419,7 @@ const Navbar = () => {
                             onClick={() => handleNavigation('/contact')}
                         >
                             <Mail size={16} />
-                            <span>support@shamsuperstore.com</span>
+                            <span>{t('navbar.topActions.support')}</span>
                         </button>
 
                         <button
@@ -422,14 +427,14 @@ const Navbar = () => {
                             onClick={() => handleNavigation('/my-account')}
                         >
                             <User size={16} />
-                            <span>Login</span>
+                            <span>{t('navbar.topActions.login')}</span>
                         </button>
 
                         <button
                             className="navbar__seller-btn"
                             onClick={() => handleNavigation('/sellers')}
                         >
-                            Become a seller
+                            {t('navbar.topActions.becomeASeller')}
                         </button>
                     </div>
 
@@ -448,7 +453,7 @@ const Navbar = () => {
                     <form onSubmit={handleSearchSubmit} className="navbar__search-form-mobile">
                         <input
                             type="text"
-                            placeholder="Search products..."
+                            placeholder={t('navbar.search.placeholder')}
                             value={searchQuery}
                             onChange={handleSearchChange}
                             className="navbar__search-input-mobile"
@@ -491,15 +496,27 @@ const Navbar = () => {
                                             onMouseEnter={() => dropdownItem.subDropdown && handleSubMouseEnter(dropIndex)}
                                             onMouseLeave={handleSubMouseLeave}
                                         >
-                                            <Link to={dropdownItem.link} className="navbar__dropdown-link" onClick={handleLinkClick}>
-                                                {dropdownItem.title}
-                                                {dropdownItem.subDropdown && (
-                                                    <ChevronRight
-                                                        size={14}
-                                                        className="navbar__arrow--sub"
-                                                    />
-                                                )}
-                                            </Link>
+                                            {dropdownItem.onClick ? (
+                                                <button
+                                                    onClick={() => {
+                                                        dropdownItem.onClick();
+                                                        handleLinkClick();
+                                                    }}
+                                                    className="navbar__dropdown-link navbar__dropdown-link--button"
+                                                >
+                                                    {dropdownItem.title}
+                                                </button>
+                                            ) : (
+                                                <Link to={dropdownItem.link} className="navbar__dropdown-link" onClick={handleLinkClick}>
+                                                    {dropdownItem.title}
+                                                    {dropdownItem.subDropdown && (
+                                                        <ChevronRight
+                                                            size={14}
+                                                            className="navbar__arrow--sub"
+                                                        />
+                                                    )}
+                                                </Link>
+                                            )}
 
                                             {/* Third Level Dropdown */}
                                             {dropdownItem.subDropdown && activeSubDropdown === dropIndex && (
@@ -565,13 +582,25 @@ const Navbar = () => {
                                     {item.dropdown.map((dropdownItem, dropIndex) => (
                                         <div key={dropIndex} className="navbar__mobile-dropdown-item">
                                             <div className="navbar__mobile-dropdown-link-container">
-                                                <Link
-                                                    to={dropdownItem.link}
-                                                    className="navbar__mobile-dropdown-link"
-                                                    onClick={handleLinkClick}
-                                                >
-                                                    {dropdownItem.title}
-                                                </Link>
+                                                {dropdownItem.onClick ? (
+                                                    <button
+                                                        onClick={() => {
+                                                            dropdownItem.onClick();
+                                                            handleLinkClick();
+                                                        }}
+                                                        className="navbar__mobile-dropdown-link navbar__mobile-dropdown-link--button"
+                                                    >
+                                                        {dropdownItem.title}
+                                                    </button>
+                                                ) : (
+                                                    <Link
+                                                        to={dropdownItem.link}
+                                                        className="navbar__mobile-dropdown-link"
+                                                        onClick={handleLinkClick}
+                                                    >
+                                                        {dropdownItem.title}
+                                                    </Link>
+                                                )}
                                                 {dropdownItem.subDropdown && (
                                                     <button
                                                         className="navbar__mobile-arrow-btn"
@@ -610,7 +639,7 @@ const Navbar = () => {
                     <div className="navbar__mobile-item">
                         <button className="navbar__mobile-cart" onClick={handleCartClick}>
                             <ShoppingCart size={20} />
-                            <span>Cart</span>
+                            <span>{t('navbar.navigation.cart')}</span>
                             {totalItems > 0 && (
                                 <span className="navbar__mobile-cart-badge">
                                     {totalItems > 99 ? '99+' : totalItems}

@@ -22,6 +22,65 @@ $transition: all 0.2s ease-in-out;
   border: 1px solid rgba(255, 255, 255, $opacity);
 }
 
+// RTL Support Mixins
+@mixin rtl-ltr($ltr-value, $rtl-value, $property: 'direction') {
+  .ltr & {
+    #{$property}: $ltr-value;
+  }
+
+  .rtl & {
+    #{$property}: $rtl-value;
+  }
+}
+
+@mixin margin-inline($start: 0, $end: 0) {
+  .ltr & {
+    margin-left: $start;
+    margin-right: $end;
+  }
+
+  .rtl & {
+    margin-left: $end;
+    margin-right: $start;
+  }
+}
+
+@mixin padding-inline($start: 0, $end: 0) {
+  .ltr & {
+    padding-left: $start;
+    padding-right: $end;
+  }
+
+  .rtl & {
+    padding-left: $end;
+    padding-right: $start;
+  }
+}
+
+@mixin border-inline($start: none, $end: none) {
+  .ltr & {
+    border-left: $start;
+    border-right: $end;
+  }
+
+  .rtl & {
+    border-left: $end;
+    border-right: $start;
+  }
+}
+
+@mixin position-inline($start: auto, $end: auto) {
+  .ltr & {
+    left: $start;
+    right: $end;
+  }
+
+  .rtl & {
+    left: $end;
+    right: $start;
+  }
+}
+
 // Search Bar Styles - Desktop
 .navbar__search {
   flex: 1;
@@ -56,6 +115,11 @@ $transition: all 0.2s ease-in-out;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: $transition;
+
+  // RTL support
+  .rtl & {
+    direction: rtl;
+  }
 
   &:focus-within {
     @include glass-effect(0.25);
@@ -179,6 +243,11 @@ $transition: all 0.2s ease-in-out;
   transition: $transition;
   border: 2px solid rgba(255, 255, 255, 0.8);
 
+  // RTL support
+  .rtl & {
+    direction: rtl;
+  }
+
   &:focus-within {
     background: rgba(255, 255, 255, 1);
     box-shadow: $shadow-xl;
@@ -259,82 +328,7 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Mobile Search Bar (in menu)
-.navbar__mobile-search {
-  padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 1rem;
-  display: none; // Hide since we have separate search bar
-}
-
-.navbar__mobile-search-form {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  @include glass-effect(0.15);
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: $transition;
-
-  &:focus-within {
-    @include glass-effect(0.25);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  }
-}
-
-.navbar__mobile-search-input {
-  flex: 1;
-  padding: 0.8rem 1rem;
-  border: none;
-  background: transparent;
-  color: $white;
-  font-size: 1rem;
-  font-weight: 400;
-  outline: none;
-  transition: $transition;
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 300;
-  }
-
-  &:focus::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-  }
-}
-
-.navbar__mobile-search-button {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: $white;
-  padding: 0.8rem 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: $transition;
-  border-radius: 0;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: $white;
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  svg {
-    transition: $transition;
-  }
-
-  &:hover svg {
-    transform: scale(1.1);
-  }
-}
-
+// Main Navbar Container
 .navbar {
   background: $primary-color;
   box-shadow: $shadow-lg;
@@ -342,6 +336,15 @@ $transition: all 0.2s ease-in-out;
   top: 0;
   z-index: 1000;
   width: 100%;
+
+  // RTL Support for entire navbar
+  &.rtl {
+    direction: rtl;
+  }
+
+  &.ltr {
+    direction: ltr;
+  }
 }
 
 .navbar__top {
@@ -484,16 +487,27 @@ $transition: all 0.2s ease-in-out;
     transform: translateY(-1px);
     box-shadow: $shadow-md;
   }
-}
 
-.navbar__action-btn svg {
-  opacity: 0.9;
-  transition: $transition;
-}
+  // RTL icon positioning
+  svg {
+    opacity: 0.9;
+    transition: $transition;
 
-.navbar__action-btn:hover svg {
-  opacity: 1;
-  transform: scale(1.1);
+    .rtl & {
+      order: 2;
+    }
+  }
+
+  span {
+    .rtl & {
+      order: 1;
+    }
+  }
+
+  &:hover svg {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 }
 
 .navbar__seller-btn {
@@ -543,10 +557,10 @@ $transition: all 0.2s ease-in-out;
 }
 
 .navbar__item.navbar__cart {
-  margin-left: 1.25rem;
+  @include margin-inline(1.25rem, 0);
 
   @media (min-width: 1200px) {
-    margin-left: 1rem;
+    @include margin-inline(1rem, 0);
   }
 }
 
@@ -574,19 +588,32 @@ $transition: all 0.2s ease-in-out;
 }
 
 .navbar__arrow {
-  margin-left: 0.5rem;
+  @include margin-inline(0.5rem, 0);
   transition: transform 0.2s ease;
   color: rgba(255, 255, 255, 0.8);
 
   // SMALLER SIZE FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    margin-left: 0.4rem; // Reduced margin
+    @include margin-inline(0.4rem, 0); // Reduced margin
+  }
+
+  // RTL rotation adjustment
+  .rtl & {
+    &.rotated {
+      transform: rotate(180deg);
+    }
   }
 }
 
 .navbar__arrow--sub {
   margin-left: auto;
   color: rgba(33, 78, 113, 0.7);
+
+  .rtl & {
+    margin-left: 0;
+    margin-right: auto;
+    transform: scaleX(-1);
+  }
 }
 
 // Cart Button
@@ -618,7 +645,6 @@ $transition: all 0.2s ease-in-out;
 .navbar__cart-badge {
   position: absolute;
   top: -8px;
-  right: -8px;
   background: $orange-color;
   color: $white;
   border-radius: 50%;
@@ -630,13 +656,16 @@ $transition: all 0.2s ease-in-out;
   border: 2px solid $white;
   box-shadow: $shadow-sm;
 
+  // RTL positioning
+  @include position-inline(auto, -8px);
+
   // SMALLER SIZE FOR DESKTOP ONLY
   @media (min-width: 1200px) {
     min-width: 18px; // Slightly smaller
     height: 18px;
     font-size: 11px;
     top: -6px;
-    right: -6px;
+    @include position-inline(auto, -6px);
   }
 }
 
@@ -644,7 +673,6 @@ $transition: all 0.2s ease-in-out;
 .navbar__dropdown {
   position: absolute;
   top: 100%;
-  left: 0;
   background: $white;
   border-radius: 0.5rem;
   box-shadow: $shadow-lg;
@@ -658,6 +686,13 @@ $transition: all 0.2s ease-in-out;
   transition: $transition;
   // Remove gap by positioning closer
   margin-top: -2px;
+
+  // RTL positioning
+  @include position-inline(0, auto);
+
+  .rtl & {
+    text-align: right;
+  }
 
   // SMALLER WIDTH FOR DESKTOP ONLY
   @media (min-width: 1200px) {
@@ -701,7 +736,8 @@ $transition: all 0.2s ease-in-out;
   position: relative;
 }
 
-.navbar__dropdown-link {
+.navbar__dropdown-link,
+.navbar__dropdown-link--button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -710,6 +746,11 @@ $transition: all 0.2s ease-in-out;
   color: $dark-blue-color;
   transition: $transition;
   font-size: 0.9rem;
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: inherit;
 
   // SMALLER PADDING AND FONT FOR DESKTOP ONLY
   @media (min-width: 1200px) {
@@ -731,7 +772,6 @@ $transition: all 0.2s ease-in-out;
 .navbar__sub-dropdown {
   position: absolute;
   top: -2px; // Align with parent item
-  left: 100%;
   background: $white;
   border-radius: 0.5rem;
   box-shadow: $shadow-lg;
@@ -742,6 +782,15 @@ $transition: all 0.2s ease-in-out;
   z-index: 1002;
   // Remove gap completely
   margin-left: -1px;
+
+  // RTL positioning
+  @include position-inline(100%, auto);
+
+  .rtl & {
+    margin-left: 0;
+    margin-right: -1px;
+    text-align: right;
+  }
 
   // SMALLER WIDTH FOR DESKTOP ONLY
   @media (min-width: 1200px) {
@@ -829,6 +878,17 @@ $transition: all 0.2s ease-in-out;
   z-index: 1001; // LOWER THAN TOGGLE BUTTON
   padding: 180px 0 2rem 0; // More padding to account for fixed top bar + search bar
 
+  // RTL support
+  .rtl & {
+    transform: translateX(100%);
+    left: auto;
+    right: 0;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+
   @media (max-width: 768px) {
     padding: 170px 0 2rem 0;
   }
@@ -884,7 +944,7 @@ $transition: all 0.2s ease-in-out;
 
   &:hover {
     color: lighten($primary-color, 30%);
-    padding-left: 0.5rem;
+    @include padding-inline(0.5rem, 0);
   }
 }
 
@@ -947,7 +1007,8 @@ $transition: all 0.2s ease-in-out;
   justify-content: space-between;
 }
 
-.navbar__mobile-dropdown-link {
+.navbar__mobile-dropdown-link,
+.navbar__mobile-dropdown-link--button {
   display: flex;
   align-items: center;
   flex: 1;
@@ -957,10 +1018,14 @@ $transition: all 0.2s ease-in-out;
   font-size: 1rem;
   padding: 1rem 0;
   transition: $transition;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: inherit;
 
   &:hover {
     color: $white;
-    padding-left: 0.5rem;
+    @include padding-inline(0.5rem, 0);
   }
 }
 
@@ -974,7 +1039,9 @@ $transition: all 0.2s ease-in-out;
 
   &.active {
     max-height: 1000px;
-    padding: 0.5rem 1rem 1rem 2rem;
+    @include padding-inline(2rem, 1rem);
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
   }
 }
 
@@ -989,7 +1056,7 @@ $transition: all 0.2s ease-in-out;
 
   &:hover {
     color: $white;
-    padding-left: 0.5rem;
+    @include padding-inline(0.5rem, 0);
   }
 }
 
@@ -1028,4 +1095,9 @@ $transition: all 0.2s ease-in-out;
   font-weight: 600;
   border: 2px solid $white;
   margin-left: auto;
+
+  .rtl & {
+    margin-left: 0;
+    margin-right: auto;
+  }
 }

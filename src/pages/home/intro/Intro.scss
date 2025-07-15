@@ -38,16 +38,26 @@ $text-dark: #333333;
 body {
   font-family: 'Arial', sans-serif;
   overflow-x: hidden;
+
+  // RTL support
+  &.lang-ar {
+    font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+    direction: rtl;
+  }
+
+  &.lang-en {
+    direction: ltr;
+  }
 }
 
 // Main container
 .swiper-container {
   position: relative;
   width: 100%;
-  height: 80vh; // Reduced from 100vh to make it smaller
+  height: 80vh;
   overflow: hidden;
   cursor: grab;
-  user-select: none; // Prevent text selection during drag
+  user-select: none;
 
   &:active {
     cursor: grabbing;
@@ -81,6 +91,19 @@ body {
       transform: translateX(-100%);
     }
 
+    // RTL support for slide transitions
+    [dir="rtl"] & {
+      transform: translateX(-100%);
+
+      &.active {
+        transform: translateX(0);
+      }
+
+      &.prev {
+        transform: translateX(100%);
+      }
+    }
+
     // Background gradients
     &.orange {
       background: linear-gradient(135deg, $orange-primary 0%, $orange-secondary 100%);
@@ -98,6 +121,11 @@ body {
     max-width: 1200px;
     padding: 0 50px;
     position: relative;
+
+    // RTL support
+    [dir="rtl"] & {
+      flex-direction: row-reverse;
+    }
   }
 
   // Image section
@@ -116,8 +144,16 @@ body {
   // Text section
   .slide-text {
     flex: 1;
-    padding-left: 80px;
+    padding-inline-start: 80px;
     color: $white;
+    text-align: start;
+
+    // RTL specific adjustments
+    [dir="rtl"] & {
+      padding-inline-start: 80px;
+      padding-inline-end: 0;
+      text-align: right;
+    }
 
     .collection-label {
       font-size: 18px;
@@ -126,6 +162,11 @@ body {
       opacity: 0.9;
       letter-spacing: 1px;
       text-transform: uppercase;
+
+      // RTL specific
+      [dir="rtl"] & {
+        letter-spacing: 0.5px;
+      }
     }
 
     .main-title {
@@ -134,6 +175,12 @@ body {
       line-height: 1.1;
       margin-bottom: 40px;
       text-shadow: 0 4px 8px rgba($black, 0.3);
+
+      // RTL specific
+      [dir="rtl"] & {
+        font-size: 4rem;
+        line-height: 1.2;
+      }
     }
 
     .shop-button {
@@ -149,6 +196,11 @@ body {
       @include smooth-transition;
       border: 2px solid $white;
 
+      // RTL specific
+      [dir="rtl"] & {
+        letter-spacing: 0.5px;
+      }
+
       &:hover {
         background: $white;
         color: $text-dark;
@@ -158,7 +210,7 @@ body {
     }
   }
 
-  // Navigation buttons - Half boxes at screen edges
+  // Navigation buttons
   .swiper-nav {
     position: absolute;
     top: 50%;
@@ -181,12 +233,38 @@ body {
       left: 0;
       border-radius: 0 5px 5px 0;
       border-left: none;
+
+      // RTL support
+      [dir="rtl"] & {
+        left: auto;
+        right: 0;
+        border-radius: 5px 0 0 5px;
+        border-left: 1px solid rgba($white, 0.3);
+        border-right: none;
+
+        svg {
+          transform: scaleX(-1);
+        }
+      }
     }
 
     &-next {
       right: 0;
       border-radius: 5px 0 0 5px;
       border-right: none;
+
+      // RTL support
+      [dir="rtl"] & {
+        right: auto;
+        left: 0;
+        border-radius: 0 5px 5px 0;
+        border-right: 1px solid rgba($white, 0.3);
+        border-left: none;
+
+        svg {
+          transform: scaleX(-1);
+        }
+      }
     }
 
     svg {
@@ -226,21 +304,40 @@ body {
   }
 }
 
+// Mobile responsiveness
 @media (max-width: 768px) {
   .swiper-container {
     .slide-content {
       flex-direction: column;
       text-align: center;
       padding: 0 20px;
+
+      // RTL support for mobile
+      [dir="rtl"] & {
+        flex-direction: column;
+        text-align: center;
+      }
     }
 
     .slide-text {
-      padding-left: 0;
+      padding-inline-start: 0;
       padding-top: 30px;
+
+      // RTL specific
+      [dir="rtl"] & {
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+        text-align: center;
+      }
 
       .main-title {
         font-size: 3rem;
         margin-bottom: 20px;
+
+        // RTL specific
+        [dir="rtl"] & {
+          font-size: 2.8rem;
+        }
       }
     }
 
@@ -256,11 +353,21 @@ body {
       height: 70px;
 
       &-prev {
-        left: 0; // Keep flush with edge
+        left: 0;
+
+        [dir="rtl"] & {
+          left: auto;
+          right: 0;
+        }
       }
 
       &-next {
-        right: 0; // Keep flush with edge
+        right: 0;
+
+        [dir="rtl"] & {
+          right: auto;
+          left: 0;
+        }
       }
 
       svg {
@@ -278,6 +385,11 @@ body {
     .slide-text {
       .main-title {
         font-size: 2.5rem;
+
+        // RTL specific
+        [dir="rtl"] & {
+          font-size: 2.2rem;
+        }
       }
 
       .collection-label {
@@ -313,10 +425,20 @@ body {
 
       &-prev {
         left: 0;
+
+        [dir="rtl"] & {
+          left: auto;
+          right: 0;
+        }
       }
 
       &-next {
         right: 0;
+
+        [dir="rtl"] & {
+          right: auto;
+          left: 0;
+        }
       }
 
       svg {
@@ -327,9 +449,22 @@ body {
   }
 }
 
+// Animations
 @keyframes slideInFromRight {
   from {
     transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
     opacity: 0;
   }
 
@@ -351,6 +486,46 @@ body {
   }
 }
 
+@keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+// RTL specific animations
+[dir="rtl"] {
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideOutToLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+}
+
+// Accessibility
 .swiper-nav,
 .pagination-bullet {
   &:focus {

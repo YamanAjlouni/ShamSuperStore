@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import './Intro.scss';
-import intro1 from '../../../assets/images/home/intro/intro1.png'
-import intro2 from '../../../assets/images/home/intro/intro2.png'
-import intro3 from '../../../assets/images/home/intro/intro3.png'
-import intro4 from '../../../assets/images/home/intro/intro4.png'
+import { useLanguage } from '../../../context/LanguageContext';
+import intro1 from '../../../assets/images/home/intro/intro1.png';
+import intro2 from '../../../assets/images/home/intro/intro2.png';
+import intro3 from '../../../assets/images/home/intro/intro3.png';
+import intro4 from '../../../assets/images/home/intro/intro4.png';
 
 export const Intro = () => {
+  const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoplayEnabled, setAutoplayEnabled] = useState(true);
   const totalSlides = 4;
@@ -14,6 +16,7 @@ export const Intro = () => {
   const touchEndX = useRef(0);
   const autoplayRef = useRef(null);
 
+  // This data will come from backend later - keeping as is
   const slides = [
     {
       id: 1,
@@ -62,17 +65,17 @@ export const Intro = () => {
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    resetAutoplay(); // Reset autoplay timer on manual navigation
+    resetAutoplay();
   };
 
   const previousSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-    resetAutoplay(); // Reset autoplay timer on manual navigation
+    resetAutoplay();
   };
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
-    resetAutoplay(); // Reset autoplay timer on manual navigation
+    resetAutoplay();
   };
 
   // Touch/Swipe functionality
@@ -98,7 +101,6 @@ export const Intro = () => {
       previousSlide();
     }
 
-    // Reset touch positions
     touchStartX.current = 0;
     touchEndX.current = 0;
   };
@@ -106,11 +108,11 @@ export const Intro = () => {
   // Mouse drag functionality for desktop
   const handleMouseDown = (e) => {
     touchStartX.current = e.clientX;
-    e.preventDefault(); // Prevent text selection
+    e.preventDefault();
   };
 
   const handleMouseMove = (e) => {
-    if (touchStartX.current === 0) return; // Only track if mouse is down
+    if (touchStartX.current === 0) return;
     touchEndX.current = e.clientX;
   };
 
@@ -132,7 +134,6 @@ export const Intro = () => {
       previousSlide();
     }
 
-    // Reset positions
     touchStartX.current = 0;
     touchEndX.current = 0;
   };
@@ -201,7 +202,9 @@ export const Intro = () => {
               <div className="slide-text">
                 <div className="collection-label">{slide.label}</div>
                 <h1 className="main-title">{slide.title}</h1>
-                <button className="shop-button">Shop Accessories</button>
+                <button className="shop-button">
+                  {t('home.intro.buttons.shopAccessories')}
+                </button>
               </div>
             </div>
           </div>
@@ -209,12 +212,20 @@ export const Intro = () => {
       </div>
 
       {/* Navigation */}
-      <div className="swiper-nav swiper-nav-prev" onClick={previousSlide}>
+      <div
+        className="swiper-nav swiper-nav-prev"
+        onClick={previousSlide}
+        aria-label={t('home.intro.navigation.previousSlide')}
+      >
         <svg viewBox="0 0 24 24">
           <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
         </svg>
       </div>
-      <div className="swiper-nav swiper-nav-next" onClick={nextSlide}>
+      <div
+        className="swiper-nav swiper-nav-next"
+        onClick={nextSlide}
+        aria-label={t('home.intro.navigation.nextSlide')}
+      >
         <svg viewBox="0 0 24 24">
           <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
         </svg>
