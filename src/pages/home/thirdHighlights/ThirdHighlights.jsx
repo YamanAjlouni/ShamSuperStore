@@ -1,9 +1,12 @@
 import './ThirdHighlights.scss'
+import { useLanguage } from '../../../context/LanguageContext'
 import shoes from '../../../assets/images/home/thirdHighlights/shoes.png'
 import home from '../../../assets/images/home/thirdHighlights/home.png'
 import laundry from '../../../assets/images/home/thirdHighlights/laundry.png'
 
 export const ThirdHighlights = () => {
+    const { t } = useLanguage()
+
     return (
         <div className="thirdHighlights-out-container">
             <div className='thirdHighlights-container'>
@@ -16,7 +19,7 @@ export const ThirdHighlights = () => {
                             Shoes
                         </h3>
                         <button>
-                            Shop
+                            {t('home.thirdHighlights.button')}
                         </button>
                     </div>
                     <div className='product-right-container'>
@@ -32,7 +35,7 @@ export const ThirdHighlights = () => {
                             Home Appliances
                         </h3>
                         <button>
-                            Shop
+                            {t('home.thirdHighlights.button')}
                         </button>
                     </div>
                     <div className='product-right-container'>
@@ -48,7 +51,7 @@ export const ThirdHighlights = () => {
                             Laundry Supplies
                         </h3>
                         <button>
-                            Shop
+                            {t('home.thirdHighlights.button')}
                         </button>
                     </div>
                     <div className='product-right-container'>

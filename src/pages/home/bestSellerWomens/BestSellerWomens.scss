@@ -9,7 +9,6 @@
         padding: 30px 15px;
     }
 
-
     @media (max-width: 468px) {
         padding: 30px 10px;
     }
@@ -19,13 +18,19 @@
         font-weight: 600;
         color: $text-dark;
         margin-bottom: 30px;
-        text-align: left;
+        text-align: left; // Default for LTR
 
         @media (max-width: 768px) {
             font-size: 20px;
             margin: 0 30px;
             margin-bottom: 20px;
         }
+    }
+
+    // RTL title alignment
+    .rtl .section-title {
+        text-align: right;
+        font-family: 'Arial', 'Tahoma', sans-serif;
     }
 
     .products-swiper-container {
@@ -49,7 +54,7 @@
         background-color: $primary-color;
         width: 40px;
         height: 40px;
-        border-radius: 8px; // Changed from 50% to make it box-shaped
+        border-radius: 8px; // Box-shaped like NewProducts
         border: none;
         cursor: pointer;
         display: flex;
@@ -60,7 +65,7 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
         @media (max-width: 768px) {
-            width: 32px; // Smaller on mobile
+            width: 32px;
             height: 32px;
             border-radius: 6px;
         }
@@ -81,12 +86,15 @@
         }
 
         svg {
-            width: 24px; // Increased from 16px
-            height: 24px; // Increased from 16px
+            width: 24px;
+            height: 24px;
             fill: $white;
 
+            @media (max-width: 768px) {
+                width: 20px;
+                height: 20px;
+            }
         }
-
 
         &.prev-button {
             left: 10px;
@@ -106,6 +114,20 @@
     }
 
     .products-swiper {
+        position: relative;
+
+        // RTL layout handling through CSS
+        &.rtl-swiper {
+            direction: rtl;
+
+            .swiper-wrapper {
+                direction: ltr;
+            }
+
+            .swiper-slide {
+                direction: ltr; // Reset direction for slide content
+            }
+        }
 
         .swiper-slide {
             height: auto;
@@ -126,7 +148,7 @@
                 position: relative;
                 width: 100%;
                 min-width: 150px;
-                height: 150px; // Changed from 160px to 150px
+                height: 150px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -136,7 +158,7 @@
 
                 @media (max-width: 768px) {
                     min-width: 120px;
-                    height: 125px; // Bigger on mobile (120px instead of smaller)
+                    height: 125px;
                     max-height: 130px;
                 }
 
@@ -146,7 +168,7 @@
                     object-fit: cover;
 
                     @media (max-width: 768px) {
-                        width: 100%; // Bigger on mobile
+                        width: 100%;
                         max-width: 130px;
                         max-height: 130px;
                         height: 100%;
@@ -155,8 +177,14 @@
 
                 .sale-banner {
                     position: absolute;
-                    top: 0;
-                    left: 0;
+                    top: 8px;
+                    left: 8px;
+                    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+                    color: white;
+                    border-radius: 4px;
+                    font-size: 10px;
+                    font-weight: bold;
+                    text-transform: uppercase;
                     z-index: 2;
 
                     span {
@@ -170,16 +198,6 @@
                         letter-spacing: 0.5px;
                         position: relative;
 
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            bottom: -8px;
-                            left: 0;
-                            width: 0;
-                            height: 0;
-                            border-left: 15px solid transparent;
-                            border-top: 8px solid #d35400;
-                        }
                     }
                 }
 
@@ -258,5 +276,11 @@
         .swiper-pagination {
             display: none;
         }
+    }
+
+    // RTL-specific adjustments for sale banner positioning
+    .rtl .products-swiper .product-item .product-image-container .sale-banner {
+        left: auto;
+        right: 8px;
     }
 }

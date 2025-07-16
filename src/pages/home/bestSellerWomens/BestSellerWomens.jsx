@@ -1,15 +1,19 @@
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { useState, useRef } from 'react';
+import { useLanguage } from '../../../context/LanguageContext';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './BestSellerWomens.scss';
 
 const BestSellerWomens = () => {
+    const { t, isRTL } = useLanguage();
     const swiperRef = useRef(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
+    // This data will come from backend later - keeping as is
     const products = [
         {
             id: 1,
@@ -87,7 +91,6 @@ const BestSellerWomens = () => {
         </svg>
     );
 
-    // Method 1: Update your React component - Change strokeWidth and use white stroke
     const ChevronLeft = () => (
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -123,7 +126,9 @@ const BestSellerWomens = () => {
 
     return (
         <div className="best-sellers-section">
-            <h2 className="section-title">Best Sellers in Women's Clothing</h2>
+            <div className={isRTL ? 'rtl' : 'ltr'}>
+                <h2 className="section-title">{t('home.bestSellerWomens.title')}</h2>
+            </div>
 
             <div className="products-swiper-container">
                 {/* Custom Previous Button */}
@@ -131,6 +136,7 @@ const BestSellerWomens = () => {
                     className="custom-nav-button prev-button"
                     onClick={handlePrevClick}
                     disabled={isBeginning}
+                    aria-label={t('home.bestSellerWomens.navigation.previousSlide')}
                 >
                     <ChevronLeft />
                 </button>
@@ -140,6 +146,7 @@ const BestSellerWomens = () => {
                     className="custom-nav-button next-button"
                     onClick={handleNextClick}
                     disabled={isEnd}
+                    aria-label={t('home.bestSellerWomens.navigation.nextSlide')}
                 >
                     <ChevronRight />
                 </button>
@@ -174,7 +181,7 @@ const BestSellerWomens = () => {
                     }}
                     loop={false}
                     watchOverflow={true}
-                    className="products-swiper"
+                    className={`products-swiper ${isRTL ? 'rtl-swiper' : ''}`}
                 >
                     {products.map((product) => (
                         <SwiperSlide key={product.id}>
@@ -188,7 +195,7 @@ const BestSellerWomens = () => {
 
                                     {product.isOnSale && (
                                         <div className="sale-banner">
-                                            <span>SALE</span>
+                                            <span>{t('home.bestSellerWomens.sale')}</span>
                                         </div>
                                     )}
 

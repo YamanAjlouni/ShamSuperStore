@@ -13,7 +13,7 @@
         display: flex;
         justify-content: center;
         gap: 20px;
-        flex-wrap: wrap; // Allow wrapping on smaller screens
+        flex-wrap: wrap;
 
         .product-out-container {
             background-color: #fff;
@@ -21,10 +21,10 @@
             gap: 30px;
             padding: 25px;
             border-radius: 5px;
-            border: 1px solid #39465D;
             flex: 1;
-            min-width: 300px; // Minimum width for each card
-            max-width: 400px; // Maximum width for each card
+            min-width: 300px;
+            max-width: 400px;
+            border: none !important;
 
             .product-left-container {
                 flex: 1;
@@ -81,7 +81,25 @@
     }
 }
 
-// Responsive design
+// RTL Support for Arabic
+.lang-ar {
+    .secondHighlights-out-container {
+        .secondHighlights-container {
+            .product-out-container {
+                direction: rtl;
+
+                .product-left-container {
+                    text-align: right;
+
+                    button {
+                        align-self: flex-start;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: 1024px) {
     .secondHighlights-out-container {
         .secondHighlights-container {

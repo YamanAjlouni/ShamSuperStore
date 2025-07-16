@@ -18,7 +18,7 @@
         font-weight: 600;
         color: $text-dark;
         margin-bottom: 30px;
-        text-align: left;
+        text-align: left; // Default for LTR
 
         @media (max-width: 768px) {
             font-size: 20px;
@@ -27,9 +27,15 @@
         }
     }
 
+    // RTL title alignment
+    .rtl .section-title {
+        text-align: right;
+        font-family: 'Arial', 'Tahoma', sans-serif;
+    }
+
     .products-swiper-container {
         position: relative;
-        padding: 0 60px;
+        padding: 0 60px; // Increased padding to accommodate buttons
 
         @media (max-width: 1024px) {
             padding: 0 50px;
@@ -40,6 +46,7 @@
         }
     }
 
+    // Navigation buttons positioned in the padding area
     .custom-nav-button {
         position: absolute;
         top: 50%;
@@ -47,7 +54,7 @@
         background-color: $primary-color;
         width: 40px;
         height: 40px;
-        border-radius: 8px;
+        border-radius: 8px; // Box-shaped like other components
         border: none;
         cursor: pointer;
         display: flex;
@@ -109,6 +116,19 @@
     .products-swiper {
         position: relative;
 
+        // RTL layout handling through CSS
+        &.rtl-swiper {
+            direction: rtl;
+
+            .swiper-wrapper {
+                direction: ltr;
+            }
+
+            .swiper-slide {
+                direction: ltr; // Reset direction for slide content
+            }
+        }
+
         .swiper-slide {
             height: auto;
         }
@@ -143,8 +163,8 @@
                 }
 
                 .product-image {
-                    width: 150px;
-                    height: 150px;
+                    width: 150px; // Fixed width
+                    height: 150px; // Fixed height
                     object-fit: cover;
 
                     @media (max-width: 768px) {
@@ -155,6 +175,7 @@
                     }
                 }
 
+                // Flag-style sale banner (keeping original design)
                 .sale-banner {
                     position: absolute;
                     top: 0;
@@ -163,25 +184,12 @@
 
                     span {
                         display: inline-block;
-                        background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
                         color: $white;
                         font-size: 11px;
                         font-weight: 700;
-                        padding: 6px 12px 6px 12px;
                         text-transform: uppercase;
                         letter-spacing: 0.5px;
                         position: relative;
-
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            bottom: -8px;
-                            left: 0;
-                            width: 0;
-                            height: 0;
-                            border-left: 15px solid transparent;
-                            border-top: 8px solid #d35400;
-                        }
                     }
                 }
 
@@ -244,18 +252,36 @@
             }
         }
 
+        // Hover effect for store icon
         .product-item:hover .store-icon-overlay {
             opacity: 1 !important;
             transform: scale(1) !important;
         }
 
+        // Hide default Swiper navigation buttons
         .swiper-button-next,
         .swiper-button-prev {
             display: none;
         }
 
+        // Hide pagination
         .swiper-pagination {
             display: none;
+        }
+    }
+
+    // RTL-specific adjustments for sale banner positioning
+    .rtl .products-swiper .product-item .product-image-container .sale-banner {
+        left: auto;
+        right: 0;
+
+        span {
+            &::after {
+                left: auto;
+                right: 0;
+                border-left: none;
+                border-right: 15px solid transparent;
+            }
         }
     }
 }

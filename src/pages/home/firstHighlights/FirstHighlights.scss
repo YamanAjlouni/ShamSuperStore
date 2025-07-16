@@ -81,6 +81,25 @@
     }
 }
 
+// RTL Support for Arabic
+.lang-ar {
+    .firstHighlights-out-container {
+        .firstHighlights-container {
+            .product-out-container {
+                direction: rtl;
+
+                .product-left-container {
+                    text-align: right;
+
+                    button {
+                        align-self: flex-start;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: 1024px) {
     .firstHighlights-out-container {
         .firstHighlights-container {

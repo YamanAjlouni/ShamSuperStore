@@ -1,14 +1,24 @@
-// Import home intro translations
+// Import home translations
 import enHomeIntro from '../locale/en/home/intro.json';
 import arHomeIntro from '../locale/ar/home/intro.json';
-
-// Import home newProducts translations
 import enHomeNewProducts from '../locale/en/home/newProducts.json';
 import arHomeNewProducts from '../locale/ar/home/newProducts.json';
-
-// Import home categories translations
 import enHomeCategories from '../locale/en/home/categories.json';
 import arHomeCategories from '../locale/ar/home/categories.json';
+import enHomeFirstHighlights from '../locale/en/home/firstHighlights.json';
+import arHomeFirstHighlights from '../locale/ar/home/firstHighlights.json';
+import enHomeBestSellerWomens from '../locale/en/home/bestSellerWomens.json';
+import arHomeBestSellerWomens from '../locale/ar/home/bestSellerWomens.json';
+import enHomeBestSellerMens from '../locale/en/home/bestSellerMens.json';
+import arHomeBestSellerMens from '../locale/ar/home/bestSellerMens.json';
+import enHomeSecondHighlights from '../locale/en/home/secondHighlights.json';
+import arHomeSecondHighlights from '../locale/ar/home/secondHighlights.json';
+import enHomeBestSellerFurniture from '../locale/en/home/bestSellerFurniture.json';
+import arHomeBestSellerFurniture from '../locale/ar/home/bestSellerFurniture.json';
+import enHomeBestSellerKitchen from '../locale/en/home/bestSellerKitchen.json';
+import arHomeBestSellerKitchen from '../locale/ar/home/bestSellerKitchen.json';
+import enHomeThirdHighlights from '../locale/en/home/thirdHighlights.json';
+import arHomeThirdHighlights from '../locale/ar/home/thirdHighlights.json';
 
 // Import navbar translations
 import enNavbar from '../locale/en/navbar.json';
@@ -22,6 +32,13 @@ const localization = {
             intro: enHomeIntro,
             newProducts: enHomeNewProducts,
             categories: enHomeCategories,
+            firstHighlights: enHomeFirstHighlights,
+            bestSellerWomens: enHomeBestSellerWomens,
+            bestSellerMens: enHomeBestSellerMens,
+            secondHighlights: enHomeSecondHighlights,
+            bestSellerFurniture: enHomeBestSellerFurniture,
+            bestSellerKitchen: enHomeBestSellerKitchen,
+            thirdHighlights: enHomeThirdHighlights,
         },
     },
     ar: {
@@ -30,6 +47,13 @@ const localization = {
             intro: arHomeIntro,
             newProducts: arHomeNewProducts,
             categories: arHomeCategories,
+            firstHighlights: arHomeFirstHighlights,
+            bestSellerWomens: arHomeBestSellerWomens,
+            bestSellerMens: arHomeBestSellerMens,
+            secondHighlights: arHomeSecondHighlights,
+            bestSellerFurniture: arHomeBestSellerFurniture,
+            bestSellerKitchen: arHomeBestSellerKitchen,
+            thirdHighlights: arHomeThirdHighlights,
         },
     }
 };

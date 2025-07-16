@@ -1,9 +1,12 @@
 import './SecondHighlights.scss'
+import { useLanguage } from '../../../context/LanguageContext'
 import phone from '../../../assets/images/home/secondHighlights/phone.png'
 import watch from '../../../assets/images/home/secondHighlights/watch.png'
 import school from '../../../assets/images/home/secondHighlights/school.png'
 
 export const SecondHighlights = () => {
+    const { t } = useLanguage()
+
     return (
         <div className="secondHighlights-out-container">
             <div className='secondHighlights-container'>
@@ -16,7 +19,7 @@ export const SecondHighlights = () => {
                             Smart Phones
                         </h3>
                         <button>
-                            Shop
+                            {t('home.secondHighlights.button')}
                         </button>
                     </div>
                     <div className='product-right-container'>
@@ -32,7 +35,7 @@ export const SecondHighlights = () => {
                             Bags and Luggage
                         </h3>
                         <button>
-                            Shop
+                            {t('home.secondHighlights.button')}
                         </button>
                     </div>
                     <div className='product-right-container'>
@@ -48,7 +51,7 @@ export const SecondHighlights = () => {
                             Arts and Accessories
                         </h3>
                         <button>
-                            Shop
+                            {t('home.secondHighlights.button')}
                         </button>
                     </div>
                     <div className='product-right-container'>
