@@ -1,15 +1,19 @@
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { useState, useRef } from 'react';
+import { useLanguage } from '../../../context/LanguageContext';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './BestSellerGardenSupplies.scss';
 
 const BestSellerGardenSupplies = () => {
+    const { t, isRTL } = useLanguage();
     const swiperRef = useRef(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
+    // This data will come from backend later - keeping as is
     const products = [
         {
             id: 1,
@@ -122,13 +126,16 @@ const BestSellerGardenSupplies = () => {
 
     return (
         <div className="best-sellers-section">
-            <h2 className="section-title">Best Sellers in Garden Supplies</h2>
+            <div className={isRTL ? 'rtl' : 'ltr'}>
+                <h2 className="section-title">{t('home.bestSellerGardenSupplies.title')}</h2>
+            </div>
 
             <div className="products-swiper-container">
                 <button
                     className="custom-nav-button prev-button"
                     onClick={handlePrevClick}
                     disabled={isBeginning}
+                    aria-label={t('home.bestSellerGardenSupplies.navigation.previousSlide')}
                 >
                     <ChevronLeft />
                 </button>
@@ -136,6 +143,7 @@ const BestSellerGardenSupplies = () => {
                     className="custom-nav-button next-button"
                     onClick={handleNextClick}
                     disabled={isEnd}
+                    aria-label={t('home.bestSellerGardenSupplies.navigation.nextSlide')}
                 >
                     <ChevronRight />
                 </button>
@@ -170,7 +178,7 @@ const BestSellerGardenSupplies = () => {
                     }}
                     loop={false}
                     watchOverflow={true}
-                    className="products-swiper"
+                    className={`products-swiper ${isRTL ? 'rtl-swiper' : ''}`}
                 >
                     {products.map((product) => (
                         <SwiperSlide key={product.id}>
@@ -184,7 +192,7 @@ const BestSellerGardenSupplies = () => {
 
                                     {product.isOnSale && (
                                         <div className="sale-banner">
-                                            <span>SALE</span>
+                                            <span>{t('home.bestSellerGardenSupplies.sale')}</span>
                                         </div>
                                     )}
 

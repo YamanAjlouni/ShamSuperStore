@@ -121,7 +121,6 @@
                 .fifth-content-area {
                     padding-left: 50px;
 
-
                     h5,
                     h3 {
                         color: white;
@@ -138,6 +137,30 @@
 
                     .fifth-product-image {
                         height: 400px;
+                    }
+                }
+            }
+        }
+    }
+
+    // RTL Support
+    &.rtl {
+        .fifth-highlights-main {
+            .fifth-card-container {
+                .fifth-content-area {
+
+                    h5,
+                    h3,
+                    button {
+                        font-family: 'Arial', 'Tahoma', sans-serif;
+                    }
+                }
+
+                // RTL layout for right large section
+                &.fifth-right-large {
+                    .fifth-content-area {
+                        padding-left: 0;
+                        padding-right: 50px;
                     }
                 }
             }
@@ -161,6 +184,19 @@
 
                     .fifth-content-area {
                         padding-left: 0;
+                    }
+                }
+            }
+        }
+
+        // RTL responsive adjustments
+        &.rtl {
+            .fifth-highlights-main {
+                .fifth-card-container {
+                    &.fifth-right-large {
+                        .fifth-content-area {
+                            padding-right: 0;
+                        }
                     }
                 }
             }
@@ -191,14 +227,30 @@
                     }
                 }
 
-
                 &.fifth-right-large {
                     min-width: 100%;
                     max-width: 100%;
 
+                    .fifth-content-area {
+                        padding-left: 0;
+                    }
+
                     .fifth-image-area {
                         .fifth-product-image {
                             height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        // RTL mobile adjustments
+        &.rtl {
+            .fifth-highlights-main {
+                .fifth-card-container {
+                    &.fifth-right-large {
+                        .fifth-content-area {
+                            padding-right: 0;
                         }
                     }
                 }

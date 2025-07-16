@@ -287,8 +287,162 @@
             }
         }
     }
-}
 
+    // RTL Support
+    &.rtl {
+        direction: rtl;
+
+        .footer-content {
+            .footer-section {
+                &.logo-section {
+                    .contact-info {
+
+                        .email,
+                        .phone {
+                            font-family: 'Arial', 'Tahoma', sans-serif;
+                        }
+                    }
+                }
+
+                &.links-section {
+                    text-align: right;
+
+                    ul {
+                        li {
+                            a {
+                                font-family: 'Arial', 'Tahoma', sans-serif;
+                                text-align: right;
+                                display: block;
+                            }
+                        }
+                    }
+                }
+
+                &.newsletter-section {
+                    text-align: right;
+
+                    .newsletter {
+                        h4 {
+                            font-family: 'Arial', 'Tahoma', sans-serif;
+                            text-align: right;
+                        }
+
+                        .newsletter-form {
+                            input {
+                                font-family: 'Arial', 'Tahoma', sans-serif;
+                                text-align: right;
+                                direction: rtl;
+
+                                &::placeholder {
+                                    direction: rtl;
+                                    text-align: right;
+                                }
+                            }
+
+                            button {
+                                font-family: 'Arial', 'Tahoma', sans-serif;
+                            }
+                        }
+
+                        .newsletter-text {
+                            font-family: 'Arial', 'Tahoma', sans-serif;
+                            text-align: right;
+                        }
+                    }
+
+                    .search-section {
+                        h4 {
+                            font-family: 'Arial', 'Tahoma', sans-serif;
+                            text-align: right;
+                        }
+
+                        .search-form {
+                            input {
+                                font-family: 'Arial', 'Tahoma', sans-serif;
+                                text-align: right;
+                                direction: rtl;
+
+                                &::placeholder {
+                                    direction: rtl;
+                                    text-align: right;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer-bottom {
+            .footer-bottom-content {
+                p {
+                    font-family: 'Arial', 'Tahoma', sans-serif;
+                }
+
+                .footer-bottom-links {
+                    a {
+                        font-family: 'Arial', 'Tahoma', sans-serif;
+                    }
+                }
+            }
+        }
+    }
+
+    // LTR Default (for clarity)
+    &.ltr {
+        direction: ltr;
+
+        .footer-content {
+            .footer-section {
+                &.links-section {
+                    text-align: left;
+                }
+
+                &.newsletter-section {
+                    text-align: left;
+
+                    .newsletter {
+                        h4 {
+                            text-align: left;
+                        }
+
+                        .newsletter-form {
+                            input {
+                                text-align: left;
+                                direction: ltr;
+
+                                &::placeholder {
+                                    text-align: left;
+                                }
+                            }
+                        }
+
+                        .newsletter-text {
+                            text-align: left;
+                        }
+                    }
+
+                    .search-section {
+                        h4 {
+                            text-align: left;
+                        }
+
+                        .search-form {
+                            input {
+                                text-align: left;
+                                direction: ltr;
+
+                                &::placeholder {
+                                    text-align: left;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 @media (max-width: 1024px) {
     .footer {
@@ -299,7 +453,7 @@
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto auto auto;
             gap: 30px;
-            padding: 0 30px; // Increased overall padding
+            padding: 0 30px;
 
             .footer-section {
                 &.logo-section {
@@ -320,24 +474,21 @@
                 &.links-section:nth-child(2) {
                     grid-column: 1;
                     order: 2;
-                    text-align: left;
-                    padding-left: 20px; // Add left padding for first column
-                    padding-right: 10px; // Add some right padding
+                    padding-left: 20px;
+                    padding-right: 10px;
                 }
 
                 &.links-section:nth-child(3) {
                     grid-column: 2;
                     order: 3;
-                    text-align: left;
-                    padding-left: 10px; // Add left padding for second column
-                    padding-right: 20px; // Add right padding
+                    padding-left: 10px;
+                    padding-right: 20px;
                 }
 
                 &.newsletter-section {
                     grid-column: 1 / -1;
                     order: 4;
-                    text-align: left;
-                    padding: 0 20px; // Add padding on both sides
+                    padding: 0 20px;
                     margin-top: 10px;
                 }
             }
@@ -348,7 +499,24 @@
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
-                padding: 0 30px; // Match the increased padding
+                padding: 0 30px;
+            }
+        }
+
+        // RTL tablet adjustments
+        &.rtl {
+            .footer-content {
+                .footer-section {
+                    &.links-section:nth-child(2) {
+                        padding-right: 20px;
+                        padding-left: 10px;
+                    }
+
+                    &.links-section:nth-child(3) {
+                        padding-right: 10px;
+                        padding-left: 20px;
+                    }
+                }
             }
         }
     }
@@ -357,7 +525,7 @@
 @media (max-width: 768px) {
     .footer {
         .footer-content {
-            padding: 0 20px; // Reduce padding for smaller screens
+            padding: 0 20px;
             gap: 25px;
 
             .footer-section {
@@ -383,6 +551,23 @@
 
                 .footer-bottom-links {
                     justify-content: center;
+                }
+            }
+        }
+
+        // RTL mobile adjustments
+        &.rtl {
+            .footer-content {
+                .footer-section {
+                    &.links-section:nth-child(2) {
+                        padding-right: 15px;
+                        padding-left: 8px;
+                    }
+
+                    &.links-section:nth-child(3) {
+                        padding-right: 8px;
+                        padding-left: 15px;
+                    }
                 }
             }
         }
@@ -428,6 +613,23 @@
                 .footer-bottom-links {
                     flex-direction: column;
                     gap: 10px;
+                }
+            }
+        }
+
+        // RTL small mobile adjustments
+        &.rtl {
+            .footer-content {
+                .footer-section {
+                    &.links-section:nth-child(2) {
+                        padding-right: 10px;
+                        padding-left: 5px;
+                    }
+
+                    &.links-section:nth-child(3) {
+                        padding-right: 5px;
+                        padding-left: 10px;
+                    }
                 }
             }
         }

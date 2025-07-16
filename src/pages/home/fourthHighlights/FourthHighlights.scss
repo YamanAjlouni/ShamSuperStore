@@ -87,11 +87,18 @@
                     align-items: flex-end;
                     text-align: right;
 
+                    button {
+                        align-self: flex-end;
+                    }
                 }
 
                 &.left-content {
                     align-items: flex-start;
                     text-align: left;
+
+                    button {
+                        align-self: flex-start;
+                    }
                 }
             }
         }
@@ -108,7 +115,39 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+        }
+    }
 
+    // RTL Support
+    &.rtl {
+        .fourthHighlights-container {
+            .product-out-container {
+                .content-overlay {
+
+                    h2,
+                    h3 {
+                        font-family: 'Arial', 'Tahoma', sans-serif;
+                    }
+
+                    &.right-content {
+                        align-items: flex-start;
+                        text-align: left;
+
+                        button {
+                            align-self: flex-start;
+                        }
+                    }
+
+                    &.left-content {
+                        align-items: flex-end;
+                        text-align: right;
+
+                        button {
+                            align-self: flex-end;
+                        }
+                    }
+                }
+            }
         }
     }
 }

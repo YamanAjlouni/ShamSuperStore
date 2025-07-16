@@ -19,15 +19,46 @@ import enHomeBestSellerKitchen from '../locale/en/home/bestSellerKitchen.json';
 import arHomeBestSellerKitchen from '../locale/ar/home/bestSellerKitchen.json';
 import enHomeThirdHighlights from '../locale/en/home/thirdHighlights.json';
 import arHomeThirdHighlights from '../locale/ar/home/thirdHighlights.json';
+import enHomeBestSellerPhones from '../locale/en/home/bestSellerPhones.json';
+import arHomeBestSellerPhones from '../locale/ar/home/bestSellerPhones.json';
+import enHomeBestSellerElectronics from '../locale/en/home/bestSellerElectronics.json';
+import arHomeBestSellerElectronics from '../locale/ar/home/bestSellerElectronics.json';
+import enHomeFourthHighlights from '../locale/en/home/fourthHighlights.json';
+import arHomeFourthHighlights from '../locale/ar/home/fourthHighlights.json';
+import enHomeBestSellerBeauty from '../locale/en/home/bestSellerBeauty.json';
+import arHomeBestSellerBeauty from '../locale/ar/home/bestSellerBeauty.json';
+import enHomeBestSellerSchool from '../locale/en/home/bestSellerSchool.json';
+import arHomeBestSellerSchool from '../locale/ar/home/bestSellerSchool.json';
+import enHomeFifthHighlights from '../locale/en/home/fifthHighlights.json';
+import arHomeFifthHighlights from '../locale/ar/home/fifthHighlights.json';
+import enHomeBestSellerHomeRenovation from '../locale/en/home/bestSellerHomeRenovation.json';
+import arHomeBestSellerHomeRenovation from '../locale/ar/home/bestSellerHomeRenovation.json';
+import enHomeBestSellerGardenSupplies from '../locale/en/home/bestSellerGardenSupplies.json';
+import arHomeBestSellerGardenSupplies from '../locale/ar/home/bestSellerGardenSupplies.json';
+import enHomeSixthHighlights from '../locale/en/home/sixthHighlights.json';
+import arHomeSixthHighlights from '../locale/ar/home/sixthHighlights.json';
+import enHomeFeaturedProducts from '../locale/en/home/featuredProducts.json';
+import arHomeFeaturedProducts from '../locale/ar/home/featuredProducts.json';
+import enHomeOurNews from '../locale/en/home/ourNews.json';
+import arHomeOurNews from '../locale/ar/home/ourNews.json';
+import enHomeTopRatedProducts from '../locale/en/home/topRatedProducts.json';
+import arHomeTopRatedProducts from '../locale/ar/home/topRatedProducts.json';
+
 
 // Import navbar translations
 import enNavbar from '../locale/en/navbar.json';
 import arNavbar from '../locale/ar/navbar.json';
 
+// Import footer translations
+import enFooter from '../locale/en/footer.json';
+import arFooter from '../locale/ar/footer.json';
+
+
 // Organize translations by language and section
 const localization = {
     en: {
         navbar: enNavbar,
+        footer: enFooter,
         home: {
             intro: enHomeIntro,
             newProducts: enHomeNewProducts,
@@ -37,12 +68,26 @@ const localization = {
             bestSellerMens: enHomeBestSellerMens,
             secondHighlights: enHomeSecondHighlights,
             bestSellerFurniture: enHomeBestSellerFurniture,
+            bestSellerPhones: enHomeBestSellerPhones,
             bestSellerKitchen: enHomeBestSellerKitchen,
             thirdHighlights: enHomeThirdHighlights,
+            bestSellerElectronics: enHomeBestSellerElectronics,
+            fourthHighlights: enHomeFourthHighlights,
+            bestSellerBeauty: enHomeBestSellerBeauty,
+            bestSellerSchool: enHomeBestSellerSchool,
+            fifthHighlights: enHomeFifthHighlights,
+            bestSellerHomeRenovation: enHomeBestSellerHomeRenovation,
+            bestSellerGardenSupplies: enHomeBestSellerGardenSupplies,
+            sixthHighlights: enHomeSixthHighlights,
+            featuredProducts: enHomeFeaturedProducts,
+            ourNews: enHomeOurNews,
+            topRatedProducts: enHomeTopRatedProducts,
+
         },
     },
     ar: {
         navbar: arNavbar,
+        footer: arFooter,
         home: {
             intro: arHomeIntro,
             newProducts: arHomeNewProducts,
@@ -52,8 +97,21 @@ const localization = {
             bestSellerMens: arHomeBestSellerMens,
             secondHighlights: arHomeSecondHighlights,
             bestSellerFurniture: arHomeBestSellerFurniture,
+            bestSellerPhones: arHomeBestSellerPhones,
             bestSellerKitchen: arHomeBestSellerKitchen,
             thirdHighlights: arHomeThirdHighlights,
+            bestSellerElectronics: arHomeBestSellerElectronics,
+            fourthHighlights: arHomeFourthHighlights,
+            bestSellerBeauty: arHomeBestSellerBeauty,
+            bestSellerSchool: arHomeBestSellerSchool,
+            fifthHighlights: arHomeFifthHighlights,
+            bestSellerHomeRenovation: arHomeBestSellerHomeRenovation,
+            bestSellerGardenSupplies: arHomeBestSellerGardenSupplies,
+            sixthHighlights: arHomeSixthHighlights,
+            featuredProducts: arHomeFeaturedProducts,
+            ourNews: arHomeOurNews,
+            topRatedProducts: arHomeTopRatedProducts,
+
         },
     }
 };

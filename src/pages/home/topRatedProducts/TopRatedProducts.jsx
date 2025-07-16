@@ -2,16 +2,19 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, FreeMode } from 'swiper/modules';
 import { useState, useRef } from 'react';
+import { useLanguage } from '../../../context/LanguageContext';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import './TopRatedProducts.scss';
 
 const TopRatedProducts = () => {
+    const { t, isRTL } = useLanguage();
     const swiperRef = useRef(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
+    // This data will come from backend later - keeping as is
     const products = [
         {
             id: 1,
@@ -99,9 +102,8 @@ const TopRatedProducts = () => {
     };
 
     return (
-        <div className="top-rated-products-section">
+        <div className={`top-rated-products-section ${isRTL ? 'rtl' : 'ltr'}`}>
             <div className="products-swiper-container">
-
                 <Swiper
                     modules={[Navigation, Autoplay, FreeMode]}
                     slidesPerView={2}
@@ -137,10 +139,12 @@ const TopRatedProducts = () => {
                         pauseOnMouseEnter: true,
                     }}
                     speed={3000}
-                    freeMode={true}
-                    freeModeMomentum={false}
+                    freeMode={{
+                        enabled: true,
+                        momentum: false
+                    }}
                     watchOverflow={true}
-                    className="products-swiper"
+                    className={`products-swiper ${isRTL ? 'rtl-swiper' : ''}`}
                 >
                     {products.map((product) => (
                         <SwiperSlide key={product.id}>
@@ -154,7 +158,7 @@ const TopRatedProducts = () => {
 
                                     {product.isOnSale && (
                                         <div className="sale-banner">
-                                            <span>SALE</span>
+                                            <span>{t('home.topRatedProducts.sale')}</span>
                                         </div>
                                     )}
 

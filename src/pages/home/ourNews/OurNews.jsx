@@ -1,9 +1,14 @@
+import React from 'react';
+import { useLanguage } from '../../../context/LanguageContext';
 import './OurNews.scss';
-import laptop from '../../../assets/images/home/ourNews/laptop.jpg'
-import room from '../../../assets/images/home/ourNews/room.jpg'
-import man from '../../../assets/images/home/ourNews/man.jpg'
+import laptop from '../../../assets/images/home/ourNews/laptop.jpg';
+import room from '../../../assets/images/home/ourNews/room.jpg';
+import man from '../../../assets/images/home/ourNews/man.jpg';
 
 const OurNews = () => {
+    const { t, isRTL } = useLanguage();
+
+    // This data will come from backend later - keeping as is
     const newsData = [
         {
             id: 1,
@@ -23,14 +28,14 @@ const OurNews = () => {
     ];
 
     return (
-        <section className="our-news-section">
+        <section className={`our-news-section ${isRTL ? 'rtl' : 'ltr'}`}>
             <div className="container">
-                <h2 className="section-title">Our News</h2>
+                <h2 className="section-title">{t('home.ourNews.title')}</h2>
                 <div className="news-cards">
                     {newsData.map((news) => (
                         <div key={news.id} className="news-card">
                             <div className="card-image">
-                                <img src={news.image} alt={news.title} />
+                                <img src={news.image} alt={news.description} />
                             </div>
                             <div className="card-content">
                                 <p className="card-description">{news.description}</p>

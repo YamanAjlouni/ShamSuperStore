@@ -70,12 +70,52 @@
             }
         }
 
-        .blue-container{
+        .blue-container {
             background-color: $primary-color;
         }
 
-        .orange-container{
+        .orange-container {
             background-color: $orange-color;
+        }
+    }
+
+    // RTL Support
+    &.rtl {
+        .sixthHighlights-container {
+            .product-out-container {
+                .product-left-container {
+
+                    h3,
+                    button {
+                        font-family: 'Arial', 'Tahoma', sans-serif;
+                    }
+
+                    h3 {
+                        text-align: right;
+                    }
+
+                    button {
+                        align-self: flex-end;
+                    }
+                }
+            }
+        }
+    }
+
+    // LTR Default (for clarity)
+    &.ltr {
+        .sixthHighlights-container {
+            .product-out-container {
+                .product-left-container {
+                    h3 {
+                        text-align: left;
+                    }
+
+                    button {
+                        align-self: flex-start;
+                    }
+                }
+            }
         }
     }
 }
@@ -99,6 +139,19 @@
 
             .product-out-container {
                 min-width: 100%;
+            }
+        }
+
+        // RTL mobile adjustments
+        &.rtl {
+            .sixthHighlights-container {
+                .product-out-container {
+                    .product-left-container {
+                        h3 {
+                            text-align: right;
+                        }
+                    }
+                }
             }
         }
     }
