@@ -1,9 +1,9 @@
-// ProductsList.jsx - Enhanced with additional filters
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 import { Search, Filter, ChevronLeft, Star } from 'lucide-react';
 import ProductsOnSale from '../productsOnSale/ProductsOnSale';
 import FeaturedProducts from '../featuredProducts/FeaturedProducts';
+import { useLanguage } from '../../../context/LanguageContext';
 import './ProductsList.scss';
 
 export const ProductsList = () => {
@@ -15,6 +15,9 @@ export const ProductsList = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [showFilters, setShowFilters] = useState(false);
     const [priceRange, setPriceRange] = useState({ min: '', max: '' });
+
+    // Language context
+    const { t } = useLanguage();
 
     // New filter states
     const [selectedSizes, setSelectedSizes] = useState([]);
@@ -79,7 +82,7 @@ export const ProductsList = () => {
                 inStock: false,
                 sizes: ["Full Size"],
                 colors: ["Black", "White"],
-                condition: "open box",
+                condition: "openBox",
                 rating: 4.8
             },
             {
@@ -129,7 +132,7 @@ export const ProductsList = () => {
                 inStock: true,
                 sizes: ["Large"],
                 colors: ["Black", "Gray"],
-                condition: "open box",
+                condition: "openBox",
                 rating: 4.6
             }
         ],
@@ -321,6 +324,21 @@ export const ProductsList = () => {
         ));
     };
 
+    const getConditionTranslation = (condition) => {
+        switch (condition) {
+            case 'new':
+                return t('shop.productsList.conditions.new');
+            case 'used':
+                return t('shop.productsList.conditions.used');
+            case 'openBox':
+                return t('shop.productsList.conditions.openBox');
+            case 'refurbished':
+                return t('shop.productsList.conditions.refurbished');
+            default:
+                return condition;
+        }
+    };
+
     if (!subcategory) {
         return (
             <div className="shop-page">
@@ -330,8 +348,10 @@ export const ProductsList = () => {
                 </div>
                 <div className="main-content">
                     <div className="error-message">
-                        <h2>Coming Soon</h2>
-                        <button onClick={handleBackToSubcategories}>Back to Categories</button>
+                        <h2>{t('shop.productsList.results.comingSoon')}</h2>
+                        <button onClick={handleBackToSubcategories}>
+                            {t('shop.productsList.navigation.backTo', { categoryName: 'Categories' })}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -351,7 +371,7 @@ export const ProductsList = () => {
                         onClick={handleBackToSubcategories}
                     >
                         <ChevronLeft size={16} />
-                        Back to {category?.name}
+                        {t('shop.productsList.navigation.backTo', { categoryName: category?.name })}
                     </button>
 
                     <h2 className="section-title">{subcategory.name}</h2>
@@ -359,7 +379,15 @@ export const ProductsList = () => {
                     {/* Show comparison status if active */}
                     {compareProducts && (
                         <div className="comparison-status">
-                            <p>🔍 Comparing {compareProducts.split(',').length} product(s) - Add more products or <button onClick={() => navigate(`/compare?products=${compareProducts}`)} style={{ color: '#FEF3C7', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', fontWeight: '600' }}>view comparison</button></p>
+                            <p>
+                                {t('shop.productsList.comparison.status', { count: compareProducts.split(',').length })} {' '}
+                                <button
+                                    onClick={() => navigate(`/compare?products=${compareProducts}`)}
+                                    style={{ color: '#FEF3C7', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', fontWeight: '600' }}
+                                >
+                                    {t('shop.productsList.comparison.viewComparison')}
+                                </button>
+                            </p>
                         </div>
                     )}
 
@@ -368,7 +396,7 @@ export const ProductsList = () => {
                         <div className="search-container">
                             <input
                                 type="text"
-                                placeholder="Search products..."
+                                placeholder={t('shop.productsList.search.placeholder')}
                                 className="search-input"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -385,10 +413,10 @@ export const ProductsList = () => {
                                     onChange={(e) => setSortBy(e.target.value)}
                                     className="sort-select"
                                 >
-                                    <option value="name">Default sorting</option>
-                                    <option value="price-low">Price: Low to High</option>
-                                    <option value="price-high">Price: High to Low</option>
-                                    <option value="rating">Rating: High to Low</option>
+                                    <option value="name">{t('shop.productsList.sorting.default')}</option>
+                                    <option value="price-low">{t('shop.productsList.sorting.priceLowToHigh')}</option>
+                                    <option value="price-high">{t('shop.productsList.sorting.priceHighToLow')}</option>
+                                    <option value="rating">{t('shop.productsList.sorting.ratingHighToLow')}</option>
                                 </select>
                             </div>
                             <button
@@ -396,7 +424,7 @@ export const ProductsList = () => {
                                 onClick={() => setShowFilters(!showFilters)}
                             >
                                 <Filter size={16} />
-                                Filter
+                                {t('shop.productsList.filters.button')}
                             </button>
                         </div>
                     </div>
@@ -404,24 +432,24 @@ export const ProductsList = () => {
                     {/* Advanced Filters Panel */}
                     {showFilters && (
                         <div className="advanced-filters">
-                            <h3 className="filters-title">Advanced Filters</h3>
+                            <h3 className="filters-title">{t('shop.productsList.filters.title')}</h3>
 
                             <div className="filter-grid">
                                 {/* Price Range */}
                                 <div className="filter-group">
-                                    <label className="filter-label">Price:</label>
+                                    <label className="filter-label">{t('shop.productsList.filters.price.label')}</label>
                                     <div className="price-range">
                                         <input
                                             type="number"
-                                            placeholder="Min"
+                                            placeholder={t('shop.productsList.filters.price.minPlaceholder')}
                                             className="price-input"
                                             value={priceRange.min}
                                             onChange={(e) => setPriceRange({ ...priceRange, min: e.target.value })}
                                         />
-                                        <span className="price-separator">to</span>
+                                        <span className="price-separator">{t('shop.productsList.filters.price.separator')}</span>
                                         <input
                                             type="number"
-                                            placeholder="Max"
+                                            placeholder={t('shop.productsList.filters.price.maxPlaceholder')}
                                             className="price-input"
                                             value={priceRange.max}
                                             onChange={(e) => setPriceRange({ ...priceRange, max: e.target.value })}
@@ -432,7 +460,7 @@ export const ProductsList = () => {
                                 {/* Size Filter */}
                                 {filterOptions.sizes.length > 0 && (
                                     <div className="filter-group">
-                                        <label className="filter-label">Size:</label>
+                                        <label className="filter-label">{t('shop.productsList.filters.size.label')}</label>
                                         <div className="size-options">
                                             {filterOptions.sizes.map(size => (
                                                 <button
@@ -450,7 +478,7 @@ export const ProductsList = () => {
                                 {/* Color Filter */}
                                 {filterOptions.colors.length > 0 && (
                                     <div className="filter-group">
-                                        <label className="filter-label">Color:</label>
+                                        <label className="filter-label">{t('shop.productsList.filters.color.label')}</label>
                                         <div className="color-options">
                                             {filterOptions.colors.map(color => (
                                                 <button
@@ -469,16 +497,16 @@ export const ProductsList = () => {
                                 {/* Condition Filter */}
                                 {filterOptions.conditions.length > 0 && (
                                     <div className="filter-group">
-                                        <label className="filter-label">Condition:</label>
+                                        <label className="filter-label">{t('shop.productsList.filters.condition.label')}</label>
                                         <select
                                             value={selectedCondition}
                                             onChange={(e) => setSelectedCondition(e.target.value)}
                                             className="condition-select"
                                         >
-                                            <option value="">All Conditions</option>
+                                            <option value="">{t('shop.productsList.filters.condition.allConditions')}</option>
                                             {filterOptions.conditions.map(condition => (
                                                 <option key={condition} value={condition}>
-                                                    {condition.charAt(0).toUpperCase() + condition.slice(1)}
+                                                    {getConditionTranslation(condition)}
                                                 </option>
                                             ))}
                                         </select>
@@ -487,7 +515,7 @@ export const ProductsList = () => {
 
                                 {/* Rating Filter */}
                                 <div className="filter-group">
-                                    <label className="filter-label">Minimum Rating:</label>
+                                    <label className="filter-label">{t('shop.productsList.filters.rating.label')}</label>
                                     <div className="rating-options">
                                         {[4, 3, 2, 1].map(rating => (
                                             <button
@@ -498,7 +526,7 @@ export const ProductsList = () => {
                                                 <div className="stars">
                                                     {renderStars(rating)}
                                                 </div>
-                                                <span>& up</span>
+                                                <span>{t('shop.productsList.filters.rating.andUp')}</span>
                                             </button>
                                         ))}
                                     </div>
@@ -514,14 +542,16 @@ export const ProductsList = () => {
                                             checked={filterInStock}
                                             onChange={(e) => setFilterInStock(e.target.checked)}
                                         />
-                                        <label htmlFor="inStock" className="stock-label">In Stock Only</label>
+                                        <label htmlFor="inStock" className="stock-label">
+                                            {t('shop.productsList.filters.stock.label')}
+                                        </label>
                                     </div>
                                 </div>
 
                                 {/* Clear Filters */}
                                 <div className="filter-group">
                                     <button className="clear-filters-btn" onClick={clearFilters}>
-                                        Clear All Filters
+                                        {t('shop.productsList.filters.clear')}
                                     </button>
                                 </div>
                             </div>
@@ -530,12 +560,17 @@ export const ProductsList = () => {
 
                     {products.length === 0 ? (
                         <div className="no-products">
-                            <p>Coming Soon !!</p>
+                            <p>{t('shop.productsList.results.noProducts')}</p>
                         </div>
                     ) : (
                         <>
                             <div className="results-info">
-                                <span>Showing {filteredAndSortedProducts.length} of {products.length} results</span>
+                                <span>
+                                    {t('shop.productsList.results.showing', {
+                                        filtered: filteredAndSortedProducts.length,
+                                        total: products.length
+                                    })}
+                                </span>
                             </div>
 
                             <div className="products-grid">
@@ -556,7 +591,9 @@ export const ProductsList = () => {
                                                     <div className="stars">
                                                         {renderStars(product.rating)}
                                                     </div>
-                                                    <span className="rating-text">({product.rating})</span>
+                                                    <span className="rating-text">
+                                                        {t('shop.productsList.product.rating', { rating: product.rating })}
+                                                    </span>
                                                 </div>
                                             )}
 
@@ -569,7 +606,7 @@ export const ProductsList = () => {
 
                                             {product.condition && product.condition !== 'new' && (
                                                 <div className="product-condition">
-                                                    {product.condition.charAt(0).toUpperCase() + product.condition.slice(1)}
+                                                    {getConditionTranslation(product.condition)}
                                                 </div>
                                             )}
                                         </div>

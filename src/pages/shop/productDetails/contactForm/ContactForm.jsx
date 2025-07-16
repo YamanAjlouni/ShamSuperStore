@@ -1,9 +1,9 @@
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Phone, MessageCircle, Mail } from 'lucide-react';
-import './InquiryForm.scss';
+import './ContactForm.scss';
 
-export const InquiryForm = () => {
+export const ContactForm = () => {
     const { productId } = useParams();
     const location = useLocation();
     const navigate = useNavigate();
@@ -114,7 +114,7 @@ export const InquiryForm = () => {
 
     const handleGoBack = () => {
         if (productId) {
-            navigate(`/product/${productId}`);
+            navigate(`/shop/product/${productId}`);
         } else {
             navigate('/shop');
         }
@@ -335,4 +335,4 @@ export const InquiryForm = () => {
     );
 };
 
-export default InquiryForm;
+export default ContactForm;

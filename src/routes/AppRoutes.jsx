@@ -8,7 +8,7 @@ import SubCategories from '../pages/shop/subCategories/SubCategories'
 import StorePage from '../pages/shop/storePage/StorePage'
 import About from '../pages/about/About'
 import ContactUs from '../pages/contactUs/ContactUs'
-import InquiryForm from '../pages/shop/productDetails/inquiryForm/InquiryForm'
+import ContactForm from '../pages/shop/productDetails/contactForm/ContactForm'
 import Compare from '../pages/shop/productDetails/compare/Compare'
 import Cart from '../pages/cart/Cart'
 
@@ -44,7 +44,7 @@ export const AppRoutes = () => {
       <Route path="/shop/category/:categoryId/subcategory/:subcategoryId" element={<ProductsList />} />
       <Route path="/shop/product/:productId" element={<ProductDetails />} />
       <Route path="/shop/store/:storeId" element={<StorePage />} /> {/* New Store route */}
-      <Route path="/inquiry/:productId" element={<InquiryForm />} />
+      <Route path="/inquiry/:productId" element={<ContactForm />} />
       <Route path="/compare" element={<Compare />} />
       {/* End of Shop Pages and Sections */}
 

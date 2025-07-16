@@ -47,6 +47,20 @@
                 height: 100%;
                 object-fit: cover;
             }
+
+            .featured-badge {
+                position: absolute;
+                top: 2px;
+                right: 2px;
+                background: linear-gradient(135deg, $primary-color, $primary-blue-hover);
+                color: white;
+                font-size: 0.65rem;
+                font-weight: 600;
+                padding: 2px 4px;
+                border-radius: 3px;
+                line-height: 1;
+                box-shadow: 0 1px 3px rgba(66, 103, 178, 0.3);
+            }
         }
 
         .product-info {
@@ -74,6 +88,63 @@
             }
         }
     }
+
+    // RTL Support
+    &.rtl {
+        direction: rtl;
+
+        .section-title {
+            font-family: 'Arial', 'Tahoma', sans-serif;
+            text-align: right;
+        }
+
+        .product-item {
+            .product-image {
+                .featured-badge {
+                    right: auto;
+                    left: 2px;
+                }
+            }
+
+            .product-info {
+                .product-name {
+                    text-align: right;
+                }
+
+                .product-pricing {
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    // LTR Default (for clarity)
+    &.ltr {
+        direction: ltr;
+
+        .section-title {
+            text-align: left;
+        }
+
+        .product-item {
+            .product-image {
+                .featured-badge {
+                    right: 2px;
+                    left: auto;
+                }
+            }
+
+            .product-info {
+                .product-name {
+                    text-align: left;
+                }
+
+                .product-pricing {
+                    text-align: left;
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 768px) {
@@ -87,6 +158,11 @@
             .product-image {
                 width: 40px;
                 height: 40px;
+
+                .featured-badge {
+                    font-size: 0.6rem;
+                    padding: 1px 3px;
+                }
             }
 
             .product-info {

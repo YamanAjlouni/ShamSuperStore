@@ -22,6 +22,11 @@
             border-color: $primary-color;
             color: $primary-color;
         }
+
+        // RTL Support
+        [dir="rtl"] & {
+            flex-direction: row-reverse;
+        }
     }
 
     .section-title {
@@ -58,6 +63,11 @@
                 }
             }
         }
+
+        // RTL Support
+        [dir="rtl"] & {
+            text-align: center; // Keep centered for both directions
+        }
     }
 
     .filter-bar {
@@ -66,6 +76,11 @@
         align-items: center;
         margin-bottom: 2rem;
         gap: 1rem;
+
+        // RTL Support
+        [dir="rtl"] & {
+            flex-direction: row-reverse;
+        }
 
         .search-container {
             display: flex;
@@ -90,6 +105,12 @@
                 &::placeholder {
                     color: $text-light;
                 }
+
+                // RTL Support
+                [dir="rtl"] & {
+                    padding: 0.75rem 1rem 0.75rem 3rem;
+                    text-align: right;
+                }
             }
 
             .search-button {
@@ -106,6 +127,12 @@
                 &:hover {
                     color: $primary-color;
                 }
+
+                // RTL Support
+                [dir="rtl"] & {
+                    right: auto;
+                    left: 0.75rem;
+                }
             }
         }
 
@@ -113,6 +140,11 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+
+            // RTL Support
+            [dir="rtl"] & {
+                flex-direction: row-reverse;
+            }
 
             .sort-dropdown {
                 .sort-select {
@@ -127,6 +159,11 @@
                     &:focus {
                         outline: none;
                         border-color: $primary-color;
+                    }
+
+                    // RTL Support
+                    [dir="rtl"] & {
+                        text-align: right;
                     }
                 }
             }
@@ -147,6 +184,11 @@
                     background: $primary-blue-light;
                     border-color: $primary-color;
                     color: $primary-color;
+                }
+
+                // RTL Support
+                [dir="rtl"] & {
+                    flex-direction: row-reverse;
                 }
             }
         }
@@ -177,6 +219,11 @@
             font-weight: 600;
             color: $text-dark;
             margin-bottom: 1.5rem;
+
+            // RTL Support
+            [dir="rtl"] & {
+                text-align: right;
+            }
         }
 
         .filter-grid {
@@ -195,6 +242,11 @@
                 font-size: 0.9rem;
                 color: $text-dark;
                 font-weight: 500;
+
+                // RTL Support
+                [dir="rtl"] & {
+                    text-align: right;
+                }
             }
 
             // Price Range
@@ -202,6 +254,11 @@
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
+
+                // RTL Support
+                [dir="rtl"] & {
+                    flex-direction: row-reverse;
+                }
 
                 .price-input {
                     width: 80px;
@@ -219,6 +276,11 @@
                     &::placeholder {
                         color: $text-light;
                     }
+
+                    // RTL Support
+                    [dir="rtl"] & {
+                        text-align: right;
+                    }
                 }
 
                 .price-separator {
@@ -233,6 +295,11 @@
                 display: flex;
                 flex-wrap: wrap;
                 gap: 0.5rem;
+
+                // RTL Support
+                [dir="rtl"] & {
+                    justify-content: flex-end;
+                }
 
                 .size-option {
                     padding: 0.5rem 0.75rem;
@@ -264,6 +331,11 @@
                 flex-wrap: wrap;
                 gap: 0.5rem;
 
+                // RTL Support
+                [dir="rtl"] & {
+                    justify-content: flex-end;
+                }
+
                 .color-option {
                     display: flex;
                     align-items: center;
@@ -287,22 +359,57 @@
                         border-color: $primary-color;
                     }
 
+                    // RTL Support
+                    [dir="rtl"] & {
+                        flex-direction: row-reverse;
+                    }
+
                     .color-swatch {
                         width: 16px;
                         height: 16px;
                         border-radius: 50%;
                         border: 1px solid $gray-300;
-                        
-                        &.color-black { background-color: #000; }
-                        &.color-white { background-color: #fff; }
-                        &.color-gray, &.color-grey { background-color: #6b7280; }
-                        &.color-silver { background-color: #c0c0c0; }
-                        &.color-red { background-color: #dc2626; }
-                        &.color-blue { background-color: #2563eb; }
-                        &.color-navy { background-color: #1e3a8a; }
-                        &.color-green { background-color: #16a34a; }
-                        &.color-rgb { background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff); }
-                        &.color-charcoal { background-color: #374151; }
+
+                        &.color-black {
+                            background-color: #000;
+                        }
+
+                        &.color-white {
+                            background-color: #fff;
+                        }
+
+                        &.color-gray,
+                        &.color-grey {
+                            background-color: #6b7280;
+                        }
+
+                        &.color-silver {
+                            background-color: #c0c0c0;
+                        }
+
+                        &.color-red {
+                            background-color: #dc2626;
+                        }
+
+                        &.color-blue {
+                            background-color: #2563eb;
+                        }
+
+                        &.color-navy {
+                            background-color: #1e3a8a;
+                        }
+
+                        &.color-green {
+                            background-color: #16a34a;
+                        }
+
+                        &.color-rgb {
+                            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+                        }
+
+                        &.color-charcoal {
+                            background-color: #374151;
+                        }
                     }
                 }
             }
@@ -319,6 +426,11 @@
                 &:focus {
                     outline: none;
                     border-color: $primary-color;
+                }
+
+                // RTL Support
+                [dir="rtl"] & {
+                    text-align: right;
                 }
             }
 
@@ -351,9 +463,20 @@
                         border-color: $primary-color;
                     }
 
+                    // RTL Support
+                    [dir="rtl"] & {
+                        flex-direction: row-reverse;
+                        text-align: right;
+                    }
+
                     .stars {
                         display: flex;
                         gap: 2px;
+
+                        // RTL Support
+                        [dir="rtl"] & {
+                            flex-direction: row-reverse;
+                        }
 
                         .star {
                             color: #fbbf24;
@@ -371,6 +494,12 @@
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
+
+                // RTL Support
+                [dir="rtl"] & {
+                    flex-direction: row-reverse;
+                    justify-content: flex-end;
+                }
 
                 .stock-checkbox {
                     width: 16px;
@@ -425,6 +554,11 @@
         color: $text-light;
         font-size: 0.9rem;
         text-align: center;
+
+        // RTL Support
+        [dir="rtl"] & {
+            text-align: center; // Keep centered for both
+        }
     }
 
     .products-grid {
@@ -463,6 +597,11 @@
             padding: 1rem;
             text-align: center;
 
+            // RTL Support
+            [dir="rtl"] & {
+                text-align: center; // Keep centered for both
+            }
+
             .product-name {
                 font-size: 0.9rem;
                 font-weight: 500;
@@ -486,6 +625,11 @@
                     display: flex;
                     gap: 2px;
 
+                    // RTL Support - Stars should always be left-to-right
+                    [dir="rtl"] & {
+                        flex-direction: row; // Keep LTR for stars
+                    }
+
                     .star {
                         color: #fbbf24;
 
@@ -507,6 +651,11 @@
                 justify-content: center;
                 gap: 0.5rem;
                 margin-bottom: 0.5rem;
+
+                // RTL Support
+                [dir="rtl"] & {
+                    flex-direction: row-reverse;
+                }
 
                 .original-price {
                     font-size: 0.85rem;
@@ -534,6 +683,35 @@
     }
 }
 
+// RTL-specific adjustments for Arabic text
+[dir="rtl"] {
+    .shop-products-section {
+        .filter-bar {
+            .search-container {
+                .search-input {
+                    font-family: 'Arial', sans-serif; // Ensure Arabic font compatibility
+                }
+            }
+        }
+
+        .advanced-filters {
+            .filter-group {
+                .filter-label {
+                    font-family: 'Arial', sans-serif; // Ensure Arabic font compatibility
+                }
+            }
+        }
+
+        .product-card {
+            .product-info {
+                .product-name {
+                    font-family: 'Arial', sans-serif; // Ensure Arabic font compatibility
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: 1024px) {
     .shop-products-section {
         .advanced-filters {
@@ -552,12 +730,22 @@
             align-items: stretch;
             gap: 1rem;
 
+            // RTL Support
+            [dir="rtl"] & {
+                flex-direction: column; // Same for both directions on mobile
+            }
+
             .search-container {
                 max-width: none;
             }
 
             .filter-controls {
                 justify-content: space-between;
+
+                // RTL Support
+                [dir="rtl"] & {
+                    flex-direction: row-reverse;
+                }
 
                 .sort-dropdown .sort-select {
                     min-width: auto;
@@ -574,12 +762,24 @@
 
             .filter-group {
                 .size-options {
+
+                    // RTL Support
+                    [dir="rtl"] & {
+                        justify-content: flex-start; // Reset on mobile
+                    }
+
                     .size-option {
                         min-width: 35px;
                     }
                 }
 
                 .color-options {
+
+                    // RTL Support
+                    [dir="rtl"] & {
+                        justify-content: flex-start; // Reset on mobile
+                    }
+
                     .color-option {
                         flex: 1;
                         min-width: 0;
@@ -590,6 +790,11 @@
                 .rating-options {
                     .rating-option {
                         justify-content: center;
+
+                        // RTL Support
+                        [dir="rtl"] & {
+                            flex-direction: row-reverse;
+                        }
                     }
                 }
             }
@@ -656,6 +861,11 @@
                 flex-direction: column;
                 gap: 0.75rem;
 
+                // RTL Support
+                [dir="rtl"] & {
+                    flex-direction: column; // Same for both directions
+                }
+
                 .sort-dropdown,
                 .filter-button {
                     width: 100%;
@@ -678,6 +888,11 @@
                     flex-wrap: wrap;
                     gap: 0.5rem;
 
+                    // RTL Support
+                    [dir="rtl"] & {
+                        flex-direction: row; // Reset to normal flow on mobile
+                    }
+
                     .price-input {
                         width: 70px;
                     }
@@ -694,6 +909,7 @@
                 .color-options {
                     flex-direction: column;
                     flex-wrap: wrap;
+
                     .color-option {
                         padding: 0.4rem 0.6rem;
                         font-size: 0.8rem;

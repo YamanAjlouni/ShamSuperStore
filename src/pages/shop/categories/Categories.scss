@@ -9,7 +9,6 @@
         color: $text-dark;
         text-align: center;
         margin-bottom: 2rem;
-        // border-bottom: 2px solid $gray-200;
         padding-bottom: 0.75rem;
     }
 
@@ -27,7 +26,6 @@
             font-size: 1.1rem;
         }
     }
-
 
     .categories-grid {
         display: grid;
@@ -105,6 +103,50 @@
 
             &:active {
                 transform: translateY(1px);
+            }
+        }
+    }
+
+    // RTL Support
+    &.rtl {
+        direction: rtl;
+
+        .section-title {
+            font-family: 'Arial', 'Tahoma', sans-serif;
+        }
+
+        .comparison-status {
+            p {
+                font-family: 'Arial', 'Tahoma', sans-serif;
+                direction: rtl;
+            }
+        }
+
+        .category-item {
+            .category-name {
+                font-family: 'Arial', 'Tahoma', sans-serif;
+                text-align: center;
+            }
+
+            .view-category-btn {
+                font-family: 'Arial', 'Tahoma', sans-serif;
+            }
+        }
+    }
+
+    // LTR Default (for clarity)
+    &.ltr {
+        direction: ltr;
+
+        .comparison-status {
+            p {
+                direction: ltr;
+            }
+        }
+
+        .category-item {
+            .category-name {
+                text-align: center;
             }
         }
     }

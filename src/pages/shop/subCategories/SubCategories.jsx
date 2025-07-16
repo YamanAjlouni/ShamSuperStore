@@ -1,14 +1,18 @@
-// SubCategories.jsx - Updated with comparison state preservation
+// SubCategories.jsx - Updated with translations and comparison state preservation
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import ProductsOnSale from '../productsOnSale/ProductsOnSale';
 import FeaturedProducts from '../featuredProducts/FeaturedProducts';
+import { useLanguage } from '../../../context/LanguageContext'; // Import the language context
 import './SubCategories.scss';
 
 export const SubCategories = () => {
     const { categoryId } = useParams();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    
+
+    // Language context
+    const { t } = useLanguage();
+
     // Get comparison state from URL
     const compareProducts = searchParams.get('compare');
 
@@ -243,8 +247,10 @@ export const SubCategories = () => {
                 </div>
                 <div className="main-content">
                     <div className="error-message">
-                        <h2>Category not found</h2>
-                        <button onClick={handleBackToCategories}>Back to Shop</button>
+                        <h2>{t('shop.subCategories.errors.categoryNotFound')}</h2>
+                        <button onClick={handleBackToCategories}>
+                            {t('shop.subCategories.navigation.backToShop')}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -263,21 +269,25 @@ export const SubCategories = () => {
                         className="back-button"
                         onClick={handleBackToCategories}
                     >
-                        ← Back to Categories
+                        {t('shop.subCategories.navigation.backToCategories')}
                     </button>
-                    
+
                     <h2 className="section-title">{category.name}</h2>
-                    
+
                     {/* Show comparison status if active */}
                     {compareProducts && (
                         <div className="comparison-status">
-                            <p>🔍 Comparing {compareProducts.split(',').length} product(s) - Continue browsing to add more!</p>
+                            <p>
+                                {t('shop.subCategories.comparison.status', {
+                                    count: compareProducts.split(',').length
+                                })}
+                            </p>
                         </div>
                     )}
-                    
+
                     {subcategories.length === 0 ? (
                         <div className="no-subcategories">
-                            <p>Coming Soon !!.</p>
+                            <p>{t('shop.subCategories.content.comingSoon')}</p>
                         </div>
                     ) : (
                         <div className="subcategories-grid">
@@ -298,7 +308,7 @@ export const SubCategories = () => {
                                             handleSubcategoryClick(subcategory.id);
                                         }}
                                     >
-                                        View Products
+                                        {t('shop.subCategories.content.viewProducts')}
                                     </button>
                                 </div>
                             ))}

@@ -111,11 +111,77 @@
                 font-size: 0.75rem;
                 color: $primary-color;
                 font-weight: 500;
-                background: linear-gradient(135deg, $primary-color, 15% );
+                background: linear-gradient(135deg, $primary-color, 15%);
                 padding: 2px 6px;
                 border-radius: 10px;
                 display: inline-block;
                 box-shadow: 0 1px 2px rgba(22, 160, 133, 0.2);
+            }
+        }
+    }
+
+    // RTL Support
+    &.rtl {
+        direction: rtl;
+
+        .section-title {
+            font-family: 'Arial', 'Tahoma', sans-serif;
+            text-align: right;
+        }
+
+        .product-item {
+            .product-image {
+                .sale-badge {
+                    right: auto;
+                    left: 2px;
+                }
+            }
+
+            .product-info {
+                .product-name {
+                    text-align: right;
+                }
+
+                .product-pricing {
+                    justify-content: flex-end;
+                    flex-direction: row-reverse;
+                }
+
+                .savings-info {
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    // LTR Default (for clarity)
+    &.ltr {
+        direction: ltr;
+
+        .section-title {
+            text-align: left;
+        }
+
+        .product-item {
+            .product-image {
+                .sale-badge {
+                    right: 2px;
+                    left: auto;
+                }
+            }
+
+            .product-info {
+                .product-name {
+                    text-align: left;
+                }
+
+                .product-pricing {
+                    justify-content: flex-start;
+                }
+
+                .savings-info {
+                    text-align: left;
+                }
             }
         }
     }
@@ -188,7 +254,7 @@
 
                 .product-pricing {
                     margin-bottom: 0.2rem;
-                    
+
                     .original-price {
                         font-size: 0.65rem;
                     }

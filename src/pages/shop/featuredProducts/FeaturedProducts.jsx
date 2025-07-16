@@ -1,9 +1,13 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../../../context/LanguageContext';
 import './FeaturedProducts.scss';
 
 export const FeaturedProducts = ({ compareProducts }) => {
+    const { t, isRTL } = useLanguage();
     const navigate = useNavigate();
 
+    // This data will come from backend later - keeping as is
     const featuredProducts = [
         {
             id: 101, // Matches ProductDetails database
@@ -59,8 +63,8 @@ export const FeaturedProducts = ({ compareProducts }) => {
     };
 
     return (
-        <div className="featured-products">
-            <h3 className="section-title">Featured products</h3>
+        <div className={`featured-products ${isRTL ? 'rtl' : 'ltr'}`}>
+            <h3 className="section-title">{t('shop.featuredProducts.title')}</h3>
             <div className="products-list">
                 {featuredProducts.map(product => (
                     <div

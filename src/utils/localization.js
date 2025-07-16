@@ -44,6 +44,17 @@ import arHomeOurNews from '../locale/ar/home/ourNews.json';
 import enHomeTopRatedProducts from '../locale/en/home/topRatedProducts.json';
 import arHomeTopRatedProducts from '../locale/ar/home/topRatedProducts.json';
 
+// Import shop translations
+import enShopCategories from '../locale/en/shop/categories.json';
+import arShopCategories from '../locale/ar/shop/categories.json';
+import enShopProductsOnSale from '../locale/en/shop/productsOnSale.json';
+import arShopProductsOnSale from '../locale/ar/shop/productsOnSale.json';
+import enShopFeaturedProducts from '../locale/en/shop/featuredProducts.json';
+import arShopFeaturedProducts from '../locale/ar/shop/featuredProducts.json';
+import enShopProductsList from '../locale/en/shop/productsList.json';
+import arShopProductsList from '../locale/ar/shop/productsList.json';
+import enShopSubCategories from '../locale/en/shop/subCategories.json';
+import arShopSubCategories from '../locale/ar/shop/subCategories.json';
 
 // Import navbar translations
 import enNavbar from '../locale/en/navbar.json';
@@ -54,7 +65,6 @@ import enFooter from '../locale/en/footer.json';
 import arFooter from '../locale/ar/footer.json';
 
 
-// Organize translations by language and section
 const localization = {
     en: {
         navbar: enNavbar,
@@ -82,7 +92,13 @@ const localization = {
             featuredProducts: enHomeFeaturedProducts,
             ourNews: enHomeOurNews,
             topRatedProducts: enHomeTopRatedProducts,
-
+        },
+        shop: {
+            categories: enShopCategories,
+            productsOnSale: enShopProductsOnSale,
+            featuredProducts: enShopFeaturedProducts,
+            productsList: enShopProductsList,
+            subCategories: enShopSubCategories,
         },
     },
     ar: {
@@ -111,7 +127,13 @@ const localization = {
             featuredProducts: arHomeFeaturedProducts,
             ourNews: arHomeOurNews,
             topRatedProducts: arHomeTopRatedProducts,
-
+        },
+        shop: {
+            categories: arShopCategories,
+            productsOnSale: arShopProductsOnSale,
+            featuredProducts: arShopFeaturedProducts,
+            productsList: arShopProductsList,
+            subCategories: arShopSubCategories,
         },
     }
 };

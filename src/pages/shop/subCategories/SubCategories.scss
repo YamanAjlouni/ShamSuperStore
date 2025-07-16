@@ -20,6 +20,11 @@
             color: $primary-color;
             transform: translateY(-1px);
         }
+
+        // RTL Support
+        [dir="rtl"] & {
+            text-align: right;
+        }
     }
 
     .section-title {
@@ -29,6 +34,11 @@
         text-align: center;
         margin-bottom: 2rem;
         padding-bottom: 0.75rem;
+
+        // RTL Support
+        [dir="rtl"] & {
+            text-align: center; // Keep centered for both directions
+        }
     }
 
     .comparison-status {
@@ -43,8 +53,12 @@
         p {
             margin: 0;
         }
-    }
 
+        // RTL Support
+        [dir="rtl"] & {
+            text-align: center; // Keep centered for both directions
+        }
+    }
 
     .no-subcategories {
         text-align: center;
@@ -59,12 +73,22 @@
             font-size: 1.1rem;
             margin: 0.5rem 0;
         }
+
+        // RTL Support
+        [dir="rtl"] & {
+            text-align: center; // Keep centered for both directions
+        }
     }
 
     .subcategories-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(210px, 220px));
         gap: 1.5rem;
+
+        // RTL Support
+        [dir="rtl"] & {
+            direction: ltr; // Keep grid flow consistent
+        }
     }
 
     .subcategory-item {
@@ -78,6 +102,12 @@
         &:hover {
             background-color: transparent;
             box-shadow: $shadow-md;
+        }
+
+        // RTL Support
+        [dir="rtl"] & {
+            text-align: center; // Keep centered for both directions
+            direction: rtl; // Reset direction for content
         }
 
         .subcategory-image {
@@ -111,6 +141,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
+            // RTL Support
+            [dir="rtl"] & {
+                font-family: 'Arial', sans-serif; // Ensure Arabic font compatibility
+            }
         }
 
         .view-subcategory-btn {
@@ -136,6 +171,73 @@
 
             &:active {
                 transform: translateY(1px);
+            }
+
+            // RTL Support
+            [dir="rtl"] & {
+                font-family: 'Arial', sans-serif; // Ensure Arabic font compatibility
+            }
+        }
+    }
+
+    // Error message styling
+    .error-message {
+        text-align: center;
+        padding: 3rem;
+        background: $white;
+        border-radius: $radius-lg;
+        border: 1px solid $gray-200;
+        box-shadow: $shadow-sm;
+
+        h2 {
+            color: $text-dark;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background: $primary-color;
+            color: $white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: $radius-md;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background: $primary-blue-hover;
+            }
+        }
+
+        // RTL Support
+        [dir="rtl"] & {
+            text-align: center; // Keep centered for both directions
+
+            h2,
+            button {
+                font-family: 'Arial', sans-serif; // Ensure Arabic font compatibility
+            }
+        }
+    }
+}
+
+// RTL-specific adjustments for Arabic text
+[dir="rtl"] {
+    .shop-subcategories-section {
+        .back-button {
+            font-family: 'Arial', sans-serif; // Ensure Arabic font compatibility
+        }
+
+        .comparison-status {
+            p {
+                font-family: 'Arial', sans-serif; // Ensure Arabic font compatibility
+            }
+        }
+
+        .no-subcategories {
+            p {
+                font-family: 'Arial', sans-serif; // Ensure Arabic font compatibility
             }
         }
     }
@@ -168,10 +270,20 @@
 
         .subcategories-grid {
             gap: 1rem;
+
+            // RTL Support
+            [dir="rtl"] & {
+                direction: ltr; // Keep grid flow consistent on mobile
+            }
         }
 
         .subcategory-item {
             padding: 1rem;
+
+            // RTL Support
+            [dir="rtl"] & {
+                direction: rtl; // Reset direction for content on mobile
+            }
 
             .subcategory-image {
                 width: 90px;

@@ -1,9 +1,13 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../../../context/LanguageContext';
 import './ProductsOnSale.scss';
 
 export const ProductsOnSale = ({ compareProducts }) => {
+    const { t, isRTL } = useLanguage();
     const navigate = useNavigate();
 
+    // This data will come from backend later - keeping as is
     const saleProducts = [
         {
             id: 101, // Matches ProductDetails database
@@ -60,8 +64,8 @@ export const ProductsOnSale = ({ compareProducts }) => {
     };
 
     return (
-        <div className="products-on-sale">
-            <h3 className="section-title">Products on-sale</h3>
+        <div className={`products-on-sale ${isRTL ? 'rtl' : 'ltr'}`}>
+            <h3 className="section-title">{t('shop.productsOnSale.title')}</h3>
             <div className="products-list">
                 {saleProducts.map(product => {
                     const savings = calculateSavings(product.originalPrice, product.salePrice);

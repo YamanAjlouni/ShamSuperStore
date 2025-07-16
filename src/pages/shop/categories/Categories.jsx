@@ -1,10 +1,13 @@
-// Categories.jsx - Updated with comparison state preservation
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../../../context/LanguageContext';
 import './Categories.scss';
 
 export const Categories = ({ compareProducts }) => {
+    const { t, isRTL } = useLanguage();
     const navigate = useNavigate();
 
+    // This data will come from backend later - keeping as is
     const categories = [
         {
             id: 1,
@@ -117,13 +120,15 @@ export const Categories = ({ compareProducts }) => {
         }
     };
 
+    const compareCount = compareProducts ? compareProducts.split(',').length : 0;
+
     return (
-        <div className="shop-categories-section">
-            <h2 className="section-title">Categories</h2>
+        <div className={`shop-categories-section ${isRTL ? 'rtl' : 'ltr'}`}>
+            <h2 className="section-title">{t('shop.categories.title')}</h2>
             {/* Show comparison status if active */}
             {compareProducts && (
                 <div className="comparison-status">
-                    <p>🔍 Comparing {compareProducts.split(',').length} product(s) - Continue shopping to add more items to compare!</p>
+                    <p>🔍 {t('shop.categories.comparing', { count: compareCount })} - {t('shop.categories.continueShoppingToCompare')}</p>
                 </div>
             )}
             <div className="categories-grid">
@@ -144,7 +149,7 @@ export const Categories = ({ compareProducts }) => {
                                 handleCategoryClick(category.id);
                             }}
                         >
-                            View Category
+                            {t('shop.categories.viewCategory')}
                         </button>
                     </div>
                 ))}
