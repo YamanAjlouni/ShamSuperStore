@@ -894,7 +894,7 @@ $transition: all 0.2s ease-in-out;
   }
 
   @media (max-width: 480px) {
-    padding: 160px 0 2rem 0;
+    padding: 120px 0 2rem 0;
   }
 
   // Custom scrollbar
@@ -1100,4 +1100,15 @@ $transition: all 0.2s ease-in-out;
     margin-left: 0;
     margin-right: auto;
   }
+}
+
+
+body {
+  @media (max-width: 1200px) {
+    margin-top: 40px; // Account for top bar + search bar + main navbar
+  }
+
+  @media (max-width: 768px) {}
+
+  @media (max-width: 480px) {}
 }
