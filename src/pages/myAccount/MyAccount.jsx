@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import './MyAccount.scss';
 
 // Import all components
@@ -26,6 +27,7 @@ const MyAccount = () => {
         password: '',
         rememberMe: false
     });
+    const { t } = useLanguage();
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -69,14 +71,14 @@ const MyAccount = () => {
                 return <AccountDetails />;
             case 'wishlist':
                 return <Wishlist />;
-            case 'following':
-                return <Following />;
-            case 'lost-password':
-                return <LostPassword setShowLogin={setShowLogin} />;
+            // case 'following':
+            //     return <Following />;
             case 'support-tickets':
                 return <SupportTickets />;
             case 'inquiries':
                 return <ContactedSellers />;
+            case 'lost-password':
+                return <LostPassword setShowLogin={setShowLogin} />;
             default:
                 return <Dashboard handleLogout={handleLogout} setActiveTab={setActiveTab} />;
         }
@@ -99,45 +101,71 @@ const MyAccount = () => {
                 <div className="account-sidebar">
                     <div className="user-info">
                         <h3>yamanajlouni</h3>
-                        <button onClick={handleLogout} className="logout-btn">Logout</button>
+                        <button onClick={handleLogout} className="logout-btn">
+                            {t('myAccount.actions.logout')}
+                        </button>
                     </div>
                     <nav className="account-nav">
                         <ul>
                             <li className={activeTab === 'dashboard' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('dashboard')}>Dashboard</button>
+                                <button onClick={() => setActiveTab('dashboard')}>
+                                    {t('myAccount.navigation.dashboard')}
+                                </button>
                             </li>
                             <li className={activeTab === 'orders' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('orders')}>Orders</button>
+                                <button onClick={() => setActiveTab('orders')}>
+                                    {t('myAccount.navigation.orders')}
+                                </button>
                             </li>
                             <li className={activeTab === 'order-tracking' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('order-tracking')}>Order Tracking</button>
+                                <button onClick={() => setActiveTab('order-tracking')}>
+                                    {t('myAccount.navigation.orderTracking')}
+                                </button>
                             </li>
                             <li className={activeTab === 'downloads' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('downloads')}>Downloads</button>
+                                <button onClick={() => setActiveTab('downloads')}>
+                                    {t('myAccount.navigation.downloads')}
+                                </button>
                             </li>
                             <li className={activeTab === 'addresses' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('addresses')}>Addresses</button>
+                                <button onClick={() => setActiveTab('addresses')}>
+                                    {t('myAccount.navigation.addresses')}
+                                </button>
                             </li>
                             <li className={activeTab === 'payment-methods' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('payment-methods')}>Payment Methods</button>
+                                <button onClick={() => setActiveTab('payment-methods')}>
+                                    {t('myAccount.navigation.paymentMethods')}
+                                </button>
                             </li>
                             <li className={activeTab === 'account-details' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('account-details')}>Account Details</button>
+                                <button onClick={() => setActiveTab('account-details')}>
+                                    {t('myAccount.navigation.accountDetails')}
+                                </button>
                             </li>
                             <li className={activeTab === 'wishlist' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('wishlist')}>Wishlist</button>
+                                <button onClick={() => setActiveTab('wishlist')}>
+                                    {t('myAccount.navigation.wishlist')}
+                                </button>
                             </li>
-                            <li className={activeTab === 'following' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('following')}>Following</button>
-                            </li>
+                            {/* <li className={activeTab === 'following' ? 'active' : ''}>
+                                <button onClick={() => setActiveTab('following')}>
+                                    {t('myAccount.navigation.following')}
+                                </button>
+                            </li> */}
                             <li className={activeTab === 'support-tickets' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('support-tickets')}>Support Tickets</button>
+                                <button onClick={() => setActiveTab('support-tickets')}>
+                                    {t('myAccount.navigation.supportTickets')}
+                                </button>
                             </li>
                             <li className={activeTab === 'inquiries' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('inquiries')}>Contacted Sellers</button>
+                                <button onClick={() => setActiveTab('inquiries')}>
+                                    {t('myAccount.navigation.contactedSellers')}
+                                </button>
                             </li>
                             <li className={activeTab === 'lost-password' ? 'active' : ''}>
-                                <button onClick={() => setActiveTab('lost-password')}>Lost Password</button>
+                                <button onClick={() => setActiveTab('lost-password')}>
+                                    {t('myAccount.navigation.lostPassword')}
+                                </button>
                             </li>
                         </ul>
                     </nav>

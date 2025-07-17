@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { X, ShoppingCart, Eye } from 'lucide-react';
+import { useLanguage } from '../../../../context/LanguageContext';
 import './Compare.scss';
 
 export const Compare = () => {
@@ -8,6 +9,7 @@ export const Compare = () => {
     const navigate = useNavigate();
     const [compareProducts, setCompareProducts] = useState([]);
     const [quantities, setQuantities] = useState({});
+    const { t } = useLanguage();
 
     // Mock products database - same as ProductDetails
     const productsDatabase = {
@@ -398,15 +400,15 @@ export const Compare = () => {
         return (
             <div className="compare-page">
                 <div className="compare-header">
-                    <h1>Product Comparison</h1>
-                    <p>No products selected for comparison</p>
+                    <h1>{t('shop.compare.header.title')}</h1>
+                    <p>{t('shop.compare.header.noProducts')}</p>
                 </div>
                 <div className="empty-compare">
                     <div className="empty-icon">📊</div>
-                    <h2>Start Comparing Products</h2>
-                    <p>Add products to compare their features, prices, and specifications side by side.</p>
+                    <h2>{t('shop.compare.empty.title')}</h2>
+                    <p>{t('shop.compare.empty.description')}</p>
                     <button className="browse-btn" onClick={() => navigate('/shop')}>
-                        Browse Products
+                        {t('shop.compare.empty.browseButton')}
                     </button>
                 </div>
             </div>
@@ -416,8 +418,13 @@ export const Compare = () => {
     return (
         <div className="compare-page">
             <div className="compare-header">
-                <h1>Product Comparison</h1>
-                <p>Compare {compareProducts.length} product{compareProducts.length > 1 ? 's' : ''}</p>
+                <h1>{t('shop.compare.header.title')}</h1>
+                <p>
+                    {compareProducts.length === 1
+                        ? t('shop.compare.header.compareCount', { count: compareProducts.length })
+                        : t('shop.compare.header.compareCountPlural', { count: compareProducts.length })
+                    }
+                </p>
             </div>
 
             <div className="compare-container">
@@ -426,14 +433,14 @@ export const Compare = () => {
                     <div className={`comparison-table ${compareProducts.length > 4 ? 'many-products' : ''}`} data-products={compareProducts.length}>
                         {/* Product Images Row */}
                         <div className="compare-row product-images-row">
-                            <div className="row-label">Product</div>
+                            <div className="row-label">{t('shop.compare.table.labels.product')}</div>
                             {compareProducts.map((product) => (
                                 <div key={product.id} className="compare-cell product-image-cell">
                                     <div className="product-card">
                                         <button
                                             className="remove-btn"
                                             onClick={() => handleRemoveProduct(product.id)}
-                                            title="Remove from comparison"
+                                            title={t('shop.compare.product.removeTitle')}
                                         >
                                             <X size={16} />
                                         </button>
@@ -444,7 +451,9 @@ export const Compare = () => {
                                                 className="product-image"
                                             />
                                             {product.originalPrice && product.originalPrice > product.price && (
-                                                <div className="sale-badge">Sale</div>
+                                                <div className="sale-badge">
+                                                    {t('shop.compare.product.saleBadge')}
+                                                </div>
                                             )}
                                         </div>
                                         <h3 className="product-name">{product.name}</h3>
@@ -453,7 +462,7 @@ export const Compare = () => {
                                             onClick={() => handleViewProduct(product.id)}
                                         >
                                             <Eye size={14} />
-                                            View Details
+                                            {t('shop.compare.product.viewDetails')}
                                         </button>
                                     </div>
                                 </div>
@@ -462,7 +471,7 @@ export const Compare = () => {
 
                         {/* Rating Row */}
                         <div className="compare-row">
-                            <div className="row-label">Rating</div>
+                            <div className="row-label">{t('shop.compare.table.labels.rating')}</div>
                             {compareProducts.map((product) => (
                                 <div key={product.id} className="compare-cell">
                                     {product.rating ? (
@@ -471,11 +480,16 @@ export const Compare = () => {
                                                 {renderStars(product.rating)}
                                             </div>
                                             <span className="rating-text">
-                                                {product.rating}/5 ({product.reviews} reviews)
+                                                {t('shop.compare.rating.ratingText', {
+                                                    rating: product.rating,
+                                                    reviews: product.reviews
+                                                })}
                                             </span>
                                         </div>
                                     ) : (
-                                        <span className="no-rating">No rating available</span>
+                                        <span className="no-rating">
+                                            {t('shop.compare.rating.noRating')}
+                                        </span>
                                     )}
                                 </div>
                             ))}
@@ -483,7 +497,7 @@ export const Compare = () => {
 
                         {/* Price Row */}
                         <div className="compare-row price-row">
-                            <div className="row-label">Price</div>
+                            <div className="row-label">{t('shop.compare.table.labels.price')}</div>
                             {compareProducts.map((product) => (
                                 <div key={product.id} className="compare-cell">
                                     <div className="price-container">
@@ -498,11 +512,14 @@ export const Compare = () => {
 
                         {/* Availability Row */}
                         <div className="compare-row">
-                            <div className="row-label">Availability</div>
+                            <div className="row-label">{t('shop.compare.table.labels.availability')}</div>
                             {compareProducts.map((product) => (
                                 <div key={product.id} className="compare-cell">
                                     <span className={`availability ${product.inStock ? 'in-stock' : 'out-of-stock'}`}>
-                                        {product.inStock ? '✓ In Stock' : '✗ Out of Stock'}
+                                        {product.inStock
+                                            ? t('shop.compare.availability.inStock')
+                                            : t('shop.compare.availability.outOfStock')
+                                        }
                                     </span>
                                 </div>
                             ))}
@@ -510,7 +527,7 @@ export const Compare = () => {
 
                         {/* SKU Row */}
                         <div className="compare-row">
-                            <div className="row-label">SKU</div>
+                            <div className="row-label">{t('shop.compare.table.labels.sku')}</div>
                             {compareProducts.map((product) => (
                                 <div key={product.id} className="compare-cell">
                                     <span className="sku-value">{product.sku}</span>
@@ -520,7 +537,7 @@ export const Compare = () => {
 
                         {/* Condition Row */}
                         <div className="compare-row">
-                            <div className="row-label">Condition</div>
+                            <div className="row-label">{t('shop.compare.table.labels.condition')}</div>
                             {compareProducts.map((product) => (
                                 <div key={product.id} className="compare-cell">
                                     <span className="condition">{product.condition || 'New'}</span>
@@ -530,7 +547,7 @@ export const Compare = () => {
 
                         {/* Colors Row */}
                         <div className="compare-row">
-                            <div className="row-label">Colors</div>
+                            <div className="row-label">{t('shop.compare.table.labels.colors')}</div>
                             {compareProducts.map((product) => (
                                 <div key={product.id} className="compare-cell">
                                     {product.attributes?.colors ? (
@@ -547,7 +564,7 @@ export const Compare = () => {
                                             ))}
                                         </div>
                                     ) : (
-                                        <span className="no-data">N/A</span>
+                                        <span className="no-data">{t('shop.compare.general.notAvailable')}</span>
                                     )}
                                 </div>
                             ))}
@@ -555,7 +572,7 @@ export const Compare = () => {
 
                         {/* Sizes Row */}
                         <div className="compare-row">
-                            <div className="row-label">Sizes</div>
+                            <div className="row-label">{t('shop.compare.table.labels.sizes')}</div>
                             {compareProducts.map((product) => (
                                 <div key={product.id} className="compare-cell">
                                     {product.attributes?.sizes ? (
@@ -565,7 +582,7 @@ export const Compare = () => {
                                             ))}
                                         </div>
                                     ) : (
-                                        <span className="no-data">N/A</span>
+                                        <span className="no-data">{t('shop.compare.general.notAvailable')}</span>
                                     )}
                                 </div>
                             ))}
@@ -573,7 +590,7 @@ export const Compare = () => {
 
                         {/* Add to Cart Row */}
                         <div className="compare-row cart-row">
-                            <div className="row-label">Add to Cart</div>
+                            <div className="row-label">{t('shop.compare.table.labels.addToCart')}</div>
                             {compareProducts.map((product) => (
                                 <div key={product.id} className="compare-cell">
                                     <div className="cart-section">
@@ -601,7 +618,10 @@ export const Compare = () => {
                                             disabled={!product.inStock}
                                         >
                                             <ShoppingCart size={16} />
-                                            {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                                            {product.inStock
+                                                ? t('shop.compare.cart.addToCart')
+                                                : t('shop.compare.cart.outOfStock')
+                                            }
                                         </button>
                                     </div>
                                 </div>
@@ -614,7 +634,7 @@ export const Compare = () => {
             {/* Additional Actions */}
             <div className="compare-actions">
                 <button className="continue-shopping-btn" onClick={handleContinueShopping}>
-                    Continue Shopping
+                    {t('shop.compare.actions.continueShopping')}
                 </button>
                 <button
                     className="clear-all-btn"
@@ -624,7 +644,7 @@ export const Compare = () => {
                         setSearchParams({});
                     }}
                 >
-                    Clear All
+                    {t('shop.compare.actions.clearAll')}
                 </button>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useLanguage } from '../../../context/LanguageContext';
 import './StorePage.scss';
 
 export const StorePage = () => {
@@ -7,6 +8,7 @@ export const StorePage = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [activeTab, setActiveTab] = useState('products');
+    const { t } = useLanguage();
 
     // Mock stores database - in real app, this would be an API call
     const storesDatabase = {
@@ -250,9 +252,11 @@ export const StorePage = () => {
         return (
             <div className="store-page">
                 <div className="error-message">
-                    <h2>Store not found</h2>
-                    <p>The store you're looking for doesn't exist or has been removed.</p>
-                    <button onClick={() => navigate('/shop')}>Back to Shop</button>
+                    <h2>{t('shop.storePage.error.storeNotFound')}</h2>
+                    <p>{t('shop.storePage.error.storeNotFoundMessage')}</p>
+                    <button onClick={() => navigate('/shop')}>
+                        {t('shop.storePage.error.backToShop')}
+                    </button>
                 </div>
             </div>
         );
@@ -289,8 +293,8 @@ export const StorePage = () => {
     };
 
     const tabs = [
-        { id: 'products', label: 'Products' },
-        { id: 'reviews', label: 'Store Reviews' }
+        { id: 'products', label: t('shop.storePage.tabs.products') },
+        { id: 'reviews', label: t('shop.storePage.tabs.storeReviews') }
     ];
 
     const renderTabContent = () => {
@@ -302,26 +306,30 @@ export const StorePage = () => {
                             storeProducts.map((product) => (
                                 <div key={product.id} className="product-card">
                                     <div className="product-image-container">
-                                        <img 
-                                            src={product.images[0]} 
+                                        <img
+                                            src={product.images[0]}
                                             alt={product.name}
                                             className="product-image"
                                             onClick={() => handleProductClick(product.id)}
                                         />
                                         {product.originalPrice && product.originalPrice > product.price && (
-                                            <div className="sale-badge">Sale</div>
+                                            <div className="sale-badge">
+                                                {t('shop.storePage.product.saleBadge')}
+                                            </div>
                                         )}
                                     </div>
-                                    
+
                                     <div className="product-info">
                                         <div className="product-header">
-                                            <h3 
+                                            <h3
                                                 className="product-name"
                                                 onClick={() => handleProductClick(product.id)}
                                             >
                                                 {product.name}
                                             </h3>
-                                            <span className="product-sku">SKU: {product.sku}</span>
+                                            <span className="product-sku">
+                                                {t('shop.storePage.product.skuLabel')} {product.sku}
+                                            </span>
                                         </div>
 
                                         {product.rating && (
@@ -348,10 +356,13 @@ export const StorePage = () => {
                                                     <span className="original-price">${product.originalPrice.toFixed(2)}</span>
                                                 )}
                                             </div>
-                                            
+
                                             <div className="stock-status">
                                                 <span className={`status ${product.inStock ? 'in-stock' : 'out-of-stock'}`}>
-                                                    {product.inStock ? 'In Stock' : 'Out of Stock'}
+                                                    {product.inStock
+                                                        ? t('shop.storePage.product.stockStatus.inStock')
+                                                        : t('shop.storePage.product.stockStatus.outOfStock')
+                                                    }
                                                 </span>
                                             </div>
                                         </div>
@@ -360,7 +371,7 @@ export const StorePage = () => {
                             ))
                         ) : (
                             <div className="no-products">
-                                <p>No products available from this store.</p>
+                                <p>{t('shop.storePage.messages.noProducts')}</p>
                             </div>
                         )}
                     </div>
@@ -377,7 +388,9 @@ export const StorePage = () => {
                                         {renderStars(store.rating)}
                                     </div>
                                 </div>
-                                <p className="total-reviews">Based on {store.totalReviews} reviews</p>
+                                <p className="total-reviews">
+                                    {t('shop.storePage.reviews.basedOnReviews', { count: store.totalReviews })}
+                                </p>
                             </div>
                         </div>
 
@@ -393,7 +406,9 @@ export const StorePage = () => {
                                     </div>
                                     <p className="review-comment">{review.comment}</p>
                                     <div className="purchased-product">
-                                        <span>Purchased: {review.productPurchased}</span>
+                                        <span>
+                                            {t('shop.storePage.reviews.purchasedLabel')} {review.productPurchased}
+                                        </span>
                                     </div>
                                 </div>
                             ))}

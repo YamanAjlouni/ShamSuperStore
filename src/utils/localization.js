@@ -57,6 +57,38 @@ import enShopSubCategories from '../locale/en/shop/subCategories.json';
 import arShopSubCategories from '../locale/ar/shop/subCategories.json';
 import enShopProductDetails from '../locale/en/shop/productDetails.json';
 import arShopProductDetails from '../locale/ar/shop/productDetails.json';
+import enShopStorePage from '../locale/en/shop/storePage.json';
+import arShopStorePage from '../locale/ar/shop/storePage.json';
+import enShopCompare from '../locale/en/shop/compare.json';
+import arShopCompare from '../locale/ar/shop/compare.json';
+
+// Import myAccount translations
+import enMyAccount from '../locale/en/myAccount/myAccount.json';
+import arMyAccount from '../locale/ar/myAccount/myAccount.json';
+import enMyAccountAuth from '../locale/en/myAccount/auth.json';
+import arMyAccountAuth from '../locale/ar/myAccount/auth.json';
+import enMyAccountDashboard from '../locale/en/myAccount/dashboard.json';
+import arMyAccountDashboard from '../locale/ar/myAccount/dashboard.json';
+import enMyAccountOrders from '../locale/en/myAccount/orders.json';
+import arMyAccountOrders from '../locale/ar/myAccount/orders.json';
+import enMyAccountOrderTracking from '../locale/en/myAccount/orderTracking.json';
+import arMyAccountOrderTracking from '../locale/ar/myAccount/orderTracking.json';
+import enMyAccountDownloads from '../locale/en/myAccount/downloads.json';
+import arMyAccountDownloads from '../locale/ar/myAccount/downloads.json';
+import enMyAccountAddresses from '../locale/en/myAccount/addresses.json';
+import arMyAccountAddresses from '../locale/ar/myAccount/addresses.json';
+import enMyAccountPaymentMethods from '../locale/en/myAccount/paymentMethods.json';
+import arMyAccountPaymentMethods from '../locale/ar/myAccount/paymentMethods.json';
+import enMyAccountAccountDetails from '../locale/en/myAccount/accountDetails.json';
+import arMyAccountAccountDetails from '../locale/ar/myAccount/accountDetails.json';
+import enMyAccountWishlist from '../locale/en/myAccount/wishlist.json';
+import arMyAccountWishlist from '../locale/ar/myAccount/wishlist.json';
+import enMyAccountSupportTickets from '../locale/en/myAccount/supportTickets.json';
+import arMyAccountSupportTickets from '../locale/ar/myAccount/supportTickets.json';
+import enMyAccountContactedSellers from '../locale/en/myAccount/contactedSellers.json';
+import arMyAccountContactedSellers from '../locale/ar/myAccount/contactedSellers.json';
+import enMyAccountLostPassword from '../locale/en/myAccount/lostPassword.json';
+import arMyAccountLostPassword from '../locale/ar/myAccount/lostPassword.json';
 
 // Import navbar translations
 import enNavbar from '../locale/en/navbar.json';
@@ -72,6 +104,21 @@ const localization = {
     en: {
         navbar: enNavbar,
         footer: enFooter,
+        myAccount: {
+            ...enMyAccount,
+            auth: enMyAccountAuth,
+            dashboard: enMyAccountDashboard,
+            orders: enMyAccountOrders,
+            orderTracking: enMyAccountOrderTracking,
+            downloads: enMyAccountDownloads,
+            addresses: enMyAccountAddresses,
+            paymentMethods: enMyAccountPaymentMethods,
+            accountDetails: enMyAccountAccountDetails,
+            wishlist: enMyAccountWishlist,
+            supportTickets: enMyAccountSupportTickets,
+            contactedSellers: enMyAccountContactedSellers,
+            lostPassword: enMyAccountLostPassword
+        },
         home: {
             intro: enHomeIntro,
             newProducts: enHomeNewProducts,
@@ -103,11 +150,28 @@ const localization = {
             productsList: enShopProductsList,
             subCategories: enShopSubCategories,
             productDetails: enShopProductDetails,
+            storePage: enShopStorePage,
+            compare: enShopCompare,
         },
     },
     ar: {
         navbar: arNavbar,
         footer: arFooter,
+        myAccount: {
+            ...arMyAccount,
+            auth: arMyAccountAuth,
+            dashboard: arMyAccountDashboard,
+            orders: arMyAccountOrders,
+            orderTracking: arMyAccountOrderTracking,
+            downloads: arMyAccountDownloads,
+            addresses: arMyAccountAddresses,
+            paymentMethods: arMyAccountPaymentMethods,
+            accountDetails: arMyAccountAccountDetails,
+            wishlist: arMyAccountWishlist,
+            supportTickets: arMyAccountSupportTickets,
+            contactedSellers: arMyAccountContactedSellers,
+            lostPassword: arMyAccountLostPassword
+        },
         home: {
             intro: arHomeIntro,
             newProducts: arHomeNewProducts,
@@ -139,6 +203,8 @@ const localization = {
             productsList: arShopProductsList,
             subCategories: arShopSubCategories,
             productDetails: arShopProductDetails,
+            storePage: arShopStorePage,
+            compare: arShopCompare,
         },
     }
 };

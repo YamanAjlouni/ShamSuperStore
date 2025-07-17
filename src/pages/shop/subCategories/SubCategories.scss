@@ -20,11 +20,6 @@
             color: $primary-color;
             transform: translateY(-1px);
         }
-
-        // RTL Support
-        [dir="rtl"] & {
-            text-align: right;
-        }
     }
 
     .section-title {
@@ -53,11 +48,6 @@
         p {
             margin: 0;
         }
-
-        // RTL Support
-        [dir="rtl"] & {
-            text-align: center; // Keep centered for both directions
-        }
     }
 
     .no-subcategories {
@@ -84,11 +74,6 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(210px, 220px));
         gap: 1.5rem;
-
-        // RTL Support
-        [dir="rtl"] & {
-            direction: ltr; // Keep grid flow consistent
-        }
     }
 
     .subcategory-item {

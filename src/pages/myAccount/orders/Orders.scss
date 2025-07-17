@@ -28,12 +28,30 @@
                     text-transform: uppercase;
                     letter-spacing: 0.5px;
 
+                    // LTR border radius
                     &:first-child {
                         border-top-left-radius: $radius-lg;
+                        border-top-right-radius: 0;
                     }
 
                     &:last-child {
                         border-top-right-radius: $radius-lg;
+                        border-top-left-radius: 0;
+                    }
+
+                    // RTL border radius - when body has lang-ar class
+                    :global(.lang-ar) & {
+                        text-align: right;
+
+                        &:first-child {
+                            border-top-left-radius: 0;
+                            border-top-right-radius: $radius-lg;
+                        }
+
+                        &:last-child {
+                            border-top-right-radius: 0;
+                            border-top-left-radius: $radius-lg;
+                        }
                     }
                 }
             }
@@ -66,10 +84,24 @@
                     &:first-child {
                         text-align: left;
                         font-weight: 500;
+
+                        // RTL alignment for first column
+                        :global(.lang-ar) & {
+                            text-align: right;
+                        }
                     }
 
                     &:last-child {
                         border-bottom: none;
+                    }
+
+                    // RTL text alignment for all cells
+                    :global(.lang-ar) & {
+                        text-align: center;
+
+                        &:first-child {
+                            text-align: right;
+                        }
                     }
                 }
             }
@@ -140,6 +172,7 @@
             width: 16px;
             height: 16px;
         }
+
     }
 
     // Order status badges
@@ -174,6 +207,12 @@
             background-color: rgba(66, 103, 178, 0.1);
             color: $primary-color;
             border: 1px solid rgba(66, 103, 178, 0.3);
+        }
+
+        // RTL text transform handling
+        :global(.lang-ar) & {
+            text-transform: none; // Remove uppercase for Arabic text
+            letter-spacing: normal; // Reset letter spacing for Arabic
         }
     }
 
@@ -228,6 +267,23 @@
     }
 }
 
+// Alternative approach using CSS logical properties (more modern)
+@supports (border-start-start-radius: 1px) {
+    .orders-content .orders-table table thead th {
+        &:first-child {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-start-start-radius: $radius-lg;
+        }
+
+        &:last-child {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-start-end-radius: $radius-lg;
+        }
+    }
+}
+
 // Responsive Design for Orders
 @media (max-width: 768px) {
     .orders-content {
@@ -244,11 +300,11 @@
                     font-size: 11px;
 
                     &:first-child {
-                        border-radius: 0 0 0 0;
+                        border-radius: 0;
                     }
 
                     &:last-child {
-                        border-radius: 0 0 0 0;
+                        border-radius: 0;
                     }
                 }
 
@@ -289,6 +345,11 @@
             .action-btn {
                 font-size: 11px;
                 padding: 3px 6px;
+            }
+
+            // Reset RTL flex direction on mobile for better UX
+            :global(.lang-ar) & {
+                flex-direction: column;
             }
         }
 
