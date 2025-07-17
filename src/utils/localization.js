@@ -55,6 +55,8 @@ import enShopProductsList from '../locale/en/shop/productsList.json';
 import arShopProductsList from '../locale/ar/shop/productsList.json';
 import enShopSubCategories from '../locale/en/shop/subCategories.json';
 import arShopSubCategories from '../locale/ar/shop/subCategories.json';
+import enShopProductDetails from '../locale/en/shop/productDetails.json';
+import arShopProductDetails from '../locale/ar/shop/productDetails.json';
 
 // Import navbar translations
 import enNavbar from '../locale/en/navbar.json';
@@ -65,6 +67,7 @@ import enFooter from '../locale/en/footer.json';
 import arFooter from '../locale/ar/footer.json';
 
 
+// Organize translations by language and section
 const localization = {
     en: {
         navbar: enNavbar,
@@ -99,6 +102,7 @@ const localization = {
             featuredProducts: enShopFeaturedProducts,
             productsList: enShopProductsList,
             subCategories: enShopSubCategories,
+            productDetails: enShopProductDetails,
         },
     },
     ar: {
@@ -134,6 +138,7 @@ const localization = {
             featuredProducts: arShopFeaturedProducts,
             productsList: arShopProductsList,
             subCategories: arShopSubCategories,
+            productDetails: arShopProductDetails,
         },
     }
 };

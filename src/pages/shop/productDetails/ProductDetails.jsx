@@ -1,5 +1,6 @@
 import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useLanguage } from '../../../context/LanguageContext'; // Import the language context
 import './ProductDetails.scss';
 
 export const ProductDetails = () => {
@@ -12,6 +13,9 @@ export const ProductDetails = () => {
     const [activeTab, setActiveTab] = useState('about');
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
+
+    // Language context
+    const { t } = useLanguage();
 
     // Mock products database - in real app, this would be an API call
     const productsDatabase = {
@@ -605,9 +609,11 @@ export const ProductDetails = () => {
         return (
             <div className="product-details">
                 <div className="error-message">
-                    <h2>Product not found</h2>
-                    <p>The product you're looking for doesn't exist or has been removed.</p>
-                    <button onClick={() => navigate('/shop')}>Back to Shop</button>
+                    <h2>{t('shop.productDetails.errors.productNotFound')}</h2>
+                    <p>{t('shop.productDetails.errors.productNotFoundDescription')}</p>
+                    <button onClick={() => navigate('/shop')}>
+                        {t('shop.productDetails.errors.backToShop')}
+                    </button>
                 </div>
             </div>
         );
@@ -699,17 +705,25 @@ export const ProductDetails = () => {
         return stars;
     };
 
+    // Helper function to get review count text with proper pluralization
+    const getReviewCountText = (count) => {
+        if (count === 1) {
+            return `${count} ${t('shop.productDetails.productInfo.review')}`;
+        }
+        return `${count} ${t('shop.productDetails.productInfo.reviews')}`;
+    };
+
     const tabs = [
-        { id: 'about', label: 'About this item' },
-        { id: 'shortDescription', label: 'Short Description' },
-        { id: 'moreInformation', label: 'More information' },
-        { id: 'productRating', label: 'Product Rating' },
-        { id: 'reviews', label: 'Reviews' },
-        { id: 'shippingTime', label: 'Shipping time' },
-        { id: 'contactSeller', label: 'Contact Seller' },
-        { id: 'otherSellers', label: 'Other seller\'s offers' },
-        { id: 'marketplacePolicy', label: 'Marketplace Policy' },
-        { id: 'storePolicy', label: 'Store Policy' }
+        { id: 'about', label: t('shop.productDetails.tabs.aboutItem') },
+        { id: 'shortDescription', label: t('shop.productDetails.tabs.shortDescription') },
+        { id: 'moreInformation', label: t('shop.productDetails.tabs.moreInformation') },
+        { id: 'productRating', label: t('shop.productDetails.tabs.productRating') },
+        { id: 'reviews', label: t('shop.productDetails.tabs.reviews') },
+        { id: 'shippingTime', label: t('shop.productDetails.tabs.shippingTime') },
+        { id: 'contactSeller', label: t('shop.productDetails.tabs.contactSeller') },
+        { id: 'otherSellers', label: t('shop.productDetails.tabs.otherSellers') },
+        { id: 'marketplacePolicy', label: t('shop.productDetails.tabs.marketplacePolicy') },
+        { id: 'storePolicy', label: t('shop.productDetails.tabs.storePolicy') }
     ];
 
     const hasSale = product.originalPrice && product.originalPrice > product.price;
@@ -734,7 +748,7 @@ export const ProductDetails = () => {
                             ))}
                         </div>
                     ) : (
-                        <p>No reviews available for this product yet.</p>
+                        <p>{t('shop.productDetails.reviews.noReviews')}</p>
                     )}
                 </div>
             );
@@ -743,7 +757,7 @@ export const ProductDetails = () => {
                 <div className="inquiry-section">
                     <p>{product.details[activeTab]}</p>
                     <button className="inquiry-btn" onClick={handleInquiry}>
-                        Contact Seller
+                        {t('shop.productDetails.contact.contactSeller')}
                     </button>
                 </div>
             );
@@ -751,9 +765,13 @@ export const ProductDetails = () => {
             return (
                 <div className="shipping-section">
                     {product.inStock ? (
-                        <p><strong>Available</strong> - Shipping time is from 2 to 3 days</p>
+                        <p>
+                            <strong>{t('shop.productDetails.shipping.available')}</strong> - {t('shop.productDetails.shipping.shippingTime')}
+                        </p>
                     ) : (
-                        <p><strong>Currently out of stock.</strong> Expected restock in 2-3 weeks.</p>
+                        <p>
+                            <strong>{t('shop.productDetails.shipping.outOfStock')}</strong> {t('shop.productDetails.shipping.expectedRestock')}
+                        </p>
                     )}
                 </div>
             );
@@ -766,8 +784,8 @@ export const ProductDetails = () => {
                                 🛡️
                             </div>
                             <div className="policy-content">
-                                <h4>Secure online payments</h4>
-                                <p>Scelerisque dignissim in leo at magna donec mi metus ipsum luctus nam elit sociis luctus et aliquam libero at mi metus ipsum luctus magna donec mi metus.</p>
+                                <h4>{t('shop.productDetails.policy.securePayments.title')}</h4>
+                                <p>{t('shop.productDetails.policy.securePayments.description')}</p>
                             </div>
                         </div>
 
@@ -776,8 +794,8 @@ export const ProductDetails = () => {
                                 🚚
                             </div>
                             <div className="policy-content">
-                                <h4>Free worldwide shipping</h4>
-                                <p>Cras mi metus ipsum luctus ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <h4>{t('shop.productDetails.policy.freeShipping.title')}</h4>
+                                <p>{t('shop.productDetails.policy.freeShipping.description')}</p>
                             </div>
                         </div>
 
@@ -786,8 +804,8 @@ export const ProductDetails = () => {
                                 🎧
                             </div>
                             <div className="policy-content">
-                                <h4>Customer support</h4>
-                                <p>Scelerisque dignissim in leo at magna donec mi metus ipsum luctus nam elit sociis luctus et aliquam libero.</p>
+                                <h4>{t('shop.productDetails.policy.customerSupport.title')}</h4>
+                                <p>{t('shop.productDetails.policy.customerSupport.description')}</p>
                             </div>
                         </div>
 
@@ -796,8 +814,8 @@ export const ProductDetails = () => {
                                 🔄
                             </div>
                             <div className="policy-content">
-                                <h4>30 days return period</h4>
-                                <p>Scelerisque dignissim in leo at magna donec mi metus ipsum luctus nam elit sociis luctus et aliquam libero. Cras ultricies ligula sed magna dictum porta.</p>
+                                <h4>{t('shop.productDetails.policy.returnPeriod.title')}</h4>
+                                <p>{t('shop.productDetails.policy.returnPeriod.description')}</p>
                             </div>
                         </div>
                     </div>
@@ -809,7 +827,7 @@ export const ProductDetails = () => {
                     {product.details[activeTab] && product.details[activeTab].trim() !== '' ? (
                         <p>{product.details[activeTab]}</p>
                     ) : (
-                        <p>No store policy information available.</p>
+                        <p>{t('shop.productDetails.policy.noStorePolicy')}</p>
                     )}
                 </div>
             );
@@ -823,15 +841,15 @@ export const ProductDetails = () => {
                                 <span className="rating-value">({product.rating})</span>
                             </div>
                             <p className="rating-text">
-                                Based on {product.reviews} customer reviews.
-                                {product.rating >= 4.5 ? " Outstanding quality and performance." :
-                                    product.rating >= 4.0 ? " Great quality and value." :
-                                        product.rating >= 3.5 ? " Good quality with room for improvement." :
-                                            " Mixed reviews, consider alternatives."}
+                                {t('shop.productDetails.reviews.basedOn', { count: product.reviews })}
+                                {product.rating >= 4.5 ? ` ${t('shop.productDetails.reviews.outstanding')}` :
+                                    product.rating >= 4.0 ? ` ${t('shop.productDetails.reviews.great')}` :
+                                        product.rating >= 3.5 ? ` ${t('shop.productDetails.reviews.good')}` :
+                                            ` ${t('shop.productDetails.reviews.mixed')}`}
                             </p>
                         </div>
                     ) : (
-                        <p>No rating available yet. Check individual reviews below.</p>
+                        <p>{t('shop.productDetails.reviews.noRating')}</p>
                     )}
                 </div>
             );
@@ -910,7 +928,7 @@ export const ProductDetails = () => {
                 {/* Product Info Section */}
                 <div className="product-info">
                     <div className="sku-section">
-                        <span className="sku-label">SKU:</span>
+                        <span className="sku-label">{t('shop.productDetails.productInfo.sku')}</span>
                         <span className="sku-value">{product.sku}</span>
                     </div>
 
@@ -923,7 +941,7 @@ export const ProductDetails = () => {
                                 {renderStars(product.rating)}
                                 <span className="rating-value">({product.rating})</span>
                             </div>
-                            <span className="review-count">{product.reviews} reviews</span>
+                            <span className="review-count">{getReviewCountText(product.reviews)}</span>
                         </div>
                     )}
 
@@ -940,7 +958,9 @@ export const ProductDetails = () => {
                             {/* Color Selection */}
                             {product.attributes.colors && product.attributes.colors.length > 0 && (
                                 <div className="attribute-group">
-                                    <span className="attribute-label">Color: <strong>{selectedColor}</strong></span>
+                                    <span className="attribute-label">
+                                        {t('shop.productDetails.productInfo.color')} <strong>{selectedColor}</strong>
+                                    </span>
                                     <div className="color-options">
                                         {product.attributes.colors.map((color) => (
                                             <button
@@ -958,7 +978,7 @@ export const ProductDetails = () => {
                             {/* Size Selection */}
                             {product.attributes.sizes && product.attributes.sizes.length > 0 && (
                                 <div className="attribute-group">
-                                    <span className="attribute-label">Size:</span>
+                                    <span className="attribute-label">{t('shop.productDetails.productInfo.size')}</span>
                                     <div className="size-options">
                                         {product.attributes.sizes.map((size) => (
                                             <button
@@ -976,7 +996,7 @@ export const ProductDetails = () => {
                     )}
 
                     <div className="tags-section">
-                        <span className="tags-label">Tags:</span>
+                        <span className="tags-label">{t('shop.productDetails.productInfo.tags')}</span>
                         {product.tags.map((tag, index) => (
                             <span key={index} className="tag">{tag}</span>
                         ))}
@@ -1009,20 +1029,23 @@ export const ProductDetails = () => {
                             onClick={handleAddToCart}
                             disabled={!product.inStock}
                         >
-                            {product.inStock ? 'Add to cart' : 'Out of Stock'}
+                            {product.inStock ?
+                                t('shop.productDetails.productInfo.addToCart') :
+                                t('shop.productDetails.productInfo.outOfStock')
+                            }
                         </button>
                     </div>
 
                     <button className="compare-btn" onClick={handleCompare}>
-                        Compare
+                        {t('shop.productDetails.productInfo.compare')}
                     </button>
 
                     <div className="sold-by">
-                        <span>Sold By:</span>
+                        <span>{t('shop.productDetails.productInfo.soldBy')}</span>
                         <div
                             className="sold-by-details clickable"
                             onClick={handleStoreClick}
-                            title="Click to view store details"
+                            title={t('shop.productDetails.accessibility.viewStoreDetails')}
                         >
                             2153
                         </div>

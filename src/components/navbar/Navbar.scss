@@ -199,7 +199,7 @@ $transition: all 0.2s ease-in-out;
   @media (max-width: 1200px) {
     display: block;
     position: fixed;
-    top: 85px; // Adjust based on your top bar height
+    top: 85px;
     left: 0;
     right: 0;
     padding: 1rem 0;
@@ -207,12 +207,12 @@ $transition: all 0.2s ease-in-out;
   }
 
   @media (max-width: 768px) {
-    top: 85px; // Adjust for mobile
+    top: 85px;
     padding: 0.8rem 0;
   }
 
   @media (max-width: 480px) {
-    top: 80px;
+    top: 75px;
     padding: 0.7rem 0;
   }
 }
