@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { ExternalLink, Smartphone, ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 import './DeliveryDriversApp.scss';
 
 const DeliveryDriversApp = () => {
-    const appUrl = "https://shamsuperstore-dashboard.netlify.app/";
+    const { t } = useLanguage();
 
     return (
         <div className="delivery-drivers-app-page">
             <div className="delivery-drivers-app-container">
                 <Link to="/delivery-drivers" className="back-link">
                     <ArrowLeft size={20} />
-                    Back to Delivery Drivers
+                    {t('drivers.deliveryDriversApp.backLink')}
                 </Link>
 
                 <div className="delivery-drivers-app-content">
@@ -18,21 +19,20 @@ const DeliveryDriversApp = () => {
                         <Smartphone size={80} />
                     </div>
 
-                    <h1>Delivery Drivers App</h1>
+                    <h1>{t('drivers.deliveryDriversApp.heading')}</h1>
 
                     <p>
-                        Download our mobile app for drivers and manage deliveries on the go. Access app information,
-                        download links, and get support for our mobile delivery management platform.
+                        {t('drivers.deliveryDriversApp.description')}
                     </p>
 
                     <a
-                        href={appUrl}
+                        href={t('drivers.deliveryDriversApp.appUrl')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="delivery-drivers-app-btn"
                     >
                         <ExternalLink size={20} />
-                        Get Mobile App
+                        {t('drivers.deliveryDriversApp.appButton')}
                     </a>
                 </div>
             </div>

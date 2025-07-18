@@ -1,8 +1,9 @@
 import { ExternalLink, Truck } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 import './DeliveryDrivers.scss';
 
 const DeliveryDrivers = () => {
-    const driverDashboardUrl = "https://shamsuperstore-dashboard.netlify.app/";
+    const { t } = useLanguage();
 
     return (
         <div className="delivery-drivers-page">
@@ -12,21 +13,20 @@ const DeliveryDrivers = () => {
                         <Truck size={80} />
                     </div>
 
-                    <h1>Join as a Delivery Driver</h1>
+                    <h1>{t('drivers.heading')}</h1>
 
                     <p>
-                        Become a delivery driver with Sham Super Store and start earning with flexible hours.
-                        Access our driver dashboard to manage your deliveries, track earnings, and join our growing network.
+                        {t('drivers.description')}
                     </p>
 
                     <a
-                        href={driverDashboardUrl}
+                        href={t('drivers.dashboardUrl')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="dashboard-btn"
                     >
                         <ExternalLink size={20} />
-                        Go to Driver Dashboard
+                        {t('drivers.dashboardButton')}
                     </a>
                 </div>
             </div>

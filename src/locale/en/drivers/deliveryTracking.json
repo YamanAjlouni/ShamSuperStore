@@ -1,0 +1,8 @@
+{
+    "pageTitle": "Delivery Tracking",
+    "backLink": "Back to Delivery Drivers",
+    "heading": "Delivery Tracking",
+    "description": "Track all deliveries in real-time with our advanced tracking system. Access the tracking portal to monitor delivery status, view routes, and ensure timely order fulfillment.",
+    "trackingButton": "Track Deliveries",
+    "trackingUrl": "https://shamsuperstore-dashboard.netlify.app/"
+}

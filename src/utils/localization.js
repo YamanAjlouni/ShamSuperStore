@@ -109,6 +109,20 @@ import enSellersStoreManager from '../locale/en/sellers/storeManager.json';
 import arSellersStoreManager from '../locale/ar/sellers/storeManager.json';
 import enSellersVendorsDriversManager from '../locale/en/sellers/vendorsDriversManager.json';
 import arSellersVendorsDriversManager from '../locale/ar/sellers/vendorsDriversManager.json';
+import enSellersStoresList from '../locale/en/sellers/storesList.json';
+import arSellersStoresList from '../locale/ar/sellers/storesList.json';
+
+// Import drivers translations
+import enDrivers from '../locale/en/drivers/drivers.json';
+import arDrivers from '../locale/ar/drivers/drivers.json';
+import enDriversDeliveryDriversApp from '../locale/en/drivers/deliveryDriversApp.json';
+import arDriversDeliveryDriversApp from '../locale/ar/drivers/deliveryDriversApp.json';
+import enDriversDeliveryDriversManager from '../locale/en/drivers/deliveryDriversManager.json';
+import arDriversDeliveryDriversManager from '../locale/ar/drivers/deliveryDriversManager.json';
+import enDriversDeliveryTracking from '../locale/en/drivers/deliveryTracking.json';
+import arDriversDeliveryTracking from '../locale/ar/drivers/deliveryTracking.json';
+import enDriversVendorsDriversManagers from '../locale/en/drivers/vendorsDriversManagers.json';
+import arDriversVendorsDriversManagers from '../locale/ar/drivers/vendorsDriversManagers.json';
 
 // Import navbar translations
 import enNavbar from '../locale/en/navbar.json';
@@ -181,6 +195,14 @@ const localization = {
             vendorMembership: enSellersVendorMembership,
             storeManager: enSellersStoreManager,
             vendorsDriversManager: enSellersVendorsDriversManager,
+            storesList: enSellersStoresList,
+        },
+        drivers: {
+            ...enDrivers,
+            deliveryDriversApp: enDriversDeliveryDriversApp,
+            deliveryDriversManager: enDriversDeliveryDriversManager,
+            deliveryTracking: enDriversDeliveryTracking,
+            vendorsDriversManagers: enDriversVendorsDriversManagers,
         },
     },
     ar: {
@@ -243,6 +265,14 @@ const localization = {
             vendorMembership: arSellersVendorMembership,
             storeManager: arSellersStoreManager,
             vendorsDriversManager: arSellersVendorsDriversManager,
+            storesList: arSellersStoresList,
+        },
+        drivers: {
+            ...arDrivers,
+            deliveryDriversApp: arDriversDeliveryDriversApp,
+            deliveryDriversManager: arDriversDeliveryDriversManager,
+            deliveryTracking: arDriversDeliveryTracking,
+            vendorsDriversManagers: arDriversVendorsDriversManagers,
         },
     }
 };

@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { ExternalLink, Building2, ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 import './StoresList.scss';
 
 const StoresList = () => {
-    const storesListUrl = "https://shamsuperstore-dashboard.netlify.app/";
+    const { t } = useLanguage();
 
     return (
         <div className="stores-list-page">
             <div className="stores-list-container">
                 <Link to="/sellers" className="back-link">
                     <ArrowLeft size={20} />
-                    Back to Sellers
+                    {t('sellers.storesList.backLink')}
                 </Link>
 
                 <div className="stores-list-content">
@@ -18,21 +19,20 @@ const StoresList = () => {
                         <Building2 size={80} />
                     </div>
 
-                    <h1>Stores List</h1>
+                    <h1>{t('sellers.storesList.heading')}</h1>
 
                     <p>
-                        Browse and explore all active stores on our marketplace platform. Access the comprehensive
-                        stores directory to discover vendors, compare offerings, and manage store relationships.
+                        {t('sellers.storesList.description')}
                     </p>
 
                     <a
-                        href={storesListUrl}
+                        href={t('sellers.storesList.storesListUrl')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="stores-list-btn"
                     >
                         <ExternalLink size={20} />
-                        View All Stores
+                        {t('sellers.storesList.storesListButton')}
                     </a>
                 </div>
             </div>

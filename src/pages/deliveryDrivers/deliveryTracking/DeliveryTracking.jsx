@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { ExternalLink, MapPin, ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 import './DeliveryTracking.scss';
 
 const DeliveryTracking = () => {
-    const trackingUrl = "https://shamsuperstore-dashboard.netlify.app/";
+    const { t } = useLanguage();
 
     return (
         <div className="delivery-tracking-page">
             <div className="delivery-tracking-container">
                 <Link to="/delivery-drivers" className="back-link">
                     <ArrowLeft size={20} />
-                    Back to Delivery Drivers
+                    {t('drivers.deliveryTracking.backLink')}
                 </Link>
 
                 <div className="delivery-tracking-content">
@@ -18,21 +19,20 @@ const DeliveryTracking = () => {
                         <MapPin size={80} />
                     </div>
 
-                    <h1>Delivery Tracking</h1>
+                    <h1>{t('drivers.deliveryTracking.heading')}</h1>
 
                     <p>
-                        Track all deliveries in real-time with our advanced tracking system. Access the tracking
-                        portal to monitor delivery status, view routes, and ensure timely order fulfillment.
+                        {t('drivers.deliveryTracking.description')}
                     </p>
 
                     <a
-                        href={trackingUrl}
+                        href={t('drivers.deliveryTracking.trackingUrl')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="delivery-tracking-btn"
                     >
                         <ExternalLink size={20} />
-                        Track Deliveries
+                        {t('drivers.deliveryTracking.trackingButton')}
                     </a>
                 </div>
             </div>
