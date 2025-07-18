@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { X, Plus, Minus, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartReducer';
+import { useLanguage } from '../../context/LanguageContext';
 import './SidebarCart.scss';
 
 const SidebarCart = () => {
@@ -14,6 +15,8 @@ const SidebarCart = () => {
         getSubtotal,
         getTotalPrice
     } = useCart();
+
+    const { t } = useLanguage();
     const navigate = useNavigate();
 
     // Prevent body scroll when cart is open
@@ -66,11 +69,11 @@ const SidebarCart = () => {
             {/* Sidebar */}
             <div className={`sidebar-cart ${isOpen ? 'sidebar-cart-open' : ''}`}>
                 <div className="sidebar-cart-header">
-                    <h3>Shopping Cart</h3>
+                    <h3>{t('sidebarCart.title')}</h3>
                     <button
                         className="sidebar-cart-close"
                         onClick={closeCart}
-                        aria-label="Close cart"
+                        aria-label={t('sidebarCart.closeCart')}
                     >
                         <X size={24} />
                     </button>
@@ -79,7 +82,7 @@ const SidebarCart = () => {
                 <div className="sidebar-cart-content">
                     {items.length === 0 ? (
                         <div className="sidebar-cart-empty">
-                            <p>Your cart is empty</p>
+                            <p>{t('sidebarCart.empty')}</p>
                         </div>
                     ) : (
                         <>
@@ -99,7 +102,7 @@ const SidebarCart = () => {
                                                     <button
                                                         className="quantity-btn"
                                                         onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                                                        aria-label="Decrease quantity"
+                                                        aria-label={t('sidebarCart.item.decreaseQuantity')}
                                                     >
                                                         <Minus size={16} />
                                                     </button>
@@ -107,7 +110,7 @@ const SidebarCart = () => {
                                                     <button
                                                         className="quantity-btn"
                                                         onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                                                        aria-label="Increase quantity"
+                                                        aria-label={t('sidebarCart.item.increaseQuantity')}
                                                     >
                                                         <Plus size={16} />
                                                     </button>
@@ -118,7 +121,7 @@ const SidebarCart = () => {
                                         <button
                                             className="sidebar-cart-item-remove"
                                             onClick={() => removeFromCart(item.id)}
-                                            aria-label="Remove item"
+                                            aria-label={t('sidebarCart.item.removeItem')}
                                         >
                                             <Trash2 size={18} />
                                         </button>
@@ -128,27 +131,29 @@ const SidebarCart = () => {
 
                             <div className="sidebar-cart-summary">
                                 <div className="sidebar-cart-subtotal">
-                                    <span>Sub Total</span>
+                                    <span>{t('sidebarCart.summary.subtotal')}</span>
                                     <span>${getSubtotal().toFixed(2)}</span>
                                 </div>
 
                                 <div className="sidebar-cart-shipping">
-                                    <span>Shipping Calculate</span>
+                                    <span>{t('sidebarCart.summary.shipping')}</span>
                                     <span>$0.00</span>
                                 </div>
 
                                 <div className="sidebar-cart-total">
-                                    <span>Total</span>
+                                    <span>{t('sidebarCart.summary.total')}</span>
                                     <span>${getTotalPrice().toFixed(2)}</span>
                                 </div>
 
                                 <div className="sidebar-cart-promo">
                                     <input
                                         type="text"
-                                        placeholder="Enter your Promo Code"
+                                        placeholder={t('sidebarCart.summary.promoPlaceholder')}
                                         className="promo-input"
                                     />
-                                    <button className="promo-btn">Apply</button>
+                                    <button className="promo-btn">
+                                        {t('sidebarCart.summary.promoApply')}
+                                    </button>
                                 </div>
 
                                 <div className="sidebar-cart-actions">
@@ -156,13 +161,13 @@ const SidebarCart = () => {
                                         className="view-cart-btn"
                                         onClick={handleViewCart}
                                     >
-                                        View cart
+                                        {t('sidebarCart.actions.viewCart')}
                                     </button>
                                     <button
                                         className="checkout-btn"
                                         onClick={handleCheckout}
                                     >
-                                        Checkout
+                                        {t('sidebarCart.actions.checkout')}
                                     </button>
                                 </div>
                             </div>

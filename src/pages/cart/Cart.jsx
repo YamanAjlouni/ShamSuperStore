@@ -3,6 +3,7 @@ import { Minus, Plus, X, RefreshCw, Heart, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './Cart.scss';
 import { useCart } from '../../context/CartReducer';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Cart = () => {
     const {
@@ -13,6 +14,7 @@ const Cart = () => {
         getTotalPrice
     } = useCart();
 
+    const { t } = useLanguage();
     const navigate = useNavigate();
     const [couponCode, setCouponCode] = useState('');
     const [savedItems, setSavedItems] = useState([]);
@@ -61,28 +63,28 @@ const Cart = () => {
             <div className="cart-container">
                 <div className="cart-content">
                     <div className="cart-main">
-                        <h1 className="cart-title">Shopping Cart</h1>
+                        <h1 className="cart-title">{t('cart.title')}</h1>
 
                         {items.length === 0 ? (
                             <div className="cart-empty">
                                 <div className="empty-cart-icon">🛒</div>
-                                <h2>Your cart is empty</h2>
-                                <p>Looks like you haven't added any items to your cart yet.</p>
+                                <h2>{t('cart.empty.heading')}</h2>
+                                <p>{t('cart.empty.description')}</p>
                                 <button
                                     className="continue-shopping-btn"
                                     onClick={() => navigate('/shop')}
                                 >
-                                    Continue Shopping
+                                    {t('cart.empty.continueShoppingBtn')}
                                 </button>
                             </div>
                         ) : (
                             <>
                                 <div className="cart-table">
                                     <div className="cart-table-header">
-                                        <div className="header-product">Product</div>
-                                        <div className="header-price">Price</div>
-                                        <div className="header-quantity">Quantity</div>
-                                        <div className="header-subtotal">Subtotal</div>
+                                        <div className="header-product">{t('cart.table.headers.product')}</div>
+                                        <div className="header-price">{t('cart.table.headers.price')}</div>
+                                        <div className="header-quantity">{t('cart.table.headers.quantity')}</div>
+                                        <div className="header-subtotal">{t('cart.table.headers.subtotal')}</div>
                                     </div>
 
                                     <div className="cart-table-body">
@@ -92,7 +94,7 @@ const Cart = () => {
                                                     <button
                                                         className="remove-btn"
                                                         onClick={() => removeFromCart(item.id)}
-                                                        aria-label="Remove item"
+                                                        aria-label={t('cart.item.removeItem')}
                                                     >
                                                         <X size={18} />
                                                     </button>
@@ -106,7 +108,7 @@ const Cart = () => {
                                                             onClick={() => handleSaveForLater(item)}
                                                         >
                                                             <Heart size={14} />
-                                                            <span>Save for later</span>
+                                                            <span>{t('cart.item.saveForLater')}</span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -120,7 +122,7 @@ const Cart = () => {
                                                         <button
                                                             className="quantity-btn"
                                                             onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                                                            aria-label="Decrease quantity"
+                                                            aria-label={t('cart.item.decreaseQuantity')}
                                                         >
                                                             <Minus size={16} />
                                                         </button>
@@ -128,7 +130,7 @@ const Cart = () => {
                                                         <button
                                                             className="quantity-btn"
                                                             onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                                                            aria-label="Increase quantity"
+                                                            aria-label={t('cart.item.increaseQuantity')}
                                                         >
                                                             <Plus size={16} />
                                                         </button>
@@ -147,7 +149,7 @@ const Cart = () => {
                                     <div className="coupon-section">
                                         <input
                                             type="text"
-                                            placeholder="Coupon code"
+                                            placeholder={t('cart.actions.couponPlaceholder')}
                                             value={couponCode}
                                             onChange={(e) => setCouponCode(e.target.value)}
                                             className="coupon-input"
@@ -156,7 +158,7 @@ const Cart = () => {
                                             className="apply-coupon-btn"
                                             onClick={handleApplyCoupon}
                                         >
-                                            Apply coupon
+                                            {t('cart.actions.applyCouponBtn')}
                                         </button>
                                     </div>
 
@@ -165,21 +167,21 @@ const Cart = () => {
                                         onClick={handleRefreshCart}
                                     >
                                         <RefreshCw size={16} />
-                                        Refresh Cart
+                                        {t('cart.actions.refreshCartBtn')}
                                     </button>
                                 </div>
 
                                 {/* Saved for Later Section */}
                                 {savedItems.length > 0 && (
                                     <div className="saved-items-section">
-                                        <h2 className="saved-items-title">Saved for Later</h2>
+                                        <h2 className="saved-items-title">{t('cart.savedItems.title')}</h2>
                                         <div className="saved-items-grid">
                                             {savedItems.map((item) => (
                                                 <div key={`saved-${item.id}`} className="saved-item">
                                                     <button
                                                         className="remove-saved-btn"
                                                         onClick={() => handleRemoveSaved(item.id)}
-                                                        aria-label="Remove from saved"
+                                                        aria-label={t('cart.savedItems.removeFromSaved')}
                                                     >
                                                         <X size={14} />
                                                     </button>
@@ -193,7 +195,7 @@ const Cart = () => {
                                                             className="move-to-cart-btn"
                                                             onClick={() => handleMoveToCart(item)}
                                                         >
-                                                            Move to Cart
+                                                            {t('cart.savedItems.moveToCartBtn')}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -208,28 +210,28 @@ const Cart = () => {
                     {items.length > 0 && (
                         <div className="cart-sidebar">
                             <div className="cart-totals">
-                                <h2 className="totals-title">Cart totals</h2>
+                                <h2 className="totals-title">{t('cart.totals.title')}</h2>
 
                                 <div className="totals-row">
-                                    <span>Subtotal</span>
+                                    <span>{t('cart.totals.subtotal')}</span>
                                     <span>${getSubtotal().toFixed(2)}</span>
                                 </div>
 
                                 <div className="shipping-section">
                                     <div className="shipping-header">
-                                        <span>Shipping</span>
+                                        <span>{t('cart.totals.shipping')}</span>
                                     </div>
                                     <div className="shipping-info">
-                                        <p>No shipping options were found for danaes, TX, 43243, Syria.</p>
+                                        <p>{t('cart.totals.shippingMessage', { address: 'danaes, TX, 43243, Syria' })}</p>
                                         <button className="change-address-btn">
                                             <MapPin size={14} />
-                                            Enter a different address
+                                            {t('cart.totals.changeAddressBtn')}
                                         </button>
                                     </div>
                                 </div>
 
                                 <div className="totals-row total-row">
-                                    <span>Total</span>
+                                    <span>{t('cart.totals.total')}</span>
                                     <span>${totalAmount.toFixed(2)}</span>
                                 </div>
 
@@ -237,7 +239,7 @@ const Cart = () => {
                                     className="checkout-btn"
                                     onClick={handleProceedToCheckout}
                                 >
-                                    Proceed to checkout
+                                    {t('cart.totals.checkoutBtn')}
                                 </button>
                             </div>
                         </div>
