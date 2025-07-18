@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { ExternalLink, UserPlus, ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 import './VendorRegistration.scss';
 
 const VendorRegistration = () => {
-    const registrationUrl = "https://shamsuperstore-dashboard.netlify.app/";
+    const { t } = useLanguage();
 
     return (
         <div className="vendor-registration-page">
             <div className="vendor-registration-container">
                 <Link to="/sellers" className="back-link">
                     <ArrowLeft size={20} />
-                    Back to Sellers
+                    {t('sellers.vendorRegistration.backLink')}
                 </Link>
 
                 <div className="registration-content">
@@ -18,21 +19,20 @@ const VendorRegistration = () => {
                         <UserPlus size={80} />
                     </div>
 
-                    <h1>Vendor Registration</h1>
+                    <h1>{t('sellers.vendorRegistration.heading')}</h1>
 
                     <p>
-                        Start your seller journey with Sham Super Store. Register as a vendor through our
-                        secure registration portal and begin selling your products to millions of customers.
+                        {t('sellers.vendorRegistration.description')}
                     </p>
 
                     <a
-                        href={registrationUrl}
+                        href={t('sellers.vendorRegistration.registrationUrl')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="registration-btn"
                     >
                         <ExternalLink size={20} />
-                        Start Registration
+                        {t('sellers.vendorRegistration.registrationButton')}
                     </a>
                 </div>
             </div>

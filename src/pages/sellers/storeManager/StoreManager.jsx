@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { ExternalLink, Store, ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 import './StoreManager.scss';
 
 const StoreManager = () => {
-    const storeManagerUrl = "https://shamsuperstore-dashboard.netlify.app/";
+    const { t } = useLanguage();
 
     return (
         <div className="store-manager-page">
             <div className="store-manager-container">
                 <Link to="/sellers" className="back-link">
                     <ArrowLeft size={20} />
-                    Back to Sellers
+                    {t('sellers.storeManager.backLink')}
                 </Link>
 
                 <div className="store-manager-content">
@@ -18,21 +19,20 @@ const StoreManager = () => {
                         <Store size={80} />
                     </div>
 
-                    <h1>Store Manager</h1>
+                    <h1>{t('sellers.storeManager.heading')}</h1>
 
                     <p>
-                        Manage your online store with powerful tools and analytics. Access your store management
-                        dashboard to update products, process orders, and track your business performance.
+                        {t('sellers.storeManager.description')}
                     </p>
 
                     <a
-                        href={storeManagerUrl}
+                        href={t('sellers.storeManager.storeManagerUrl')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="store-manager-btn"
                     >
                         <ExternalLink size={20} />
-                        Access Store Manager
+                        {t('sellers.storeManager.storeManagerButton')}
                     </a>
                 </div>
             </div>

@@ -1,8 +1,9 @@
 import { ExternalLink, Store } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 import './Sellers.scss';
 
 const Sellers = () => {
-    const sellerDashboardUrl = "https://shamsuperstore-dashboard.netlify.app/";
+    const { t } = useLanguage();
 
     return (
         <div className="sellers-page">
@@ -12,21 +13,20 @@ const Sellers = () => {
                         <Store size={80} />
                     </div>
 
-                    <h1>Join as a Seller</h1>
+                    <h1>{t('sellers.heading')}</h1>
 
                     <p>
-                        Become a seller on Sham Super Store and start your business journey with us.
-                        Access our seller dashboard to manage your products, orders, and grow your business.
+                        {t('sellers.description')}
                     </p>
 
                     <a
-                        href={sellerDashboardUrl}
+                        href={t('sellers.dashboardUrl')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="dashboard-btn"
                     >
                         <ExternalLink size={20} />
-                        Go to Seller Dashboard
+                        {t('sellers.dashboardButton')}
                     </a>
                 </div>
             </div>

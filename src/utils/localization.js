@@ -90,6 +90,26 @@ import arMyAccountContactedSellers from '../locale/ar/myAccount/contactedSellers
 import enMyAccountLostPassword from '../locale/en/myAccount/lostPassword.json';
 import arMyAccountLostPassword from '../locale/ar/myAccount/lostPassword.json';
 
+// Import about translations
+import enAbout from '../locale/en/about/about.json';
+import arAbout from '../locale/ar/about/about.json';
+
+// Import contact translations
+import enContact from '../locale/en/contact/contact.json';
+import arContact from '../locale/ar/contact/contact.json';
+
+// Import sellers translations
+import enSellers from '../locale/en/sellers/sellers.json';
+import arSellers from '../locale/ar/sellers/sellers.json';
+import enSellersVendorRegistration from '../locale/en/sellers/vendorRegistration.json';
+import arSellersVendorRegistration from '../locale/ar/sellers/vendorRegistration.json';
+import enSellersVendorMembership from '../locale/en/sellers/vendorMembership.json';
+import arSellersVendorMembership from '../locale/ar/sellers/vendorMembership.json';
+import enSellersStoreManager from '../locale/en/sellers/storeManager.json';
+import arSellersStoreManager from '../locale/ar/sellers/storeManager.json';
+import enSellersVendorsDriversManager from '../locale/en/sellers/vendorsDriversManager.json';
+import arSellersVendorsDriversManager from '../locale/ar/sellers/vendorsDriversManager.json';
+
 // Import navbar translations
 import enNavbar from '../locale/en/navbar.json';
 import arNavbar from '../locale/ar/navbar.json';
@@ -104,21 +124,6 @@ const localization = {
     en: {
         navbar: enNavbar,
         footer: enFooter,
-        myAccount: {
-            ...enMyAccount,
-            auth: enMyAccountAuth,
-            dashboard: enMyAccountDashboard,
-            orders: enMyAccountOrders,
-            orderTracking: enMyAccountOrderTracking,
-            downloads: enMyAccountDownloads,
-            addresses: enMyAccountAddresses,
-            paymentMethods: enMyAccountPaymentMethods,
-            accountDetails: enMyAccountAccountDetails,
-            wishlist: enMyAccountWishlist,
-            supportTickets: enMyAccountSupportTickets,
-            contactedSellers: enMyAccountContactedSellers,
-            lostPassword: enMyAccountLostPassword
-        },
         home: {
             intro: enHomeIntro,
             newProducts: enHomeNewProducts,
@@ -153,25 +158,34 @@ const localization = {
             storePage: enShopStorePage,
             compare: enShopCompare,
         },
+        myAccount: {
+            ...enMyAccount,
+            auth: enMyAccountAuth,
+            dashboard: enMyAccountDashboard,
+            orders: enMyAccountOrders,
+            orderTracking: enMyAccountOrderTracking,
+            downloads: enMyAccountDownloads,
+            addresses: enMyAccountAddresses,
+            paymentMethods: enMyAccountPaymentMethods,
+            accountDetails: enMyAccountAccountDetails,
+            wishlist: enMyAccountWishlist,
+            supportTickets: enMyAccountSupportTickets,
+            contactedSellers: enMyAccountContactedSellers,
+            lostPassword: enMyAccountLostPassword
+        },
+        about: enAbout,
+        contact: enContact,
+        sellers: {
+            ...enSellers,
+            vendorRegistration: enSellersVendorRegistration,
+            vendorMembership: enSellersVendorMembership,
+            storeManager: enSellersStoreManager,
+            vendorsDriversManager: enSellersVendorsDriversManager,
+        },
     },
     ar: {
         navbar: arNavbar,
         footer: arFooter,
-        myAccount: {
-            ...arMyAccount,
-            auth: arMyAccountAuth,
-            dashboard: arMyAccountDashboard,
-            orders: arMyAccountOrders,
-            orderTracking: arMyAccountOrderTracking,
-            downloads: arMyAccountDownloads,
-            addresses: arMyAccountAddresses,
-            paymentMethods: arMyAccountPaymentMethods,
-            accountDetails: arMyAccountAccountDetails,
-            wishlist: arMyAccountWishlist,
-            supportTickets: arMyAccountSupportTickets,
-            contactedSellers: arMyAccountContactedSellers,
-            lostPassword: arMyAccountLostPassword
-        },
         home: {
             intro: arHomeIntro,
             newProducts: arHomeNewProducts,
@@ -205,6 +219,30 @@ const localization = {
             productDetails: arShopProductDetails,
             storePage: arShopStorePage,
             compare: arShopCompare,
+        },
+        myAccount: {
+            ...arMyAccount,
+            auth: arMyAccountAuth,
+            dashboard: arMyAccountDashboard,
+            orders: arMyAccountOrders,
+            orderTracking: arMyAccountOrderTracking,
+            downloads: arMyAccountDownloads,
+            addresses: arMyAccountAddresses,
+            paymentMethods: arMyAccountPaymentMethods,
+            accountDetails: arMyAccountAccountDetails,
+            wishlist: arMyAccountWishlist,
+            supportTickets: arMyAccountSupportTickets,
+            contactedSellers: arMyAccountContactedSellers,
+            lostPassword: arMyAccountLostPassword
+        },
+        about: arAbout,
+        contact: arContact,
+        sellers: {
+            ...arSellers,
+            vendorRegistration: arSellersVendorRegistration,
+            vendorMembership: arSellersVendorMembership,
+            storeManager: arSellersStoreManager,
+            vendorsDriversManager: arSellersVendorsDriversManager,
         },
     }
 };

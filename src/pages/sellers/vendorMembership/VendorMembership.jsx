@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { ExternalLink, Crown, ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 import './VendorMembership.scss';
 
 const VendorMembership = () => {
-    const membershipUrl = "https://shamsuperstore-dashboard.netlify.app/";
+    const { t } = useLanguage();
 
     return (
         <div className="vendor-membership-page">
             <div className="vendor-membership-container">
                 <Link to="/sellers" className="back-link">
                     <ArrowLeft size={20} />
-                    Back to Sellers
+                    {t('sellers.vendorMembership.backLink')}
                 </Link>
 
                 <div className="membership-content">
@@ -18,21 +19,20 @@ const VendorMembership = () => {
                         <Crown size={80} />
                     </div>
 
-                    <h1>Vendor Membership</h1>
+                    <h1>{t('sellers.vendorMembership.heading')}</h1>
 
                     <p>
-                        Explore our vendor membership tiers and exclusive benefits. Access the membership
-                        portal to choose the plan that best fits your business needs and unlock premium features.
+                        {t('sellers.vendorMembership.description')}
                     </p>
 
                     <a
-                        href={membershipUrl}
+                        href={t('sellers.vendorMembership.membershipUrl')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="membership-btn"
                     >
                         <ExternalLink size={20} />
-                        View Membership Plans
+                        {t('sellers.vendorMembership.membershipButton')}
                     </a>
                 </div>
             </div>
