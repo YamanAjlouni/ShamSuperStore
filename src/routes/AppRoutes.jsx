@@ -23,8 +23,6 @@ import StoresList from '../pages/sellers/storesList/StoresList'
 // Delivery Drivers Section Pages
 import DeliveryDrivers from '../pages/deliveryDrivers/DeliveryDrivers'
 import DeliveryDriversManager from '../pages/deliveryDrivers/deliveryDriversManager/DeliveryDriversManager'
-import VendorsDriversManagers from '../pages/deliveryDrivers/vendorsDriversManagers/VendorsDriversManagers'
-import DeliveryTracking from '../pages/deliveryDrivers/deliveryTracking/DeliveryTracking'
 import DeliveryDriversApp from '../pages/deliveryDrivers/deliveryDriversApp/DeliveryDriversApp'
 import PrivacyPolicy from '../components/privacyPolicy/PrivacyPolicy'
 import TermsConditions from '../components/termsConditions/TermsConditions'
@@ -63,8 +61,6 @@ export const AppRoutes = () => {
       {/* Delivery Drivers Section Pages */}
       <Route path="/delivery-drivers" element={<DeliveryDrivers />} />
       <Route path="/delivery-drivers-manager" element={<DeliveryDriversManager />} />
-      <Route path="/vendors-drivers-managers" element={<VendorsDriversManagers />} />
-      <Route path="/delivery-tracking" element={<DeliveryTracking />} />
       <Route path="/delivery-drivers-app" element={<DeliveryDriversApp />} />
       {/* End of Delivery Drivers Section Pages */}
 

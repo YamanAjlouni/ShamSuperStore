@@ -125,10 +125,6 @@ import enDriversDeliveryDriversApp from '../locale/en/drivers/deliveryDriversApp
 import arDriversDeliveryDriversApp from '../locale/ar/drivers/deliveryDriversApp.json';
 import enDriversDeliveryDriversManager from '../locale/en/drivers/deliveryDriversManager.json';
 import arDriversDeliveryDriversManager from '../locale/ar/drivers/deliveryDriversManager.json';
-import enDriversDeliveryTracking from '../locale/en/drivers/deliveryTracking.json';
-import arDriversDeliveryTracking from '../locale/ar/drivers/deliveryTracking.json';
-import enDriversVendorsDriversManagers from '../locale/en/drivers/vendorsDriversManagers.json';
-import arDriversVendorsDriversManagers from '../locale/ar/drivers/vendorsDriversManagers.json';
 
 // Import navbar translations
 import enNavbar from '../locale/en/navbar.json';
@@ -209,8 +205,6 @@ const localization = {
             ...enDrivers,
             deliveryDriversApp: enDriversDeliveryDriversApp,
             deliveryDriversManager: enDriversDeliveryDriversManager,
-            deliveryTracking: enDriversDeliveryTracking,
-            vendorsDriversManagers: enDriversVendorsDriversManagers,
         },
     },
     ar: {
@@ -281,8 +275,6 @@ const localization = {
             ...arDrivers,
             deliveryDriversApp: arDriversDeliveryDriversApp,
             deliveryDriversManager: arDriversDeliveryDriversManager,
-            deliveryTracking: arDriversDeliveryTracking,
-            vendorsDriversManagers: arDriversVendorsDriversManagers,
         },
     }
 };

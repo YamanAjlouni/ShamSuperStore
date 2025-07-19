@@ -10,7 +10,7 @@
     },
     "navigation": {
         "home": "الرئيسية",
-        "shop": "المتجر",
+        "shop": "الفئات",
         "myAccount": "حسابي",
         "about": "من نحن",
         "contactUs": "اتصل بنا",
@@ -185,9 +185,7 @@
     "deliveryDrivers": {
         "deliveryDrivers": "سائقو التوصيل",
         "deliveryDriversManager": "مدير سائقي التوصيل",
-        "vendorsDriversManagers": "مديرو سائقي البائعين",
-        "deliveryTracking": "تتبع التوصيل",
-        "deliveryDriversApp": "تطبيق سائقي التوصيل"
+        "deliveryDriversApp": "موقع سائقي التوصيل"
     },
     "languages": {
         "english": "English (الإنجليزية)",

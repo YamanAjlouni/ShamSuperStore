@@ -10,7 +10,7 @@
     },
     "navigation": {
         "home": "Home",
-        "shop": "Shop",
+        "shop": "Categories",
         "myAccount": "My Account",
         "about": "About",
         "contactUs": "Contact Us",
@@ -185,9 +185,7 @@
     "deliveryDrivers": {
         "deliveryDrivers": "Delivery Drivers",
         "deliveryDriversManager": "Delivery Drivers Manager",
-        "vendorsDriversManagers": "Vendors Drivers Managers",
-        "deliveryTracking": "Delivery Tracking",
-        "deliveryDriversApp": "Delivery Drivers App"
+        "deliveryDriversApp": "Delivery Drivers Website"
     },
     "languages": {
         "english": "English",

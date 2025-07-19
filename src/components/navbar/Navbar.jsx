@@ -260,8 +260,6 @@ const Navbar = () => {
             dropdown: [
                 { title: t('navbar.deliveryDrivers.deliveryDrivers'), link: '/delivery-drivers' },
                 { title: t('navbar.deliveryDrivers.deliveryDriversManager'), link: '/delivery-drivers-manager' },
-                { title: t('navbar.deliveryDrivers.vendorsDriversManagers'), link: '/vendors-drivers-managers' },
-                { title: t('navbar.deliveryDrivers.deliveryTracking'), link: '/delivery-tracking' },
                 { title: t('navbar.deliveryDrivers.deliveryDriversApp'), link: '/delivery-drivers-app' }
             ]
         },

@@ -1,8 +1,8 @@
 {
-    "pageTitle": "Delivery Drivers App",
+    "pageTitle": "Delivery Drivers Website",
     "backLink": "Back to Delivery Drivers",
-    "heading": "Delivery Drivers App",
-    "description": "Download our mobile app for drivers and manage deliveries on the go. Access app information, download links, and get support for our mobile delivery management platform.",
-    "appButton": "Get Mobile App",
+    "heading": "Delivery Drivers Website",
+    "description": "Visit our website for drivers and manage deliveries on the go. Access information, download links, and get support for our mobile delivery management platform.",
+    "appButton": "Go to Website",
     "appUrl": "https://shamsuperstore-dashboard.netlify.app/"
 }
