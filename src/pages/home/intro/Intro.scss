@@ -1,4 +1,3 @@
-// Variables
 $orange-primary: #CE802D;
 $orange-secondary: #E6912F;
 $blue-primary: rgb(97, 132, 237);
@@ -7,7 +6,6 @@ $white: #ffffff;
 $black: #000000;
 $text-dark: #333333;
 
-// Mixins
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -28,7 +26,6 @@ $text-dark: #333333;
   box-shadow: 0 20px 40px rgba($black, $opacity);
 }
 
-// Base styles
 * {
   margin: 0;
   padding: 0;
@@ -39,7 +36,6 @@ body {
   font-family: 'Arial', sans-serif;
   overflow-x: hidden;
 
-  // RTL support
   &.lang-ar {
     font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
     direction: rtl;
@@ -50,7 +46,6 @@ body {
   }
 }
 
-// Main container
 .swiper-container {
   position: relative;
   width: 100%;
@@ -63,14 +58,12 @@ body {
     cursor: grabbing;
   }
 
-  // Slides wrapper
   .swiper-slides {
     position: relative;
     width: 100%;
     height: 100%;
   }
 
-  // Individual slide
   .swiper-slide {
     position: absolute;
     top: 0;
@@ -91,7 +84,6 @@ body {
       transform: translateX(-100%);
     }
 
-    // RTL support for slide transitions
     [dir="rtl"] & {
       transform: translateX(-100%);
 
@@ -104,7 +96,6 @@ body {
       }
     }
 
-    // Background gradients
     &.orange {
       background: linear-gradient(135deg, $orange-primary 0%, $orange-secondary 100%);
     }
@@ -114,7 +105,6 @@ body {
     }
   }
 
-  // Slide content
   .slide-content {
     @include flex-center;
     width: 100%;
@@ -122,13 +112,11 @@ body {
     padding: 0 50px;
     position: relative;
 
-    // RTL support
     [dir="rtl"] & {
       flex-direction: row-reverse;
     }
   }
 
-  // Image section
   .slide-image {
     flex: 1;
     @include flex-center;
@@ -141,14 +129,12 @@ body {
     }
   }
 
-  // Text section
   .slide-text {
     flex: 1;
     padding-inline-start: 80px;
     color: $white;
     text-align: start;
 
-    // RTL specific adjustments
     [dir="rtl"] & {
       padding-inline-start: 80px;
       padding-inline-end: 0;
@@ -163,7 +149,6 @@ body {
       letter-spacing: 1px;
       text-transform: uppercase;
 
-      // RTL specific
       [dir="rtl"] & {
         letter-spacing: 0.5px;
       }
@@ -176,7 +161,6 @@ body {
       margin-bottom: 40px;
       text-shadow: 0 4px 8px rgba($black, 0.3);
 
-      // RTL specific
       [dir="rtl"] & {
         font-size: 4rem;
         line-height: 1.2;
@@ -196,7 +180,6 @@ body {
       @include smooth-transition;
       border: 2px solid $white;
 
-      // RTL specific
       [dir="rtl"] & {
         letter-spacing: 0.5px;
       }
@@ -210,7 +193,6 @@ body {
     }
   }
 
-  // Navigation buttons
   .swiper-nav {
     position: absolute;
     top: 50%;
@@ -234,7 +216,6 @@ body {
       border-radius: 0 5px 5px 0;
       border-left: none;
 
-      // RTL support
       [dir="rtl"] & {
         left: auto;
         right: 0;
@@ -253,7 +234,6 @@ body {
       border-radius: 5px 0 0 5px;
       border-right: none;
 
-      // RTL support
       [dir="rtl"] & {
         right: auto;
         left: 0;
@@ -274,7 +254,6 @@ body {
     }
   }
 
-  // Pagination
   .swiper-pagination {
     position: absolute;
     bottom: 40px;
@@ -304,7 +283,6 @@ body {
   }
 }
 
-// Mobile responsiveness
 @media (max-width: 768px) {
   .swiper-container {
     .slide-content {
@@ -312,7 +290,6 @@ body {
       text-align: center;
       padding: 0 20px;
 
-      // RTL support for mobile
       [dir="rtl"] & {
         flex-direction: column;
         text-align: center;
@@ -323,7 +300,6 @@ body {
       padding-inline-start: 0;
       padding-top: 30px;
 
-      // RTL specific
       [dir="rtl"] & {
         padding-inline-start: 0;
         padding-inline-end: 0;
@@ -334,7 +310,6 @@ body {
         font-size: 3rem;
         margin-bottom: 20px;
 
-        // RTL specific
         [dir="rtl"] & {
           font-size: 2.8rem;
         }
@@ -386,7 +361,6 @@ body {
       .main-title {
         font-size: 2.5rem;
 
-        // RTL specific
         [dir="rtl"] & {
           font-size: 2.2rem;
         }
@@ -449,7 +423,6 @@ body {
   }
 }
 
-// Animations
 @keyframes slideInFromRight {
   from {
     transform: translateX(100%);
@@ -498,7 +471,6 @@ body {
   }
 }
 
-// RTL specific animations
 [dir="rtl"] {
   @keyframes slideInFromRight {
     from {
@@ -525,7 +497,6 @@ body {
   }
 }
 
-// Accessibility
 .swiper-nav,
 .pagination-bullet {
   &:focus {

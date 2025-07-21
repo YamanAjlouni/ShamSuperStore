@@ -8,7 +8,7 @@ import ReviewPopup from '../../components/reviewPopup/ReviewPopup';
 
 const Checkout = () => {
     const { items, getTotalPrice, clearCart } = useCart();
-    const { t, isRTL } = useLanguage(); // Add isRTL here
+    const { t, isRTL } = useLanguage();
     const navigate = useNavigate();
 
     const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -99,7 +99,6 @@ const Checkout = () => {
         setIsProcessing(true);
         console.log('Starting order processing...');
 
-        // Simulate order processing
         setTimeout(() => {
             const newOrderNumber = 'ORD-' + Date.now();
             setOrderNumber(newOrderNumber);
@@ -107,10 +106,8 @@ const Checkout = () => {
             setOrderComplete(true);
             console.log('Order completed, order number:', newOrderNumber);
 
-            // Show review popup after a short delay (skip clearCart for now)
             setTimeout(() => {
                 console.log('About to show review popup...');
-                // Skip clearCart for now: clearCart();
                 setShowReviewPopup(true);
                 console.log('showReviewPopup state set to:', true);
             }, 2000);
@@ -121,7 +118,6 @@ const Checkout = () => {
         navigate('/shop');
     };
 
-    // Debug function to test review popup
     const testReviewPopup = () => {
         console.log('Testing review popup...');
         setShowReviewPopup(true);
@@ -198,7 +194,6 @@ const Checkout = () => {
                 <form onSubmit={handleSubmit} className="checkout-form">
                     <div className="checkout-content">
                         <div className="checkout-main">
-                            {/* Billing Details */}
                             <div className="billing-section">
                                 <h2><CreditCard size={20} /> {t('checkout.billing.title') || 'Billing Details'}</h2>
 
@@ -324,7 +319,6 @@ const Checkout = () => {
                                 </div>
                             </div> */}
 
-                            {/* Payment Methods */}
                             <div className="payment-section">
                                 <h2><CreditCard size={20} /> {t('checkout.order.paymentMethod') || 'Payment Method'}</h2>
                                 {errors.paymentMethod && <span className="error-message">{errors.paymentMethod}</span>}
@@ -372,7 +366,6 @@ const Checkout = () => {
                             </div>
                         </div>
 
-                        {/* Order Summary */}
                         <div className="checkout-sidebar">
                             <div className="order-summary">
                                 <h2>{t('checkout.order.title') || 'Your Order'}</h2>

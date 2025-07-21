@@ -59,11 +59,9 @@
 }
 
 
-// Add this to your existing Addresses.scss file
 
 .addresses-content {
 
-    // RTL text alignment for title and description
     h3 {
         :global(.lang-ar) & {
             text-align: right;
@@ -146,7 +144,6 @@
         }
     }
 
-    // Add Address Form Styles
     .add-address-form {
         margin-top: 30px;
         background: $white;
@@ -332,7 +329,6 @@
     }
 }
 
-// Responsive Design for Form
 @media (max-width: 768px) {
     .addresses-content {
         .add-address-form {

@@ -4,7 +4,6 @@ const ReturnPolicy = () => {
     return (
         <div className="return-policy-container">
             <div className="content-wrapper">
-                {/* Main Return Policy Section */}
                 <section className="policy-section">
                     <h1 className="main-title">Return Policy</h1>
                     <h2 className="subtitle">Easy shopping, simple returns:</h2>
@@ -30,7 +29,6 @@ const ReturnPolicy = () => {
                     </div>
                 </section>
 
-                {/* Items You Can't Return */}
                 <section className="policy-section">
                     <h2 className="section-title">Items That You Can't Return</h2>
                     <p className="section-intro">Some products are non-returnable, such as the following:</p>
@@ -60,7 +58,6 @@ const ReturnPolicy = () => {
                     </p>
                 </section>
 
-                {/* Unintended Items */}
                 <section className="policy-section">
                     <h2 className="section-title">Unintended Item(s) in My Return</h2>
                     <p>
@@ -70,13 +67,11 @@ const ReturnPolicy = () => {
                     </p>
                 </section>
 
-                {/* Bundle Returns */}
                 <section className="policy-section">
                     <h2 className="section-title">Returning Items Purchased in a Bundle</h2>
                     <p>You must return all items purchased in a Bundle with Savings to receive a refund. Partial refunds are not available.</p>
                 </section>
 
-                {/* Initiating a Return */}
                 <section className="policy-section">
                     <h2 className="section-title">Initiating a Return</h2>
                     <p>
@@ -84,7 +79,6 @@ const ReturnPolicy = () => {
                     </p>
                 </section>
 
-                {/* Sending Your Return */}
                 <section className="policy-section">
                     <h2 className="section-title">Sending Us Your Return</h2>
                     <p>Please make sure that your item is:</p>
@@ -101,7 +95,6 @@ const ReturnPolicy = () => {
                     </p>
                 </section>
 
-                {/* Return Fees */}
                 <section className="policy-section">
                     <h2 className="section-title">Return Fees</h2>
                     <p className="fees-intro">
@@ -131,7 +124,6 @@ const ReturnPolicy = () => {
                     </div>
                 </section>
 
-                {/* Returning a Gift */}
                 <section className="policy-section">
                     <h2 className="section-title">Returning a Gift</h2>
                     <p>
@@ -145,7 +137,6 @@ const ReturnPolicy = () => {
                     </p>
                 </section>
 
-                {/* Need Help */}
                 <section className="policy-section help-section">
                     <h2 className="section-title">Need help?</h2>
                     <p>Contact us at <a href="mailto:support@yourstore.com" className="link">support@shamsuperstore.com</a> for questions related to refunds and returns.</p>

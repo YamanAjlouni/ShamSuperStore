@@ -291,7 +291,6 @@ const Navbar = () => {
         setActiveSubDropdown(null);
     };
 
-    // Mobile dropdown handlers
     const handleMobileDropdownToggle = (index, e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -341,7 +340,6 @@ const Navbar = () => {
         setSearchQuery(e.target.value);
     };
 
-    // Close mobile menu on resize
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth >= 1200) {
@@ -355,7 +353,6 @@ const Navbar = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Prevent body scroll when mobile menu is open
     useEffect(() => {
         if (mobileMenuOpen) {
             const scrollY = window.scrollY;
@@ -384,17 +381,14 @@ const Navbar = () => {
 
     return (
         <nav className={`navbar ${isRTL ? 'rtl' : 'ltr'}`}>
-            {/* Top Bar */}
             <div className="navbar__top">
                 <div className="navbar__top-container">
-                    {/* Logo */}
                     <div className="navbar__logo">
                         <Link to="/" onClick={handleLinkClick}>
                             <img src={shamSuperStoreLogo} alt="Sham Super Store" />
                         </Link>
                     </div>
 
-                    {/* Search Bar - Desktop Only */}
                     <div className="navbar__search navbar__search--desktop">
                         <form onSubmit={handleSearchSubmit} className="navbar__search-form">
                             <input
@@ -410,7 +404,6 @@ const Navbar = () => {
                         </form>
                     </div>
 
-                    {/* Top Actions (Desktop Only) */}
                     <div className="navbar__actions">
                         <button
                             className="navbar__action-btn"
@@ -436,7 +429,6 @@ const Navbar = () => {
                         </button>
                     </div>
 
-                    {/* Mobile Toggle */}
                     <div className="navbar__toggle" onClick={toggleMobileMenu}>
                         <span className={`navbar__toggle-line ${mobileMenuOpen ? 'active' : ''}`}></span>
                         <span className={`navbar__toggle-line ${mobileMenuOpen ? 'active' : ''}`}></span>
@@ -445,7 +437,6 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Separate Search Bar for Tablet/Mobile */}
             <div className="navbar__search-bar-mobile">
                 <div className="navbar__search-bar-container">
                     <form onSubmit={handleSearchSubmit} className="navbar__search-form-mobile">
@@ -463,9 +454,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Main Navbar */}
             <div className="navbar__container">
-                {/* Desktop Navigation */}
                 <ul className="navbar__menu">
                     {navItems.map((item, index) => (
                         <li
@@ -484,7 +473,6 @@ const Navbar = () => {
                                 )}
                             </Link>
 
-                            {/* Second Level Dropdown */}
                             {item.dropdown && activeDropdown === index && (
                                 <ul className={`navbar__dropdown ${index === 1 ? 'navbar__dropdown--scrollable' : ''}`}>
                                     {item.dropdown.map((dropdownItem, dropIndex) => (
@@ -535,7 +523,6 @@ const Navbar = () => {
                         </li>
                     ))}
 
-                    {/* Cart */}
                     <li className="navbar__item navbar__cart">
                         <button className="navbar__cart-btn" onClick={handleCartClick}>
                             <div className="navbar__cart-icon">
@@ -550,7 +537,6 @@ const Navbar = () => {
                     </li>
                 </ul>
 
-                {/* Mobile Menu */}
                 <div className={`navbar__mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
                     {navItems.map((item, index) => (
                         <div key={index} className="navbar__mobile-item">
@@ -633,7 +619,6 @@ const Navbar = () => {
                         </div>
                     ))}
 
-                    {/* Mobile Cart */}
                     <div className="navbar__mobile-item">
                         <button className="navbar__mobile-cart" onClick={handleCartClick}>
                             <ShoppingCart size={20} />

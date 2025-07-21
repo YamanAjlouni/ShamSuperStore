@@ -78,7 +78,6 @@ export const Intro = () => {
     resetAutoplay();
   };
 
-  // Touch/Swipe functionality
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -105,7 +104,6 @@ export const Intro = () => {
     touchEndX.current = 0;
   };
 
-  // Mouse drag functionality for desktop
   const handleMouseDown = (e) => {
     touchStartX.current = e.clientX;
     e.preventDefault();
@@ -138,7 +136,6 @@ export const Intro = () => {
     touchEndX.current = 0;
   };
 
-  // Autoplay functionality
   useEffect(() => {
     resetAutoplay();
     return () => {
@@ -148,7 +145,6 @@ export const Intro = () => {
     };
   }, [autoplayEnabled]);
 
-  // Pause/resume autoplay on hover
   const handleMouseEnter = () => {
     setAutoplayEnabled(false);
     if (autoplayRef.current) {
@@ -161,7 +157,6 @@ export const Intro = () => {
     resetAutoplay();
   };
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === 'ArrowLeft') {
@@ -211,7 +206,6 @@ export const Intro = () => {
         ))}
       </div>
 
-      {/* Navigation */}
       <div
         className="swiper-nav swiper-nav-prev"
         onClick={previousSlide}
@@ -231,7 +225,6 @@ export const Intro = () => {
         </svg>
       </div>
 
-      {/* Pagination */}
       <div className="swiper-pagination">
         {slides.map((_, index) => (
           <div

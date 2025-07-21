@@ -1,6 +1,5 @@
 @use '../../assets/style/vars.scss' as *;
 
-// Overlay
 .sidebar-cart-overlay {
     position: fixed;
     top: 0;
@@ -19,7 +18,6 @@
     }
 }
 
-// Sidebar
 .sidebar-cart {
     position: fixed;
     top: 0;
@@ -43,7 +41,6 @@
     }
 }
 
-// Header
 .sidebar-cart-header {
     display: flex;
     justify-content: space-between;
@@ -72,7 +69,6 @@
     }
 }
 
-// Content
 .sidebar-cart-content {
     flex: 1;
     display: flex;
@@ -80,7 +76,6 @@
     overflow: hidden;
 }
 
-// Empty state
 .sidebar-cart-empty {
     flex: 1;
     display: flex;
@@ -90,14 +85,12 @@
     font-size: 16px;
 }
 
-// Items container
 .sidebar-cart-items {
     flex: 1;
     overflow-y: auto;
     padding: 0 20px;
 }
 
-// Individual item
 .sidebar-cart-item {
     display: flex;
     align-items: flex-start;
@@ -203,7 +196,6 @@
     }
 }
 
-// Summary section
 .sidebar-cart-summary {
     padding: 20px;
     border-top: 1px solid $gray-200;
@@ -310,7 +302,6 @@
     }
 }
 
-// Responsive
 @media (max-width: 768px) {
     .sidebar-cart {
         width: 350px;

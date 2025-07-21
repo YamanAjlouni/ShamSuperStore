@@ -1,6 +1,5 @@
 @use '../../assets/style/vars.scss' as *;
 
-// RTL Support Mixins
 @mixin margin-inline($start: 0, $end: 0) {
     .ltr & {
         margin-left: $start;
@@ -62,7 +61,6 @@
     background: $gray-50;
     padding: 2rem 0;
 
-    // RTL Support
     .rtl & {
         direction: rtl;
     }
@@ -124,7 +122,6 @@
     gap: 2.5rem;
 }
 
-// Form Sections
 .billing-section,
 .shipping-section,
 .shipping-methods-section,
@@ -156,7 +153,6 @@
     }
 }
 
-// Form Elements
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -219,7 +215,6 @@
     }
 }
 
-// Shipping Options
 .shipping-options {
     display: flex;
     flex-direction: column;
@@ -268,7 +263,6 @@
     }
 }
 
-// Payment Options
 .payment-options {
     display: flex;
     flex-direction: column;
@@ -283,7 +277,6 @@
     cursor: pointer;
     transition: $transition-all;
 
-    // RTL Support for payment options
     .rtl & {
         flex-direction: row-reverse;
         text-align: right;
@@ -326,7 +319,6 @@
     }
 }
 
-// Order Summary Sidebar
 .checkout-sidebar {
     @media (max-width: 1024px) {
         order: -1;
@@ -391,7 +383,6 @@
     .item-details {
         flex: 1;
 
-        // RTL Support for item details
         .rtl & {
             text-align: right;
         }
@@ -493,7 +484,6 @@
     }
 }
 
-// Empty Checkout
 .empty-checkout {
     text-align: center;
     padding: 4rem 2rem;
@@ -536,7 +526,6 @@
     }
 }
 
-// Order Success
 .order-success {
     text-align: center;
     padding: 4rem 2rem;

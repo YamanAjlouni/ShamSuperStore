@@ -51,7 +51,6 @@ const Addresses = ({
             [name]: type === 'checkbox' ? checked : value
         }));
 
-        // Clear error when user starts typing
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -70,7 +69,6 @@ const Addresses = ({
             }
         });
 
-        // Phone validation
         if (formData.phone && !/^[\+]?[0-9\s\-\(\)]+$/.test(formData.phone)) {
             newErrors.phone = t('myAccount.addresses.validation.invalidPhone');
         }
@@ -90,7 +88,6 @@ const Addresses = ({
             onSaveAddress(addressType, formData);
         }
 
-        // Reset form
         setFormData({
             firstName: '',
             lastName: '',
@@ -321,7 +318,7 @@ const Addresses = ({
                                     <span className="error-message">{errors.city}</span>
                                 )}
                             </div>
-                            
+
                             <div className="form-group">
                                 <label htmlFor="phone">
                                     {t('myAccount.addresses.form.phone')}

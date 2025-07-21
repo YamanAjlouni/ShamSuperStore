@@ -288,7 +288,6 @@
         }
     }
 
-    // RTL Support
     &.rtl {
         direction: rtl;
 
@@ -388,7 +387,6 @@
         }
     }
 
-    // LTR Default (for clarity)
     &.ltr {
         direction: ltr;
 
@@ -503,7 +501,6 @@
             }
         }
 
-        // RTL tablet adjustments
         &.rtl {
             .footer-content {
                 .footer-section {
@@ -555,7 +552,6 @@
             }
         }
 
-        // RTL mobile adjustments
         &.rtl {
             .footer-content {
                 .footer-section {
@@ -617,7 +613,6 @@
             }
         }
 
-        // RTL small mobile adjustments
         &.rtl {
             .footer-content {
                 .footer-section {

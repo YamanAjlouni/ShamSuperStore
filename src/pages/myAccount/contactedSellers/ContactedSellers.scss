@@ -43,7 +43,6 @@
         }
     }
 
-    // RTL support for header
     .lang-ar & .inquiries-header {
 
         h3 {
@@ -55,7 +54,6 @@
         }
     }
 
-    // Contact Seller Form Styles
     .contact-seller-form {
         background: $white;
         border: 2px solid $primary-color;
@@ -164,7 +162,6 @@
         }
     }
 
-    // RTL support for form
     .lang-ar & .contact-seller-form {
         h4 {
             text-align: right;
@@ -295,7 +292,6 @@
             }
         }
 
-        // Status Badges
         .status-badge {
             display: inline-block;
             padding: 4px 12px;
@@ -330,7 +326,6 @@
             }
         }
 
-        // Conversation Actions
         .conversation-actions {
             display: flex;
             gap: 8px;
@@ -381,7 +376,6 @@
             }
         }
 
-        // Empty State
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -408,7 +402,6 @@
         }
     }
 
-    // RTL support for table
     .lang-ar & .inquiries-table {
         table {
             thead th {
@@ -459,7 +452,6 @@
     }
 }
 
-// Responsive Design
 @media (max-width: 768px) {
     .inquiries-content {
         .inquiries-header {
@@ -478,7 +470,6 @@
             }
         }
 
-        // RTL mobile adjustments
         .lang-ar & .inquiries-header {
             flex-direction: column;
 
@@ -507,7 +498,6 @@
             }
         }
 
-        // RTL mobile form adjustments
         .lang-ar & .contact-seller-form .form-actions {
             flex-direction: column;
         }
@@ -554,7 +544,6 @@
                 }
             }
 
-            // RTL mobile table adjustments
             .lang-ar & .conversation-actions {
                 flex-direction: column;
             }

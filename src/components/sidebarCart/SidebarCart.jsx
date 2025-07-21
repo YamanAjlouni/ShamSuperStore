@@ -19,7 +19,6 @@ const SidebarCart = () => {
     const { t } = useLanguage();
     const navigate = useNavigate();
 
-    // Prevent body scroll when cart is open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -32,7 +31,6 @@ const SidebarCart = () => {
         };
     }, [isOpen]);
 
-    // Close cart when clicking outside
     const handleOverlayClick = (e) => {
         if (e.target === e.currentTarget) {
             closeCart();
@@ -59,13 +57,11 @@ const SidebarCart = () => {
 
     return (
         <>
-            {/* Overlay */}
             <div
                 className={`sidebar-cart-overlay ${isOpen ? 'sidebar-cart-overlay-active' : ''}`}
                 onClick={handleOverlayClick}
             />
 
-            {/* Sidebar */}
             <div className={`sidebar-cart ${isOpen ? 'sidebar-cart-open' : ''}`}>
                 <div className="sidebar-cart-header">
                     <h3>{t('sidebarCart.title')}</h3>

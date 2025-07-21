@@ -41,21 +41,18 @@ const Cart = () => {
     };
 
     const handleApplyCoupon = () => {
-        // Coupon logic would go here
         console.log('Applying coupon:', couponCode);
     };
 
     const handleRefreshCart = () => {
-        // Refresh cart logic would go here
         console.log('Refreshing cart...');
     };
 
     const handleProceedToCheckout = () => {
-        // Navigate to checkout page
         navigate('/checkout');
     };
 
-    const shippingFee = 0; // Free shipping for now
+    const shippingFee = 0;
     const totalAmount = getTotalPrice() + shippingFee;
 
     return (
@@ -171,7 +168,6 @@ const Cart = () => {
                                     </button>
                                 </div>
 
-                                {/* Saved for Later Section */}
                                 {savedItems.length > 0 && (
                                     <div className="saved-items-section">
                                         <h2 className="saved-items-title">{t('cart.savedItems.title')}</h2>

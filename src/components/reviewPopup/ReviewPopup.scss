@@ -56,7 +56,6 @@
     }
 }
 
-// Header
 .popup-header {
     display: flex;
     align-items: flex-start;
@@ -127,7 +126,6 @@
     }
 }
 
-// Body
 .popup-body {
     padding: 2rem;
 
@@ -165,7 +163,6 @@
     }
 }
 
-// Star Rating
 .star-rating {
     display: flex;
     gap: 0.5rem;
@@ -238,7 +235,6 @@
     }
 }
 
-// Recommendation Scale
 .recommend-scale {
     .scale-labels {
         display: flex;
@@ -300,7 +296,6 @@
     }
 }
 
-// Footer
 .popup-footer {
     display: flex;
     gap: 1rem;
@@ -376,7 +371,6 @@
     }
 }
 
-// Thank You Content
 .thankyou-content {
     text-align: center;
     padding: 3rem 2rem;
@@ -473,7 +467,6 @@
     }
 }
 
-// Scrollbar styling for webkit browsers
 .review-popup::-webkit-scrollbar {
     width: 6px;
 }

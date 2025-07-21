@@ -22,17 +22,14 @@ const ContactUs = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
         console.log('Form submitted:', formData);
     };
 
     return (
         <div className="contact-page">
             <div className="contact-container">
-                {/* Contact Info Cards Section */}
                 <div className="contact-info-section">
                     <div className="contact-info-grid">
-                        {/* Phone Card */}
                         <a href={`tel:${t('contact.contactInfo.phone.number')}`} className="contact-info-card">
                             <div className="info-icon">
                                 <Phone size={40} />
@@ -41,7 +38,6 @@ const ContactUs = () => {
                             <p className="info-subtitle">{t('contact.contactInfo.phone.hours')}</p>
                         </a>
 
-                        {/* Email Card */}
                         <div className="contact-info-card">
                             <div className="info-icon">
                                 <Mail size={40} />
@@ -50,7 +46,6 @@ const ContactUs = () => {
                             <p className="info-subtitle">{t('contact.contactInfo.email.description')}</p>
                         </div>
 
-                        {/* Address Card */}
                         <div className="contact-info-card">
                             <div className="info-icon">
                                 <Building size={40} />
@@ -61,7 +56,6 @@ const ContactUs = () => {
                     </div>
                 </div>
 
-                {/* Contact Form Section */}
                 <div className="contact-form-section">
                     <div className="form-header">
                         <h2 className="form-title">{t('contact.form.title')}</h2>
@@ -127,7 +121,6 @@ const ContactUs = () => {
                     </form>
                 </div>
 
-                {/* Social Media Section */}
                 <div className="social-media-section">
                     <div className="social-icons">
                         <a href="#" className="social-icon facebook" title={t('contact.socialMedia.facebook')}>

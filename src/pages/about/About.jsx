@@ -29,10 +29,8 @@ const About = () => {
     return (
         <div className="about-page">
             <div className="about-container">
-                {/* Four Cards Section */}
                 <div className="about-section">
                     <div className="about-cards-grid">
-                        {/* For Shoppers Card */}
                         <div className="card-wrapper">
                             <h2 className="external-card-title">{t('about.cards.shoppers.title')}</h2>
                             <div className="about-card">
@@ -51,7 +49,6 @@ const About = () => {
                             </div>
                         </div>
 
-                        {/* For Sellers Card */}
                         <div className="card-wrapper">
                             <h2 className="external-card-title">{t('about.cards.sellers.title')}</h2>
                             <div className="about-card">
@@ -70,7 +67,6 @@ const About = () => {
                             </div>
                         </div>
 
-                        {/* The People Behind the Platform Card */}
                         <div className="card-wrapper">
                             <h2 className="external-card-title">{t('about.cards.team.title')}</h2>
                             <div className="about-card">
@@ -89,7 +85,6 @@ const About = () => {
                             </div>
                         </div>
 
-                        {/* Delivery Team Card */}
                         <div className="card-wrapper">
                             <h2 className="external-card-title">{t('about.cards.delivery.title')}</h2>
                             <div className="about-card">
@@ -110,7 +105,6 @@ const About = () => {
                     </div>
                 </div>
 
-                {/* Second Section - Illustration and Service Info */}
                 <div className="service-section">
                     <div className="service-content">
                         <div className="service-illustration">

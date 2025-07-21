@@ -39,7 +39,6 @@ const AccountDetails = ({
             [name]: value
         }));
 
-        // Clear error when user starts typing
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -76,7 +75,6 @@ const AccountDetails = ({
             newErrors.email = t('myAccount.accountDetails.validation.emailInvalid');
         }
 
-        // Password validation only if user is trying to change password
         if (formData.newPassword || formData.confirmPassword) {
             if (!formData.currentPassword) {
                 newErrors.currentPassword = t('myAccount.accountDetails.validation.currentPasswordRequired');
@@ -108,14 +106,11 @@ const AccountDetails = ({
             if (onSaveAccount) {
                 await onSaveAccount(formData);
             } else {
-                // Simulate API call
                 await new Promise(resolve => setTimeout(resolve, 2000));
             }
 
-            // Handle success
             alert(t('myAccount.accountDetails.messages.updateSuccess'));
 
-            // Clear password fields after successful update
             setFormData(prev => ({
                 ...prev,
                 currentPassword: '',

@@ -1,9 +1,7 @@
 @use '../../assets/style/vars.scss' as *;
 
-// Variables
 $transition: all 0.2s ease-in-out;
 
-// Mixins
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -22,7 +20,6 @@ $transition: all 0.2s ease-in-out;
   border: 1px solid rgba(255, 255, 255, $opacity);
 }
 
-// RTL Support Mixins
 @mixin rtl-ltr($ltr-value, $rtl-value, $property: 'direction') {
   .ltr & {
     #{$property}: $ltr-value;
@@ -81,7 +78,6 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Search Bar Styles - Desktop
 .navbar__search {
   flex: 1;
   max-width: 600px;
@@ -92,13 +88,11 @@ $transition: all 0.2s ease-in-out;
     margin: 0 1.5rem;
   }
 
-  // Hide on tablet and mobile - only show desktop version
   @media (max-width: 1200px) {
     display: none;
   }
 }
 
-// Desktop search modifier
 .navbar__search--desktop {
   @media (max-width: 1200px) {
     display: none;
@@ -116,7 +110,6 @@ $transition: all 0.2s ease-in-out;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: $transition;
 
-  // RTL support
   .rtl & {
     direction: rtl;
   }
@@ -188,7 +181,6 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// NEW: Separate Search Bar for Tablet/Mobile
 .navbar__search-bar-mobile {
   display: none;
   background: linear-gradient(135deg, $primary-color 0%, $primary-blue-hover 50%, lighten($primary-color, 10%) 100%);
@@ -243,7 +235,6 @@ $transition: all 0.2s ease-in-out;
   transition: $transition;
   border: 2px solid rgba(255, 255, 255, 0.8);
 
-  // RTL support
   .rtl & {
     direction: rtl;
   }
@@ -328,7 +319,6 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Main Navbar Container
 .navbar {
   background: $primary-color;
   box-shadow: $shadow-lg;
@@ -337,7 +327,6 @@ $transition: all 0.2s ease-in-out;
   z-index: 1000;
   width: 100%;
 
-  // RTL Support for entire navbar
   &.rtl {
     direction: rtl;
   }
@@ -393,7 +382,7 @@ $transition: all 0.2s ease-in-out;
   }
 
   @media (max-width: 1200px) {
-    margin-top: 0px; // Add margin to account for search bar
+    margin-top: 0px;
     height: 0px;
 
   }
@@ -410,10 +399,9 @@ $transition: all 0.2s ease-in-out;
   object-fit: contain;
   transition: $transition;
 
-  // SMALLER LOGO FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    height: 3.8rem; // Reduced from 4.5rem
-    width: 150px; // Reduced from 180px
+    height: 3.8rem;
+    width: 150px;
   }
 
   &:hover {
@@ -476,7 +464,6 @@ $transition: all 0.2s ease-in-out;
     box-shadow: $shadow-md;
   }
 
-  // RTL icon positioning
   svg {
     opacity: 0.9;
     transition: $transition;
@@ -562,10 +549,9 @@ $transition: all 0.2s ease-in-out;
   transition: $transition;
   border-radius: 0.375rem;
 
-  // SMALLER PADDING AND FONT FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    padding: 0.7rem 1rem; // Reduced padding
-    font-size: 0.9rem; // Smaller font size
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
   }
 
@@ -580,12 +566,10 @@ $transition: all 0.2s ease-in-out;
   transition: transform 0.2s ease;
   color: rgba(255, 255, 255, 0.8);
 
-  // SMALLER SIZE FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    @include margin-inline(0.4rem, 0); // Reduced margin
+    @include margin-inline(0.4rem, 0);
   }
 
-  // RTL rotation adjustment
   .rtl & {
     &.rotated {
       transform: rotate(180deg);
@@ -604,7 +588,6 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Cart Button
 .navbar__cart-btn {
   @include flex-center;
   background: none;
@@ -615,9 +598,8 @@ $transition: all 0.2s ease-in-out;
   border-radius: 0.375rem;
   transition: $transition;
 
-  // SMALLER PADDING FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    padding: 0.7rem 1rem; // Reduced padding
+    padding: 0.7rem 1rem;
   }
 
   &:hover {
@@ -644,12 +626,10 @@ $transition: all 0.2s ease-in-out;
   border: 2px solid $white;
   box-shadow: $shadow-sm;
 
-  // RTL positioning
   @include position-inline(auto, -8px);
 
-  // SMALLER SIZE FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    min-width: 18px; // Slightly smaller
+    min-width: 18px;
     height: 18px;
     font-size: 11px;
     top: -6px;
@@ -657,7 +637,6 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Second Level Dropdown - Fixed hover gap issue
 .navbar__dropdown {
   position: absolute;
   top: 100%;
@@ -672,35 +651,29 @@ $transition: all 0.2s ease-in-out;
   opacity: 1;
   transform: translateY(0);
   transition: $transition;
-  // Remove gap by positioning closer
   margin-top: -2px;
 
-  // RTL positioning
   @include position-inline(0, auto);
 
   .rtl & {
     text-align: right;
   }
 
-  // SMALLER WIDTH FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    min-width: 200px; // Reduced from 220px
-    padding: 0.4rem 0; // Reduced padding
+    min-width: 200px;
+    padding: 0.4rem 0;
   }
 }
 
-// Special styling for Shop dropdown (scrollable)
 .navbar__dropdown--shop {
   max-height: 70vh;
   overflow-y: auto;
   min-width: 280px;
 
-  // SMALLER WIDTH FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    min-width: 250px; // Reduced from 280px
+    min-width: 250px;
   }
 
-  // Custom scrollbar
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -740,10 +713,9 @@ $transition: all 0.2s ease-in-out;
   cursor: pointer;
   text-align: inherit;
 
-  // SMALLER PADDING AND FONT FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    padding: 0.6rem 0.8rem; // Reduced padding
-    font-size: 0.85rem; // Reduced font size
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
   }
 
   &:hover {
@@ -756,10 +728,9 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Third Level Dropdown (Sub-dropdown) - Fixed positioning
 .navbar__sub-dropdown {
   position: absolute;
-  top: -2px; // Align with parent item
+  top: -2px;
   background: $white;
   border-radius: 0.5rem;
   box-shadow: $shadow-lg;
@@ -768,10 +739,8 @@ $transition: all 0.2s ease-in-out;
   padding: 0.5rem 0;
   min-width: 200px;
   z-index: 1002;
-  // Remove gap completely
   margin-left: -1px;
 
-  // RTL positioning
   @include position-inline(100%, auto);
 
   .rtl & {
@@ -780,10 +749,9 @@ $transition: all 0.2s ease-in-out;
     text-align: right;
   }
 
-  // SMALLER WIDTH FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    min-width: 180px; // Reduced from 200px
-    padding: 0.4rem 0; // Reduced padding
+    min-width: 180px;
+    padding: 0.4rem 0;
   }
 }
 
@@ -795,10 +763,9 @@ $transition: all 0.2s ease-in-out;
   transition: $transition;
   font-size: 0.85rem;
 
-  // SMALLER PADDING AND FONT FOR DESKTOP ONLY
   @media (min-width: 1200px) {
-    padding: 0.6rem 0.8rem; // Reduced padding
-    font-size: 0.8rem; // Reduced font size
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
   }
 
   &:hover {
@@ -807,13 +774,12 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Mobile Toggle - FIXED WITH PROPER Z-INDEX
 .navbar__toggle {
   display: none;
   flex-direction: column;
   cursor: pointer;
   padding: 0.5rem;
-  z-index: 1003; // HIGHEST Z-INDEX TO STAY ABOVE EVERYTHING
+  z-index: 1003;
   position: relative;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
@@ -839,7 +805,6 @@ $transition: all 0.2s ease-in-out;
   transform-origin: center;
 }
 
-// IMPROVED active states for mobile toggle
 .navbar__toggle-line.active:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
@@ -852,7 +817,6 @@ $transition: all 0.2s ease-in-out;
   transform: rotate(-45deg) translate(7px, -6px);
 }
 
-// Mobile Menu - FIXED Z-INDEX
 .navbar__mobile-menu {
   position: fixed;
   top: 0;
@@ -863,10 +827,9 @@ $transition: all 0.2s ease-in-out;
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   overflow-y: auto;
-  z-index: 1001; // LOWER THAN TOGGLE BUTTON
-  padding: 180px 0 2rem 0; // More padding to account for fixed top bar + search bar
+  z-index: 1001;
+  padding: 180px 0 2rem 0;
 
-  // RTL support
   .rtl & {
     transform: translateX(100%);
     left: auto;
@@ -885,7 +848,6 @@ $transition: all 0.2s ease-in-out;
     padding: 120px 0 2rem 0;
   }
 
-  // Custom scrollbar
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -936,7 +898,6 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Mobile Arrow Button - IMPROVED
 .navbar__mobile-arrow-btn {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -961,7 +922,6 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Mobile Arrow Icon - IMPROVED
 .navbar__mobile-arrow {
   transition: transform 0.3s ease;
   color: $white;
@@ -1091,17 +1051,12 @@ $transition: all 0.2s ease-in-out;
 }
 
 
-// Add this to the very end of your Navbar.scss file, replacing the existing body styles
-
-// Fix for content overlap - Add proper margin to account for fixed navbar
 body {
   @media (max-width: 1200px) {
-    // Total height calculation:
-    // Top bar: ~85px + Search bar: ~60px + Main navbar: ~70px = ~215px
-    margin-top: 150px; // Increased from 40px to 150px
+    margin-top: 150px;
   }
 
   @media (max-width: 768px) {
-    margin-top: 145px; // Slightly less for tablet
+    margin-top: 145px;
   }
 }

@@ -57,7 +57,6 @@
     }
 }
 
-// Empty cart styles
 .cart-empty {
     text-align: center;
     padding: 4rem 2rem;
@@ -97,7 +96,6 @@
     }
 }
 
-// Cart table styles
 .cart-table {
     border: 1px solid $gray-200;
     border-radius: $radius-lg;
@@ -221,7 +219,6 @@
     }
 }
 
-// Elegant Save for Later Button
 .save-for-later-btn {
     background: linear-gradient(135deg, rgba(255, 182, 193, 0.1) 0%, rgba(255, 192, 203, 0.2) 100%);
     border: 1px solid rgba(255, 182, 193, 0.3);
@@ -375,7 +372,6 @@
     }
 }
 
-// Cart actions
 .cart-actions {
     display: flex;
     justify-content: space-between;
@@ -461,7 +457,6 @@
     }
 }
 
-// Saved items section
 .saved-items-section {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -575,7 +570,6 @@
     }
 }
 
-// Cart sidebar
 .cart-sidebar {
     @media (max-width: 1024px) {
         order: -1;

@@ -5,7 +5,7 @@ import { useLanguage } from '../../context/LanguageContext';
 
 const ReviewPopup = ({ isOpen, onClose, orderNumber }) => {
     const { t } = useLanguage();
-    const [currentStep, setCurrentStep] = useState('review'); // 'review' or 'thankyou'
+    const [currentStep, setCurrentStep] = useState('review');
     const [formData, setFormData] = useState({
         platformRating: 0,
         comment: '',
@@ -75,12 +75,10 @@ const ReviewPopup = ({ isOpen, onClose, orderNumber }) => {
 
         setIsSubmitting(true);
 
-        // Simulate API call
         setTimeout(() => {
             setIsSubmitting(false);
             setCurrentStep('thankyou');
 
-            // Auto close after 3 seconds on thank you page
             setTimeout(() => {
                 onClose();
             }, 3000);
@@ -114,7 +112,6 @@ const ReviewPopup = ({ isOpen, onClose, orderNumber }) => {
                         </div>
 
                         <div className="popup-body">
-                            {/* Platform Rating Question */}
                             <div className="question-section">
                                 <h3>{t('reviewPopup.platformQuestion.title')}</h3>
                                 {errors.platformRating && (
@@ -147,7 +144,6 @@ const ReviewPopup = ({ isOpen, onClose, orderNumber }) => {
                                 )}
                             </div>
 
-                            {/* Recommendation Question */}
                             <div className="question-section">
                                 <h3>{t('reviewPopup.recommendQuestion.title')}</h3>
                                 <p className="question-subtitle">{t('reviewPopup.recommendQuestion.subtitle')}</p>
