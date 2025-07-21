@@ -1,0 +1,32 @@
+{
+    "title": "We'd Love Your Feedback!",
+    "subtitle": "Help us improve your shopping experience",
+    "platformQuestion": {
+        "title": "How would you rate our platform?",
+        "placeholder": "Share your thoughts about your shopping experience..."
+    },
+    "recommendQuestion": {
+        "title": "How likely are you to recommend us to others?",
+        "subtitle": "On a scale of 1-10",
+        "labels": {
+            "notLikely": "Not Likely",
+            "veryLikely": "Very Likely"
+        }
+    },
+    "buttons": {
+        "submit": "Submit Review",
+        "skip": "Skip for Now",
+        "submitting": "Submitting...",
+        "thankYou": "Thank You!"
+    },
+    "thankYouMessage": {
+        "title": "Thank You for Your Feedback!",
+        "message": "Your review helps us improve and serve you better.",
+        "close": "Close"
+    },
+    "validation": {
+        "platformRating": "Please rate our platform",
+        "recommendRating": "Please select a recommendation score",
+        "commentTooShort": "Please share more details (minimum 10 characters)"
+    }
+}

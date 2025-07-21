@@ -11,6 +11,7 @@ import ContactUs from '../pages/contactUs/ContactUs'
 import ContactForm from '../pages/shop/productDetails/contactForm/ContactForm'
 import Compare from '../pages/shop/productDetails/compare/Compare'
 import Cart from '../pages/cart/Cart'
+import Checkout from '../pages/checkout/Checkout'
 
 // Sellers Section Pages
 import Sellers from '../pages/sellers/Sellers'
@@ -46,8 +47,9 @@ export const AppRoutes = () => {
       <Route path="/compare" element={<Compare />} />
       {/* End of Shop Pages and Sections */}
 
-      {/* Cart Page */}
+      {/* Cart and Checkout Pages */}
       <Route path="/cart" element={<Cart />} />
+      <Route path="/checkout" element={<Checkout />} />
 
       {/* Sellers Section Pages */}
       <Route path="/sellers" element={<Sellers />} />

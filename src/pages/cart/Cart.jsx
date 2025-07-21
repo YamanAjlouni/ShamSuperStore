@@ -51,7 +51,7 @@ const Cart = () => {
     };
 
     const handleProceedToCheckout = () => {
-        // Checkout logic would go here
+        // Navigate to checkout page
         navigate('/checkout');
     };
 

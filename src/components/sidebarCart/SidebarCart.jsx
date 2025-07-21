@@ -54,8 +54,7 @@ const SidebarCart = () => {
 
     const handleCheckout = () => {
         closeCart();
-        // Add checkout logic here
-        console.log('Proceeding to checkout...');
+        navigate('/checkout');
     };
 
     return (

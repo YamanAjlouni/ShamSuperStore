@@ -68,6 +68,14 @@ import arCart from '../locale/ar/cart/cart.json';
 import enSidebarCart from '../locale/en/cart/sidebarCart.json';
 import arSidebarCart from '../locale/ar/cart/sidebarCart.json';
 
+// Import checkout translations
+import enCheckout from '../locale/en/checkout/checkout.json';
+import arCheckout from '../locale/ar/checkout/checkout.json';
+
+// Import review popup translations
+import enReviewPopup from '../locale/en/reviewPopup/reviewPopup.json';
+import arReviewPopup from '../locale/ar/reviewPopup/reviewPopup.json';
+
 // Import myAccount translations
 import enMyAccount from '../locale/en/myAccount/myAccount.json';
 import arMyAccount from '../locale/ar/myAccount/myAccount.json';
@@ -176,6 +184,8 @@ const localization = {
         },
         cart: enCart,
         sidebarCart: enSidebarCart,
+        checkout: enCheckout,
+        reviewPopup: enReviewPopup,
         myAccount: {
             ...enMyAccount,
             auth: enMyAccountAuth,
@@ -246,6 +256,8 @@ const localization = {
         },
         cart: arCart,
         sidebarCart: arSidebarCart,
+        checkout: arCheckout,
+        reviewPopup: arReviewPopup,
         myAccount: {
             ...arMyAccount,
             auth: arMyAccountAuth,
