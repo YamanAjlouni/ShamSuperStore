@@ -8,7 +8,7 @@ import ReviewPopup from '../../components/reviewPopup/ReviewPopup';
 
 const Checkout = () => {
     const { items, getTotalPrice, clearCart } = useCart();
-    const { t } = useLanguage();
+    const { t, isRTL } = useLanguage(); // Add isRTL here
     const navigate = useNavigate();
 
     const [showReviewPopup, setShowReviewPopup] = useState(false);
@@ -89,7 +89,6 @@ const Checkout = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    // Replace your handleSubmit function with this:
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -134,7 +133,7 @@ const Checkout = () => {
 
     if (items.length === 0 && !orderComplete) {
         return (
-            <div className="checkout-page">
+            <div className={`checkout-page ${isRTL ? 'rtl' : 'ltr'}`}>
                 <div className="checkout-container">
                     <div className="empty-checkout">
                         <div className="empty-icon">🛒</div>
@@ -155,7 +154,7 @@ const Checkout = () => {
     if (orderComplete) {
         console.log('Rendering order success screen, showReviewPopup:', showReviewPopup);
         return (
-            <div className="checkout-page">
+            <div className={`checkout-page ${isRTL ? 'rtl' : 'ltr'}`}>
                 <div className="checkout-container">
                     <div className="order-success">
                         <div className="success-icon">
@@ -192,7 +191,7 @@ const Checkout = () => {
     }
 
     return (
-        <div className="checkout-page">
+        <div className={`checkout-page ${isRTL ? 'rtl' : 'ltr'}`}>
             <div className="checkout-container">
                 <h1 className="checkout-title">{t('checkout.title') || 'Checkout'}</h1>
 
@@ -303,7 +302,7 @@ const Checkout = () => {
                             </div>
 
                             {/* Shipping Methods */}
-                            <div className="shipping-methods-section">
+                            {/* <div className="shipping-methods-section">
                                 <h2><Truck size={20} /> {t('checkout.order.shippingMethod') || 'Shipping Method'}</h2>
                                 <div className="shipping-options">
                                     {Object.entries(shippingOptions).map(([key, option]) => (
@@ -323,7 +322,7 @@ const Checkout = () => {
                                         </label>
                                     ))}
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Payment Methods */}
                             <div className="payment-section">
