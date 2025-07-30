@@ -9,7 +9,9 @@ const ReviewPopup = ({ isOpen, onClose, orderNumber }) => {
     const [formData, setFormData] = useState({
         platformRating: 0,
         comment: '',
-        recommendScore: 0
+        recommendScore: 0,
+        recommendReason: '',
+        feelingResponse: ''
     });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,6 +51,20 @@ const ReviewPopup = ({ isOpen, onClose, orderNumber }) => {
         }
     };
 
+    const handleRecommendReasonChange = (e) => {
+        setFormData(prev => ({ ...prev, recommendReason: e.target.value }));
+        if (errors.recommendReason) {
+            setErrors(prev => ({ ...prev, recommendReason: '' }));
+        }
+    };
+
+    const handleFeelingResponseChange = (value) => {
+        setFormData(prev => ({ ...prev, feelingResponse: value }));
+        if (errors.feelingResponse) {
+            setErrors(prev => ({ ...prev, feelingResponse: '' }));
+        }
+    };
+
     const validateForm = () => {
         const newErrors = {};
 
@@ -62,6 +78,14 @@ const ReviewPopup = ({ isOpen, onClose, orderNumber }) => {
 
         if (formData.comment && formData.comment.length < 10) {
             newErrors.comment = t('reviewPopup.validation.commentTooShort');
+        }
+
+        if (!formData.recommendReason || formData.recommendReason.trim().length < 5) {
+            newErrors.recommendReason = t('reviewPopup.validation.recommendReason');
+        }
+
+        if (!formData.feelingResponse) {
+            newErrors.feelingResponse = t('reviewPopup.validation.feelingResponse');
         }
 
         setErrors(newErrors);
@@ -88,6 +112,13 @@ const ReviewPopup = ({ isOpen, onClose, orderNumber }) => {
     const handleSkip = () => {
         onClose();
     };
+
+    const feelingOptions = [
+        { value: 'very_disappointed', label: t('reviewPopup.feelingQuestion.options.veryDisappointed') },
+        { value: 'somewhat_disappointed', label: t('reviewPopup.feelingQuestion.options.somewhatDisappointed') },
+        { value: 'not_disappointed', label: t('reviewPopup.feelingQuestion.options.notDisappointed') },
+        { value: 'na_no_longer_use', label: t('reviewPopup.feelingQuestion.options.naNoLongerUse') }
+    ];
 
     if (!isOpen) return null;
 
@@ -165,6 +196,43 @@ const ReviewPopup = ({ isOpen, onClose, orderNumber }) => {
                                             </button>
                                         ))}
                                     </div>
+                                </div>
+
+                                <div className="reason-input-section">
+                                    <label className="reason-label">
+                                        {t('reviewPopup.recommendQuestion.reasonLabel')}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="reason-input"
+                                        placeholder={t('reviewPopup.recommendQuestion.reasonPlaceholder')}
+                                        value={formData.recommendReason}
+                                        onChange={handleRecommendReasonChange}
+                                    />
+                                    {errors.recommendReason && (
+                                        <span className="error-message">{errors.recommendReason}</span>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="question-section">
+                                <h3>{t('reviewPopup.feelingQuestion.title')}</h3>
+                                <p className="question-subtitle">{t('reviewPopup.feelingQuestion.subtitle')}</p>
+                                {errors.feelingResponse && (
+                                    <span className="error-message">{errors.feelingResponse}</span>
+                                )}
+
+                                <div className="feeling-options">
+                                    {feelingOptions.map((option, index) => (
+                                        <button
+                                            key={option.value}
+                                            className={`feeling-option ${formData.feelingResponse === option.value ? 'selected' : ''}`}
+                                            onClick={() => handleFeelingResponseChange(option.value)}
+                                        >
+                                            <span className="option-number">{index + 1}</span>
+                                            <span className="option-text">{option.label}</span>
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
                         </div>

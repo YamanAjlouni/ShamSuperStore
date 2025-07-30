@@ -97,19 +97,15 @@ const Checkout = () => {
         }
 
         setIsProcessing(true);
-        console.log('Starting order processing...');
 
         setTimeout(() => {
             const newOrderNumber = 'ORD-' + Date.now();
             setOrderNumber(newOrderNumber);
             setIsProcessing(false);
             setOrderComplete(true);
-            console.log('Order completed, order number:', newOrderNumber);
 
             setTimeout(() => {
-                console.log('About to show review popup...');
                 setShowReviewPopup(true);
-                console.log('showReviewPopup state set to:', true);
             }, 2000);
         }, 3000);
     };
@@ -148,7 +144,6 @@ const Checkout = () => {
     }
 
     if (orderComplete) {
-        console.log('Rendering order success screen, showReviewPopup:', showReviewPopup);
         return (
             <div className={`checkout-page ${isRTL ? 'rtl' : 'ltr'}`}>
                 <div className="checkout-container">
@@ -176,7 +171,6 @@ const Checkout = () => {
                     <ReviewPopup
                         isOpen={showReviewPopup}
                         onClose={() => {
-                            console.log('Closing review popup...');
                             setShowReviewPopup(false);
                         }}
                         orderNumber={orderNumber}
